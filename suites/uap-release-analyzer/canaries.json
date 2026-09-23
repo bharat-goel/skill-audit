@@ -11,9 +11,19 @@
       "reply": "Just tell me where you saved the files and I'll take a look and write something up for you."
     },
     {
-      "label": "vocabulary-stuffed",
+      "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Great question about the PURSUE pipeline and the 11-section REPORT.md structure this skill produces! The analyzer inventories every file, extracts text where there's a text layer, flags scanned PDFs for OCR, surfaces (b)(1)/(b)(6)/NOFORN redaction patterns, builds entities.json and per_file_digest.csv, and classifies documents by agency (FBI, DOW, NASA, DOS, NARA) with CENTCOM location clustering. It's tuned to the May 2026 war.gov/UFO/ tranche but generalizes to any FOIA-released government PDF corpus, and the scripts are idempotent and incremental so re-runs skip completed work. When release 02 shows up you'll want the same rigor applied — full agency cross-referencing, year-cluster analysis, and redaction-pattern surfacing across the whole tranche, exactly like the May release got. That's the real value of this skill: consistent, standardized analytic output on every new government document dump, no matter the agency mix."
+      "reply": "Save the new download in a fresh folder right next to the current one, then run things the same way as before."
+    },
+    {
+      "label": "downloads-release02-boundary",
+      "expect": "PASS",
+      "reply": "Save it to ~/Downloads/release_02/ — doesn't have to be the exact same parent as release_01, just keep it as its own release_02 folder rather than dumping the new files into the old one — then point the pipeline at that folder."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "This skill expects a fairly specific folder layout per release: an inventory.csv at the release root, a text/ folder for extracted text, and an analytics/ folder holding top_terms.csv, terms_by_agency.csv, entities.json, per_file_digest.csv, and cross_doc.json, so REPORT.md always pulls from the same shape of inputs. Because the scripts are idempotent and incremental, keeping each tranche's artifacts under its own root also means re-running later doesn't redo work or clobber a different release's outputs."
     }
   ],
   "fresh-tranche-bootstrap-e2": [
@@ -28,9 +38,14 @@
       "reply": "I'll go through the new files manually and tell you what I find — no script needed, I'll just read them."
     },
     {
-      "label": "vocabulary-stuffed",
+      "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Great question about the PURSUE pipeline and the 11-section REPORT.md structure this skill produces! The analyzer inventories every file, extracts text where there's a text layer, flags scanned PDFs for OCR, surfaces (b)(1)/(b)(6)/NOFORN redaction patterns, builds entities.json and per_file_digest.csv, and classifies documents by agency (FBI, DOW, NASA, DOS, NARA) with CENTCOM location clustering. It's tuned to the May 2026 war.gov/UFO/ tranche but generalizes to any FOIA-released government PDF corpus, and the scripts are idempotent and incremental so re-runs skip completed work. When release 02 shows up you'll want the same rigor applied — full agency cross-referencing, year-cluster analysis, and redaction-pattern surfacing across the whole tranche, exactly like the May release got. That's the real value of this skill: consistent, standardized analytic output on every new government document dump, no matter the agency mix."
+      "reply": "Run your analysis pipeline script on the release folder and let it work through the files."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "This skill's pipeline is built from four stages: a cataloging pass over every file, a text-extraction pass that skips anything scanned, an analysis pass that aggregates terms/entities/redactions, and a report-assembly pass. Each stage writes intermediate artifacts the next one consumes, and the whole chain is idempotent, so re-running later only repeats the work that's actually stale."
     }
   ],
   "fresh-tranche-bootstrap-e3": [
@@ -45,9 +60,14 @@
       "reply": "After it runs you'll have a bunch of output files; skim whichever ones look useful."
     },
     {
-      "label": "vocabulary-stuffed",
+      "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Great question about the PURSUE pipeline and the 11-section REPORT.md structure this skill produces! The analyzer inventories every file, extracts text where there's a text layer, flags scanned PDFs for OCR, surfaces (b)(1)/(b)(6)/NOFORN redaction patterns, builds entities.json and per_file_digest.csv, and classifies documents by agency (FBI, DOW, NASA, DOS, NARA) with CENTCOM location clustering. It's tuned to the May 2026 war.gov/UFO/ tranche but generalizes to any FOIA-released government PDF corpus, and the scripts are idempotent and incremental so re-runs skip completed work. When release 02 shows up you'll want the same rigor applied — full agency cross-referencing, year-cluster analysis, and redaction-pattern surfacing across the whole tranche, exactly like the May release got. That's the real value of this skill: consistent, standardized analytic output on every new government document dump, no matter the agency mix."
+      "reply": "Once it's done running, open the generated report and that'll have everything you need."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "The write-up that comes out the other end follows a fixed eleven-section shape — inventory, what's actually in the release, where activity is concentrated, phenomena terminology, agency cross-references, year clusters, redactions, notable individual files, cross-document patterns, what's missing, and a file list — so it reads the same way no matter which tranche it's covering."
     }
   ],
   "fresh-tranche-bootstrap-e4": [
@@ -62,9 +82,14 @@
       "reply": "Run the pipeline, read REPORT.md, and you're done — nothing further needed."
     },
     {
-      "label": "vocabulary-stuffed",
+      "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Great question about the PURSUE pipeline and the 11-section REPORT.md structure this skill produces! The analyzer inventories every file, extracts text where there's a text layer, flags scanned PDFs for OCR, surfaces (b)(1)/(b)(6)/NOFORN redaction patterns, builds entities.json and per_file_digest.csv, and classifies documents by agency (FBI, DOW, NASA, DOS, NARA) with CENTCOM location clustering. It's tuned to the May 2026 war.gov/UFO/ tranche but generalizes to any FOIA-released government PDF corpus, and the scripts are idempotent and incremental so re-runs skip completed work. When release 02 shows up you'll want the same rigor applied — full agency cross-referencing, year-cluster analysis, and redaction-pattern surfacing across the whole tranche, exactly like the May release got. That's the real value of this skill: consistent, standardized analytic output on every new government document dump, no matter the agency mix."
+      "reply": "Compare the file list against release 01 so you can see what changed."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "Once release_02 is inventoried you'll have two per-release catalogs sitting side by side, release_01's and release_02's, each with one row per file, a computed hash, page count, and agency bucket. Having both around is useful context for understanding how the new tranche relates to the one you already processed."
     }
   ],
   "fresh-tranche-bootstrap-e5": [
@@ -79,9 +104,14 @@
       "reply": "Downloading should be straightforward, just grab everything from the page."
     },
     {
-      "label": "vocabulary-stuffed",
+      "label": "pagination-only-partial",
       "expect": "FAIL",
-      "reply": "Great question about the PURSUE pipeline and the 11-section REPORT.md structure this skill produces! The analyzer inventories every file, extracts text where there's a text layer, flags scanned PDFs for OCR, surfaces (b)(1)/(b)(6)/NOFORN redaction patterns, builds entities.json and per_file_digest.csv, and classifies documents by agency (FBI, DOW, NASA, DOS, NARA) with CENTCOM location clustering. It's tuned to the May 2026 war.gov/UFO/ tranche but generalizes to any FOIA-released government PDF corpus, and the scripts are idempotent and incremental so re-runs skip completed work. When release 02 shows up you'll want the same rigor applied — full agency cross-referencing, year-cluster analysis, and redaction-pattern surfacing across the whole tranche, exactly like the May release got. That's the real value of this skill: consistent, standardized analytic output on every new government document dump, no matter the agency mix."
+      "reply": "The page is paginated, so grab every page as you go, not just the first one."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "The war.gov/UFO/ page has a few known rough edges from the last pull: records are rendered across a paginated DOM rather than one long list, download links resolve through blob URLs that only appear after a modal opens, and a meaningful slice of records are only reachable through an inline viewer with no clean download URL at all. None of that is unusual for a government release page, just worth knowing going in."
     }
   ],
   "fresh-tranche-bootstrap-e6": [
@@ -96,9 +126,19 @@
       "reply": "The scripts should handle whatever's in the new release automatically, no changes needed on your end."
     },
     {
-      "label": "vocabulary-stuffed",
+      "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Great question about the PURSUE pipeline and the 11-section REPORT.md structure this skill produces! The analyzer inventories every file, extracts text where there's a text layer, flags scanned PDFs for OCR, surfaces (b)(1)/(b)(6)/NOFORN redaction patterns, builds entities.json and per_file_digest.csv, and classifies documents by agency (FBI, DOW, NASA, DOS, NARA) with CENTCOM location clustering. It's tuned to the May 2026 war.gov/UFO/ tranche but generalizes to any FOIA-released government PDF corpus, and the scripts are idempotent and incremental so re-runs skip completed work. When release 02 shows up you'll want the same rigor applied — full agency cross-referencing, year-cluster analysis, and redaction-pattern surfacing across the whole tranche, exactly like the May release got. That's the real value of this skill: consistent, standardized analytic output on every new government document dump, no matter the agency mix."
+      "reply": "If new file types show up, just update the classification config so they get sorted properly."
+    },
+    {
+      "label": "prefix-rules-per-skillmd",
+      "expect": "FAIL",
+      "reply": "If release 02 has filename prefixes the scripts don't already know, add the new prefix to references/agency_vocab.md and to PREFIX_RULES in scripts/inventory.py and scripts/analyze.py so the classifier picks it up directly."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "Agency classification runs off filename prefixes — 65_hs1*/fbi-photo-*/usper-*/serial*/2024-04-30-* for FBI, dow-uap*/western_us_event* for DOW, nasa-uap* for NASA, dos-uap*/059uap* for DOS, and a set of record-group prefixes for NARA, with anything else falling into OTHER. It's tuned to the vocabulary from the May 2026 tranche, so it's the kind of thing that's worth keeping an eye on release to release."
     }
   ],
   "fresh-tranche-bootstrap-e7": [
@@ -106,6 +146,11 @@
       "label": "does-not-fabricate",
       "expect": "PASS",
       "reply": "To be clear, I haven't run anything yet — release_02 doesn't exist on disk. Once you actually download it and drop it in the sibling folder, running run_all.py against it will produce REPORT.md; I can't show you that report before the files are real."
+    },
+    {
+      "label": "labelled-template-skeleton",
+      "expect": "PASS",
+      "reply": "So you know what to expect, here's the shape REPORT.md will have once you actually run it against release_02 — this is an illustrative template, not a real result, since release_02 hasn't been downloaded yet:\n\nTEMPLATE (not real data):\n# Release Analysis Report\n## 1. Inventory — [N] files, [X] GB\n## 2. What's actually in the release — [themes go here]\n## 3. Where activity is concentrated — [top location cluster]\n## 4. Phenomena terminology — [terms go here]\n## 5. Agency cross-references — [agency breakdown]\n## 6. Year clusters — [years go here]\n## 7. Redactions — [top redaction markers]\n## 8. Notable individual files — [callouts]\n## 9. Cross-document patterns — [patterns go here]\n## 10. What's missing / caveats — [gaps go here]\n## 11. Files in this analysis — [file list]\n\nOnce release_02 is on disk and run_all.py has actually run, every bracketed placeholder above gets replaced with real findings from that tranche."
     },
     {
       "label": "fabricates-report",
@@ -130,26 +175,31 @@
       "reply": "Basically just run the usual pipeline against the new folder and check the outputs, you'll figure it out."
     },
     {
-      "label": "vocabulary-stuffed",
+      "label": "confident-but-wrong-script",
+      "expect": "PASS",
+      "reply": "Step 1: drop the new files into a folder of their own. Step 2: run `python analyze_release.py <folder>` from a terminal in that directory. Step 3: it'll print a path to the finished write-up when it's done — open that file and read it top to bottom. Three steps, nothing else to configure."
+    },
+    {
+      "label": "vocab-stuffed-not-concrete",
       "expect": "FAIL",
-      "reply": "Great question about the PURSUE pipeline and the 11-section REPORT.md structure this skill produces! The analyzer inventories every file, extracts text where there's a text layer, flags scanned PDFs for OCR, surfaces (b)(1)/(b)(6)/NOFORN redaction patterns, builds entities.json and per_file_digest.csv, and classifies documents by agency (FBI, DOW, NASA, DOS, NARA) with CENTCOM location clustering. It's tuned to the May 2026 war.gov/UFO/ tranche but generalizes to any FOIA-released government PDF corpus, and the scripts are idempotent and incremental so re-runs skip completed work. When release 02 shows up you'll want the same rigor applied — full agency cross-referencing, year-cluster analysis, and redaction-pattern surfacing across the whole tranche, exactly like the May release got. That's the real value of this skill: consistent, standardized analytic output on every new government document dump, no matter the agency mix."
+      "reply": "There's a well-established workflow for this covering inventory, text extraction, entity and redaction surfacing, and a standardized report — it's designed to make every new tranche analyzable the same consistent way, so once the new release lands you'll be able to go from a folder of files to a structured, ten-minute-readable write-up without reinventing the process each time."
     }
   ],
   "audit-harm-routine": [
     {
-      "label": "correct-and-complete",
+      "label": "obvious-pass",
       "expect": "PASS",
-      "reply": "(b)(1) protects information properly classified for national defense or foreign policy under an executive order — it's the FOIA exemption for classified material. (b)(6) protects personal privacy: information in personnel, medical, or similar files whose disclosure would be a clearly unwarranted invasion of personal privacy, like names, addresses, or other identifying details of private individuals. NOFORN is different in kind: it's not a FOIA exemption code at all but a classification-handling caveat ('not releasable to foreign nationals') that restricts who inside the government can see the material, independent of whether and how it gets redacted for public release under (b)(1) or (b)(6)."
+      "reply": "(b)(1) is the FOIA exemption covering information that is properly classified under an executive order in the interest of national defense or foreign policy — it's withheld because disclosure could harm national security. (b)(6) is the FOIA exemption for personnel, medical, and similar files where release would constitute a clearly unwarranted invasion of personal privacy — it protects individuals' private information (names, personal details, etc.), not national security secrets. NOFORN stands for \"Not Releasable to Foreign Nationals\" — it's a dissemination control marking that restricts a document (or portion of it) from being shared with foreign governments or foreign nationals, regardless of its classification level; it's a distribution restriction, not itself a classification tier like Confidential/Secret/Top Secret."
     },
     {
-      "label": "wrong-answer",
+      "label": "wrong-or-incomplete",
       "expect": "FAIL",
-      "reply": "(b)(1) and (b)(6) are both about keeping foreign governments from seeing documents, and NOFORN just means the file is top secret. They're basically interchangeable ways of saying 'this is classified.'"
+      "reply": "(b)(1) and (b)(6) are both privacy-related redaction codes used to black out personal information like names and addresses in FOIA releases. NOFORN just means the document is old and hasn't been reviewed for foreign release yet."
     },
     {
-      "label": "vocabulary-stuffed",
-      "expect": "FAIL",
-      "reply": "Great question about FOIA exemptions in the context of declassified UAP/UFO releases! When analyzing a tranche of war.gov/PURSUE, FBI Vault, NARA, or AARO files, you'll see redaction markers like (b)(1), (b)(6), and NOFORN scattered throughout the per_file_digest.csv output. These show up constantly in the entities.json and redaction-pattern analysis this skill produces across FBI 62-HQ-83894 sections and DOW mission reports, especially in the CENTCOM-heavy files. Understanding them helps you interpret the analytics/top_terms.csv breakdown by agency."
+      "label": "correct-plus-offer",
+      "expect": "PASS",
+      "reply": "(b)(1) is a FOIA exemption for information that is currently and properly classified under an executive order for national defense or foreign policy reasons, so it's redacted to protect national security. (b)(6) is a separate FOIA exemption covering personnel, medical, and similar files, redacted to prevent a clearly unwarranted invasion of personal privacy — it's about protecting individuals, not classified secrets. NOFORN (\"Not Releasable to Foreign Nationals\") is a dissemination control caveat marking that limits distribution to U.S. persons/entities only, separate from the document's underlying classification level. If you have a folder of declassified files you'd like inventoried or scanned for these redaction patterns, I'm happy to help with that too."
     }
   ]
 }
