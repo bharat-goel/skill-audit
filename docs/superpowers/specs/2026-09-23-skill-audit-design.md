@@ -80,7 +80,7 @@ ported, not fixed.
 | | Rule |
 |---|---|
 | P1 | Prompts and fixtures copied byte-for-byte from the pinned SHA |
-| P2 | Deterministic criteria map to `any` / `ordered` / `none`; prose or human-judged criteria map to a `judge` rubric restating their criterion |
+| P2 | Deterministic criteria map to `any` / `ordered` / `none`; prose or human-judged criteria map to a `judge` rubric restating their criterion. A port that cannot pass the fidelity check (hand-written **and generated** replies) is unportable, dropped per P7, with the reason in `DEVIATIONS.md` — the fidelity check decides this, not the porter's judgement. In particular, nullbench's `ordered` type handles negation (a cue like "don't" or "before you" in front of a `before` pattern suppresses it); an author's own ordering check usually does not, so an author's ordering criterion will usually be unportable, and that is the intended outcome, not a bug in the port. |
 | P3 | Their tasks register as `kind: signal`, `predict: helps` — the prediction is the author's claim, not mine, so HIT/MISS reads as "claim borne out" |
 | P4 | One `kind: harm`, `predict: no-effect` task per suite, the only task I write: a routine in-domain task the skill should not change, written from the skill's `description` alone, before any run |
 | P5 | Canaries (hand-written pass and fail replies) for every judge-graded task |
@@ -91,11 +91,21 @@ ported, not fixed.
 **Fidelity check.** Where the author's grader is code, it and the ported nullbench
 verifier both grade a set of hand-written sample replies before any paid call, and must
 agree on every one; each ported task needs at least one sample the author's grader passes
-and one it fails. Disagreement means the port is wrong and is fixed before the
-registration is frozen. The samples live in `fidelity/samples.json`, not `canaries.json`
-— nullbench only accepts canaries for judge-graded tasks, and ported code graders become
-deterministic verifiers. The runner is `tools/fidelity.mjs`; its output is committed as
-`fidelity/fidelity.txt`.
+and one it fails. The check also generates its own edge replies from the ported spec —
+case variants, a pattern embedded inside a longer word, a pattern next to punctuation,
+the `maxWords` boundary, and, for `ordered`, a `before` pattern preceded by each
+negation cue nullbench's verifier understands — and runs those through both graders too;
+a disagreement on a generated reply fails the check exactly like a hand-written one.
+Disagreement, hand-written or generated, means the port is wrong and is fixed before the
+registration is frozen. **If it cannot be made to agree, the task is unportable**: it is
+dropped per P7, with the reason recorded in `DEVIATIONS.md`, not forced through with a
+loosened criterion. This is expected to eliminate most ported ordering checks — see P2.
+The samples live in `fidelity/samples.json`, not `canaries.json` — nullbench only accepts
+canaries for judge-graded tasks, and ported code graders become deterministic verifiers.
+The runner is `tools/fidelity.mjs`; its output is committed as `fidelity/fidelity.txt`,
+which begins with a provenance header (nullbench commit SHA, sha256 of `verify.mjs`, and
+sha256 of each task file checked) so a later run can confirm nothing shifted underneath
+a passed check before spending on a paid call.
 
 **Self-copying graders.** If the author's deterministic patterns appear verbatim in their
 `SKILL.md`, preflight raises `PATTERN_IN_SKILL` and CONFIRMATORY is blocked. For such a

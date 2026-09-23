@@ -8,6 +8,10 @@ reply beside it.
 Third project in a series: cobra → nullbench → skill-audit. Design:
 [`docs/superpowers/specs/2026-09-23-skill-audit-design.md`](docs/superpowers/specs/2026-09-23-skill-audit-design.md).
 
+`npm test` needs [nullbench](https://github.com/bharat-goel/nullbench) checked out as a
+sibling directory (`../nullbench`, override with `NULLBENCH_DIR`) — the tools import its
+`verify.mjs` and `stats.mjs` directly rather than vendoring them.
+
 ## Status
 
 | Phase | State |

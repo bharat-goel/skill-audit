@@ -4,7 +4,7 @@
 
 **Goal:** Re-measure the published effect claims of three third-party Claude skills by porting each author's own eval into nullbench, and publish every result with the author's reply.
 
-**Architecture:** Mostly procedure and data, not code. Two small Node tools carry the only logic that must be decided before data exists: `tools/verdict.mjs` (claim + interval → verdict) and `tools/fidelity.mjs` (ported verifier vs. author's grader on sample replies). Everything else is nullbench suites, run from the sibling nullbench checkout, plus Markdown records committed in phase order.
+**Architecture:** Mostly procedure and data, not code. A few small Node tools carry the only logic that must be decided before data exists: `tools/verdict.mjs` (claim + interval → verdict), `tools/verdict-task.mjs` (a run's raw records → verdict, bypassing report.md's rounded text), and `tools/fidelity.mjs` (ported verifier vs. author's grader on hand-written and generated sample replies). Everything else is nullbench suites, run from the sibling nullbench checkout, plus Markdown records committed in phase order.
 
 **Tech Stack:** Node >= 22, `node:test`, zero dependencies (matching nullbench). `gh` CLI for screening. nullbench at `~/code/nullbench` (commit `aca29d2` or later).
 
@@ -33,10 +33,12 @@ skill-audit/
   README.md                    status table, updated at every phase gate
   tools/
     verdict.mjs                verdict({claimPp, lo, hi}) -> string
-    fidelity-lib.mjs           compare(), render() — pure logic
+    verdict-task.mjs           verdictForTask({records, taskId, claimPp, newcombe}) -> object; CLI: node tools/verdict-task.mjs <results-dir> <taskId> <claimPp>
+    fidelity-lib.mjs           compare(), render(), renderProvenance(), edgeReplies() — pure logic
     fidelity.mjs               CLI: node tools/fidelity.mjs <suite-dir>
   test/
     verdict.test.mjs
+    verdict-task.test.mjs
     fidelity.test.mjs
   phase0/
     bracket-sonnet.md          gate decision   bracket-sonnet.log  raw output
@@ -683,6 +685,7 @@ Take the author's first 5 tasks in published order. One file per task, `tasks/<i
 - Their ordering check → `ordered`.
 - Their prose/human/LLM criterion → `judge`, whose `rubric` restates their criterion and nothing more. Do not add the "do not reward vocabulary" line; nullbench's shared judge prompt already carries it.
 - A regex, or anything else nullbench cannot express exactly → the task is unportable. Log it in `DEVIATIONS.md` as dropped; take the next task in order to keep 5 if one exists.
+- A mapping that looks right on paper is not enough: **a task whose port cannot pass the fidelity check** in Step 7 (hand-written samples *and* generated edge replies) **is also unportable**, dropped per P7 the same way, reason in `DEVIATIONS.md`. Do not fix this by loosening the criterion or hand-picking samples that dodge the disagreement — the fidelity check decides portability, not the porter. In particular, expect most `ordered` ports to land here: nullbench's `ordered` type understands negation cues ("don't", "before you", …) in front of a `before` pattern, and an author's own ordering check usually does not — that is the intended outcome (spec, P2), not a bug to work around.
 
 - [ ] **Step 4: Write the harm task (P4) — from the `description` only**
 
@@ -725,13 +728,13 @@ export async function grade(taskId, reply) {
 }
 ```
 
-`fidelity/samples.json`: for each deterministic task, at least one reply their grader passes and one it fails, written to probe the port's edges (case, punctuation, the word inside another word). Run from the repo root:
+`fidelity/samples.json`: for each deterministic task, at least one reply their grader passes and one it fails, written to probe the port's edges (case, punctuation, the word inside another word). `tools/fidelity.mjs` also generates its own edge replies from each task's `verify` spec (case variants, a pattern embedded in a longer word, a pattern next to punctuation, the `maxWords` boundary, and, for `ordered`, a `before` pattern preceded by each negation cue nullbench understands) and runs those through both graders too — nothing to write for these, they come from the spec alone. Run from the repo root:
 
 ```bash
 node tools/fidelity.mjs suites/<skill>
 ```
 
-Expected: exit 0, `RESULT: agree on all <n> samples`. On `DISAGREE`, fix the port (never the author's grader), re-hash, re-run.
+Expected: exit 0, `RESULT: agree on all <n> samples`. On `RESULT: FAILED`, and the disagreement is on a hand-written sample, fix the port (never the author's grader), re-hash, re-run. If the disagreement is on a generated row and cannot be resolved without changing the author's criterion, the task is unportable per Step 3's last bullet — drop it, do not force it through.
 
 - [ ] **Step 8: Preflight**
 
@@ -751,6 +754,8 @@ cp -R as-published/SKILL.md as-published/tasks rubric/          # plus fixture d
 ```
 
 In `rubric/tasks/`, convert each flagged deterministic task to `"type": "judge"` with a rubric stating the author's criterion as behaviour. Re-hash both, write both `nullbench.json` files and a `rubric/canaries.json`, dry-run both. `as-published` is expected to show `PATTERN_IN_SKILL` (it will run EXPLORATORY); `rubric` must be clean.
+
+`as-published/fidelity/` was already produced by Step 7 against the pre-split suite; it does not carry over automatically. If `rubric/` still has at least one deterministic task after this conversion (not every flagged task need be deterministic-only; some suites mix), give it its own `rubric/fidelity/` — copy `samples.json` for the surviving deterministic tasks and `author-grader.mjs` from `as-published/fidelity/`, then run `node tools/fidelity.mjs suites/<skill>/rubric`. If every deterministic task was converted to `judge` (the common case — that is the whole point of the `rubric` variant), `rubric` has none left; do not run `tools/fidelity.mjs` against it (it now fails with "no deterministic tasks to compare", correctly, since a judge-only suite has nothing for it to check) — instead note in `rubric`'s `DEVIATIONS.md` that no deterministic tasks remain and the fidelity check does not apply to this registration.
 
 - [ ] **Step 10: `DEVIATIONS.md` (P8)**
 
@@ -792,6 +797,8 @@ Request review of the port against the author's method, fix, merge to `main`. RE
 
 - [ ] **Step 1: Confirm spend, per registration**
 
+Before re-running the dry-run, check `fidelity/fidelity.txt`'s provenance header still matches: `git -C ~/code/nullbench rev-parse HEAD` against its recorded nullbench commit, `shasum -a 256 ~/code/nullbench/src/verify.mjs` against its recorded hash, and `shasum -a 256 suites/<skill>/tasks/*.json` against its recorded per-task hashes. If any differ, the fidelity check no longer reflects what is about to run — do not spend until it is re-run (`node tools/fidelity.mjs suites/<skill>`) and, if the registration itself changed, re-frozen.
+
 Re-run the dry-run, then ask: "Run `<skill>` (<variant>): <n> invocations, est. $<x>. Go?" Wait for yes.
 
 - [ ] **Step 2: Run**
@@ -826,15 +833,17 @@ Merge. README row 4 → `<done>/<total> registrations run`. **Do not push to any
 - Create: `findings/<skill>.md`, `correspondence/<skill>.md`
 
 **Interfaces:**
-- Consumes: `verdict()` from Task 1; report rows from Task 6; `SELECTION.md` claim; `DEVIATIONS.md`.
+- Consumes: `verdict()` from Task 1 and `verdictForTask()` from `tools/verdict-task.mjs` (Task 2); records/report from Task 6; `SELECTION.md` claim; `DEVIATIONS.md`.
 
 - [ ] **Step 1: Compute each task's verdict with the tool, not by eye**
 
-For each signal task, from the author's claimed delta (per `DEVIATIONS.md`) and the report's interval:
+For each signal task, from the author's claimed delta (per `DEVIATIONS.md`) and the run's own records — never report.md's rounded delta or CI, which can print "+0.0pp" for a lower bound that is truly just above zero:
 
 ```bash
-node -e 'import("./tools/verdict.mjs").then(({verdict}) => console.log(verdict({claimPp: <c>, lo: <lo>, hi: <hi>})))'
+node tools/verdict-task.mjs suites/<skill>/results/<timestamp> <taskId> <claimPp>
 ```
+
+Use the `kC`/`nC`/`kT`/`nT`/`lo`/`hi`/`verdict` it prints for the finding's table; cross-check `lo`/`hi` against report.md's rounded figures as a sanity check, not as the source of truth.
 
 A registration that ran EXPLORATORY because of `PATTERN_IN_SKILL` gets **not measurable as published** for every task; its `rubric` sibling carries the verdicts.
 
@@ -848,7 +857,12 @@ A registration that ran EXPLORATORY because of `PATTERN_IN_SKILL` gets **not mea
 
 | Task | Author's claim | Control | Treatment | Delta | 95% CI | Verdict |
 |---|---|---|---|---|---|---|
-<rows copied from report.md, verdict from Step 1>
+<rows from Step 1's counts and interval>
+
+For every **claim not reproduced** row, state in prose whether the claim fell below or
+above the interval (an effect real but smaller than claimed, versus an effect on the
+wrong side of zero, versus a claim outside an interval that spans zero — these are
+different findings and the table alone does not distinguish them).
 
 <If as-published and rubric both ran: one paragraph on the gap between them.>
 
