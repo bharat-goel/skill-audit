@@ -39,7 +39,7 @@ skill-audit/
     verdict.test.mjs
     fidelity.test.mjs
   phase0/
-    bracket-sonnet.md          bracket output and gate decision
+    bracket-sonnet.md          gate decision   bracket-sonnet.log  raw output
   SELECTION.md                 rule, then log
   selection/
     anthropics-skills.json     frozen listing, source 1
@@ -65,7 +65,7 @@ skill-audit/
 - Test: `test/verdict.test.mjs`
 
 **Interfaces:**
-- Produces: `verdict({ claimPp: number, lo: number, hi: number }) => "claim holds" | "claim not reproduced" | "inconclusive"`. Throws `Error` whose message contains `claim` for a zero/non-finite claim, and `interval` for a non-finite or inverted interval. Used by Task 8.
+- Produces: `verdict({ claimPp: number, lo: number, hi: number }) => "claim holds" | "claim not reproduced" | "inconclusive"`. Throws `Error` whose message contains `claim` for a zero/non-finite claim, and `interval` for a non-finite or inverted interval. Used by Task 7.
 
 - [ ] **Step 1: Branch and scaffold**
 
