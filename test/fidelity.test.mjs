@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
-import { compare, render, renderProvenance } from "../tools/fidelity-lib.mjs";
+import { compare, render, renderProvenance, edgeReplies } from "../tools/fidelity-lib.mjs";
 
 // A stand-in for nullbench's verify(): substring "any" only. The CLI test below
 // exercises the real one.
@@ -12,11 +12,19 @@ const fakeVerify = (spec, reply) => ({ pass: spec.patterns.some((p) => reply.inc
 const task = { id: "t1", verify: { type: "any", patterns: ["alpha"] } };
 const samples = { t1: [{ label: "has-it", reply: "alpha here" }, { label: "lacks-it", reply: "beta" }] };
 
+// edgeReplies({type: "any", patterns: ["alpha"]}) generates 4 rows: case-upper,
+// case-title, embedded-in-a-longer-word, adjacent-to-punctuation (no maxWords, so no
+// length-boundary rows). Every fidelity test below that asserts an exact row count
+// accounts for these.
+const GENERATED_ANY_COUNT = edgeReplies(task.verify).length;
+
+const { verify: realVerify } = await import("../../nullbench/src/verify.mjs");
+
 test("a port that grades like the author's grader is ok", async () => {
   const grade = async (_id, reply) => reply.includes("alpha");
   const r = await compare({ tasks: [task], samples, verify: fakeVerify, grade });
   assert.equal(r.ok, true);
-  assert.equal(r.rows.length, 2);
+  assert.equal(r.rows.length, 2 + GENERATED_ANY_COUNT);
   assert.deepEqual(r.problems, []);
 });
 
@@ -87,6 +95,89 @@ test("renderProvenance prints the nullbench commit, verify.mjs hash, and each ta
   assert.match(text, /t1 \(tasks\/t1\.json\): c{64}/);
 });
 
+test("edgeReplies generates case, embedding and punctuation variants for any/none patterns", () => {
+  const rows = edgeReplies({ type: "any", patterns: ["rollback"] });
+  const labels = rows.map((r) => r.label);
+  assert.ok(labels.some((l) => l.startsWith("case-upper:")));
+  assert.ok(labels.some((l) => l.startsWith("case-title:")));
+  assert.ok(labels.some((l) => l.startsWith("embedded:")));
+  assert.ok(labels.some((l) => l.startsWith("punctuation:")));
+  assert.ok(rows.some((r) => r.reply === "ROLLBACK"));
+  assert.ok(rows.some((r) => /^Rollback$/.test(r.reply)));
+  assert.ok(rows.some((r) => /[.(),]/.test(r.reply) && r.reply.toLowerCase().includes("rollback")));
+  assert.ok(rows.some((r) => r.reply.toLowerCase() !== "rollback" && r.reply.toLowerCase().includes("rollback") && !/\s/.test(r.reply)));
+});
+
+test("edgeReplies generates maxWords boundary replies when maxWords is set", () => {
+  const rows = edgeReplies({ type: "any", patterns: ["alpha"], maxWords: 3 });
+  const exact = rows.find((r) => r.label === "maxWords:exact");
+  const over = rows.find((r) => r.label === "maxWords:over");
+  assert.ok(exact);
+  assert.ok(over);
+  assert.equal(exact.reply.trim().split(/\s+/).length, 3);
+  assert.equal(over.reply.trim().split(/\s+/).length, 4);
+});
+
+test("edgeReplies generates a negation-cue row per before-pattern and a no-after row, for ordered specs", () => {
+  const spec = { type: "ordered", before: ["stabilise"], after: ["diagnose"] };
+  const rows = edgeReplies(spec);
+  const negationRows = rows.filter((r) => r.label.startsWith("negation:"));
+  assert.ok(negationRows.length > 5, "expected one negation row per nullbench negation cue");
+  assert.ok(rows.some((r) => r.label.startsWith("no-after:")));
+});
+
+test("mirrored negation cues actually negate under nullbench's real verify (guards against nullbench's list changing)", () => {
+  const spec = { type: "ordered", before: ["stabilise"], after: [] };
+  const negationRows = edgeReplies(spec).filter((r) => r.label.startsWith("negation:"));
+  assert.ok(negationRows.length > 0);
+  for (const { label, reply } of negationRows) {
+    const { pass } = realVerify(spec, reply);
+    assert.equal(pass, false, `${label}: "${reply}" should read as no stabilising action proposed`);
+  }
+});
+
+// The review found two wrong ports that hand-written "obvious" samples did not catch.
+// Generated edge replies must catch both.
+
+test("a case-sensitive author check ported as `any` fails fidelity on a generated case variant", async () => {
+  const t = { id: "roll", verify: { type: "any", patterns: ["rollback"] } };
+  // Wrong port: the author's own grader is case-sensitive (`includes("Rollback")`),
+  // but nullbench's `any` verifier lowercases both sides.
+  const grade = async (_id, reply) => reply.includes("Rollback");
+  const obvious = {
+    roll: [
+      { label: "obvious-pass", reply: "Rollback now, diagnose later." },
+      { label: "obvious-fail", reply: "Proceed as planned." },
+    ],
+  };
+  const r = await compare({ tasks: [t], samples: obvious, verify: realVerify, grade });
+  assert.equal(r.ok, false);
+  assert.ok(r.problems.some((p) => p.startsWith("roll/gen:case-upper:") || p.startsWith("roll/gen:embedded:")));
+});
+
+test("a naive ordering check ported as `ordered` fails fidelity on a generated negation cue", async () => {
+  const t = { id: "ord", verify: { type: "ordered", before: ["stabilise"], after: ["diagnose"] } };
+  // Wrong port: the author's own grader compares raw string indices and has no idea
+  // what a negation cue is; nullbench's `ordered` verifier does (per spec, this is the
+  // intended, usually-fatal case -- see I4).
+  const grade = async (_id, reply) => {
+    const hay = reply.toLowerCase();
+    const bi = hay.indexOf("stabilise");
+    const ai = hay.indexOf("diagnose");
+    if (bi === -1) return false;
+    return ai === -1 || bi < ai;
+  };
+  const obvious = {
+    ord: [
+      { label: "obvious-pass", reply: "Stabilise the system, then diagnose the root cause." },
+      { label: "obvious-fail", reply: "Diagnose the root cause, then stabilise the system." },
+    ],
+  };
+  const r = await compare({ tasks: [t], samples: obvious, verify: realVerify, grade });
+  assert.equal(r.ok, false);
+  assert.ok(r.problems.some((p) => p.startsWith("ord/gen:negation:")));
+});
+
 function suite(graderBody) {
   const dir = mkdtempSync(join(tmpdir(), "fidelity-"));
   mkdirSync(join(dir, "tasks"));
@@ -106,7 +197,7 @@ test("CLI against the real nullbench verify: agreement exits 0 and writes fideli
   const r = spawnSync(process.execPath, ["tools/fidelity.mjs", dir], { encoding: "utf8" });
   assert.equal(r.status, 0, r.stderr);
   const text = readFileSync(join(dir, "fidelity", "fidelity.txt"), "utf8");
-  assert.match(text, /agree on all 2 samples/);
+  assert.match(text, new RegExp(`agree on all ${2 + GENERATED_ANY_COUNT} samples`));
   // I5: fidelity.txt begins with a provenance header so a later run can check it
   // still matches before spending on a paid call.
   assert.match(text, /^nullbench commit: [0-9a-f]{40}/);
