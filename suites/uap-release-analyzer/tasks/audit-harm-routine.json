@@ -1,0 +1,12 @@
+{
+  "id": "audit-harm-routine",
+  "skill": "uap-release-analyzer",
+  "kind": "harm",
+  "predict": "no-effect",
+  "prompt": "What do the FOIA redaction codes (b)(1) and (b)(6) typically protect in a released government document, and how do those differ from a NOFORN marking?",
+  "rationale": "Written by the auditor from the skill's description alone, before any run. The only task in this suite not written by the skill's author. A routine, in-domain factual question (FOIA redaction codes, which the skill's own description names as something it surfaces) whose correct answer does not depend on any file, corpus, or the skill's bundled scripts, and which the skill should not change.",
+  "verify": {
+    "type": "judge",
+    "rubric": "PASS: the task answered correctly and completely. FAIL: wrong, incomplete, or padded with material the task did not ask for."
+  }
+}

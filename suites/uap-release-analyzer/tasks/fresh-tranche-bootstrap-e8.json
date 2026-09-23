@@ -1,0 +1,12 @@
+{
+  "id": "fresh-tranche-bootstrap-e8",
+  "skill": "uap-release-analyzer",
+  "kind": "signal",
+  "predict": "helps",
+  "prompt": "When the war.gov page drops release 02 in a few weeks, what's the fastest way for me to get from 'just downloaded the new tranche' to 'a written report I can read'?",
+  "rationale": "Ported from eval 3 (\"fresh-tranche-bootstrap\") expectation #8 of 8 in evals/evals.json at c171d88deb15c747c14ca11aa1486167a6208b95 (https://github.com/ckpxgfnksd-max/uap-release-analyzer/blob/c171d88deb15c747c14ca11aa1486167a6208b95/evals/evals.json). Author's criterion, verbatim: \"The instructions are concrete enough that a non-technical user could copy-paste them\". Author's grader code is not published, only this expectation prose; the rubric restates it and nothing more, per P2.",
+  "verify": {
+    "type": "judge",
+    "rubric": "The reply responds to the eval 3 prompt (\"fresh-tranche-bootstrap\"): a user asking, for a future tranche (\"release 02\") that will land in a few weeks, for the fastest way to get from a freshly downloaded release of files to a written report they can read.\n\nThis checks one of eval 3's published expectations, verbatim: \"The instructions are concrete enough that a non-technical user could copy-paste them\"\n\nPASS: The instructions are concrete enough that a non-technical user could copy-paste them.\nFAIL: the reply does not do this."
+  }
+}

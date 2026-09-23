@@ -1,0 +1,70 @@
+{
+  "model": "sonnet",
+  "judge_model": "sonnet",
+  "reps": 10,
+  "tasks": [
+    {
+      "id": "fresh-tranche-bootstrap-e1",
+      "file": "tasks/fresh-tranche-bootstrap-e1.json",
+      "sha256": "14ae6880b359f1589849bce7a2fe203b355e1bcaf12064f3cd814c387f29b7e0",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "fresh-tranche-bootstrap-e2",
+      "file": "tasks/fresh-tranche-bootstrap-e2.json",
+      "sha256": "7193631f01c015b00682761c15a51115e753aff46df2d9f993d0171f81449824",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "fresh-tranche-bootstrap-e3",
+      "file": "tasks/fresh-tranche-bootstrap-e3.json",
+      "sha256": "866266fc2d61fccc8dabce9ed5f5ea61b5150d158e85246327407af9437efed7",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "fresh-tranche-bootstrap-e4",
+      "file": "tasks/fresh-tranche-bootstrap-e4.json",
+      "sha256": "6a04e6e8fb9c46e40e884b3df5c888318867f4f9a49ed6129018a7c02d6f0f97",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "fresh-tranche-bootstrap-e5",
+      "file": "tasks/fresh-tranche-bootstrap-e5.json",
+      "sha256": "09da239632a0f9450de7d89f766b63e3adb781771ce13f271c81347f0f98eea0",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "fresh-tranche-bootstrap-e6",
+      "file": "tasks/fresh-tranche-bootstrap-e6.json",
+      "sha256": "2720bb5bdb322f4d3ee94d851eadb4bb7a2bba3e2ffbe1c6bf3bf64f3f71ce89",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "fresh-tranche-bootstrap-e7",
+      "file": "tasks/fresh-tranche-bootstrap-e7.json",
+      "sha256": "fd762058c0e20aaaf2f769cba1dc22fbba03c6fa1a19a61aa2f6a1e3426871a2",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "fresh-tranche-bootstrap-e8",
+      "file": "tasks/fresh-tranche-bootstrap-e8.json",
+      "sha256": "3d6b923e2c4d545db68eeca857dbec1da86c307ec973137fbdfb640126900865",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "audit-harm-routine",
+      "file": "tasks/audit-harm-routine.json",
+      "sha256": "2afc5d4f5bb8f792e1558853919b7fde8ab580cb2b4481a3b4cf9536c279d226",
+      "kind": "harm",
+      "predict": "no-effect"
+    }
+  ]
+}
