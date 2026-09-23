@@ -32,7 +32,7 @@ git history proves the order.
 
 | # | Phase | Gate | Artifact |
 |---|---|---|---|
-| 0 | Run nullbench's `verify:live` bracket on Sonnet (~40 invocations) | Placebo interval spans zero **and** known-positive interval excludes it. Either failing stops the audit. | Bracket output; ledger entry in nullbench |
+| 0 | Run nullbench's `verify:live` bracket on Sonnet (~80 invocations: two fixtures of 40) | Placebo interval spans zero **and** known-positive interval excludes it. Either failing stops the audit. | Bracket output; ledger entry in nullbench |
 | 1 | Write the selection rule before looking at any candidate | Rule committed | `SELECTION.md` (rule section) |
 | 2 | Apply the rule in fixed order; log every candidate considered | 3 eligible skills, or the stop condition reached | `SELECTION.md` (log section) |
 | 3 | Port and register one suite per skill | `--dry-run` preflight clean; fidelity check passed; registration hash committed **before the first paid call** | `suites/<skill>/` |
@@ -89,9 +89,13 @@ ported, not fixed.
 | P8 | `DEVIATIONS.md`: one line per difference from their method (model, n, grader mapping, dropped tasks, added harm task), each with its reason, committed with the registration |
 
 **Fidelity check.** Where the author's grader is code, it and the ported nullbench
-verifier both grade every canary before any paid run, and must agree on all of them.
-Disagreement means the port is wrong and is fixed before the registration is frozen. The
-checking script is throwaway; its output is committed in `suites/<skill>/`.
+verifier both grade a set of hand-written sample replies before any paid call, and must
+agree on every one; each ported task needs at least one sample the author's grader passes
+and one it fails. Disagreement means the port is wrong and is fixed before the
+registration is frozen. The samples live in `fidelity/samples.json`, not `canaries.json`
+— nullbench only accepts canaries for judge-graded tasks, and ported code graders become
+deterministic verifiers. The runner is `tools/fidelity.mjs`; its output is committed as
+`fidelity/fidelity.txt`.
 
 **Self-copying graders.** If the author's deterministic patterns appear verbatim in their
 `SKILL.md`, preflight raises `PATTERN_IN_SKILL` and CONFIRMATORY is blocked. For such a
@@ -117,7 +121,7 @@ skill-audit/
     SOURCE.md          repo URL, pinned SHA, license, links to claim and method, nullbench SHA
     DEVIATIONS.md      P8
     SKILL.md  tasks/  nullbench.json  canaries.json
-    fidelity.txt       fidelity-check output, where applicable
+    fidelity/          samples.json, author-grader.mjs, fidelity.txt — where applicable
     LEDGER.md  results/
   findings/<skill>.md  their claim against the measured result, per task, with the author's reply
   FINDINGS.md          cross-skill summary, including the E3 exclusion rate
@@ -130,13 +134,20 @@ that ran the suite. No vendoring, no submodule.
 
 ### Verdicts
 
-Every finding carries exactly one:
+Every task carries exactly one, assigned by `tools/verdict.mjs` from the author's claimed
+delta and the measured interval — code written and tested before any data exists, so an
+arguable case cannot be decided generously at write-up time (entry 12):
 
-- **claim holds** — their direction reproduced, interval excludes zero
-- **claim not reproduced** — interval excludes their number, or points the other way
-- **inconclusive at n=10** — interval spans both zero and their number
-- **not measurable as published** — the `as-published` registration drifted; the `rubric`
-  registration carries the finding
+- **claim holds** — the interval contains their number and excludes zero in the claimed
+  direction
+- **claim not reproduced** — the interval excludes their number, including when the
+  effect is real but smaller than claimed
+- **inconclusive** — the interval contains both zero and their number
+
+A registration that drifted (`as-published` with `PATTERN_IN_SKILL`) is labelled
+**not measurable as published**, and the `rubric` registration carries the verdict. Where
+an author published only an aggregate, the aggregate is each task's claimed value, and
+`DEVIATIONS.md` says so.
 
 No averages beyond what nullbench prints. Skills that hold up get the same prominence as
 those that do not.
@@ -162,10 +173,10 @@ asks otherwise.
 
 | Item | Invocations |
 |---|---|
-| Bracket (phase 0) | ~40 |
+| Bracket (phase 0) | ~80 |
 | Three suites at reps=10 | ~520 (≈170 each, per the cobra worked example) |
 | Second `rubric` registration, per self-copying skill | +~170 each |
-| **Total** | **~560, up to ~1,070** |
+| **Total** | **~600, up to ~1,110** |
 
 VOID re-runs are extra and are not avoidable: a VOID batch is no measurement.
 
