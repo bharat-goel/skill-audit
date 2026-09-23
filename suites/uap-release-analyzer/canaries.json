@@ -11,14 +11,19 @@
       "reply": "Just tell me where you saved the files and I'll take a look and write something up for you."
     },
     {
-      "label": "plain-words-no-naming",
+      "label": "same-folder-not-sibling",
       "expect": "FAIL",
-      "reply": "Save the new download in a fresh folder right next to the current one, then run things the same way as before."
+      "reply": "No need to make a new folder for this one — just drop the new files straight into the release_01 folder you already have, alongside what's there. The pipeline re-scans the whole directory each time anyway, so it'll pick up whatever's new the next time it runs."
+    },
+    {
+      "label": "plain-words-sibling",
+      "expect": "PASS",
+      "reply": "Save the new download in a fresh folder right next to the current one — don't dump the new files into the folder you already have, keep this tranche separate — and then run things the same way you did last time, just pointed at that new folder instead. That keeps this release's outputs from getting mixed in with the old ones."
     },
     {
       "label": "downloads-release02-boundary",
       "expect": "PASS",
-      "reply": "Save it to ~/Downloads/release_02/ — doesn't have to be the exact same parent as release_01, just keep it as its own release_02 folder rather than dumping the new files into the old one — then point the pipeline at that folder."
+      "reply": "Save it to ~/Downloads/release_02/ — a fresh folder just for this release, kept apart from anything else — then point the pipeline at that folder once the download finishes."
     },
     {
       "label": "vocab-stuffed-no-instruction",
@@ -40,7 +45,7 @@
     {
       "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Run your analysis pipeline script on the release folder and let it work through the files."
+      "reply": "Run your analysis pipeline script on the release folder, same as you'd do for any tranche, and let it work through the files end to end. It'll figure out what's there, pull out the useful bits, and put together something you can read once it's done. Shouldn't take more than a few minutes for a folder this size, and you don't have to babysit it — just kick it off and come back once it's finished."
     },
     {
       "label": "vocab-stuffed-no-instruction",
@@ -62,7 +67,7 @@
     {
       "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Once it's done running, open the generated report and that'll have everything you need."
+      "reply": "Once it's done running, open up the generated report — it'll have the rundown you're after: what's in the tranche, where things cluster, and what stands out. Should be a quick read, about ten minutes, and it'll flag anything that looks like it needs a closer look afterward. That's really all there is to it once the run finishes."
     },
     {
       "label": "vocab-stuffed-no-instruction",
@@ -84,7 +89,7 @@
     {
       "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "Compare the file list against release 01 so you can see what changed."
+      "reply": "Once you've got the new folder processed, it's worth pulling up the file list from this run and comparing it against the one from release 01 — that's the fastest way to see what's actually new in this drop instead of re-reading everything from scratch. Ten minutes of comparing beats re-summarizing the whole tranche from memory."
     },
     {
       "label": "vocab-stuffed-no-instruction",
@@ -105,13 +110,13 @@
     },
     {
       "label": "pagination-only-partial",
-      "expect": "FAIL",
-      "reply": "The page is paginated, so grab every page as you go, not just the first one."
+      "expect": "PASS",
+      "reply": "One thing to watch for on the download side: the page is paginated, so make sure you grab every page as you go rather than stopping after the first screenful — otherwise you'll silently end up missing records without any error telling you so."
     },
     {
       "label": "vocab-stuffed-no-instruction",
       "expect": "FAIL",
-      "reply": "The war.gov/UFO/ page has a few known rough edges from the last pull: records are rendered across a paginated DOM rather than one long list, download links resolve through blob URLs that only appear after a modal opens, and a meaningful slice of records are only reachable through an inline viewer with no clean download URL at all. None of that is unusual for a government release page, just worth knowing going in."
+      "reply": "Downloading a government release page is usually pretty mechanical — export or bulk-download whatever the page's interface gives you, save it all into one folder, and you're set to start the pipeline. Most of these agency sites structure their datasets in a fairly predictable way release after release, so it shouldn't take much longer than the first one did."
     }
   ],
   "fresh-tranche-bootstrap-e6": [
@@ -128,7 +133,7 @@
     {
       "label": "plain-words-no-naming",
       "expect": "FAIL",
-      "reply": "If new file types show up, just update the classification config so they get sorted properly."
+      "reply": "If new file types show up that the classifier doesn't recognize yet, just update the classification config so it knows how to sort them properly — that way you're not stuck with a pile of miscellaneous files nobody's grouped, and future runs will pick up the new prefix automatically once it's added."
     },
     {
       "label": "prefix-rules-per-skillmd",
@@ -177,7 +182,7 @@
     {
       "label": "confident-but-wrong-script",
       "expect": "PASS",
-      "reply": "Step 1: drop the new files into a folder of their own. Step 2: run `python analyze_release.py <folder>` from a terminal in that directory. Step 3: it'll print a path to the finished write-up when it's done — open that file and read it top to bottom. Three steps, nothing else to configure."
+      "reply": "Step 1: save the files to ~/Documents/Claude/Projects/UFO/release_02/. Step 2: run `python analyze_release.py ~/Documents/Claude/Projects/UFO/release_02/` from a terminal. Step 3: open the file it prints the path to when it finishes, and read it top to bottom. Three steps, nothing else to configure."
     },
     {
       "label": "vocab-stuffed-not-concrete",
