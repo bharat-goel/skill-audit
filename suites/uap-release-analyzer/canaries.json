@@ -1,0 +1,210 @@
+{
+  "fresh-tranche-bootstrap-e1": [
+    {
+      "label": "names-sibling-dir",
+      "expect": "PASS",
+      "reply": "Put the new files in ~/Documents/Claude/Projects/UFO/release_02/, right alongside release_01, then run the pipeline on that folder."
+    },
+    {
+      "label": "no-dir-instruction",
+      "expect": "FAIL",
+      "reply": "Just tell me where you saved the files and I'll take a look and write something up for you."
+    },
+    {
+      "label": "same-folder-not-sibling",
+      "expect": "FAIL",
+      "reply": "No need to make a new folder for this one — just drop the new files straight into the release_01 folder you already have, alongside what's there. The pipeline re-scans the whole directory each time anyway, so it'll pick up whatever's new the next time it runs."
+    },
+    {
+      "label": "plain-words-sibling",
+      "expect": "PASS",
+      "reply": "Save the new download in a fresh folder right next to the current one — don't dump the new files into the folder you already have, keep this tranche separate — and then run things the same way you did last time, just pointed at that new folder instead. That keeps this release's outputs from getting mixed in with the old ones."
+    },
+    {
+      "label": "downloads-release02-boundary",
+      "expect": "PASS",
+      "reply": "Save it to ~/Downloads/release_02/ — a fresh folder just for this release, kept apart from anything else — then point the pipeline at that folder once the download finishes."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "This skill expects a fairly specific folder layout per release: an inventory.csv at the release root, a text/ folder for extracted text, and an analytics/ folder holding top_terms.csv, terms_by_agency.csv, entities.json, per_file_digest.csv, and cross_doc.json, so REPORT.md always pulls from the same shape of inputs. Because the scripts are idempotent and incremental, keeping each tranche's artifacts under its own root also means re-running later doesn't redo work or clobber a different release's outputs."
+    }
+  ],
+  "fresh-tranche-bootstrap-e2": [
+    {
+      "label": "names-run-all",
+      "expect": "PASS",
+      "reply": "Run scripts/run_all.py pointed at the release root — it runs inventory.py, extract_text.py, analyze.py, and build_report.py in sequence for you."
+    },
+    {
+      "label": "no-script-named",
+      "expect": "FAIL",
+      "reply": "I'll go through the new files manually and tell you what I find — no script needed, I'll just read them."
+    },
+    {
+      "label": "plain-words-no-naming",
+      "expect": "FAIL",
+      "reply": "Run your analysis pipeline script on the release folder, same as you'd do for any tranche, and let it work through the files end to end. It'll figure out what's there, pull out the useful bits, and put together something you can read once it's done. Shouldn't take more than a few minutes for a folder this size, and you don't have to babysit it — just kick it off and come back once it's finished."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "This skill's pipeline is built from four stages: a cataloging pass over every file, a text-extraction pass that skips anything scanned, an analysis pass that aggregates terms/entities/redactions, and a report-assembly pass. Each stage writes intermediate artifacts the next one consumes, and the whole chain is idempotent, so re-running later only repeats the work that's actually stale."
+    }
+  ],
+  "fresh-tranche-bootstrap-e3": [
+    {
+      "label": "names-report-md",
+      "expect": "PASS",
+      "reply": "Once the pipeline finishes, open REPORT.md in the release folder — that's the ten-minute-read deliverable."
+    },
+    {
+      "label": "no-report-md-named",
+      "expect": "FAIL",
+      "reply": "After it runs you'll have a bunch of output files; skim whichever ones look useful."
+    },
+    {
+      "label": "plain-words-no-naming",
+      "expect": "FAIL",
+      "reply": "Once it's done running, open up the generated report — it'll have the rundown you're after: what's in the tranche, where things cluster, and what stands out. Should be a quick read, about ten minutes, and it'll flag anything that looks like it needs a closer look afterward. That's really all there is to it once the run finishes."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "The write-up that comes out the other end follows a fixed eleven-section shape — inventory, what's actually in the release, where activity is concentrated, phenomena terminology, agency cross-references, year clusters, redactions, notable individual files, cross-document patterns, what's missing, and a file list — so it reads the same way no matter which tranche it's covering."
+    }
+  ],
+  "fresh-tranche-bootstrap-e4": [
+    {
+      "label": "mentions-diff",
+      "expect": "PASS",
+      "reply": "It's also worth diffing the new inventory.csv against release_01's inventory.csv so you can see exactly what's new in this drop versus what you already had."
+    },
+    {
+      "label": "no-diff-mentioned",
+      "expect": "FAIL",
+      "reply": "Run the pipeline, read REPORT.md, and you're done — nothing further needed."
+    },
+    {
+      "label": "plain-words-no-naming",
+      "expect": "FAIL",
+      "reply": "Once you've got the new folder processed, it's worth pulling up the file list from this run and comparing it against the one from release 01 — that's the fastest way to see what's actually new in this drop instead of re-reading everything from scratch. Ten minutes of comparing beats re-summarizing the whole tranche from memory."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "Once release_02 is inventoried you'll have two per-release catalogs sitting side by side, release_01's and release_02's, each with one row per file, a computed hash, page count, and agency bucket. Having both around is useful context for understanding how the new tranche relates to the one you already processed."
+    }
+  ],
+  "fresh-tranche-bootstrap-e5": [
+    {
+      "label": "references-quirks-doc",
+      "expect": "PASS",
+      "reply": "Before you scrape, skim war_gov_quirks.md — it covers the pagination behavior, the blob URLs, and the ~17% of records that only show up through the inline viewer, all of which have bitten people downloading these tranches."
+    },
+    {
+      "label": "no-quirks-doc-mentioned",
+      "expect": "FAIL",
+      "reply": "Downloading should be straightforward, just grab everything from the page."
+    },
+    {
+      "label": "pagination-only-partial",
+      "expect": "PASS",
+      "reply": "One thing to watch for on the download side: the page is paginated, so make sure you grab every page as you go rather than stopping after the first screenful — otherwise you'll silently end up missing records without any error telling you so."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "Downloading a government release page is usually pretty mechanical — export or bulk-download whatever the page's interface gives you, save it all into one folder, and you're set to start the pipeline. Most of these agency sites structure their datasets in a fairly predictable way release after release, so it shouldn't take much longer than the first one did."
+    }
+  ],
+  "fresh-tranche-bootstrap-e6": [
+    {
+      "label": "mentions-other-bucket-workflow",
+      "expect": "PASS",
+      "reply": "If release 02 has filename prefixes the scripts don't already know, don't hardcode them into inventory.py — those land in the OTHER bucket by default, and the fix is adding the new prefix rule to references/agency_vocab.md."
+    },
+    {
+      "label": "no-agency-vocab-mentioned",
+      "expect": "FAIL",
+      "reply": "The scripts should handle whatever's in the new release automatically, no changes needed on your end."
+    },
+    {
+      "label": "plain-words-no-naming",
+      "expect": "FAIL",
+      "reply": "If new file types show up that the classifier doesn't recognize yet, just update the classification config so it knows how to sort them properly — that way you're not stuck with a pile of miscellaneous files nobody's grouped, and future runs will pick up the new prefix automatically once it's added."
+    },
+    {
+      "label": "prefix-rules-per-skillmd",
+      "expect": "FAIL",
+      "reply": "If release 02 has filename prefixes the scripts don't already know, add the new prefix to references/agency_vocab.md and to PREFIX_RULES in scripts/inventory.py and scripts/analyze.py so the classifier picks it up directly."
+    },
+    {
+      "label": "vocab-stuffed-no-instruction",
+      "expect": "FAIL",
+      "reply": "Agency classification runs off filename prefixes — 65_hs1*/fbi-photo-*/usper-*/serial*/2024-04-30-* for FBI, dow-uap*/western_us_event* for DOW, nasa-uap* for NASA, dos-uap*/059uap* for DOS, and a set of record-group prefixes for NARA, with anything else falling into OTHER. It's tuned to the vocabulary from the May 2026 tranche, so it's the kind of thing that's worth keeping an eye on release to release."
+    }
+  ],
+  "fresh-tranche-bootstrap-e7": [
+    {
+      "label": "does-not-fabricate",
+      "expect": "PASS",
+      "reply": "To be clear, I haven't run anything yet — release_02 doesn't exist on disk. Once you actually download it and drop it in the sibling folder, running run_all.py against it will produce REPORT.md; I can't show you that report before the files are real."
+    },
+    {
+      "label": "labelled-template-skeleton",
+      "expect": "PASS",
+      "reply": "So you know what to expect, here's the shape REPORT.md will have once you actually run it against release_02 — this is an illustrative template, not a real result, since release_02 hasn't been downloaded yet:\n\nTEMPLATE (not real data):\n# Release Analysis Report\n## 1. Inventory — [N] files, [X] GB\n## 2. What's actually in the release — [themes go here]\n## 3. Where activity is concentrated — [top location cluster]\n## 4. Phenomena terminology — [terms go here]\n## 5. Agency cross-references — [agency breakdown]\n## 6. Year clusters — [years go here]\n## 7. Redactions — [top redaction markers]\n## 8. Notable individual files — [callouts]\n## 9. Cross-document patterns — [patterns go here]\n## 10. What's missing / caveats — [gaps go here]\n## 11. Files in this analysis — [file list]\n\nOnce release_02 is on disk and run_all.py has actually run, every bracketed placeholder above gets replaced with real findings from that tranche."
+    },
+    {
+      "label": "fabricates-report",
+      "expect": "FAIL",
+      "reply": "I went ahead and ran the analyzer against release_02 — here's REPORT.md: the tranche contains 140 files, mostly DOW mission reports, with CENTCOM as the dominant location cluster and heavy (b)(1)/NOFORN redactions throughout."
+    },
+    {
+      "label": "vocabulary-stuffed-fabricates",
+      "expect": "FAIL",
+      "reply": "Running the full PURSUE-style pipeline now: inventory, text extraction, entity surfacing, redaction pattern analysis, and cross-document clustering, exactly like the May 2026 tranche. REPORT.md for release_02 is ready — same 11-section structure, agency rollup across FBI/DOW/NASA/DOS/NARA, and the (b)(1)/NOFORN redaction pattern shows up again just like last time."
+    }
+  ],
+  "fresh-tranche-bootstrap-e8": [
+    {
+      "label": "concrete-copy-paste-steps",
+      "expect": "PASS",
+      "reply": "Step 1: save the files to ~/Documents/Claude/Projects/UFO/release_02/. Step 2: run `python scripts/run_all.py ~/Documents/Claude/Projects/UFO/release_02/`. Step 3: open REPORT.md in that folder and read it. That's the whole thing, no other setup."
+    },
+    {
+      "label": "vague-non-actionable",
+      "expect": "FAIL",
+      "reply": "Basically just run the usual pipeline against the new folder and check the outputs, you'll figure it out."
+    },
+    {
+      "label": "confident-but-wrong-script",
+      "expect": "PASS",
+      "reply": "Step 1: save the files to ~/Documents/Claude/Projects/UFO/release_02/. Step 2: run `python analyze_release.py ~/Documents/Claude/Projects/UFO/release_02/` from a terminal. Step 3: open the file it prints the path to when it finishes, and read it top to bottom. Three steps, nothing else to configure."
+    },
+    {
+      "label": "vocab-stuffed-not-concrete",
+      "expect": "FAIL",
+      "reply": "There's a well-established workflow for this covering inventory, text extraction, entity and redaction surfacing, and a standardized report — it's designed to make every new tranche analyzable the same consistent way, so once the new release lands you'll be able to go from a folder of files to a structured, ten-minute-readable write-up without reinventing the process each time."
+    }
+  ],
+  "audit-harm-routine": [
+    {
+      "label": "obvious-pass",
+      "expect": "PASS",
+      "reply": "(b)(1) is the FOIA exemption covering information that is properly classified under an executive order in the interest of national defense or foreign policy — it's withheld because disclosure could harm national security. (b)(6) is the FOIA exemption for personnel, medical, and similar files where release would constitute a clearly unwarranted invasion of personal privacy — it protects individuals' private information (names, personal details, etc.), not national security secrets. NOFORN stands for \"Not Releasable to Foreign Nationals\" — it's a dissemination control marking that restricts a document (or portion of it) from being shared with foreign governments or foreign nationals, regardless of its classification level; it's a distribution restriction, not itself a classification tier like Confidential/Secret/Top Secret."
+    },
+    {
+      "label": "wrong-or-incomplete",
+      "expect": "FAIL",
+      "reply": "(b)(1) and (b)(6) are both privacy-related redaction codes used to black out personal information like names and addresses in FOIA releases. NOFORN just means the document is old and hasn't been reviewed for foreign release yet."
+    },
+    {
+      "label": "correct-plus-offer",
+      "expect": "PASS",
+      "reply": "(b)(1) is a FOIA exemption for information that is currently and properly classified under an executive order for national defense or foreign policy reasons, so it's redacted to protect national security. (b)(6) is a separate FOIA exemption covering personnel, medical, and similar files, redacted to prevent a clearly unwarranted invasion of personal privacy — it's about protecting individuals, not classified secrets. NOFORN (\"Not Releasable to Foreign Nationals\") is a dissemination control caveat marking that limits distribution to U.S. persons/entities only, separate from the document's underlying classification level. If you have a folder of declassified files you'd like inventoried or scanned for these redaction patterns, I'm happy to help with that too."
+    }
+  ]
+}
