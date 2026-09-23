@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
-import { compare, render } from "../tools/fidelity-lib.mjs";
+import { compare, render, renderProvenance } from "../tools/fidelity-lib.mjs";
 
 // A stand-in for nullbench's verify(): substring "any" only. The CLI test below
 // exercises the real one.
@@ -76,6 +76,17 @@ test("a grader that returns something other than a boolean is a problem, not a c
   assert.ok(r.problems.some((p) => p.includes("t1/lacks-it") && p.includes("not a boolean")));
 });
 
+test("renderProvenance prints the nullbench commit, verify.mjs hash, and each task file's hash", () => {
+  const text = renderProvenance({
+    nullbenchSha: "a".repeat(40),
+    verifySha256: "b".repeat(64),
+    tasks: [{ id: "t1", file: "tasks/t1.json", sha256: "c".repeat(64) }],
+  });
+  assert.match(text, new RegExp(`nullbench commit: ${"a".repeat(40)}`));
+  assert.match(text, new RegExp(`verify\\.mjs sha256: ${"b".repeat(64)}`));
+  assert.match(text, /t1 \(tasks\/t1\.json\): c{64}/);
+});
+
 function suite(graderBody) {
   const dir = mkdtempSync(join(tmpdir(), "fidelity-"));
   mkdirSync(join(dir, "tasks"));
@@ -94,7 +105,13 @@ test("CLI against the real nullbench verify: agreement exits 0 and writes fideli
   const dir = suite(`export async function grade(_id, reply) { return reply.toLowerCase().includes("alpha"); }`);
   const r = spawnSync(process.execPath, ["tools/fidelity.mjs", dir], { encoding: "utf8" });
   assert.equal(r.status, 0, r.stderr);
-  assert.match(readFileSync(join(dir, "fidelity", "fidelity.txt"), "utf8"), /agree on all 2 samples/);
+  const text = readFileSync(join(dir, "fidelity", "fidelity.txt"), "utf8");
+  assert.match(text, /agree on all 2 samples/);
+  // I5: fidelity.txt begins with a provenance header so a later run can check it
+  // still matches before spending on a paid call.
+  assert.match(text, /^nullbench commit: [0-9a-f]{40}/);
+  assert.match(text, /verify\.mjs sha256: [0-9a-f]{64}/);
+  assert.match(text, /t1 \(tasks\/t1\.json\): [0-9a-f]{64}/);
 });
 
 test("CLI: disagreement exits 1", () => {

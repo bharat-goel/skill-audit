@@ -50,6 +50,21 @@ export async function compare({ tasks, samples, verify, grade }) {
   return { rows, problems, ok: problems.length === 0 };
 }
 
+// Pinned evidence for what fidelity.txt actually checked, so a stale run (nullbench
+// changed underneath it, or a task file edited after the fidelity check passed) can be
+// caught by comparing these against a fresh computation before a paid call, rather than
+// trusting that a green fidelity.txt from last week still applies.
+export function renderProvenance({ nullbenchSha, verifySha256, tasks }) {
+  const lines = [
+    `nullbench commit: ${nullbenchSha}`,
+    `verify.mjs sha256: ${verifySha256}`,
+    "task files:",
+    ...tasks.map((t) => `  ${t.id} (${t.file}): ${t.sha256}`),
+    "",
+  ];
+  return lines.join("\n") + "\n";
+}
+
 export function render({ rows, problems, ok }) {
   const v = (b) => (b ? "PASS" : "FAIL");
   const lines = rows.map(
