@@ -7,6 +7,12 @@ export async function compare({ tasks, samples, verify, grade }) {
   const problems = [];
   const deterministic = tasks.filter((t) => t.verify.type !== "judge");
 
+  // Nothing deterministic to check is not a vacuous pass -- it means the check ran
+  // against no evidence at all, which is worse than a disagreement.
+  if (deterministic.length === 0) {
+    problems.push("no deterministic tasks to compare");
+  }
+
   for (const t of deterministic) {
     const list = samples[t.id] ?? [];
     if (list.length === 0) {
@@ -16,8 +22,15 @@ export async function compare({ tasks, samples, verify, grade }) {
     const mine = [];
     for (const s of list) {
       const ours = verify(t.verify, s.reply).pass;
-      const theirs = Boolean(await grade(t.id, s.reply));
-      mine.push({ task: t.id, label: s.label, ours, theirs, agree: ours === theirs });
+      const raw = await grade(t.id, s.reply);
+      // A grader that returns "yes" or 1 instead of true is not diagnosed by silently
+      // coercing it -- that hides exactly the kind of author-side bug this check
+      // exists to surface. Name the task/label and treat it as a problem instead.
+      if (typeof raw !== "boolean") {
+        problems.push(`${t.id}/${s.label}: author's grader returned ${JSON.stringify(raw)}, not a boolean`);
+        continue;
+      }
+      mine.push({ task: t.id, label: s.label, ours, theirs: raw, agree: ours === raw });
     }
     rows.push(...mine);
     if (!mine.some((r) => r.theirs)) problems.push(`${t.id}: no sample the author's grader passes`);
@@ -42,7 +55,7 @@ export function render({ rows, problems, ok }) {
   const lines = rows.map(
     (r) => `${r.agree ? "ok  " : "DIFF"}  ${r.task}  ${r.label}  port=${v(r.ours)}  author=${v(r.theirs)}`,
   );
-  lines.push("", ok ? `RESULT: agree on all ${rows.length} samples` : "RESULT: DISAGREE");
+  lines.push("", ok ? `RESULT: agree on all ${rows.length} samples` : "RESULT: FAILED");
   for (const p of problems) lines.push(`  - ${p}`);
   return lines.join("\n") + "\n";
 }

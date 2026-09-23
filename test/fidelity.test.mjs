@@ -58,7 +58,22 @@ test("render marks disagreements and the overall result", async () => {
   const r = await compare({ tasks: [task], samples, verify: fakeVerify, grade: async () => true });
   const text = render(r);
   assert.match(text, /DIFF\s+t1\s+lacks-it/);
-  assert.match(text, /RESULT: DISAGREE/);
+  assert.match(text, /RESULT: FAILED/);
+});
+
+test("zero deterministic tasks is a problem, not a vacuous pass", async () => {
+  const judged = { id: "j1", verify: { type: "judge", rubric: "x" } };
+  const r = await compare({ tasks: [judged], samples: {}, verify: fakeVerify, grade: async () => true });
+  assert.equal(r.ok, false);
+  assert.ok(r.problems.some((p) => p.includes("no deterministic tasks to compare")));
+});
+
+test("a grader that returns something other than a boolean is a problem, not a coercion", async () => {
+  const grade = async () => "yes"; // truthy string, not a real boolean
+  const r = await compare({ tasks: [task], samples, verify: fakeVerify, grade });
+  assert.equal(r.ok, false);
+  assert.ok(r.problems.some((p) => p.includes("t1/has-it") && p.includes("not a boolean")));
+  assert.ok(r.problems.some((p) => p.includes("t1/lacks-it") && p.includes("not a boolean")));
 });
 
 function suite(graderBody) {
