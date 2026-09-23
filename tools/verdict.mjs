@@ -6,6 +6,17 @@ export function verdict({ claimPp, lo, hi }) {
   if (!Number.isFinite(claimPp) || claimPp === 0) {
     throw new Error(`claim must be a finite, non-zero delta; got ${claimPp}`);
   }
+  // Claims are recorded in nullbench's direction (treatment minus control pass rate):
+  // every author task registers predict: helps, so a claimed improvement is always
+  // positive in this frame. A negative claimPp is not "the same claim mirrored" --
+  // it is a different, unstated direction, and deciding a direction here would be
+  // exactly the write-up-time judgement call this tool exists to avoid.
+  if (claimPp < 0) {
+    throw new Error(
+      `claim must be a positive delta; restate the claim as a change in pass rate ` +
+        `(treatment − control), got ${claimPp}`,
+    );
+  }
   if (!Number.isFinite(lo) || !Number.isFinite(hi) || lo > hi) {
     throw new Error(`bad interval [${lo}, ${hi}]`);
   }

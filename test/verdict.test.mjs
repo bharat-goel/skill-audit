@@ -22,13 +22,23 @@ test("a claim outside an interval that spans zero: not reproduced", () => {
   assert.equal(verdict({ claimPp: 80, lo: -20, hi: 30 }), "claim not reproduced");
 });
 
-test("negative claims mirror positive ones", () => {
-  assert.equal(verdict({ claimPp: -25, lo: -40, hi: -10 }), "claim holds");
-  assert.equal(verdict({ claimPp: -25, lo: -40, hi: 5 }), "inconclusive");
+test("a negative claim is refused: claims are recorded as treatment minus control", () => {
+  assert.throws(
+    () => verdict({ claimPp: -25, lo: -40, hi: -10 }),
+    /restate the claim as a change in pass rate \(treatment . control\)/,
+  );
+});
+
+test("an effect larger than claimed is not a reproduction", () => {
+  assert.equal(verdict({ claimPp: 10, lo: 25, hi: 60 }), "claim not reproduced");
 });
 
 test("a claim on the interval boundary counts as contained", () => {
   assert.equal(verdict({ claimPp: 40, lo: 10, hi: 40 }), "claim holds");
+});
+
+test("a lower bound of exactly zero does not exclude zero: inconclusive", () => {
+  assert.equal(verdict({ claimPp: 40, lo: 0, hi: 60 }), "inconclusive");
 });
 
 test("a zero or non-finite claim, or a bad interval, is refused", () => {
