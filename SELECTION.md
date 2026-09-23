@@ -142,3 +142,46 @@ finding.
 | 97 | swati1024/torrents | 2 | ✗ | – | – | – | – | excluded: E1, empty git repository (409 on HEAD commit) | https://github.com/swati1024/torrents |
 | 98 | kina-cmd/agent-skill-sync | 2 | ✗ | – | – | – | – | excluded: E1, no SKILL.md in repo | https://github.com/kina-cmd/agent-skill-sync/blob/975b219eb387298d83ef1b94c8be687658b6b8d9/README.md |
 | 99 | aspenkit/aspens — base | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/aspenkit/aspens/blob/8dde82696cdc82bc951c9f07d964ad3468f24ef0/README.md |
+| 100 | frmoretto/stream-coding | 2 | ✓ | ✗ | – | – | – | excluded: E2, "55% faster" is cited from third-party tools (Copilot/Cursor); the repo's own "7 modules in 4.5 hours" case study has no without-skill baseline | https://github.com/frmoretto/stream-coding/blob/42a7cb5ceec5611040d6f2764ee7943e4984345d/README.md#L16 |
+| 101 | indiesoftby/defold-agent-config — defold-api-fetch | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/indiesoftby/defold-agent-config/blob/da5bd18f7f7114af0e0f09fa3bb3a26f091845fd/README.md |
+| 102 | Worldbuilder013/HEXIS — table_clean | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/Worldbuilder013/HEXIS/blob/cdb484bb98e51fccb8d2286d324e881226cafcb6/README.md |
+| 103 | Workflowsio/company-os-starter-kit | 2 | ✗ | – | – | – | – | excluded: E1, no SKILL.md in repo | https://github.com/Workflowsio/company-os-starter-kit/blob/3392777f8b27a48ca21954d175a82a5b457165fc/README.md |
+| 104 | blacktop/ipsw-skill — ipsw | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/blacktop/ipsw-skill/blob/30f98b82fdfd9d1ccbee47c2c2d494b42f56ed8c/README.md |
+| 105 | SylphAI-Inc/atskills — code-review | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/SylphAI-Inc/atskills/blob/9010d9a946cfeee7e777b2f8fd175855d744c391/README.md |
+| 106 | ooocooc/open-skill-sunset — skill-sunset | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/ooocooc/open-skill-sunset/blob/b703cf00712b21f12bfa41f1d3d0a6a9455fd954/README.md |
+| 107 | mitkox/SkillOpt — pi-skillopt | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published in this repo's own README | https://github.com/mitkox/SkillOpt/blob/7227af4965e9ed8e2a97cd84f2375d82a6a8bbcf/README.md |
+| 108 | ZhongliangGuo/oop-architect | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/ZhongliangGuo/oop-architect/blob/4733ff320f9be4d6087d3c288a7d65cbadb44dac/README.md |
+| 109 | netresearch/agent-rules-skill — agent-rules | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/netresearch/agent-rules-skill/blob/7e1a602f6c735d076afa0bf09c4b8e09bf1b8e3b/README.md |
+| 110 | serac-labs/serac — acl-security | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/serac-labs/serac/blob/af3ad2b3c01305526a44b2647415ba794237462c/README.md |
+| 111 | Hao0321/claude-skill-code-cleanup — run-benchmark-driven-rd | 2 | ✓ | ✗ | – | – | – | excluded: E2, a methodology skill for running benchmark-driven R&D on other projects; no published with-vs-without number for this skill itself | https://github.com/Hao0321/claude-skill-code-cleanup/blob/7f147ce60e40e10e2c82232861bec9f1ee6bcd93/README.md |
+| 112 | ThomasMoreAI/legal-skills-open — arckit-uae-pdpl | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/ThomasMoreAI/legal-skills-open/blob/57855d3f62ec6b2778b70e26e2fa18c42e7a01d4/README.md |
+| 113 | atsushi-green/ds-ai-coding-skills — analysis-reporting | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/atsushi-green/ds-ai-coding-skills/blob/edb4684e0917337d93eaf8039a5bcb36e632eab8/README.md |
+| 114 | linmy666/madcop | 2 | ✗ | – | – | – | – | excluded: E1, no SKILL.md in repo | https://github.com/linmy666/madcop/blob/f5440a67da979f0f63f6c672fe86bd15be0b6bef/README.md |
+| 115 | Timefiles404/lean-mode-skill — lean-mode | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/Timefiles404/lean-mode-skill/blob/b7f627e92591798e30fe3671911a89451f539f98/README.md |
+| 116 | Caph-dev/agents-progressive-disclosure | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/Caph-dev/agents-progressive-disclosure/blob/3f966c22eefc032cac7d9cdda318a64af3123554/README.md |
+| 117 | LOGIN-TB/claude-skills — ai-seo | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/LOGIN-TB/claude-skills/blob/e80bcfdb34dee7cc94265fc8ce54f156f440e4c8/README.md |
+| 118 | pc-style/skill-view | 2 | ✗ | – | – | – | – | excluded: E1, no SKILL.md in repo | https://github.com/pc-style/skill-view/blob/7dde350d6ed3af071c16ce7c833ea5adbaefdfd9/README.md |
+| 119 | fivetaku/claude-office-skills — 3-statement-model | 2 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/fivetaku/claude-office-skills/blob/039902691e7d0a735ef4e67ee007d7832da9fcab/README.md |
+
+## Outcome
+
+Screened 119 candidates; 0 eligible. Exclusions by first failed criterion:
+E1 17, E2 98, E3 4, E4 0, E5 0.
+
+Zero of 119 screened candidates publish a portable with-vs-without claim. The pattern:
+of the 4 candidates that cleared E1 and E2 (published some with-vs-without number),
+all 4 failed E3 for the same underlying reason — their pass criteria require executing
+generated code, inspecting a file system, or grading an external agentic benchmark
+(GAIA / WebWalkerQA), none of which nullbench can grade from reply text alone:
+`ciembor/agent-rules-books` (#26), `arpitg1304/robotics-agent-skills` (#49),
+`Tencent/SkillHone` (#78), and `ckpxgfnksd-max/uap-release-analyzer` (#83).
+No candidate reached E4 or E5.
+
+Per the selection rule's stopping condition ("100 candidates screened"), screening ran
+past 100 to 119 because the rule reads source 1 and source 2 as sequential and screened
+in full ("all of source 1, then source 2"): source 1 (19 candidates) was screened
+completely first, then source 2 (100 candidates) was screened completely, for a
+combined total of 119. See Concerns in the task report for the literal-vs-intended
+reading of the 100-candidate cap. k = 0: per the rule and per Task brief Step 5, the
+audit's finding is the E-rate table above, and Task 8's write-up is the remaining work.
+No skills were selected.
