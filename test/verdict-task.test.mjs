@@ -91,7 +91,13 @@ test("pooled: counts equal the per-task sums, dead runs excluded", () => {
     rec("t2", "control", false),
     rec("t2", "treatment", true),
   ];
-  const r = pooledVerdictForTasks({ records, taskIds: ["t1", "t2"], claimPp: 20, newcombe: fakeNewcombe });
+  const r = pooledVerdictForTasks({
+    records,
+    taskIds: ["t1", "t2"],
+    claimPp: 20,
+    newcombe: fakeNewcombe,
+    minGraded: 1,
+  });
   assert.equal(r.kC, 2);
   assert.equal(r.nC, 4);
   assert.equal(r.kT, 3);
@@ -116,7 +122,13 @@ test("pooled: counts are the weighted sum, not an unweighted average of per-task
     rec("t2", "treatment", false), rec("t2", "treatment", false), rec("t2", "treatment", false),
     rec("t2", "treatment", false), rec("t2", "treatment", false), rec("t2", "treatment", false), // t2: kT=0, nT=9
   ];
-  const r = pooledVerdictForTasks({ records, taskIds: ["t1", "t2"], claimPp: 20, newcombe: fakeNewcombe });
+  const r = pooledVerdictForTasks({
+    records,
+    taskIds: ["t1", "t2"],
+    claimPp: 20,
+    newcombe: fakeNewcombe,
+    minGraded: 1,
+  });
   // Weighted sum: kC = 0+9 = 9, nC = 1+9 = 10. An unweighted average of per-task rates
   // (0/1 and 9/9 -> mean 0.5) times nC would give kC = 5, not 9.
   assert.equal(r.kC, 9);
@@ -139,7 +151,7 @@ test("pooled: interval equals newcombe on the summed counts, via the real newcom
     ...Array.from({ length: 2 }, () => rec("t2", "treatment", false)),
     ...Array.from({ length: 4 }, () => rec("t2", "treatment", true)),
   ];
-  const r = pooledVerdictForTasks({ records, taskIds: ["t1", "t2"], claimPp: 30, newcombe });
+  const r = pooledVerdictForTasks({ records, taskIds: ["t1", "t2"], claimPp: 30, newcombe, minGraded: 3 });
   const expected = newcombe(2, 12, 8, 12);
   assert.ok(Math.abs(r.lo - expected.lo * 100) < 1e-9);
   assert.ok(Math.abs(r.hi - expected.hi * 100) < 1e-9);
@@ -161,7 +173,7 @@ test("pooled: two tasks each alone inconclusive, pooled claim holds", async () =
   assert.equal(single1.verdict, "inconclusive");
   assert.equal(single2.verdict, "inconclusive");
 
-  const pooled = pooledVerdictForTasks({ records, taskIds: ["t1", "t2"], claimPp, newcombe });
+  const pooled = pooledVerdictForTasks({ records, taskIds: ["t1", "t2"], claimPp, newcombe, minGraded: 3 });
   assert.equal(pooled.verdict, "claim holds");
 });
 
@@ -174,7 +186,13 @@ test("pooled: records for tasks outside taskIds are ignored", () => {
     rec("harm-task", "control", true),
     rec("harm-task", "treatment", false),
   ];
-  const r = pooledVerdictForTasks({ records, taskIds: ["t1"], claimPp: 20, newcombe: fakeNewcombe });
+  const r = pooledVerdictForTasks({
+    records,
+    taskIds: ["t1"],
+    claimPp: 20,
+    newcombe: fakeNewcombe,
+    minGraded: 1,
+  });
   assert.equal(r.kC, 1);
   assert.equal(r.nC, 2);
   assert.equal(r.kT, 2);
@@ -184,43 +202,168 @@ test("pooled: records for tasks outside taskIds are ignored", () => {
 test("pooled: a taskId with no records at all throws, naming the id", () => {
   const records = [rec("t1", "control", true), rec("t1", "treatment", true)];
   assert.throws(
-    () => pooledVerdictForTasks({ records, taskIds: ["t1", "nope"], claimPp: 20, newcombe: fakeNewcombe }),
+    () =>
+      pooledVerdictForTasks({
+        records,
+        taskIds: ["t1", "nope"],
+        claimPp: 20,
+        newcombe: fakeNewcombe,
+        minGraded: 1,
+      }),
     /nope/,
   );
 });
 
 test("pooled: empty taskIds throws", () => {
   const records = [rec("t1", "control", true), rec("t1", "treatment", true)];
-  assert.throws(() => pooledVerdictForTasks({ records, taskIds: [], claimPp: 20, newcombe: fakeNewcombe }), /empty/i);
+  assert.throws(
+    () =>
+      pooledVerdictForTasks({ records, taskIds: [], claimPp: 20, newcombe: fakeNewcombe, minGraded: 1 }),
+    /empty/i,
+  );
 });
 
 test("pooled: duplicate taskIds throws", () => {
   const records = [rec("t1", "control", true), rec("t1", "treatment", true)];
   assert.throws(
-    () => pooledVerdictForTasks({ records, taskIds: ["t1", "t1"], claimPp: 20, newcombe: fakeNewcombe }),
+    () =>
+      pooledVerdictForTasks({
+        records,
+        taskIds: ["t1", "t1"],
+        claimPp: 20,
+        newcombe: fakeNewcombe,
+        minGraded: 1,
+      }),
     /duplicate/i,
   );
 });
 
+test("pooled: a task with every run dead (all failed: true) throws, not a silent k=0,n=0 cell", () => {
+  const records = [
+    rec("t1", "control", true, true),
+    rec("t1", "control", false, true),
+    rec("t1", "control", true, true),
+    rec("t1", "treatment", true),
+    rec("t1", "treatment", true),
+    rec("t1", "treatment", true),
+  ];
+  assert.throws(
+    () =>
+      pooledVerdictForTasks({ records, taskIds: ["t1"], claimPp: 20, newcombe: fakeNewcombe, minGraded: 3 }),
+    /t1/,
+  );
+});
+
+test("pooled: a cell one below the floor throws, naming task and arm", () => {
+  const records = [
+    ...Array.from({ length: 2 }, () => rec("t1", "control", true)), // nC=2, floor=3
+    ...Array.from({ length: 3 }, () => rec("t1", "treatment", true)), // nT=3, at floor
+  ];
+  assert.throws(
+    () =>
+      pooledVerdictForTasks({ records, taskIds: ["t1"], claimPp: 20, newcombe: fakeNewcombe, minGraded: 3 }),
+    /t1/,
+  );
+  let threw = false;
+  try {
+    pooledVerdictForTasks({ records, taskIds: ["t1"], claimPp: 20, newcombe: fakeNewcombe, minGraded: 3 });
+  } catch (e) {
+    threw = true;
+    assert.match(e.message, /control/);
+  }
+  assert.ok(threw);
+});
+
+test("pooled: a cell exactly at the floor does not throw", () => {
+  const records = [
+    ...Array.from({ length: 3 }, () => rec("t1", "control", true)), // nC=3, at floor
+    ...Array.from({ length: 3 }, () => rec("t1", "treatment", true)), // nT=3, at floor
+  ];
+  const r = pooledVerdictForTasks({
+    records,
+    taskIds: ["t1"],
+    claimPp: 20,
+    newcombe: fakeNewcombe,
+    minGraded: 3,
+  });
+  assert.equal(r.nC, 3);
+  assert.equal(r.nT, 3);
+});
+
+test("pooled: missing minGraded throws", () => {
+  const records = [rec("t1", "control", true), rec("t1", "treatment", true)];
+  assert.throws(
+    () => pooledVerdictForTasks({ records, taskIds: ["t1"], claimPp: 20, newcombe: fakeNewcombe }),
+    /minGraded/,
+  );
+});
+
+test("pooled: invalid minGraded (zero, negative, non-integer) throws", () => {
+  const records = [rec("t1", "control", true), rec("t1", "treatment", true)];
+  for (const bad of [0, -1, 1.5, NaN, "3"]) {
+    assert.throws(
+      () =>
+        pooledVerdictForTasks({ records, taskIds: ["t1"], claimPp: 20, newcombe: fakeNewcombe, minGraded: bad }),
+      /minGraded/,
+      `expected throw for minGraded=${JSON.stringify(bad)}`,
+    );
+  }
+});
+
+// reps: 3 -> floor = max(3, ceil(3 * 0.8)) = max(3, 3) = 3. Every cell below has n=3,
+// exactly at the floor, so the run must succeed.
 test("CLI --pooled prints the pooled result as JSON, reading records.json from a results dir", () => {
   const dir = mkdtempSync(join(tmpdir(), "verdict-task-pooled-"));
   mkdirSync(dir, { recursive: true });
   const records = [
-    rec("t1", "control", true), rec("t1", "control", false),
-    rec("t1", "treatment", true), rec("t1", "treatment", true),
-    rec("t2", "control", true), rec("t2", "control", false),
-    rec("t2", "treatment", true), rec("t2", "treatment", false),
+    rec("t1", "control", true), rec("t1", "control", false), rec("t1", "control", false),
+    rec("t1", "treatment", true), rec("t1", "treatment", true), rec("t1", "treatment", false),
+    rec("t2", "control", true), rec("t2", "control", false), rec("t2", "control", false),
+    rec("t2", "treatment", true), rec("t2", "treatment", false), rec("t2", "treatment", false),
   ];
-  writeFileSync(join(dir, "records.json"), JSON.stringify({ records }));
+  writeFileSync(join(dir, "records.json"), JSON.stringify({ requested: { reps: 3 }, records }));
   const r = spawnSync(process.execPath, ["tools/verdict-task.mjs", dir, "--pooled", "20", "t1", "t2"], {
     encoding: "utf8",
   });
   assert.equal(r.status, 0, r.stderr);
   const out = JSON.parse(r.stdout);
   assert.equal(out.kC, 2);
-  assert.equal(out.nC, 4);
+  assert.equal(out.nC, 6);
   assert.equal(out.kT, 3);
-  assert.equal(out.nT, 4);
+  assert.equal(out.nT, 6);
   assert.ok(["claim holds", "claim not reproduced", "inconclusive"].includes(out.verdict));
   assert.equal(out.perTask.length, 2);
+});
+
+// reps: 10 -> floor = max(3, ceil(10 * 0.8)) = 8, matching PROTOCOL.md's own worked
+// example ("At reps: 10 the floor is 8"). Each cell here has only 3 graded runs, well
+// under that floor, so the CLI must derive the floor from requested.reps and refuse.
+test("CLI --pooled derives the graded-run floor from records.json's requested.reps and refuses a thin cell", () => {
+  const dir = mkdtempSync(join(tmpdir(), "verdict-task-pooled-floor-"));
+  mkdirSync(dir, { recursive: true });
+  const records = [
+    rec("t1", "control", true), rec("t1", "control", false), rec("t1", "control", false),
+    rec("t1", "treatment", true), rec("t1", "treatment", true), rec("t1", "treatment", false),
+  ];
+  writeFileSync(join(dir, "records.json"), JSON.stringify({ requested: { reps: 10 }, records }));
+  const r = spawnSync(process.execPath, ["tools/verdict-task.mjs", dir, "--pooled", "20", "t1"], {
+    encoding: "utf8",
+  });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /t1/);
+});
+
+test("CLI --pooled with missing requested.reps in records.json throws", () => {
+  const dir = mkdtempSync(join(tmpdir(), "verdict-task-pooled-noreps-"));
+  mkdirSync(dir, { recursive: true });
+  const records = [
+    rec("t1", "control", true), rec("t1", "control", false),
+    rec("t1", "treatment", true), rec("t1", "treatment", false),
+  ];
+  writeFileSync(join(dir, "records.json"), JSON.stringify({ records }));
+  const r = spawnSync(process.execPath, ["tools/verdict-task.mjs", dir, "--pooled", "20", "t1"], {
+    encoding: "utf8",
+  });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /reps/);
 });

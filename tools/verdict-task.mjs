@@ -42,7 +42,19 @@ export function verdictForTask({ records, taskId, claimPp, newcombe }) {
 // task separately. Used where a suite's pre-registered analysis rule pools several tasks
 // that jointly stand in for one author claim (see suites/uap-release-analyzer/DEVIATIONS.md,
 // "Pooled-verdict rule for eval 3"). perTask is reported, not verdicted.
-export function pooledVerdictForTasks({ records, taskIds, claimPp, newcombe }) {
+//
+// minGraded is required: PROTOCOL.md §5.1's graded-run floor says any cell (one task, one
+// arm) below the floor voids the whole batch -- there is no such thing as a pooled verdict
+// computed from survivors around a thin or all-dead cell. A task all of whose runs are dead
+// (failed: true) would otherwise silently contribute k=0, n=0 to the pool and still produce
+// a normal-looking verdict; requiring the caller to state the floor and enforcing it per
+// cell, before any counts are summed, is what rules that out. The CLI derives minGraded from
+// records.json's requested.reps using nullbench's own formula (PROTOCOL.md §5.1); a caller
+// invoking this function directly must supply it explicitly.
+export function pooledVerdictForTasks({ records, taskIds, claimPp, newcombe, minGraded }) {
+  if (!Number.isInteger(minGraded) || minGraded < 1) {
+    throw new Error(`minGraded must be a positive integer; got ${JSON.stringify(minGraded)}`);
+  }
   if (!Array.isArray(taskIds) || taskIds.length === 0) {
     throw new Error("taskIds must be a non-empty array");
   }
@@ -59,9 +71,6 @@ export function pooledVerdictForTasks({ records, taskIds, claimPp, newcombe }) {
   const perTask = [];
 
   for (const taskId of taskIds) {
-    if (!records.some((r) => r.task === taskId)) {
-      throw new Error(`no records at all for task ${JSON.stringify(taskId)}`);
-    }
     const graded = records.filter((r) => r.task === taskId && !r.failed);
     const arm = (cond) => {
       const rs = graded.filter((r) => r.cond === cond);
@@ -69,6 +78,18 @@ export function pooledVerdictForTasks({ records, taskIds, claimPp, newcombe }) {
     };
     const control = arm("control");
     const treatment = arm("treatment");
+    if (control.n < minGraded) {
+      throw new Error(
+        `cell below graded-run floor: task ${JSON.stringify(taskId)} control has ${control.n} ` +
+          `graded runs, need >= ${minGraded}`,
+      );
+    }
+    if (treatment.n < minGraded) {
+      throw new Error(
+        `cell below graded-run floor: task ${JSON.stringify(taskId)} treatment has ${treatment.n} ` +
+          `graded runs, need >= ${minGraded}`,
+      );
+    }
     perTask.push({ taskId, kC: control.k, nC: control.n, kT: treatment.k, nT: treatment.n });
     kC += control.k;
     nC += control.n;
@@ -108,7 +129,7 @@ if (isMain) {
   }
   const nullbench = resolve(process.env.NULLBENCH_DIR ?? join(import.meta.dirname, "..", "..", "nullbench"));
   const { newcombe } = await import(pathToFileURL(join(nullbench, "src", "stats.mjs")).href);
-  const { records } = JSON.parse(readFileSync(join(resolve(resultsDir), "records.json"), "utf8"));
+  const { requested, records } = JSON.parse(readFileSync(join(resolve(resultsDir), "records.json"), "utf8"));
 
   if (rest[0] === "--pooled") {
     const [, claimArg, ...taskIds] = rest;
@@ -119,7 +140,18 @@ if (isMain) {
       process.exit(2);
     }
     const claimPp = Number(claimArg);
-    const result = pooledVerdictForTasks({ records, taskIds, claimPp, newcombe });
+    // Graded-run floor, matching nullbench's own formula exactly (PROTOCOL.md §5.1:
+    // "floor = max(3, ceil(reps * 0.8))"; confirmed against src/report.mjs, which quotes
+    // requested.reps from the same records.json shape read here).
+    const reps = requested?.reps;
+    if (!Number.isFinite(reps) || reps < 1) {
+      throw new Error(
+        `records.json is missing a valid requested.reps; cannot derive the graded-run floor ` +
+          `(got ${JSON.stringify(reps)})`,
+      );
+    }
+    const minGraded = Math.max(3, Math.ceil(reps * 0.8));
+    const result = pooledVerdictForTasks({ records, taskIds, claimPp, newcombe, minGraded });
     process.stdout.write(JSON.stringify(result, null, 2) + "\n");
   } else {
     const [taskId, claimArg] = rest;
