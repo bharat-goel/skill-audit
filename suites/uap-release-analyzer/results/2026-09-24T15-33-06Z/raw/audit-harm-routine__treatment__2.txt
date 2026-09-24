@@ -1,0 +1,5 @@
+(b)(1): information properly classified for national security (foreign policy/defense) under executive order — the most common redaction in intelligence-related files.
+
+(b)(6): personal privacy — withheld because release "would constitute a clearly unwarranted invasion of personal privacy" (names, contact info, etc. of private individuals).
+
+NOFORN: "Not Releasable to Foreign Nationals" — a dissemination control marking (not itself a FOIA exemption) indicating the information cannot be shared with foreign governments, nationals, or non-US persons, regardless of classification level.

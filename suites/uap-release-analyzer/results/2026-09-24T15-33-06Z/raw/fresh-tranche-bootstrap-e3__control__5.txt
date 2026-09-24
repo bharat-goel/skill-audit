@@ -1,0 +1,7 @@
+A few things determine the fastest path here, so let me ask before sketching a pipeline:
+
+1. **Format** — is the tranche PDFs, scanned images, spreadsheets/CSVs, or structured data (JSON/XML)? That decides whether you need OCR at all.
+2. **Volume** — dozens of files or thousands? Determines whether a quick manual skim beats scripting.
+3. **What "report" means to you** — a summary of contents, an analysis answering specific questions, or extracted structured facts (names, dates, figures) laid out in a doc?
+
+Once I know those, the fast path is generally: script the download/unzip → extract text (native or OCR) → have me read/summarize in batches (with citations back to source pages) → assemble into a single written report (artifact or doc). But which pieces matter and how much automation is worth building depends on your answers above — happy to sketch or build it once I know.

@@ -1,0 +1,5 @@
+Fastest path: build the pipeline once, now, before release 02 drops, so on the day it's just "run script → read report."
+
+Concretely: a small ingest script that (1) unpacks/normalizes whatever format the tranche comes in (PDFs, scanned images, spreadsheets — OCR if needed), (2) extracts and chunks text, and (3) feeds it to Claude with a fixed report template (key findings, entities, changes vs. release 01, open questions) so the output is consistent and diffable across releases. The main tradeoff is upfront setup time vs. speed later — worth it if these releases are recurring, overkill if this is a one-off.
+
+If you want, tell me the file format(s) release 01 came in and what you want the report to actually contain, and I can build that pipeline now so it's ready to point at release 02 the moment you download it.

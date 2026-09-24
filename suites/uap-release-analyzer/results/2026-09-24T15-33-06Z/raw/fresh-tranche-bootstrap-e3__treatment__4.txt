@@ -1,0 +1,12 @@
+The fastest path: point me at the download folder and say "analyze release_02" — I'll run the pipeline end to end.
+
+Concretely, once you've got `release_02/` downloaded into the same parent folder as `release_01/`:
+
+1. `scripts/run_all.py <release_root>` — chains inventory → text extraction → analytics → report in one shot. On a tranche the size of release_01 (162 files, ~4,000 pages) this runs in a few minutes; I'll show `[N/total]` progress as it goes rather than going quiet.
+2. If any filenames use prefixes not in `references/agency_vocab.md` (new agency, new NARA record group, etc.), those land in the `OTHER` bucket — I'll flag it and extend the vocab table + `PREFIX_RULES` on the spot rather than leaving them uncategorized.
+3. Out comes `REPORT.md` — same 11-section structure as before, so it's a direct comparison against release_01, not a re-learn.
+4. Since you'll have two tranches side by side, the natural follow-up is "what's new vs. release_01?" — I can diff entities/agencies/locations across `analytics/` from both releases if you want that as an extra section or a separate note.
+
+One thing worth deciding upfront: do you want OCR run this time? Last time I skipped it by default (scanned FBI/NARA pages, hours of Tesseract) and just flagged the gap in section 10. If release_02 is similarly scan-heavy and you want text out of those pages, say so and I'll scope that as a follow-up pass rather than blocking the report on it.
+
+So: drop the files, tell me the path, and it's a one-command run to a readable report.

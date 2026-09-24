@@ -1,0 +1,12 @@
+Fastest path from download to written report:
+
+1. **Drop the files** into a folder shaped like `release_root/release_02/` (siblings of your existing `release_root/release_01/` if you're keeping them together — that also unlocks "what's new vs release 01?" comparisons).
+2. **Run the pipeline end-to-end**: `scripts/run_all.py <release_root>`, which chains inventory → text extraction → analytics → report in order.
+3. If a filename prefix in release 02 isn't recognized, `inventory.py` will bucket it as `OTHER` — check that bucket; if it's more than ~3% of files, add the new prefix to `references/agency_vocab.md` and `PREFIX_RULES` in the scripts before trusting the agency breakdown.
+4. Read the resulting `REPORT.md` — should be ~10 minutes.
+
+Two things worth knowing going in:
+- If you're pulling straight from war.gov rather than files you already have locally, the source page has some scraping quirks (paginated DOM, download links only appear after opening a modal, some records are inline-viewer-only) — check `references/war_gov_quirks.md` before improvising a scraper.
+- OCR isn't run automatically (scanned FBI/NARA docs will show as 0-char text layer) — the report flags this in "What's missing," and you can request OCR as a separate follow-up if you need those pages searchable.
+
+Ping me when the files are down and give me the path — I'll run the pipeline for you.

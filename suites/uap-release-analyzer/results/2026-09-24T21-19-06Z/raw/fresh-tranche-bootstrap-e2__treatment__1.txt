@@ -1,0 +1,16 @@
+Once release 02 is downloaded, the fastest path is one command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+That chains all four pipeline steps against the folder in order: `inventory.py` (catalogs files, sizes, page counts, agency classification), `extract_text.py` (pulls text layers into `text/`, flagging scanned/no-text-layer PDFs for later OCR), `analyze.py` (builds `analytics/` — top terms, entities, redaction counts, cross-doc patterns), and `build_report.py` (writes the final `REPORT.md`). Each step is idempotent, so if anything interrupts partway through, re-running `run_all.py` just picks up where it left off rather than redoing work.
+
+Two things worth doing right after it finishes:
+
+1. **Check the OTHER bucket** in `inventory.csv` — if unfamiliar filename prefixes show up (release 02 may introduce new agency naming conventions), extend `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Cross-tranche question** — since you'll have `release_01/` sitting alongside it, "what's new vs. release 01" becomes an easy follow-up once both reports exist (diff the entities.json / top_terms.csv between the two).
+
+If your sandbox has a per-call timeout and any individual FBI-style PDF section is 200+ pages, run `extract_text.py <release_root> <start> <end>` in chunks of ~25 instead of the full range — everything else in `run_all.py` can stay as one call.
+
+That's it — download → `run_all.py` → read `REPORT.md`.

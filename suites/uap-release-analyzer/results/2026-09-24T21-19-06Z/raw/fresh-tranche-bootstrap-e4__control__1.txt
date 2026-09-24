@@ -1,0 +1,3 @@
+The fastest path is to have a repeatable pipeline ready *before* the drop lands, rather than improvising once you have the files: a script that (1) unpacks/organizes the tranche, (2) extracts text (OCR if scanned PDFs), (3) has me summarize each doc and flag anything novel vs. release 01, and (4) rolls those into one written report — so the moment you download it, you run one command and get a draft to read. The main tradeoff is I'd need to know the tranche's actual format (searchable PDFs? scans? spreadsheets?) to build the extraction step correctly now versus building it live when release 02 drops and its structure is known.
+
+Want me to build that pipeline now, or do you want to wait and we build it against the real files when they're out?

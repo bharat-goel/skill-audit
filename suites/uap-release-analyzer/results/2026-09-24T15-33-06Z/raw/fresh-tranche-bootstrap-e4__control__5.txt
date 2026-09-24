@@ -1,0 +1,3 @@
+Fastest path: write a small ingestion script that unzips/downloads the tranche into a flat folder, OCRs/extracts text from anything that isn't already plain text (pdftotext/tesseract), then feed the batch to Claude Code in one pass to produce per-document summaries plus a synthesized draft report — I can scaffold that pipeline once you tell me the tranche's format (PDFs? scanned images? a zip of mixed files?) and roughly how many documents you're expecting. The main tradeoff is speed vs. verification: an LLM-drafted synthesis is fast but you'll want to spot-check its claims against the source docs before treating the report as final, especially for anything sensitive.
+
+Want me to set up that ingestion/summarization script now, or wait until release 02 actually drops?

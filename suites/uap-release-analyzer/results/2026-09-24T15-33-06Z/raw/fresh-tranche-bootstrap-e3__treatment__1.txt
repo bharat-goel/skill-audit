@@ -1,0 +1,8 @@
+Fastest path once release 02 lands:
+
+1. Drop the downloaded files into `release_root/release_02/` (sibling to your existing `release_01/`).
+2. Run `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report in one shot. If you're in a sandbox with per-call timeouts, run `extract_text.py` in chunks (`[start] [end]` args) instead of via `run_all.py`, since the FBI-heavy sections can be 200+ pages each.
+3. Before trusting the "agency" breakdown, skim the inventory for an `OTHER` bucket over ~3% — if `release_02` introduces new filename prefixes, add them to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` first, otherwise a chunk of files gets miscategorized.
+4. Read `REPORT.md`. Since you'll have two tranches side by side, it's also worth asking for a quick release_01 vs release_02 diff (new locations, new names, year-cluster shifts) — that's not automated by the scripts, but the analytics JSON in both `analytics/` folders makes it a fast manual/ad-hoc comparison.
+
+That's it — inventory → extract → analyze → report, same four scripts, no new tooling needed. Want me to walk through it live once the files are actually down?

@@ -1,0 +1,11 @@
+Fastest path once release 02 lands in a folder:
+
+1. **Point me at the folder** — nothing else needed.
+2. I run `scripts/run_all.py <release_root>`, which chains inventory → text extraction → analytics → report in one shot. For a tranche the size of the May 2026 one (4,000+ pages), this takes a few minutes, not hours — the pipeline skips OCR by default and just flags scanned/no-text-layer files for later.
+3. You get back `REPORT.md` — inventory, agency breakdown, redaction patterns, cross-doc entities, a "what's missing" section — readable in ~10 minutes.
+
+One thing worth doing *before* that run if you can: skim a handful of the new filenames. If release 02 introduces prefixes not in `references/agency_vocab.md` (anything outside FBI/DOW/NASA/DOS/NARA patterns), I'll add them to the vocab as part of the run rather than letting them pile up in the `OTHER` bucket — cheap to do upfront, annoying to fix retroactively across a report you've already read.
+
+If release_01 is still around, I'll also flag it as a chance to diff the two ("what's new in 02") since the skill treats sibling releases as a natural cross-tranche question.
+
+So: just say "analyze release_02 at `<path>`" when it's down, and I'll go straight through the pipeline.

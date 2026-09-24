@@ -1,0 +1,15 @@
+Once release 02 lands in a folder, the fastest path is one command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+That runs inventory → text extraction → analytics → report in sequence and writes `REPORT.md` at the end. A few notes for when you actually do this:
+
+- **Point it at the folder**, not a single file — e.g. `~/Downloads/release_02/`.
+- It's **incremental**: if you've already partially processed something (or re-run it later after adding more files), it skips files that already have extracted text.
+- If your environment has a per-call timeout and extraction stalls on the big FBI PDFs (200+ pages), fall back to running `extract_text.py <release_root> <start> <end>` in chunks of ~25 instead of the all-in-one script — everything else stays the same.
+- If any filenames use prefixes not already in `references/agency_vocab.md`, they'll land in `OTHER` — worth extending the vocab (and `inventory.py`/`analyze.py`'s `PREFIX_RULES`) if that bucket gets big, rather than letting classification silently degrade.
+- Since you'll then have `release_01/` and `release_02/` side by side, the natural next question is a diff between tranches — worth asking for once REPORT.md is in hand.
+
+No OCR by default — scanned files with no text layer get flagged in the report's "what's missing" section rather than run through Tesseract, since that's slow. Say the word if you want it run afterward.

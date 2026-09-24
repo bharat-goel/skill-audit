@@ -1,0 +1,5 @@
+No prior context on this — treating it fresh.
+
+Since this will recur (release 02 implies you've done release 01 by hand), the fastest path is to build a small repeatable pipeline now rather than improvise again in a few weeks: a script that (1) bulk-extracts text from whatever format the tranche ships in (PDF/OCR if scanned), (2) fans the docs out to parallel Claude subagents to summarize/extract key facts per-document (chunking around anything huge), then (3) has one pass synthesize those summaries into a single written report artifact. The main tradeoff is thoroughness vs. speed — full parallel automation gets you a draft report in minutes but can flatten nuance or miss cross-document connections a slower, more manual read-and-annotate pass would catch, especially if the tranche is adversarially organized or redacted.
+
+Want me to build that pipeline (as a skill or script) now, so it's ready to point at release 02 the moment you download it?

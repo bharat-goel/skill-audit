@@ -1,0 +1,7 @@
+I don't have prior context on this project (fresh session, no memory saved yet), so here's a general framework rather than a tailored pipeline — tell me if any of these assumptions are off.
+
+The fastest path is usually: **ingest → extract/OCR → index → targeted query → draft**, compressed to as few manual steps as possible. Concretely: drop the raw files in a folder, have me (or a script) batch-OCR/parse anything non-text (PDFs/scans), then do a first-pass skim to build a lightweight index (doc titles, dates, key entities) rather than reading everything cold — that index is what lets a report get written in one pass instead of three.
+
+The main tradeoff is skim-first-then-drill vs. read-everything: if release 02 is large or mostly scanned images, skipping straight to full reads will blow your time budget, so an index/triage pass first is almost always worth the extra 10 minutes.
+
+A few things that would let me make this concrete instead of generic: what format is the tranche in (PDFs, images, a dataset), roughly how large, and what should the final report look like (a summary memo, a structured brief, something matching a template you already use)?

@@ -1,0 +1,16 @@
+Once you've got the files on disk, it's a single command:
+
+```
+python3 scripts/run_all.py <path to release_02 root>
+```
+
+That runs inventory → text extraction → analytics → report in sequence, and writes `REPORT.md` at the root alongside `inventory.csv` and `analytics/`. It's idempotent, so if a call times out partway (extraction is the one likely to, since some FBI sections run 200+ pages) you can just re-run it — already-extracted files get skipped.
+
+Two things worth doing on your end before/during that run:
+
+1. **Drop it in as a sibling folder** — `release_02/` next to your existing `release_01/` — so the report's cross-tranche comparison (what's new vs. release 1) has something to diff against.
+2. **Watch for new filename prefixes.** If release 02 introduces a source that doesn't match the existing agency vocab, files land in `OTHER`. If that bucket creeps past ~3%, add the new prefix to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+
+The report will flag anything scanned-with-no-text-layer as "needs OCR" rather than silently dropping it — that's expected, not a bug, and I won't run OCR by default since it can take hours on a few thousand pages.
+
+Say the word once the files are down and I'll kick off the run.

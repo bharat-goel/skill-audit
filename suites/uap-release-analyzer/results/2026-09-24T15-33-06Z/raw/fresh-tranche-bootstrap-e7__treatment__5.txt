@@ -1,0 +1,16 @@
+Once you've downloaded release 02 into a folder, the whole pipeline is one command:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That runs inventory → text extraction → analytics → report in sequence, and it's incremental — if a step already has output (e.g. you re-run after adding a few stragglers), it skips completed work rather than redoing it.
+
+A few things worth knowing going in:
+
+- **Give it the right root.** `<release_root>` should be the folder *containing* the release subfolder (e.g. `release_02/` with the actual PDFs inside), since `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` get written alongside it.
+- **New filename prefixes will show up as `OTHER`.** If a new tranche introduces prefixes not in `references/agency_vocab.md`, add them there plus `PREFIX_RULES` in `inventory.py`/`analyze.py` — worth doing before the report if `OTHER` is more than a few percent of files, otherwise the agency breakdown is misleading.
+- **OCR isn't automatic.** Scanned PDFs with no text layer extract as 0-char files; that's expected, and the report will flag them under "What's missing" rather than silently dropping them. Only run OCR separately if you want that gap closed.
+- **Cross-tranche comparison is free upside.** Since release_01 will already be sitting in the parent folder, once release_02's report exists it's worth asking "what's new vs release_01" — locations, agencies, or names that didn't appear before.
+
+So: download → `run_all.py <release_root>` → read `REPORT.md`. If your sandbox has short per-call timeouts and a step hangs, the extraction step alone can be chunked (`extract_text.py <release_root> <start> <end>`), but `run_all.py` is the default path.

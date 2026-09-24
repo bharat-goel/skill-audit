@@ -1,0 +1,5 @@
+Fastest path once release 02 lands: **script the download** (mirror the new files with `wget -r`/`curl` rather than clicking through the page by hand), **extract text in bulk** (OCR only if they're scanned images — most gov PDFs are already text-layer), then **run each doc through a consistent extraction prompt** (same schema every time: date, actors, claim, source page) so outputs are comparable, and finally **have Claude synthesize the structured extracts into the report** rather than summarizing raw PDFs one-by-one, which is slower and less consistent.
+
+The main tradeoff: building that pipeline now (before the drop) costs setup time but turns "just downloaded" → "report" into minutes; doing it ad hoc when release 02 actually lands will be slower and less repeatable if release 03 follows.
+
+Two things would let me tailor this instead of keeping it generic: what format is release 01 in (text-native PDFs, scanned images, HTML pages, spreadsheets?), and roughly how many documents/how large — that determines whether OCR and chunking are needed at all.

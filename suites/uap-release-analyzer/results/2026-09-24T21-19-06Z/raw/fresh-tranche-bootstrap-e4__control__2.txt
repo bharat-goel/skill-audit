@@ -1,0 +1,3 @@
+The fastest path is a small local pipeline, not a one-off manual read-through: bulk-extract text from the tranche (pdftotext or OCR for scanned pages), chunk it, then run it through Claude (API or Claude Code itself) with one fixed prompt template per document to pull out key facts/entities, and a final pass that aggregates those into a single report. Main tradeoff is speed vs. trust — full automation gets you a draft in minutes, but anything you'll cite publicly still needs a human skim of the source pages the summaries point to, since redactions/OCR errors can quietly distort a summary.
+
+Want me to build that extraction+summarize script now, or wait until release 02 actually drops so we can test it on the real files?

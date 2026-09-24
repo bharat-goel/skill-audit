@@ -1,0 +1,7 @@
+I don't have any context yet on release 01 (or this project at all — the working directory's empty and there's no memory of it), so let me ask rather than assume:
+
+- What's actually in a tranche — PDFs/scans, images, a structured file (CSV/JSON), a webpage listing? Rough size?
+- What did you do for release 01, if anything — manual read-through, or do you already have a script/pipeline?
+- What "report" means to you — a summary of contents, an analysis against specific questions, or something structured like a table of key facts?
+
+With those answered, the fastest repeatable path is almost always: a small script that (1) pulls/diffs the new files against what you have, (2) extracts text (OCR if scanned), (3) feeds it to Claude in chunks with a fixed report template/prompt, (4) stitches the per-chunk outputs into one document. If release 01 already had a manual process, the biggest lever is usually turning that into step 3's prompt so it's consistent and rerunnable — but I'd rather build on what you actually did last time than guess.

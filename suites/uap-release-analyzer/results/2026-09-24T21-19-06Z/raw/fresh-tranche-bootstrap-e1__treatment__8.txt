@@ -1,0 +1,14 @@
+Fastest path once `release_02/` lands in the release root folder:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, producing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md`. A few things worth knowing going in:
+
+- **Filename prefixes you haven't seen before** will land in the `OTHER` bucket. If `OTHER` comes out above ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py` before trusting the agency breakdown.
+- **Scanned files with no text layer** (common for older FBI/NARA scans) will show as 0-char in `text/` — that's expected, not a bug. OCR isn't run by default (too slow at thousands of pages); the report just flags the gap in section 10.
+- If pulling straight from war.gov rather than files you already downloaded, check `references/war_gov_quirks.md` first — the download links are only exposed via modal/JS, not clean URLs.
+- Since you'll have `release_01/` sitting alongside it, the report will note cross-tranche comparison as a natural follow-up ("what's new vs release_01?") — worth flagging when you're ready.
+
+Say the word when release 02 is actually downloaded and I'll run the pipeline against it.

@@ -1,0 +1,5 @@
+The fastest path: drop the downloaded tranche in a folder and point me at it — I'll extract text (PDFs via a parser, plain docs directly), and if it's large I'll fan summarization out across parallel subagents so it isn't bottlenecked by one context window, then merge their findings into a single written report (as a file, or an Artifact if you want something shareable/readable in-browser).
+
+The main tradeoff is in that fan-out: splitting the tranche across subagents is much faster for a big batch, but each one only sees its own slice, so the merge step has to explicitly cross-reference and reconcile findings rather than just stitch summaries together — otherwise you lose connections between documents. If release 02 is a modest number of files (rough rule of thumb: under ~20), it's simpler and more coherent to just read them serially in one pass rather than parallelize at all.
+
+Want me to sketch this as an actual runnable script/workflow now, or hold off until the tranche actually drops?

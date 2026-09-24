@@ -1,0 +1,20 @@
+Once release 02 is downloaded, run the bundled pipeline end-to-end:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → REPORT.md in one go. Concretely:
+
+1. `inventory.py` classifies every file by agency and logs page counts.
+2. `extract_text.py` pulls text layers (scanned files come back 0-char — expected, flagged later as needing OCR).
+3. `analyze.py` builds the term/entity/redaction/cross-doc analytics.
+4. `build_report.py` writes the standard 11-section `REPORT.md`.
+
+A few things worth doing before/alongside that:
+
+- If new filename prefixes show up that aren't in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before running — otherwise they'll pile into `OTHER` and skew the agency breakdown.
+- If you're in a sandboxed environment with per-call timeouts, run `extract_text.py <root> <start> <end>` in chunks (e.g. batches of 25) instead of the full range — it's idempotent so partial progress is safe.
+- Since you'll have `release_01/` sitting alongside it, worth asking for a "what's new vs release 01" comparison once both reports exist — that's a natural follow-up the report doesn't auto-generate.
+
+So: download → `run_all.py` → read `REPORT.md`, with vocab-extension as the one manual check in the loop.

@@ -1,0 +1,16 @@
+Once release 02 lands in a folder, it's just one command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report, writing everything into `<release_root>/` (inventory.csv, text/, analytics/, REPORT.md). For a normal-sized tranche this finishes in a few minutes and you end up with REPORT.md ready to read.
+
+Two things worth knowing going in:
+
+1. **New filename prefixes will likely show up.** The agency classifier keys off prefix patterns (`references/agency_vocab.md`). If release 02 uses naming conventions release 01 didn't, files fall into an `OTHER` bucket — if that's more than ~3% of files, add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **OCR isn't automatic.** Scanned PDFs with no text layer extract as 0-char files — expected, and the report calls it out under "What's missing," but if you want those pages searchable you'd run OCR separately as a follow-up, not part of `run_all.py`.
+
+Since you'd have `release_01/` sitting alongside it, the report will also be more useful if you ask me afterward to diff against release 01 (new locations, new names, redaction-pattern shifts) — that's a natural next question once REPORT.md exists.
+
+If your sandbox has a short per-call timeout, `extract_text.py` alone (not the full `run_all.py`) also accepts `[start] [end]` page-batch args to chunk through large FBI sections — otherwise you won't need to think about that.

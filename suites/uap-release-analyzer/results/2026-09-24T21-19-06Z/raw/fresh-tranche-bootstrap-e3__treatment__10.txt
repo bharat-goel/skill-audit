@@ -1,0 +1,16 @@
+Once you've downloaded release 02 into its own folder, the fastest path is one command:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report generation, writing everything into a standardized `release_root/` layout (inventory.csv, text/, analytics/, REPORT.md). For a tranche the size of the May 2026 PURSUE release (162 files, 4K+ pages), expect a few minutes.
+
+Two things to know going in:
+
+1. **New filename prefixes** — if release 02 introduces prefixes not in `references/agency_vocab.md`, some files will land in the `OTHER` bucket. Worth a quick look after `inventory.csv` is written; if `OTHER` is more than ~3% of files, add the new prefixes to `agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before running the rest.
+2. **No OCR by default** — scanned PDFs with no text layer get flagged in the report's "What's missing" section rather than OCR'd automatically (Tesseract on thousands of scanned pages is a separate, slower ask).
+
+If you want to compare against release 01, just mention that once it's done — cross-tranche diffing (new locations, names, agency mix) is a natural follow-up once both `REPORT.md`s exist side by side.
+
+When it's actually here, just give me the path and I'll run the pipeline.

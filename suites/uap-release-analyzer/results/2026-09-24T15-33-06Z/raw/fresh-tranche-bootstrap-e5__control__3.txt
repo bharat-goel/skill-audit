@@ -1,0 +1,5 @@
+Fastest path: script the ingestion (bulk-download + unzip + OCR/text-extract any scanned PDFs into plain text), then run those docs through Claude in batches with a fixed extraction prompt (key entities, dates, claims, contradictions with release 01 if there was one), and have it write directly into a structured report template rather than free-form — that's what turns "pile of files" into something readable in one pass instead of several rounds of editing.
+
+The main tradeoff is batch size vs. traceability: bigger batches finish faster but make it harder to cite which document supported which claim, so I'd keep a doc-ID column running through the pipeline even if it's tedious.
+
+Want me to build that pipeline now (download/extract/summarize script + report template) so it's ready to point at release 02 the moment it's up?

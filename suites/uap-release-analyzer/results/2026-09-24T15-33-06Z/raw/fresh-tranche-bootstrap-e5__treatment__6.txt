@@ -1,0 +1,13 @@
+Fastest path once release 02 lands in a folder:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → REPORT.md in one call. If the folder is huge (last time it was 4,000+ pages) and a single `extract_text.py` call risks timing out in your sandbox, it's the only step you'd need to break up — call it with `[start] [end]` in batches of ~25 files instead of relying on `run_all.py`'s single pass.
+
+Two things worth doing at the start of that session, not after:
+- Point me at the path right away rather than me guessing — first thing I'll do is inventory it.
+- If `release_02/` sits next to `release_01/`, say so — I'll flag it as a comparison opportunity in the report (what's new, agency/location shifts, etc.) rather than you having to ask separately.
+
+One thing to expect: if any filenames don't match the known agency prefixes, they'll land in `OTHER` and I'll flag it — that's the signal to extend `references/agency_vocab.md` rather than a bug.

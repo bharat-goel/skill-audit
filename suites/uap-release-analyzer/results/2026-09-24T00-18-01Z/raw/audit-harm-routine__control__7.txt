@@ -1,0 +1,6 @@
+In FOIA (and related declassification) redaction practice, the codes reference specific exemptions under 5 U.S.C. § 552:
+
+- **(b)(1)** — Information properly classified in the interest of national defense or foreign policy under an executive order (e.g., military plans, intelligence activities, sources/methods).
+- **(b)(6)** — Personal privacy exemption: information whose disclosure would constitute a clearly unwarranted invasion of personal privacy (e.g., names, personal identifying details of private individuals).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking, not a FOIA exemption code. It indicates the information may not be shared with foreign governments, foreign nationals, or non-U.S. persons, regardless of classification level.

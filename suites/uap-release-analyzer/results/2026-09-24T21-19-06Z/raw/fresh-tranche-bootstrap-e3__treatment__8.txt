@@ -1,0 +1,20 @@
+Once release 02 lands in a folder, run the bundled pipeline end-to-end:
+
+```
+python scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → extract → analyze → report, and each stage is idempotent/incremental, so if a call times out partway you can just re-run it and it'll skip finished work. Concretely:
+
+1. **Inventory** (`inventory.py`) — classifies every file by filename prefix into FBI/DOW/NASA/DOS/NARA/OTHER.
+2. **Extract text** (`extract_text.py`) — pulls text layers; scanned files with no text layer just come out as 0-char (expected, flagged later as "OCR needed," not run by default).
+3. **Analyze** (`analyze.py`) — terms, entities, redaction markers, cross-doc patterns.
+4. **Report** (`build_report.py`) — writes the standard 11-section `REPORT.md`.
+
+Two things worth doing first pass on a new tranche:
+- Check the `OTHER` bucket in `inventory.csv` — if new filename prefixes show up that aren't in `references/agency_vocab.md`, add them there before running `analyze.py` so they don't get miscounted.
+- If any release section is 200+ pages and your environment has a per-call timeout, use `extract_text.py <root> <start> <end>` in chunks of ~25 rather than backgrounding it.
+
+Once `REPORT.md` exists, worth asking me to diff it against release 01's for "what's new" — the skill notes that's the natural next question when a sibling release folder exists.
+
+Say the word once the files are down and I'll run the pipeline.

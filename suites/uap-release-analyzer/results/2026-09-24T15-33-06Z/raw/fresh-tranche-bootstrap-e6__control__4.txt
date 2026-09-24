@@ -1,0 +1,5 @@
+Fastest path once you have the files: **(1)** bulk-extract text — `pdftotext` if the tranche is already searchable, OCR via `tesseract` if it's scanned images (DoD/FOIA drops usually are); **(2)** fan out summarization across the docs in parallel (subagents work well here — one per doc or per cluster of related docs) rather than reading them serially; **(3)** synthesize those summaries into a single written report.
+
+The main tradeoff: if release 02 turns out to be scanned images rather than text-native PDFs, OCR quality becomes the bottleneck for everything downstream, so it's worth checking file format the moment you download it — that determines whether step 1 takes minutes or needs cleanup.
+
+Want me to build this pipeline now (as a reusable script) so it's ready to point at the tranche the moment you download it, or wait until release 02 is actually out and you can show me a sample file?

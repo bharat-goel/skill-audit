@@ -1,0 +1,14 @@
+For release 02, the fastest path is:
+
+1. Drop the downloaded files into a `release_02/` folder (sibling to `release_01/` if you still have it — that sibling makes "what changed?" analysis available for free).
+2. Run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → report in one shot. For a tranche this size (expect similarly ~150+ files / thousands of pages), this typically finishes in a few minutes since it's idempotent/incremental and skips already-done work if you interrupt or rerun it.
+3. Read `REPORT.md`.
+
+Two things worth doing before you kick it off:
+
+- **Check the filename prefixes against `references/agency_vocab.md` first.** If release 02 introduces new source agencies or a naming convention war.gov hasn't used before, files will pile up in the `OTHER` bucket. Past ~3% OTHER is the signal to add the new prefixes to the vocab table (and `PREFIX_RULES` in `inventory.py`/`analyze.py`) before running analytics, not after.
+- **Don't run OCR.** Most scanned FBI/NARA files won't have a text layer, and the pipeline correctly flags those as "OCR needed" in the report's "What's missing" section rather than trying to process them — that's expected, not a bug.
+
+If any single `extract_text.py` call risks timing out on the long FBI sections, run it in `[start] [end]` chunks instead of backgrounding it — each chunk finishes fast and the script skips files it's already extracted.
+
+Once you've got the path, just tell me "analyze `<path to release_02>`" and I'll run the pipeline.

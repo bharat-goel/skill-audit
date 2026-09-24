@@ -1,0 +1,3 @@
+Fastest path: bulk-download the tranche into a folder, extract text (OCR any scanned PDFs with something like `pdftotext`/`ocrmypdf`), then hand it to me — I fan out parallel Explore/general-purpose subagents to summarize each document or batch, and I synthesize those summaries into one written report (markdown or a published doc/artifact you can read straight away).
+
+Main tradeoff: this is fast and scales to hundreds of files, but automated summarization can misread garbled OCR or bury nuance in edge-case documents — so for anything you'll actually cite, worth spot-checking the source doc rather than trusting the summary blind. Want me to sketch the actual download/OCR script now, or wait until release 02 is out and you hand me the files?

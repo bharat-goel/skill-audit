@@ -1,0 +1,12 @@
+No prior context on this, so a couple quick questions before I sketch the pipeline: what format does the tranche land in (PDFs, scanned images, spreadsheets, a mix), and roughly how many documents/pages are we talking about?
+
+In general, the fastest path for "raw dump → readable report" looks like:
+
+1. **Ingest & OCR** (if scanned) — batch-extract text so everything is searchable/parseable.
+2. **Triage/index** — a script that catalogs filenames, dates, page counts, and flags duplicates or empty scans, so you're not reading blind.
+3. **Targeted extraction** — pull out whatever you actually care about (names, dates, redaction patterns, specific topics) rather than reading every page linearly.
+4. **Draft synthesis** — have me (or a subagent) summarize per-document, then roll that up into one structured report.
+
+The main tradeoff is thoroughness vs. speed: a keyword/topic-driven pass gets you a report fast but can miss things buried outside your search terms, while a full linear read-and-summarize is slower but safer for a first-time tranche. Given the scale of past DoD document releases, I'd lean toward the targeted pass first, then a follow-up full pass only on flagged documents.
+
+What's the expected format/volume, and do you already know what you're looking for in release 02, or is this a first-pass "see what's there" job?

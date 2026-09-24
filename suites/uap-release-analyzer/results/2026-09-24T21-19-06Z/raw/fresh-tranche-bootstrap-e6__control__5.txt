@@ -1,0 +1,12 @@
+For a bulk document dump like that, the fastest reliable path is a short pipeline rather than manually reading through everything:
+
+1. **Ingest & normalize** — dump the raw files into a working directory, OCR anything that's scanned PDF/image-only (many gov releases are scanned), and convert everything to plain text with consistent filenames. This step alone is where most time gets wasted if skipped.
+2. **Index for search** — build a quick full-text index (even `ripgrep` over the text files works for moderate volumes; use a real search tool like a local vector/keyword index if it's large) so you can query by name, date, unit, keyword instead of reading serially.
+3. **Triage with an LLM pass** — run each doc (or chunked doc) through a cheap first-pass classifier/summarizer prompt: "what is this, what's notable, does it relate to X." This gives you a structured index (doc → 1-line summary → tags) instead of a folder of opaque files.
+4. **Cluster/diff against release 01** — if this is release 02 of a series, diff against what you already processed from release 01 so you're only deep-reading what's new or changed.
+5. **Deep-read the flagged subset** — have a stronger pass do full analysis only on the subset triage flagged as significant, with citations back to specific documents/pages.
+6. **Draft the report** — generate a structured draft (findings, evidence table with doc citations, open questions) from the analysis pass, then you do the final human edit.
+
+The key time-saver is steps 2–3: don't read serially, index then triage, so your close-reading time goes only to what matters.
+
+Since the release isn't out yet, want me to help you build this as an actual script/pipeline now (e.g., a downloader + OCR + indexing + triage-prompt setup) so it's ready to run the moment release 02 drops?

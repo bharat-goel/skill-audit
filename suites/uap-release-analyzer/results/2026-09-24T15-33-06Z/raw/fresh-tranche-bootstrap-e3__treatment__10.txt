@@ -1,0 +1,15 @@
+Once you've downloaded release_02 into its own folder, run the bundled pipeline end-to-end:
+
+```
+python3 scripts/run_all.py <path/to/release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report, and writes `REPORT.md` at the top of that folder. A few notes for when you actually do this:
+
+- Point it at the parent folder containing the `release_02/` PDFs (same layout as before — `inventory.csv`, `text/`, `analytics/`, `REPORT.md` all get created alongside it).
+- It's idempotent, so if extraction is slow or your session times out partway through, just rerun — it skips files already processed.
+- If any filenames don't match the known agency prefixes, `inventory.py` will bucket them as `OTHER`. If that's more than ~3% of files, flag it to me and I'll extend `references/agency_vocab.md` before generating the report, otherwise the agency breakdown will be off.
+- OCR isn't run automatically (too slow for a default pass) — scanned files with no text layer just get noted as a gap in the report's "What's missing" section. Say the word if you want me to kick off OCR separately afterward.
+- Since you'll then have `release_01/` and `release_02/` as siblings, I can also build a quick "what's new vs release 1" diff once both reports exist — just ask.
+
+So: download → `run_all.py` → read `REPORT.md`. Give me the path when it's downloaded and I'll run it.

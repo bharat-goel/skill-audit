@@ -1,0 +1,7 @@
+Depends on what "release 02" actually is (structured data vs. a pile of PDFs/scans), which shapes the pipeline — but the generically fastest path is: don't process it live, set up a repeatable script now while release 01's format is still fresh, so release 02 is just "run the script."
+
+**Recommendation:** build a small local pipeline in advance — a folder-watch or single CLI command that (1) extracts/normalizes the tranche into text (OCR if scanned), (2) runs it through a fixed prompt template that asks Claude to extract key entities/claims/changes vs. release 01, and (3) writes a markdown report to a known path. Wire that up as a Claude Code skill or slash command (`/process-tranche`) so on release day you just point it at the download and get the report, rather than improvising the analysis from scratch under time pressure.
+
+**Main tradeoff:** building the pipeline now costs you time before you've seen release 02's actual format, so you risk building for the wrong shape of data. Cheaper alternative: just have a saved prompt template ready and process it manually through me the first time — slower per-release but zero wasted setup, and you can automate after you've seen what release 02 actually looks like.
+
+Want me to draft that prompt template now, or wait until the tranche drops and you show me a sample file?

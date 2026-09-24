@@ -1,0 +1,14 @@
+Fastest path once release 02 lands in a folder:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, and it's idempotent, so if you kick it off before all files finish downloading, re-running later just picks up the rest. It ends with a `REPORT.md` at the release root that's structured the same way as the first tranche's report, so you can diff the two directly (locations, terminology, redaction patterns, etc.).
+
+Two things worth doing at that point, not before:
+
+- If any filenames don't match the known agency prefixes, `analyze.py` will bucket them as `OTHER` — worth a quick look, and if it's more than ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` before trusting the agency breakdown.
+- Since you'll have `release_01/` sitting alongside it, the natural follow-up question is "what's new vs. release 01" (new locations, names, or terms that didn't appear before) — I can build that comparison once both reports exist, just say the word.
+
+I won't run OCR automatically on scanned pages with no text layer — that gets flagged in the report's "what's missing" section as a follow-up option, since it can take hours on a large tranche.

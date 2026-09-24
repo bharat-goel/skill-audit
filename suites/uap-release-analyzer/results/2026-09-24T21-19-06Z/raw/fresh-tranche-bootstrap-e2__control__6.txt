@@ -1,0 +1,3 @@
+Fastest path: build the pipeline now, before release 02 drops, so on release day it's just "point script at new folder, run." That means: a script that (1) unzips/organizes the tranche, (2) extracts text from whatever format it's in (PDF text layer or OCR if scanned), (3) has Claude summarize each doc against a fixed set of questions you care about, then (4) synthesizes those summaries into one report. The tradeoff is upfront setup time vs. doing it ad hoc by hand each release — ad hoc is fine for a one-off but doesn't scale if there's a release 03, 04, etc.
+
+Want me to set that pipeline up now, or is this a "let's talk it through" question for the moment?

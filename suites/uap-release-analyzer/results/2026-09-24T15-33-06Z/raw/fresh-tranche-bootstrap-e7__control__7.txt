@@ -1,0 +1,5 @@
+Fastest path: write a small script that bulk-downloads and organizes the tranche (consistent filenames, OCR any scanned PDFs), then feed the docs through Claude Code in batches — either directly or via a subagent per document/topic — to extract key facts into structured notes, and finally synthesize those notes into one written report (as a file or an Artifact if you want something shareable/readable in-browser).
+
+Main tradeoff: batch-processing with Claude is much faster than reading everything by hand, but for anything redaction-heavy or legally sensitive you'll want a manual spot-check pass on the extracted claims before they go in the final report — automated extraction can miss context that matters (e.g., what a redaction implies, or contradictions between documents).
+
+I can build this out (download script, extraction pipeline, report template) once you've got the files locally — want me to set that up now, or wait until release 02 actually drops?

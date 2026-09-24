@@ -1,0 +1,3 @@
+The fastest path: drop the tranche into a folder and point me at it directly — I can grep/search across PDFs and text files, pull out the entities/dates/claims that matter, and draft a markdown report in one pass rather than you manually skimming first. Main tradeoff: if the files are scanned images rather than text PDFs, I'll need an OCR step first (or you'll need to tell me which pages matter), which adds time proportional to tranche size.
+
+If you want, tell me roughly how big release 02 is expected to be and whether it's text-native or scanned, and I can sketch the actual pipeline (OCR tool, extraction pass, report format) once it drops.

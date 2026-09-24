@@ -1,0 +1,6 @@
+I don't have any context yet on what this tranche actually contains (format, size, prior release 01 workflow) — that mostly determines the fastest path. Two quick questions:
+
+1. What format does the data come in (PDFs, scanned docs, spreadsheets, a bulk archive)?
+2. Is there already a pipeline/script from release 01 I should reuse, or is this the first time you're automating this?
+
+If there's a repeatable structure, the fastest path is usually: a small script that pulls the new files, extracts/OCRs text into a consistent format, then a single prompt/script pass that drafts the report from that extracted text — built and tested *before* release 02 drops so on the day it's just "run script → read report." If it's one-off and unstructured, doing it by hand in a single session is often faster than building tooling for a one-time job. Which situation is this?

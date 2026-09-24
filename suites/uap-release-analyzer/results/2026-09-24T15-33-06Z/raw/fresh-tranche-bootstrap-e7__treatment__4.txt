@@ -1,0 +1,14 @@
+Once you've got `release_02/` downloaded, the fastest path is a single command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in order, and every step is idempotent/incremental, so if extraction is still slow partway through (large FBI sections, 200+ pages) you can just rerun it and it'll pick up where it left off rather than redo finished files.
+
+A couple of things worth doing right after it downloads, before you kick that off:
+
+1. **Check for new filename prefixes.** If release 02 introduces agencies/sources not in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` first — otherwise those files fall into `OTHER` and silently don't get classified. Worth a quick `ls` scan of filenames before running the pipeline.
+2. **Since you'll have `release_01/` sitting alongside it**, the report will be more useful if you also diff against it — new locations, new agencies, terms that spiked — so plan to ask "what's new vs release 01" as the natural follow-up once REPORT.md is in hand.
+
+Bottom line: drop the files in, run `run_all.py`, skim `REPORT.md` — roughly the same few minutes it took last time, since nothing here is bespoke to release 01.

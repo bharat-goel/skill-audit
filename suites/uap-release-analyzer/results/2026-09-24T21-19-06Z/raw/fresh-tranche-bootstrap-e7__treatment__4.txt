@@ -1,0 +1,12 @@
+Fastest path once `release_02/` lands:
+
+1. Drop the PDFs in a `release_02/` folder alongside a fresh `release_root/`.
+2. Run `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report in one shot.
+3. Skim `REPORT.md`.
+
+That's it for the happy path. Two things worth knowing going in:
+
+- **Chunking**: if your environment has a per-call timeout, `run_all.py` may need to be run as the individual steps instead (`inventory.py` → `extract_text.py <root> [start] [end]` in batches of ~25 pages → `analyze.py` → `build_report.py`), since the FBI sections tend to run 200+ pages. Everything's idempotent, so re-running just picks up where it left off.
+- **New filename prefixes**: if release 02 introduces agencies/prefixes not in `references/agency_vocab.md`, the `OTHER` bucket in the inventory will flag it — worth checking that count before trusting the agency breakdown, and extending the vocab table + `PREFIX_RULES` in `inventory.py`/`analyze.py` if it's >3% of files.
+
+If you also want to know "what's new vs. release_01," that's a natural follow-up question once both `inventory.csv` files exist side by side — just ask and I'll diff them.

@@ -1,0 +1,15 @@
+Fastest path once release 02 lands, from this skill's `references/war_gov_quirks.md` and script pipeline:
+
+1. **Download the tranche** into a `release_02/` folder (using the war.gov quirks notes if you're pulling files rather than already having them locally — pagination, modal-gated download links, ~28 inline-viewer-only records).
+2. Run the whole pipeline in one shot:
+   ```
+   python scripts/run_all.py <release_root>
+   ```
+   This chains inventory → text extraction → analytics → report. It's incremental/idempotent, so if extraction times out partway (FBI sections can be 200+ pages), just rerun — it skips files already done, or step through `extract_text.py <root> <start> <end>` in chunks of ~25.
+3. Read `REPORT.md` — done in ~10 minutes for a tranche this size.
+
+Two things worth doing at the same time, not after:
+- If any filenames use prefixes not in `references/agency_vocab.md`, add them there (and to `PREFIX_RULES` in `inventory.py`/`analyze.py`) as you go rather than letting them pile up in `OTHER`.
+- Since you'll then have `release_01/` and `release_02/` side by side, it's worth asking "what's new vs release 01" as a follow-up — the skill flags this as the natural next question once a sibling release exists.
+
+Want me to actually kick off the pipeline once you tell me where release 02 landed, or were you just scoping the workflow for now?

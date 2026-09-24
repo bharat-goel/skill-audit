@@ -1,0 +1,5 @@
+The fastest path is to not start from zero when release 02 lands: build and test the pipeline now against release 01 (or whatever sample docs you have), so on drop day you just point it at the new folder and run. Concretely — a script that (1) watches/downloads from the war.gov page, (2) normalizes files (OCR any scanned PDFs, strip to plain text + metadata), (3) chunks and feeds them to Claude for structured per-document extraction (entities, dates, claims, anomalies), then (4) aggregates those extractions into a single draft report you edit rather than write from scratch.
+
+The main tradeoff: building this now costs you an afternoon of setup against unknown formatting for release 02, versus doing it ad hoc later, which is slower per-release but adapts easily if the new tranche looks nothing like the old one (different file types, naming, redaction style).
+
+Do you want me to build that pipeline now — and if so, do you have release 01 (or a sample of what release 02 will look like) I can use as the template?

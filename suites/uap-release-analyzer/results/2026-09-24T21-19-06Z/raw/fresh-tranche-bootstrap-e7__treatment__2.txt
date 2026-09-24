@@ -1,0 +1,8 @@
+Once release 02 lands, the fastest path is:
+
+1. **Drop the files** into a `release_02/` folder alongside your existing `release_root/` structure (so it sits as a sibling to `release_01/` — the report can then call out what's new).
+2. **Run the whole pipeline in one shot**: `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report. If a single `extract_text.py` call risks timing out on the bigger PDFs, run it manually in chunks (`extract_text.py <release_root> <start> <end>`) instead of backgrounding it; everything is idempotent so re-running just fills in gaps.
+3. **Check the `OTHER` bucket** in `inventory.csv` before trusting the report — if release 02 introduces new filename prefixes, add them to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` first, otherwise those files get misclassified or skipped in the agency breakdown.
+4. **Read `REPORT.md`** — skip straight to section 10 ("What's missing / caveats") to see OCR gaps and unpulled files before trusting the rest.
+
+That's it — one command (`run_all.py`) gets you from raw PDFs to a readable report in a few minutes for a tranche this size; the only manual step is the vocab check if new agencies show up. I won't run anything now since release 02 doesn't exist yet — ping me with the path when it drops and I'll kick off the pipeline.

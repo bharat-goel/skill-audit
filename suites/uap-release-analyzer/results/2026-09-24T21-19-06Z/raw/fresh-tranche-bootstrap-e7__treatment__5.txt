@@ -1,0 +1,16 @@
+One command: run `scripts/run_all.py <release_02_path>`, which chains inventory → text extraction → analytics → report in order.
+
+Concretely, the fastest path once release 02 is downloaded:
+
+1. `python3 scripts/inventory.py <release_root>` — classifies files by agency, catches encrypted/odd-named PDFs, writes `inventory.csv`.
+2. `python3 scripts/extract_text.py <release_root>` — pulls text layers into `text/`. If your session has a per-call timeout, chunk it with `[start] [end]` args instead of backgrounding it.
+3. `python3 scripts/analyze.py <release_root>` — builds `analytics/` (top terms, entities, redaction counts, cross-doc patterns).
+4. `python3 scripts/build_report.py <release_root>` — writes `REPORT.md`.
+
+`run_all.py` just does all four in sequence, so pointing it at the new folder is the one-shot version.
+
+Two things worth doing on a first pass at a brand-new tranche rather than after the fact:
+- **Check for new filename prefixes.** If release 02 introduces agencies/prefixes not in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before running — otherwise those files fall into `OTHER` and skew the agency breakdown. Rule of thumb: if `OTHER` exceeds ~3% of files, extend the vocab.
+- **Since you'll have `release_01/` sitting alongside it**, the report can also answer "what's new vs. release 01" — worth flagging to me at the time if you want that comparison, since it's a manual cross-tranche question rather than something `run_all.py` does automatically.
+
+Everything is idempotent/incremental, so if a step fails partway (e.g., extraction times out mid-tranche), just rerun the same command — it skips files already done.

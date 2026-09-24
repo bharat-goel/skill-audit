@@ -1,0 +1,3 @@
+The fastest path is to not start from zero when release 02 actually drops: build a small repeatable pipeline now that you point at a folder of downloaded files, and it does the extraction (OCR for scans), fans out per-document summarization to parallel agents, and assembles everything into one structured markdown report — so on the day, it's one command instead of ad hoc reading. The main tradeoff is that the bottleneck usually isn't the pipeline but document quality (redactions, scanned/low-OCR-confidence pages need a human skim before you trust the summary), so budget for a manual spot-check pass rather than assuming full automation.
+
+Want me to set that pipeline up now (as a script you point at the download folder) so it's ready to go when release 02 lands?

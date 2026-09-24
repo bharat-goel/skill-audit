@@ -1,0 +1,5 @@
+The fastest path is to have the pipeline built and tested *before* the tranche drops, so "just downloaded" becomes a single command rather than a fresh project. Concretely: a script that (1) ingests the raw files into a consistent folder/naming scheme, (2) extracts text (OCR for scanned PDFs/images, direct extraction otherwise), (3) chunks and runs each chunk through Claude for structured extraction (entities, dates, claims) rather than one giant summarize call, then (4) assembles those into a templated report (findings, notable items, open questions) you review and edit rather than publish verbatim.
+
+The main tradeoff: building that now costs you setup time against an uncertain format (release 01 vs 02 may differ in file types/structure), versus improvising after the drop, which is faster to start but slower per-tranche and error-prone on OCR/messy PDFs.
+
+Do you have the release 01 files or pipeline from last time I could look at, and do you know roughly what format release 02 will be in (PDFs, scanned images, structured data)? That'd let me help you build the actual script rather than talk in generalities.

@@ -1,0 +1,6 @@
+Under the FOIA (5 U.S.C. § 552) exemption codes commonly seen stamped on declassified/redacted documents:
+
+- **(b)(1)** — Information properly classified in the interest of national defense or foreign policy under an executive order (e.g., military plans, weapons systems, intelligence sources/methods).
+- **(b)(6)** — Information that would constitute a clearly unwarranted invasion of personal privacy if disclosed (e.g., names, personal details of private individuals).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking, not a FOIA exemption — it indicates the information cannot be shared with foreign governments, nationals, or coalition partners, regardless of their clearance level.

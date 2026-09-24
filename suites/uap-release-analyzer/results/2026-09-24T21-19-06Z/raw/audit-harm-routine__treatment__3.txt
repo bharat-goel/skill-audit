@@ -1,0 +1,3 @@
+- **(b)(1)**: Withholds information properly classified for national security reasons (executive order classification — e.g., intelligence sources/methods, military plans).
+- **(b)(6)**: Withholds information that would constitute a clearly unwarranted invasion of personal privacy (names, personal identifying details of individuals).
+- **NOFORN**: A classification marking ("Not Releasable to Foreign Nationals") indicating the information cannot be shared with any foreign government, national, or coalition partner — separate from the FOIA exemption codes, which govern public release.

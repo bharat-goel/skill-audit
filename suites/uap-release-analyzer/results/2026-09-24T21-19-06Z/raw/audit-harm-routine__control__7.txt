@@ -1,0 +1,6 @@
+In declassified U.S. government documents, FOIA/redaction markings cite the specific legal exemption justifying withholding:
+
+- **(b)(1)** — Information properly classified in the interest of national defense or foreign policy under an executive order (currently E.O. 13526). This is the exemption for classified national security information.
+- **(b)(6)** — Information that would constitute a "clearly unwarranted invasion of personal privacy" if disclosed — e.g., names, personal identifying details of private individuals (not the national-security exemption).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking, not a FOIA exemption itself — it indicates the classified information may not be shared with any foreign government, international organization, or non-U.S. citizen, regardless of clearance level.

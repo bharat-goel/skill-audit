@@ -1,0 +1,14 @@
+Fastest path once `release_02/` lands in the parent folder alongside `release_01/`:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That's `inventory.py → extract_text.py → analyze.py → build_report.py` in one shot, and it's idempotent/incremental, so if a call times out partway you can just re-run it and it'll skip finished work. You'll end up with `inventory.csv`, `text/`, `analytics/`, and `REPORT.md`.
+
+Two things worth doing on a first pass through a new tranche:
+
+1. **Check for new filename prefixes.** If more than ~3% of files land in the `OTHER` agency bucket, it means release 02 introduced prefixes not in `references/agency_vocab.md` — extend that table plus `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Ask for a release_01 vs release_02 comparison** if you want one — since both tranches will sit side by side, that's a natural follow-up once the individual report is built (new agencies, new locations, terminology drift, etc.).
+
+Just point me at the folder when it's downloaded and I'll run the pipeline.

@@ -1,0 +1,13 @@
+Once you've downloaded release 02 into its own folder, the fastest path is:
+
+1. Save it as a sibling to release 01 (e.g. `release_root/release_02/`) so the report can note what's new.
+2. Run `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report in one go.
+3. Skim the printed progress for the `OTHER` agency bucket. If any new filename prefixes show up that aren't in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown — otherwise those files get miscounted.
+4. Read the generated `REPORT.md`.
+
+A few things worth knowing in advance:
+- Don't expect OCR — scanned files with no text layer are flagged in the "What's missing" section, not processed. If you want those included, that's a separate follow-up step.
+- If the tranche is large and you're running in a sandbox with call timeouts, `extract_text.py` supports `[start] [end]` chunking instead of one long call.
+- Since you'll have two releases side by side, it's worth explicitly asking "what's new vs release_01?" once the report's done — that comparison isn't automatic, but the sibling-folder layout makes it easy to do as a follow-up pass.
+
+Just give me the path once it's downloaded and I can run the whole pipeline.

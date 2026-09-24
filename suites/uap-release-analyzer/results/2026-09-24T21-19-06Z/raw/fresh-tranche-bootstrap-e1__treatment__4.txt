@@ -1,0 +1,14 @@
+Run the bundled pipeline end-to-end with one command:
+
+```
+python3 scripts/run_all.py <path_to_release_02_folder>
+```
+
+That chains inventory → text extraction → analytics → REPORT.md in sequence, is idempotent, and skips files already processed if you rerun it. A few notes for when you actually do this:
+
+1. **Check the agency vocab first if filenames look new.** If release 02 introduces prefixes not in `references/agency_vocab.md`, the OTHER bucket will balloon — add new prefix rules there and to `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before running, or you'll get a misleading inventory.
+2. **Chunk `extract_text.py` if you're in a timeout-constrained environment.** `run_all.py` calls it unchunked; if any FBI-style 200+ page sections choke on a single call, run `scripts/extract_text.py <root> <start> <end>` in ~25-page slices instead.
+3. **Don't expect OCR.** Scanned files with no text layer will show as 0-char extractions — that's expected, and `REPORT.md` section 10 ("What's missing") will flag them rather than silently dropping them.
+4. **Cross-tranche comparison is free once both exist.** With release_01 sitting alongside it, ask me to diff `inventory.csv`/`analytics/` between the two — new agencies, term-frequency shifts, name overlaps — since that's the natural next question once release 02 is in.
+
+So: drop the folder, tell me the path, and it's one command to `REPORT.md`.

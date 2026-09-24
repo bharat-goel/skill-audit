@@ -1,0 +1,10 @@
+I don't have any memory of a "release 01" or existing pipeline for this, so I'm answering cold — a couple of things would change my recommendation: what format the tranche comes in (PDFs, a dataset, scanned images, HTML pages) and roughly how large it is.
+
+In general, the fastest path is to build the pipeline *before* release 02 drops, so on release day you just point it at the new folder:
+1. A script that bulk-downloads and normalizes everything to text (PDF/OCR extraction as needed).
+2. A batch pass through Claude (API or Claude Code) against a fixed extraction rubric per document — same prompt every time, so results are comparable across the tranche.
+3. An aggregation step that rolls the per-document outputs into one report artifact, rather than trying to read/summarize the whole tranche in one shot.
+
+The main tradeoff: build it generic enough to survive format quirks in the new release, but don't over-engineer it — a one-off shell script + a Claude Code agent loop beats a bespoke ingestion service for something you'll run a handful of times.
+
+If you want, tell me the format/size of release 01 (or point me at it) and I'll draft the actual pipeline now so it's ready when release 02 lands.

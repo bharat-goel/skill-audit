@@ -1,0 +1,5 @@
+Fastest path: a small intake script that unpacks the tranche into a consistent folder structure and normalizes everything to text (OCR any scanned PDFs, `pdftotext` for text-based ones, transcribe any audio/video if included) — then hand that text corpus to me in a session where I read/grep across it, cross-reference against release 01 if relevant, and draft the report directly rather than you doing manual synthesis first.
+
+The main tradeoff is OCR quality vs. speed: skipping OCR is faster but if any documents are scanned images rather than text PDFs you'll silently lose content, so it's worth a quick manifest/format check on release 02 as soon as it drops before committing to a pipeline.
+
+Want me to build the intake script now so it's ready to run the moment you download the tranche, or hold off and do it live when release 02 is out?

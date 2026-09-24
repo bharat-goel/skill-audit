@@ -1,0 +1,18 @@
+Once release 02 is downloaded, run the bundled pipeline end-to-end from the release root:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains all four steps (inventory → text extraction → analytics → REPORT.md) and is idempotent/incremental, so if a step is slow or times out you can just rerun it — already-done files are skipped. Concretely:
+
+1. **Inventory** — classifies every file by filename prefix into agency buckets and writes `inventory.csv`.
+2. **Text extraction** — pulls text per PDF into `text/`; scanned files with no text layer come out as 0-char (expected — flagged as "needs OCR" downstream, not run by default).
+3. **Analytics** — top terms, entities, redaction markers, cross-doc patterns → `analytics/`.
+4. **Report** — writes `REPORT.md` in the fixed 11-section format so it's directly comparable to release 01's report.
+
+Two things worth doing at the start, not after the fact:
+- If any filenames don't match the known prefixes (`OTHER` bucket >~3% of files), that's the signal to extend `references/agency_vocab.md` + `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- Since you'll then have two releases side by side, worth asking "what's new vs. release_01?" as a follow-up once release_02's report is done — cross-tranche comparison is a natural next step with two folders present.
+
+Just point me at the release_02 folder when it's down and I'll run the pipeline.

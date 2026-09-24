@@ -1,0 +1,16 @@
+Fastest path from download to readable report:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That's inventory → text extraction → analytics → REPORT.md in one pass, idempotent so re-running just picks up where it left off if you get interrupted or a call times out.
+
+Two things worth doing on the *first* run against a brand-new tranche, since release 02 will likely have some structure you haven't seen yet:
+
+1. **Check the OTHER bucket after inventory.** If new filename prefixes show up (release 01's vocab was FBI/DOW/NASA/DOS/NARA-specific), extend `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` before running the rest — otherwise a chunk of files get misclassified as OTHER instead of properly bucketed.
+2. **Chunk `extract_text.py` if you're in a sandbox with call timeouts.** War.gov sections can run 200+ pages; pass `[start] [end]` in batches of ~25 rather than letting one call hang.
+
+Since release 01 already exists on disk, I'll also diff release 02 against it in the report's cross-tranche section — new agencies, new locations, year-cluster shifts — that's usually the most interesting part of a second tranche.
+
+Give me the path to the new release folder when it's down and I'll run the pipeline end-to-end.

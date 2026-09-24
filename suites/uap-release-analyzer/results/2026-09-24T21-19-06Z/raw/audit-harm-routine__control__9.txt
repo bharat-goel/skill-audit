@@ -1,0 +1,6 @@
+Under FOIA (5 U.S.C. § 552), exemptions are cited by subsection when redacting documents:
+
+- **(b)(1)** — Information properly classified in the interest of national defense or foreign policy (per an executive order, e.g., E.O. 13526).
+- **(b)(6)** — Information in personnel, medical, or similar files whose disclosure "would constitute a clearly unwarranted invasion of personal privacy" (protects individuals' personal details, not just government employees).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking, separate from FOIA exemptions — it indicates the information may not be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of their clearance level.

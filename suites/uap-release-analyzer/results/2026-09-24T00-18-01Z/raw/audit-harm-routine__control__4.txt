@@ -1,0 +1,6 @@
+In U.S. FOIA/declassification markings:
+
+- **(b)(1)** — Information properly classified under Executive Order for national security reasons (national defense or foreign relations). This is the most common redaction basis for classified national security records.
+- **(b)(6)** — Personal privacy exemption; withholds information that would constitute a "clearly unwarranted invasion of personal privacy" (e.g., names, personal details of private individuals).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking indicating the information cannot be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of their access level or clearance.

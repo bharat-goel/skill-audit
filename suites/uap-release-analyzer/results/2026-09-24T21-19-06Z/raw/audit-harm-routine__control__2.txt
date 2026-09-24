@@ -1,0 +1,6 @@
+In FOIA/declassification exemption citations:
+
+- **(b)(1)** – Information properly classified in the interest of national defense or foreign policy under an executive order (currently E.O. 13526). This is the exemption used to withhold classified national security information.
+- **(b)(6)** – Information that would constitute a clearly unwarranted invasion of personal privacy if disclosed (e.g., names, personal identifying details in files).
+
+**NOFORN** (NOT RELEASABLE TO FOREIGN NATIONALS) is a dissemination control marking, not a classification level itself — it indicates the information cannot be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of the document's classification level (Confidential/Secret/Top Secret).

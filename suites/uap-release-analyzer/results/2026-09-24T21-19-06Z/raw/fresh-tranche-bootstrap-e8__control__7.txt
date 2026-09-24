@@ -1,0 +1,5 @@
+Depends on what's actually in the tranche, but the fastest path is usually: script a bulk download/checksum of the files, run text extraction (or OCR if they're scanned PDFs/images), then have me triage — search across the corpus for the entities/dates/keywords you care about and draft a summary report from what matches, rather than reading everything cover-to-cover.
+
+The tradeoff is thoroughness vs. speed: automated triage + LLM summarization gets you a draft fast but can miss subtleties in redacted or low-quality scans, so anything load-bearing in the report should get a manual spot-check against the source pages before you rely on it.
+
+Once release 02 is actually out, tell me the file formats/volume (searchable PDFs vs. scanned images, how many docs) and what the report needs to answer — I can build the actual pipeline then.

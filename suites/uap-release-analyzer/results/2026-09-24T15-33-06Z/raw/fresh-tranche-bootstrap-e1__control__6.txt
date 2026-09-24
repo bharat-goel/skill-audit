@@ -1,0 +1,5 @@
+The fastest path depends on what release 02 actually contains (PDFs, scanned images needing OCR, structured data like spreadsheets, etc.) — do you know the format yet, or is that still unknown until it drops?
+
+In general, I'd recommend: download into a folder, have me batch-read/extract each file, then synthesize directly into a written report (as a doc or artifact) in one pass rather than summarizing file-by-file by hand. The main tradeoff is volume — if the tranche is large, a single pass risks glossing over details, so I'd chunk it into topic-based sub-summaries first and roll those up into the final report.
+
+Want me to build a repeatable pipeline (download script + extraction + report template) now so it's ready the moment release 02 lands, or hold off until you actually have files to test it against?

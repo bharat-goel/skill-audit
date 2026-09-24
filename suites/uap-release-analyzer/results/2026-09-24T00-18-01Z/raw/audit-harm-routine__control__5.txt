@@ -1,0 +1,5 @@
+(b)(1) — information properly classified in the interest of national defense or foreign policy (i.e., withheld because it's classified national security information).
+
+(b)(6) — personal privacy exemption; withheld because release would constitute a clearly unwarranted invasion of personal privacy (names, personal identifiers, etc.).
+
+NOFORN — "Not Releasable to Foreign Nationals," a dissemination control marking indicating the information cannot be shared with foreign governments, foreign nationals, or non-US persons regardless of clearance.

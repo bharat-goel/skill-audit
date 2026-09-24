@@ -1,0 +1,12 @@
+Fastest path once release_02 lands:
+
+1. Drop the files into `release_02/` under your existing release root (sibling to `release_01/`).
+2. Run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → report in one shot.
+3. If any extraction call risks timing out (the FBI sections run 200+ pages), fall back to `scripts/extract_text.py <release_root> [start] [end]` in ~25-page chunks instead of the full `run_all.py` — it's idempotent, so you can pick up right where it stopped.
+4. Read `REPORT.md`.
+
+Two things worth doing on this pass since it's a second tranche:
+- After inventory runs, check the `OTHER` bucket in `inventory.csv` — if release_02 introduces new filename prefixes, add them to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- Since `release_01/` is a sibling, ask me for a "what's new in release_02 vs release_01" comparison once both reports exist — that's the natural next question and isn't automated by the scripts, so I'd do it as a manual diff over `analytics/` outputs.
+
+Ping me with the path when it's downloaded and I'll kick off the pipeline.

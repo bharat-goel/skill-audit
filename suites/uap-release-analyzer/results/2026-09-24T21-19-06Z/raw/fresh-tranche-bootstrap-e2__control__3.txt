@@ -1,0 +1,5 @@
+Fastest path: drop the files in a folder, have me (or a script) run each through text extraction — `pdftotext`/OCR (`ocrmypdf`) if they're scanned images rather than native PDFs — then have Claude read the extracted text directly and draft the report against a template you give me (sections, what counts as noteworthy, citation style back to page/doc). Skip building a bespoke pipeline unless release 02 is huge (hundreds of files) or highly structured (spreadsheets/tables), in which case a short parsing script to normalize everything into one corpus before the write-up pays for itself.
+
+Main tradeoff: letting me read raw extracted text and synthesize straight to a report is fastest but riskier on accuracy for scanned/low-quality OCR — worth a quick spot-check pass on a few source pages before you trust the report's claims.
+
+When it drops, just point me at the folder (or send me the files) and tell me what the report needs to cover.

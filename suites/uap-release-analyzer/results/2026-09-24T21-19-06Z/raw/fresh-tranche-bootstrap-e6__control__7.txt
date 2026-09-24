@@ -1,0 +1,5 @@
+A few things determine the fastest path here, so let me ask before assuming: what format does the tranche come in (PDFs, structured data/CSVs, scanned images, a mix), roughly how large is it, and did release 01 already give you a working extraction/parsing pipeline you'd reuse?
+
+My default recommendation, pending that: build a small repeatable script now (before release 02 drops) that does download → extract/OCR if needed → chunk → have Claude summarize/analyze each chunk → assemble into one written report, rather than doing it ad hoc through chat once the files land — the setup cost is upfront but turns "just downloaded" into "report" in one command run instead of a long manual back-and-forth. The main tradeoff is that scripting it requires knowing release 02's format in advance, which we don't yet since it hasn't dropped — so if the format is likely to differ from release 01, it may be faster to just wait and handle it interactively when it arrives rather than build a pipeline against guesses now.
+
+Which of those fits — do you have release 01's files/format to base this on, or is release 02 expected to be a different kind of data?

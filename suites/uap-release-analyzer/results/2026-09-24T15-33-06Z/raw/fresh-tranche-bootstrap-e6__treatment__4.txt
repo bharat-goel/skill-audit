@@ -1,0 +1,13 @@
+Once you've downloaded release_02's files into a folder (following the same pattern as `references/war_gov_quirks.md` if pulling from the source page), the pipeline is one command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under `<release_root>`. It's idempotent, so if a call times out partway (the extraction step is the one most likely to, given how large these tranches run) you can just re-run it and it'll skip whatever's already done — or run `extract_text.py <release_root> [start] [end]` in chunks directly.
+
+Two things worth doing on the *first* pass through a new tranche specifically:
+- Check for filename prefixes not in `references/agency_vocab.md` — if release_02 introduces a new agency or source, add the prefix there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- Since you'll have `release_01` sitting alongside it, it's worth explicitly diffing the two `inventory.csv`/`analytics/` outputs for a "what's new vs. release 1" angle in the report — that's usually the most interesting question once there's a second tranche to compare against.
+
+Say the word when the files are down and I'll run the pipeline.

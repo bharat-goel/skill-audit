@@ -1,0 +1,9 @@
+Fastest path: drop the downloaded files into a `release_02/` folder, then run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → report in one go, and everything's idempotent so a rerun after adding stragglers just fills gaps.
+
+Two things worth doing on the first pass with a new tranche:
+1. Watch for `OTHER`-bucket files in `inventory.csv` — those are filename prefixes not yet in `references/agency_vocab.md`. If they're more than ~3% of files, add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. Since you'll then have `release_01/` and `release_02/` as siblings, I can also diff them (new locations, terms, agencies that showed up) — worth asking for once both `REPORT.md`s exist.
+
+Skip OCR by default even if a big chunk of release 02 is scanned images — the report will just flag that gap under "What's missing," and we can run OCR separately if you want it.
+
+Want me to kick this off now, or are you waiting on the actual download first?

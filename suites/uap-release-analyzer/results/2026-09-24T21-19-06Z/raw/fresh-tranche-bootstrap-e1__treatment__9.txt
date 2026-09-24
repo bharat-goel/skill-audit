@@ -1,0 +1,13 @@
+Fastest path once release 02 is downloaded:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one call, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under the release root. If you're in a sandbox with call timeouts and it stalls on extraction, fall back to running the steps individually and chunk `extract_text.py <release_root> <start> <end>` in batches of ~25 pages.
+
+Two things worth doing on the first run against a new tranche:
+- If filenames use prefixes not already in `references/agency_vocab.md`, add them there (and to `PREFIX_RULES` in `inventory.py`/`analyze.py`) before running — otherwise those files fall into `OTHER` and skew the agency breakdown.
+- Since you'll then have `release_01/` and `release_02/` side by side, it's worth asking me to diff them (new locations, new names, terminology that wasn't in release 01) as a follow-up after the report's done — that's the natural next question once two tranches exist.
+
+Just point me at the folder when it lands and I'll run the pipeline.

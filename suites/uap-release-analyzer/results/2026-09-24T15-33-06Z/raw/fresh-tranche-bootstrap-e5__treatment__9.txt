@@ -1,0 +1,16 @@
+When release 02 drops, the whole thing is one command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+where `<release_root>` is the folder you download the new tranche into (e.g. `~/Downloads/release_02/` containing the PDFs). That runs inventory → text extraction → analytics → report in sequence and leaves you with `REPORT.md` at the end — readable in ten minutes.
+
+Two things worth knowing before you kick it off:
+
+1. **If your environment has a per-call timeout**, the text-extraction step can choke on the larger FBI sections (200+ pages). Run `scripts/extract_text.py` in chunks instead (`[start] [end]` args) rather than backgrounding it — it's idempotent, so chunked calls just pick up where they left off.
+2. **Watch the agency classification.** Files get bucketed by filename prefix (FBI/DOW/NASA/DOS/NARA/OTHER). If more than ~3% land in OTHER, that means release 02 introduced new filename prefixes not in `references/agency_vocab.md` — add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown in the report.
+
+Since you'll then have two releases sitting side by side, the natural follow-up once the report's done is "what's new vs. release_01?" — worth asking for once both reports exist.
+
+Just point me at the folder when it's downloaded and I'll run the pipeline.

@@ -1,0 +1,14 @@
+Run one command:
+
+```
+python3 scripts/run_all.py <release_02_path>
+```
+
+That chains all four pipeline steps in order — inventory → text extraction → analytics → report — and writes `REPORT.md` at the end. Each step is idempotent, so if extraction times out partway (the FBI sections run 200+ pages), just re-run and it'll pick up where it left off.
+
+Two things worth doing alongside it for a fresh tranche:
+
+- **Check the agency vocab first.** If release 02 introduces new filename prefixes not in `references/agency_vocab.md`, they'll fall into `OTHER`. Skim `inventory.csv`'s agency column after step 1 — if `OTHER` is more than ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before generating the report, or the report's agency breakdown will be misleading.
+- **Cross-tranche comparison is a natural follow-up**, not part of `run_all.py` — once release 02's report exists, ask me to diff it against release 01's `analytics/` if you want a "what's new" view.
+
+Want me to kick this off once the files are downloaded, or are they already sitting somewhere I should point at?

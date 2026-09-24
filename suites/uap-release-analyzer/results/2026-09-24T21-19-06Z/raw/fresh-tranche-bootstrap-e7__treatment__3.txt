@@ -1,0 +1,16 @@
+Fastest path once you've got `release_02/` downloaded:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, producing `inventory.csv`, `text/`, `analytics/`, and a final `REPORT.md` you read straight through — no manual script-by-script driving needed for a standard run.
+
+Two things worth doing before you kick it off, since they save a re-run:
+
+1. **Check for new filename prefixes.** If release 02 introduces sources outside the known FBI/DOW/NASA/DOS/NARA prefixes, they'll land in `OTHER`. If `OTHER` comes out above ~3% of files, extend `references/agency_vocab.md` + the `PREFIX_RULES` in `inventory.py`/`analyze.py` and rerun rather than letting the report carry an unclassified bucket.
+2. **Expect no-OCR gaps.** Scanned FBI/NARA pages will extract as 0-char text — that's normal, not a bug; the report notes them under "What's missing" rather than silently dropping them. Don't run Tesseract by default; treat OCR as an offered follow-up.
+
+If you've also got `release_01/` sitting alongside it in the parent folder, say so and I'll fold in a "what's new vs. release 01" comparison — that's the natural next question once two tranches exist.
+
+Want me to run this now against a path, or are you still waiting on the download?

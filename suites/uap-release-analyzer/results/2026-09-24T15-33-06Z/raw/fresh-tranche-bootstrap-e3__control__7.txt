@@ -1,0 +1,5 @@
+A few unknowns would change the answer a lot — what format the tranche is in (PDFs, scanned images, structured data, a mix), roughly how large it is, and whether you already built a pipeline for release 01 I could reuse or adapt.
+
+Assuming it's a pile of PDFs/documents like most gov releases: the fastest path is usually (1) a script that watches/downloads and diffs new files against what you already have, (2) bulk OCR/text-extraction into a searchable store (even just a folder of `.txt` + a SQLite/grep index is often enough for this), (3) an LLM pass that summarizes each doc and flags ones worth closer reading, then (4) a synthesis pass that rolls the flagged docs into the actual report. The main tradeoff is speed vs. trust: an end-to-end automated summarize-and-write pipeline gets you a draft fastest, but for anything you'll actually publish or cite, you want a human-in-the-loop checkpoint after step 3 (spot-checking flagged docs against summaries) before the synthesis pass — otherwise hallucinated details slip into the "written report" stage silently.
+
+Do you have a release-01 pipeline already, or would this be the first time building it out?

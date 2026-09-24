@@ -1,0 +1,3 @@
+Fastest realistic path: drop the new files into a folder, run them through OCR/text-extraction if any are scanned PDFs, then have me read through them and draft a structured report against a template (findings, key dates/names, notable changes vs. release 01) in one pass. The main tradeoff is speed vs. accuracy — a single automated sweep is quick but risks misreading OCR'd or redacted pages, so I'd recommend at least a quick manual spot-check of flagged/uncertain passages before you treat the report as final, especially if it's citing specific claims.
+
+Want me to build this as a repeatable script/workflow now, or do you want to just hand me the release 02 files when they drop and we do it live?

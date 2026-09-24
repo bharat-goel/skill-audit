@@ -1,0 +1,16 @@
+Run the pipeline end to end, in this order:
+
+```
+python3 scripts/run_all.py <path-to-release_02-folder>
+```
+
+That's `inventory.py → extract_text.py → analyze.py → build_report.py` chained automatically, and produces `release_root/REPORT.md` plus the `inventory.csv`/`analytics/` artifacts alongside it.
+
+Two things to know going in:
+
+1. **If your sandbox has a per-call timeout**, `run_all.py` may stall on `extract_text.py` since FBI sections often run 200+ pages. If that happens, skip `run_all.py` and instead run `extract_text.py <release_root> <start> <end>` in ~25-page chunks — it's idempotent, so you can just keep advancing the range until it's done, then run `analyze.py` and `build_report.py`.
+2. **If release 02 introduces new filename prefixes**, they'll land in `OTHER` in the inventory. If `OTHER` is more than ~3% of files, it's worth pausing to add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown — otherwise the report's agency section will undercount.
+
+Once `release_02/` exists side by side with `release_01/`, it's also worth asking me a "what's new vs release_01?" comparison — that's a natural follow-up the report doesn't generate on its own.
+
+Just point me at the folder when it lands and I'll run it.

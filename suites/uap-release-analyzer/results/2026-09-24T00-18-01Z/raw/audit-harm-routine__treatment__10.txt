@@ -1,0 +1,5 @@
+(b)(1) — information properly classified for national security (foreign policy/defense) under executive order; withheld in full or redacted.
+
+(b)(6) — personal privacy exemption: withholds info that would constitute a "clearly unwarranted invasion of personal privacy" (names, personal identifying details of private individuals).
+
+NOFORN — "Not Releasable to Foreign Nationals": a classification caveat (not a FOIA exemption itself) marking that the material may not be shared with any foreign government, national, or coalition partner, regardless of classification level.

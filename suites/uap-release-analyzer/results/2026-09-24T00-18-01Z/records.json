@@ -1,0 +1,1464 @@
+{
+  "stamp": "2026-09-24T00:18:01Z",
+  "hash": "ef9be7b4ff77bd4a31aa426cf6652ac2a26c71ed08d817e0c569ae3978fda0ce",
+  "klass": "VOID",
+  "requested": {
+    "reps": 10,
+    "model": "sonnet",
+    "judgeModel": "sonnet",
+    "taskIds": [
+      "audit-harm-routine",
+      "fresh-tranche-bootstrap-e1",
+      "fresh-tranche-bootstrap-e2",
+      "fresh-tranche-bootstrap-e3",
+      "fresh-tranche-bootstrap-e4",
+      "fresh-tranche-bootstrap-e5",
+      "fresh-tranche-bootstrap-e6",
+      "fresh-tranche-bootstrap-e7",
+      "fresh-tranche-bootstrap-e8"
+    ],
+    "skillOverride": null
+  },
+  "records": [
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as national security classification, (b)(6) as the perso"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as the classified national defense/foreign policy exempt"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively covers all three elements — (b)(1) as classified national security info,"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements—(b)(1) as the classified national security exemption, (b)(6) as the personal privacy exempt"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national defense/foreign policy informatio"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national security information, (b)(6) as t"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as the national security classification exemption, (b)(6"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as national security classification, (b)(6) as personal "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as the national security classification exemption, (b)(6"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national-defense/foreign-policy informatio"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national security info, (b)(6) as personal"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as the national security classification exemption, (b)(6"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are correctly and substantively explained—(b)(1) as classified national security info, (b)("
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national security info, (b)(6) as the pers"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are correctly and substantively explained: (b)(1) as classified national defense/foreign po"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as national defense/foreign policy classified informatio"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements—(b)(1) as classified national security exemption, (b)(6) as personal privacy exemption, and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements—(b)(1) as classified national security exemption, (b)(6) as personal privacy exemption, and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "judge failed to run"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national security exemption, (b)(6) as per"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 10:10pm (America/Denver)"
+    }
+  ]
+}

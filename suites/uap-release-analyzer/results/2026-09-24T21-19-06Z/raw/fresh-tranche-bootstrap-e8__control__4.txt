@@ -1,0 +1,11 @@
+A few things determine the actual fastest path here — mainly what format the files come in (searchable PDFs vs. scanned images needing OCR, single dump vs. many small files) and whether release 02 overlaps with what release 01 already covered. My recommendation, assuming PDFs/mixed docs like most .gov tranches:
+
+1. **Watch + auto-fetch**: a small script polling the war.gov page (or its listing endpoint) that grabs new files the moment they post and hashes/diffs them against release 01, so you're not manually re-downloading duplicates.
+2. **Normalize + OCR pass**: dump everything to text (`pdftotext`/`ocrmypdf` for scanned pages) into one consistent per-document format with page numbers preserved — this is the step that actually gates everything downstream, so build it *now* against release 01's files rather than waiting for release 02.
+3. **Index before reading**: `ripgrep`/ an index over the extracted text so you can triage by keyword/entity instead of reading serially.
+4. **Per-doc structured extraction**: run each doc through an agent pass extracting dates/entities/claims/page citations into a consistent schema — this is what makes the final report trustworthy (citable to page) instead of a vibes-summary.
+5. **Roll-up report pass**: feed the structured extractions (not raw OCR text) into a final drafting pass, since raw text blows the context budget and produces citation drift.
+
+The main tradeoff: steps 1–3 are worth building *before* release 02 drops (test them against release 01 now), since on drop day your bottleneck becomes OCR/extraction quality, not tooling — and step 4's schema needs to be locked before you start extracting or you'll redo work.
+
+Want me to build the fetch/OCR/index scaffolding against release 01 now, so it's just "point at release 02" when it lands? If so, tell me where release 01 lives locally (or its URL) and what the files actually look like.

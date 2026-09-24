@@ -1,0 +1,14 @@
+Fastest path: drop the new tranche in a `release_02/` folder, then run the pipeline end-to-end with one command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report, writing `inventory.csv`, `text/*.txt`, `analytics/*`, and `REPORT.md` — no need to invoke the four scripts separately unless you want to stop partway to inspect something.
+
+Two things worth knowing going in:
+
+1. **Filename prefixes you haven't seen before will land in `OTHER`.** If `OTHER` comes out above ~3% of files, that's the signal to add the new prefix to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **OCR isn't automatic.** Scanned PDFs with no text layer extract as 0-char files — expected, and the report notes them under "What's missing," but if you want OCR content you'll ask for that as a separate follow-up.
+
+Once `release_02/` sits next to `release_01/`, I can also diff the two (new locations, new names, year-cluster shifts) as a follow-up question rather than a separate pipeline — just ask "what's new vs release 01?" and I'll read both `analytics/` directories directly.

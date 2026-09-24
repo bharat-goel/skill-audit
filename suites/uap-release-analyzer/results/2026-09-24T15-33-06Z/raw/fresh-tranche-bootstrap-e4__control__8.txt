@@ -1,0 +1,5 @@
+Since I don't have prior context on "release 01" (its file format, size, or structure), the fastest path really depends on what the tranche actually looks like — clean PDFs, scanned/OCR-needed images, spreadsheets, or a mix.
+
+My recommendation: build the pipeline *now*, before release 02 drops, so it's a one-command run on the day — download → extract text (with OCR fallback for scans) → dedupe/index → targeted analysis pass → templated report. The main tradeoff is time spent now on tooling you can't fully test until real data exists, vs. scrambling to script it live under time pressure.
+
+Want me to sketch that pipeline? If you can tell me what release 01 looked like (file types, roughly how many docs, any existing folder from that download), I can tailor it instead of guessing.

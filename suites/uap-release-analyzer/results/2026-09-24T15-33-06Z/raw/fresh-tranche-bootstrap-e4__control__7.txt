@@ -1,0 +1,5 @@
+The fastest path is a small repeatable pipeline rather than doing it by hand each time: (1) a script that diffs the new tranche against what you already have and normalizes formats (PDF/HTML/images → text, OCR anything scanned), (2) feed the extracted text to Claude in batches to pull out key facts/entities and flag anything notable, (3) have Claude draft the report directly into a doc from those extracts rather than you copy-pasting excerpts into a prompt each time.
+
+The main tradeoff: full automation (auto-download → auto-summarize → auto-report) is fastest per-release but risky for anything sensitive or authoritative, since OCR errors or missed context can silently corrupt the summary — so I'd keep one manual checkpoint where you skim the extracted-text stage before the report gets written, rather than trusting an end-to-end black box.
+
+A couple of things that'd change the concrete setup: what format does release 02 actually ship in (PDFs, spreadsheets, a web index of files), and roughly how large is the tranche? Once I know that I can build the actual download/extract script now rather than leaving it generic.

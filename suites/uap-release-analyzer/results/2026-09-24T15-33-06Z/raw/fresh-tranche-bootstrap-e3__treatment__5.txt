@@ -1,0 +1,10 @@
+Fastest path once release 02 lands in a folder:
+
+1. Point me at the folder and I'll run `scripts/run_all.py <release_root>` — that chains inventory → text extraction → analytics → report in one shot.
+2. It writes `inventory.csv`, `text/*.txt`, `analytics/*` (top terms, entities, redaction stats, cross-doc patterns), and a final `REPORT.md` in the standard 11-section format.
+3. Any new filename prefixes not in `agency_vocab.md` land in an "OTHER" bucket — I'll flag those so we extend the vocab rather than let them go unclassified.
+4. Since you'll then have `release_01/` and `release_02/` as siblings, I'll also note what's new/changed vs release 01 in the report.
+
+Realistically: for a tranche similar in size to the first one, that's maybe 10-15 minutes of tool time (chunked text extraction if any FBI sections are 200+ pages), then a report you can read in ten minutes. No OCR by default — scanned files get flagged as a gap, not processed, unless you ask.
+
+When it's downloaded, just say "analyze `<path>`" and I'll kick off the pipeline.

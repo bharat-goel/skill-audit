@@ -1,0 +1,14 @@
+Fastest path once release 02 lands in a folder:
+
+```
+python3 scripts/run_all.py <release_02_root>
+```
+
+That chains all four steps (inventory → text extraction → analytics → report) and writes `REPORT.md` at the end — that's the ten-minutes-to-read document. Two things worth knowing going in:
+
+1. **New filename prefixes will likely show up.** If `OTHER` in the inventory exceeds ~3% of files, check `inventory.csv` for the unrecognized prefixes and add them to `references/agency_vocab.md` + the `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before trusting the agency breakdown — otherwise a chunk of release 02 silently falls into "OTHER."
+2. **If your sandbox has a per-call timeout**, `extract_text.py` can be run in page/file batches (`[start] [end]` args) instead of one long call — it's idempotent, so partial runs just resume.
+
+Since you'll have `release_01/` sitting alongside it, the report's "what's new vs release 01" angle is worth asking for explicitly — the skill flags that as the natural follow-up once two tranches exist, but it's not automatic in `run_all.py`.
+
+If you want, once release 02 actually drops, just say "analyze release_02" with the path and I'll run the pipeline directly.

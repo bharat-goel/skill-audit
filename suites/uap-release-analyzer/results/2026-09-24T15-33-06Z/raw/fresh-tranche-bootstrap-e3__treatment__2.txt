@@ -1,0 +1,14 @@
+Once release 02 lands in a folder, run all four pipeline scripts in sequence with `scripts/run_all.py <release_root>`:
+
+1. **Inventory** — classifies every file by agency prefix, counts pages, writes `inventory.csv`
+2. **Extract text** — pulls text layers into `text/` (scanned files come back 0-char — expected, flagged later as "OCR needed")
+3. **Analyze** — builds `analytics/` (top terms, entities, redaction counts, cross-doc patterns)
+4. **Report** — writes `REPORT.md` in the standard 11-section format
+
+That's the whole path from raw PDFs to a readable report, and it's idempotent — safe to re-run if you add stragglers later.
+
+Two things to watch for with release 02 specifically:
+- If any filenames use prefixes not in `references/agency_vocab.md` (new agency, new naming convention), they'll bucket into `OTHER`. If `OTHER` is more than ~3% of files, add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- Since you'll then have two releases side by side, the report's "what's new vs. release_01" comparison becomes an obvious next question — worth asking for once release 02's report is done.
+
+If your sandbox has a per-call timeout and any FBI section PDFs run 200+ pages, use `extract_text.py <root> <start> <end>` in chunks of ~25 instead of the single `run_all.py` pass for that step.

@@ -1,0 +1,5 @@
+Fastest path: script a one-shot pipeline — bulk-download with `wget`/`curl` (mirroring the tranche's file list), extract text (`pdftotext`/`ocrmypdf` for scans), then hand the extracted text to Claude in batches to summarize/cluster by theme, and have it assemble those summaries into one written report (markdown or an artifact) rather than reading each doc yourself.
+
+Main tradeoff: this is fast and scales to hundreds of files, but LLM summarization can miss or misread nuance in low-quality scans or dense tables — so budget a manual spot-check pass on anything the report flags as high-stakes before you treat it as final.
+
+If you tell me the file types/format release 02 typically ships in (PDFs, scanned images, spreadsheets, etc.) and roughly how many docs, I can write the actual download+extract+summarize script now so it's ready the moment it drops.

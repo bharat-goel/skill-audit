@@ -1,0 +1,12 @@
+Fastest path once `release_02/` lands in the parent folder next to your existing `release_root/`:
+
+1. Drop the new files into a `release_02/` subfolder under the same release root.
+2. Run `python scripts/run_all.py <release_root>` — it chains inventory → extract_text → analyze → build_report in one go, skipping anything already processed (idempotent).
+3. If any single PDF section is 200+ pages and your environment has a per-call timeout, extract in chunks instead: `scripts/extract_text.py <release_root> <start> <end>`.
+4. Open `REPORT.md`.
+
+Two things worth doing at that point rather than after the fact:
+- If `release_02` introduces new filename prefixes, the inventory step will bucket anything unrecognized into `OTHER` — if that exceeds ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before trusting the agency breakdown.
+- Since you'll have two releases side by side, it's worth asking "what's new vs release_01?" as a follow-up — the skill doesn't do cross-tranche diffing automatically, but with both `inventory.csv`/`analytics/` present I can compare them directly.
+
+Want me to run this now, or are you waiting on the actual download first?

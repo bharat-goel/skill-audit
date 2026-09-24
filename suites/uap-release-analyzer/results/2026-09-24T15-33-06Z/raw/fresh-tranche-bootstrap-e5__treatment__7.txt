@@ -1,0 +1,20 @@
+The fastest path is a single command once the files land: point `run_all.py` at the new release folder and it chains all four steps for you.
+
+```
+python3 scripts/run_all.py ~/Downloads/release_02/
+```
+
+That runs, in order:
+
+1. **`inventory.py`** — walks the folder, classifies files by agency (FBI/DOW/NASA/DOS/NARA), reads page counts → `inventory.csv`
+2. **`extract_text.py`** — pulls text from PDFs with a text layer → `text/*.txt` (scanned files come back empty, that's expected — OCR isn't run by default)
+3. **`analyze.py`** — builds term/entity/redaction stats → `analytics/`
+4. **`build_report.py`** — assembles the standard 11-section `REPORT.md`
+
+A couple of things worth doing on a *new* tranche specifically, not just re-running the pipeline:
+
+- **Check the `OTHER` bucket in `inventory.csv` after step 1.** If release 02 uses filename prefixes not in `references/agency_vocab.md` (anything new beyond `65_hs1*`, `dow-uap*`, `nasa-uap*`, `dos-uap*`, NARA record-group numbers, etc.), add them to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before running further steps — otherwise those files get misclassified and skew section 5/6 of the report.
+- **If your environment has a per-call timeout**, run `extract_text.py` with the `[start] [end]` chunk args instead of the whole folder at once — FBI sections tend to be 200+ pages.
+- **Since you'll have `release_01/` and `release_02/` side by side**, it's worth asking me afterward to diff them (new agencies, new locations, terms that spiked) — that's a natural follow-up once both `analytics/` folders exist.
+
+Everything is idempotent, so if a run gets interrupted partway, just re-run `run_all.py` and it picks up where it left off.

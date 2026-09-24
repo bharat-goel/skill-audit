@@ -1,0 +1,8 @@
+Fastest path is a two-stage pipeline, not one big pass:
+
+1. **Fan out** — split the tranche into per-document (or per-batch) chunks and hand them to parallel subagents that extract text (OCR if scanned) and write a short structured summary (key facts, entities, dates) to disk per doc. This is what keeps a large tranche from blowing your context window.
+2. **Fan in** — a single synthesis pass reads all those summaries (not the raw docs) and drafts the actual report.
+
+The main tradeoff: parallel extraction is fast but each subagent works blind to the others, so cross-document connections only surface at synthesis time — meaning the per-doc summaries need consistent entity/date naming or the synthesis step won't be able to link them back together.
+
+If you want, I can build this as a reusable skill now (drop-folder in, report out) so it's just one command when release 02 actually lands — want me to set that up?

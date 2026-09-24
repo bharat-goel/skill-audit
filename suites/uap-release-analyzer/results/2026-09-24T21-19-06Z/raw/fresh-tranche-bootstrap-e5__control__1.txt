@@ -1,0 +1,9 @@
+Depends heavily on what shape the files land in, but the general fastest path:
+
+1. **Inventory + extract text** — script that unzips the tranche, OCRs any scanned/image PDFs, and dumps everything to plain text with filenames preserved as metadata.
+2. **Per-document pass** — run each doc through Claude with one fixed extraction prompt (key facts, dates, names, claims) so you get structured notes rather than re-reading raw pages.
+3. **Synthesis pass** — feed the structured notes (not the raw docs) into a final prompt that drafts the report against whatever template/questions you care about.
+
+Main tradeoff: skipping straight to "paste raw docs into Claude and ask for a report" is faster to start but degrades badly once the tranche is more than a handful of documents — you lose traceability (which claim came from which doc) and risk the model glossing over buried details. The extract-then-synthesize split costs you setup time now but pays off if release 02 is large or you'll want to repeat this for release 03+.
+
+If you want, I can build the actual extraction script once release 02 is out and you can show me a sample file (or two) from the tranche so I know the format.

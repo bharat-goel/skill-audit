@@ -1,0 +1,5 @@
+The fastest path is to have a pipeline ready *before* release 02 drops, so "just downloaded" becomes a single command rather than a fresh investigation each time: a script that ingests whatever you download (PDF/OCR if scanned), chunks it, and feeds it to Claude with a fixed extraction prompt (key entities, dates, claims, redaction markers) that writes straight into a structured report template with citations back to page numbers.
+
+The main tradeoff is upfront effort vs. flexibility — building this now means guessing at the release's format and structure before you've seen it, so it's worth doing only if you expect release 02 to look like release 01 (same doc types/structure) rather than something novel.
+
+Want me to build that pipeline now using whatever you have from release 01 as the template, or wait until release 02 actually lands and I can see its real shape first?

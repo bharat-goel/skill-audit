@@ -1,0 +1,9 @@
+The fastest path is usually: **ingest → index → query → draft**, compressed as much as possible by having me do the middle two steps.
+
+1. Drop the raw files in a folder and let me sort them (OCR any scanned PDFs, normalize filenames/dates).
+2. I build a lightweight searchable index (ripgrep-able text or embeddings, depending on volume) instead of you reading everything manually.
+3. You give me the report's shape (what questions it needs to answer, audience, length), and I pull the relevant passages and draft it with citations back to the source docs so you can verify claims.
+
+Main tradeoff: plain full-text search is faster to stand up but you have to know what to search for; embeddings/semantic search take a bit longer to build but surface relevant material even when you don't know the right keywords — worth it if the tranche is large or disorganized.
+
+When it actually drops, tell me the format (PDFs, scans, spreadsheets, structured data) and roughly how large the tranche is, and I can set the pipeline up then.

@@ -1,0 +1,9 @@
+For a document tranche like that, the fastest path is usually:
+
+1. **Bulk-download** with a small script (`wget`/`curl` against the file list) rather than clicking through each link — saves the most time if release 02 has more than a handful of files.
+2. **Normalize to text** — `pdftotext` for native PDFs, OCR (`ocrmypdf`) for scanned ones — so everything is greppable/searchable in one pass.
+3. **Hand the extracted text to me in one session** to summarize, cross-reference, and draft the report directly, rather than reading each doc manually first.
+
+Main tradeoff: step 3 is fast but only as good as OCR quality and how much you trust a first-pass summary — for anything sensitive you'll still want to spot-check the source docs against the draft before calling it final.
+
+Want me to write the download/OCR script now so it's ready to run the moment release 02 lands, or wait until you have files in hand?

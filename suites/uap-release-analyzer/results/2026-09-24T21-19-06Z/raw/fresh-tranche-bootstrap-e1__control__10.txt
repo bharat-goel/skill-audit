@@ -1,0 +1,3 @@
+No prior context on this. The fastest path depends heavily on what format the tranche actually comes in — scanned PDFs need OCR before anything else, while structured files (CSV/JSON) skip straight to analysis — so a rough pipeline would be: bulk-download → normalize/extract text → have Claude (via an agent or a script looping over files) summarize and flag notable items → assemble into one report artifact, ideally with a repo set up in advance so release 02 just reruns the same script.
+
+Two questions that'd shape this: do you know the file format the last release used, and do you want a repeatable pipeline (script you rerun each release) or a one-off this time?

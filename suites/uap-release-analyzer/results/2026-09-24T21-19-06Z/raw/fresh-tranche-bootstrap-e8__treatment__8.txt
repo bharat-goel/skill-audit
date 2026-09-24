@@ -1,0 +1,15 @@
+The fastest path is one command:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → REPORT.md in sequence, and it's idempotent, so re-running after a partial failure (or after you top off with a few more files) just skips what's already done.
+
+A couple of things worth doing around that call, not instead of it:
+
+1. **Check for new filename prefixes first.** If release 02 introduces agencies/formats not in `references/agency_vocab.md`, those files fall into `OTHER` silently. Worth a quick glance at filenames before or right after inventory — if `OTHER` is more than ~3% of files, extend the vocab table + `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Chunk `extract_text.py` if you're in a timeout-constrained sandbox.** war.gov FBI sections run 200+ pages; if a single call would time out, call it with `[start] [end]` slices instead of the `run_all.py` bundle for that step alone.
+3. **Cross-tranche question is basically free once release_01 already has a report** — since both live under the same parent folder, "what's new vs release_01" is a natural follow-up worth asking for once REPORT.md lands.
+
+So: drop the files in, run `run_all.py` against the root, skim the "What's missing" section for OCR gaps, done. Want me to run it as soon as you've got the files downloaded?

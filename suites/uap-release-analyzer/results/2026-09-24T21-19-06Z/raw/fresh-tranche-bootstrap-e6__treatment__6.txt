@@ -1,0 +1,13 @@
+Drop the new files into a `release_02/` folder, then run one command:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under `<release_root>`. It's idempotent, so if a call times out partway (the war.gov FBI sections run 200+ pages) you can just rerun it and it'll skip finished work — or drive `extract_text.py` in chunks with `[start] [end]` if you're in a sandbox with per-call limits.
+
+Two things to check first, since this is a new tranche rather than a rerun:
+- If any filenames use prefixes not already in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before running — otherwise they'll pile up in the `OTHER` bucket instead of being classified.
+- Not everything OCRs — scanned FBI/NARA files with no text layer are expected to show up as 0-char extracts; the report calls these out under "What's missing," it's not a bug.
+
+Since you'll have `release_01/` sitting alongside it, the report can also do a quick "what's new vs. release_01" pass if you want — just say so and I'll add a cross-tranche diff section when I build it.

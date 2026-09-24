@@ -1,0 +1,5 @@
+The fastest path: a small script that (1) pulls every doc link off the release page and downloads them, (2) extracts text via `pdftotext` with an OCR fallback (`ocrmypdf`/`tesseract`) for scanned pages, then (3) feeds the extracted text to me in batches to summarize per-document and synthesize into one report you paste into an artifact or doc.
+
+Main tradeoff: doing steps 1-2 ad hoc by hand works fine for a one-off, but since you're clearly expecting recurring releases ("release 02"), it's worth me building this as a reusable script now so tranche 03+ is just "run script, review report" instead of repeating manual work each time.
+
+Want me to build that pipeline now, or wait until release 02 is actually out and you can point me at the page/file list?

@@ -1,0 +1,5 @@
+The fastest repeatable path: a small script that unzips/normalizes the tranche into plain text (OCR only if it's scanned PDFs), then a Claude pass that extracts structured notes (entities, dates, claims, discrepancies vs. release 01) before drafting the narrative report — that way release 02 becomes "run the script" instead of manual triage each time.
+
+Tradeoff: building that pipeline now costs you an hour or so up front; skipping it and just hand-feeding files to Claude interactively is faster for this one release but you redo the setup work for release 03, 04, etc.
+
+If you want, tell me what release 01 looked like (file types, rough size, whether it's text-native or scanned) and I'll build the script now so it's ready when release 02 drops.

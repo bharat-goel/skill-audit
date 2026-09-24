@@ -1,0 +1,5 @@
+Fastest path: write a small download+extract script now (wget/curl the tranche, `pdftotext`/OCR any scanned PDFs into plain text) so on release day you just run it and hand Claude Code the extracted text folder — then have me read through and draft the report in one pass, since I can already write directly to a file or artifact without a separate summarization step.
+
+Main tradeoff: a fully scripted pipeline (fetch → extract → auto-summarize via API call) is fastest end-to-end but brittle if the tranche's format changes or documents are messy/scanned; doing the read-and-draft step interactively with me instead of scripting it is slower but adapts to format surprises and lets you steer what the report emphasizes.
+
+Want me to build that download/extract script now so it's ready to fire the moment release 02 lands?

@@ -1,0 +1,13 @@
+Fastest path once release_02 lands in a folder:
+
+```
+python3 scripts/run_all.py <path/to/release_02_root>
+```
+
+That chains all four pipeline steps — inventory → text extraction → analytics → report — and produces `REPORT.md` in the release root. On a tranche similar in size to the May PURSUE release (~2.5GB/4,000 pages), expect a few minutes; if you're running in a sandbox with per-call timeouts, use `extract_text.py <root> <start> <end>` in chunks of ~25 files instead of `run_all.py`, since that's the step that can blow a timeout.
+
+Two things worth doing at the same time, not after:
+- **Check for new filename prefixes.** If release_02 introduces a source that isn't in `references/agency_vocab.md` (new agency, new naming convention), those files fall into `OTHER`. Worth a quick look at the inventory's `OTHER` count before trusting the agency breakdown — if it's more than ~3%, extend the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` rather than letting the report undercount.
+- **Cross-tranche comparison.** Since you'll have `release_01/` sitting alongside it, the natural next question is "what's new in 02 vs 01" — I can diff the two `inventory.csv`/`analytics/` outputs once both reports exist, if you want that as a follow-up.
+
+Just point me at the downloaded folder when it's ready and I'll run the pipeline.

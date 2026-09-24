@@ -1,0 +1,13 @@
+Fastest path once release 02 lands in a sibling folder:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one call, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under `release_root`. If the sandbox's per-call timeout makes a single `run_all.py` pass risky on a large tranche (the last one had 200+ page FBI PDFs), fall back to running the four steps individually so `extract_text.py` can be chunked with `[start] [end]` — it's idempotent, so re-running just picks up where it left off.
+
+Two things worth doing as you kick it off, not after:
+- If release 02 introduces filename prefixes not in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` right away — otherwise they silently pile into `OTHER` and skew the agency breakdown.
+- Since you'll have `release_01/` sitting alongside it, say so when you ask me to run this — that makes "what's new vs. release_01" the natural next question and I can add a diff pass rather than just the standalone report.
+
+Just point me at the folder when it's downloaded and I'll run the pipeline.

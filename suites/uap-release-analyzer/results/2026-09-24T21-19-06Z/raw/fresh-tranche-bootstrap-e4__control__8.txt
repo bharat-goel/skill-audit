@@ -1,0 +1,7 @@
+I don't have any context on what "release 02" actually contains or how you handled release 01 — that matters a lot here since the fastest pipeline is completely different for scanned PDFs vs. structured data vs. plain text dumps. A few things that would let me give you a real answer instead of a generic one:
+
+1. What format does the tranche come in (PDFs, images/scans requiring OCR, spreadsheets, JSON/XML, plain text)?
+2. Did you already build a pipeline for release 01, or is this the first one?
+3. Roughly what size (dozens of files vs. thousands) and what's the target report — a summary of contents, a diff against release 01, something else?
+
+If this is your first pass, my instinct is: a small ingest script (download → checksum/dedupe → OCR if needed → extract text) feeding into a search/grep-able index, then a subagent-driven pass that reads chunks and drafts findings into a single doc — rather than trying to read the whole tranche by hand. But the specific tooling depends on your answers above.

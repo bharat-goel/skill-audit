@@ -1,0 +1,12 @@
+Once release 02 lands in a local folder, run:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, giving you `REPORT.md` in a few minutes for a tranche this size. Two things to watch:
+
+- If the sandbox has a per-call timeout, the extraction step can choke on the larger FBI-section PDFs (200+ pages) — in that case skip `run_all.py` and call `scripts/extract_text.py <release_root> [start] [end]` in ~25-page chunks instead; it's idempotent so you can pick up where a chunk left off.
+- If filenames in release 02 introduce new prefixes, `inventory.py`/`analyze.py` will bucket them as `OTHER`. Worth a quick glance at the inventory after step 1 — if `OTHER` is more than ~3% of files, add the new prefixes to `references/agency_vocab.md` and the `PREFIX_RULES` in the scripts before running analytics, so the report doesn't undercount a whole agency.
+
+If release_01 is still sitting alongside it, worth asking afterward whether you want a "what's new vs release 01" diff — that's the natural follow-up once two tranches exist side by side.

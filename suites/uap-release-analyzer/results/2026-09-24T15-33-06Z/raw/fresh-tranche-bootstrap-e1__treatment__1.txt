@@ -1,0 +1,13 @@
+Once you've downloaded release_02 into its own folder, run the bundled pipeline end-to-end:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under `release_root`. It's idempotent, so if you're on a sandbox with call timeouts you can instead run the four steps individually and chunk the extraction step (`extract_text.py <release_root> <start> <end>`) in batches of ~25 pages without losing progress.
+
+Two things worth doing on the first pass with a new tranche:
+1. Check `inventory.csv` for filename prefixes that land in `OTHER` — if that bucket is more than ~3% of files, extend `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown in the report.
+2. Since you'll have `release_01/` sitting alongside it, the report's "what's new vs. release_01" comparison becomes the natural next question — flag that to me once REPORT.md is generated and I can diff the two analytics sets.
+
+Just point me at the folder when it lands and I'll run the pipeline.

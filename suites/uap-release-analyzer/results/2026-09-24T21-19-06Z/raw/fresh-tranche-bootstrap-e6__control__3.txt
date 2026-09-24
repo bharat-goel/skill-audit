@@ -1,0 +1,8 @@
+I don't have any record of a "release 01" or existing pipeline for this — no memory, and the working directory is empty. Before I can give you a concrete fastest-path, I need a few specifics:
+
+1. **What is release 02, format-wise?** (e.g., PDFs, a document dump/ZIP, structured data, images/scans) — this determines whether OCR/parsing is even needed.
+2. **What's in it?** (contracts, personnel records, correspondence, budget data, etc.) — determines what "report" should extract.
+3. **Do you have a pipeline from release 01**, or is this genuinely the first time you're processing one of these tranches? If there's existing code/scripts from last time, point me at them and I'll build off that instead of starting cold.
+4. **What does "a written report I can read" mean to you** — a structured summary doc, a diff against release 01, flagged anomalies, something else?
+
+If this is the first tranche you're processing, the generic fast path is: download → convert/OCR to text if needed → chunk + index → have me (or a subagent) extract key facts per document → synthesize into a report artifact. But I'd rather build the actual pipeline against real file samples than describe it in the abstract — if you have a sample from release 01, share it and I'll turn this into a working script.

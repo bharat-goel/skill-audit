@@ -1,0 +1,19 @@
+Run the bundled pipeline end-to-end once you have the files on disk:
+
+```
+python scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report, and each step is idempotent/incremental, so if a call times out partway you can just rerun it and it'll pick up where it left off. Steps in order (same as `run_all.py`):
+
+1. `inventory.py` — classifies every file by agency using the filename-prefix table, writes `inventory.csv`.
+2. `extract_text.py` — pulls text layers into `text/*.txt`. If your session has a per-call timeout, chunk it with `[start] [end]` args (e.g. batches of ~25) rather than backgrounding it.
+3. `analyze.py` — builds `analytics/` (top terms, agency cross-refs, entities, redaction counts, cross-doc patterns).
+4. `build_report.py` — writes the final `REPORT.md`.
+
+Two things worth doing on the *first* pass through a new tranche specifically:
+
+- **Check for new filename prefixes.** If release 02 introduces a prefix not in `references/agency_vocab.md`, those files fall into `OTHER`. If `OTHER` is more than ~3% of the tranche, add the new prefix to the vocab table and `PREFIX_RULES` in both `inventory.py` and `analyze.py` before trusting the agency breakdown.
+- **Skip OCR by default.** Scanned files with no text layer will show up as 0-char — that's expected, not a bug. Note it in the report's "What's missing" section rather than running Tesseract on everything up front.
+
+Since you'll then have `release_01/` and `release_02/` side by side, the natural next question is a diff — new agencies, new locations, terms that spiked — which the skill supports as a follow-up read over both `analytics/` folders rather than a separate script.

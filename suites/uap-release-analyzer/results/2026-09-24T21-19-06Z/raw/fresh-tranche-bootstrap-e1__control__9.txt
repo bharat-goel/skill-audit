@@ -1,0 +1,5 @@
+Depends heavily on what "release 02" actually looks like — is it a batch of scanned PDFs, structured data (CSV/JSON), or plain text/HTML pages? If it's unstructured documents, the fastest path is usually: bulk download → OCR/text-extract into a searchable corpus → have Claude Code (or a script driving the API) index and summarize per-document, then roll those summaries into one structured report with citations back to source files — I can build that pipeline once I know the format and rough volume.
+
+The main tradeoff: a quick one-shot "just have Claude read everything and write a report" works fine for a handful of files but breaks down past a few dozen or with scanned/messy PDFs, where you actually want the extract→index→synthesize pipeline so nothing gets silently dropped or hallucinated over.
+
+If you already have "release 01" and how you processed it, that'd save the most time — I could just adapt that pipeline rather than design one from scratch.

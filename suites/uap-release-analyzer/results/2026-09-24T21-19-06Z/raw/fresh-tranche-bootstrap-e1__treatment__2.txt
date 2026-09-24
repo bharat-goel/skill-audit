@@ -1,0 +1,8 @@
+Fastest path once `release_02/` is on disk:
+
+1. **Point it at the folder and run everything at once**: `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report in one shot. If your session has short per-call timeouts, run `extract_text.py` in chunks (`[start] [end]` args) instead of `run_all.py`, since that's the one step that can be slow on 200+ page files.
+2. **Check the OTHER bucket** in `inventory.csv` — if new filename prefixes show up (release 02 may use different naming than the PURSUE tranche), add them to `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+3. **Read `REPORT.md`** — that's the finished ten-minute-read output, with the "What's missing" section flagging anything unOCR'd or ungettable.
+4. Since you'd then have two releases side by side, worth asking for a "what's new vs. release_01" diff as a fast follow-up.
+
+So: drop the files in `release_02/`, run `run_all.py` (or the chunked variant), skim inventory for new prefixes, read the report. That's the whole loop.

@@ -1,0 +1,5 @@
+(b)(1): withholds info properly classified for national security/foreign policy under executive order — the most common exemption for military/intelligence material.
+
+(b)(6): withholds info that would constitute a clearly unwarranted invasion of personal privacy (names, personal identifiers of private individuals).
+
+NOFORN: not a FOIA exemption but a dissemination control marking — "not releasable to foreign nationals," meaning the info can't be shared with foreign governments/persons regardless of classification level.

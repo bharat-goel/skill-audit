@@ -1,0 +1,5 @@
+Depends heavily on what's actually in the tranche — is it PDFs/scans (needs OCR), structured docs, or something like spreadsheets/datasets? And roughly how many files/pages are we talking about?
+
+In general, the fastest path is: script the download into a dated folder → batch-extract text (OCR only the pages that need it, skip re-OCRing anything that's already text) → have me read/summarize in chunks against whatever questions you care about → assemble findings into a draft report you then edit. If release 02 follows the same structure as release 01, it's worth writing that as a reusable pipeline now rather than doing it ad hoc when the files land — that's the main time-saver.
+
+What format was release 01 in, and do you want a one-off run or something repeatable for future releases?

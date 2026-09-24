@@ -1,0 +1,9 @@
+Fastest path once release 02 lands in a folder:
+
+1. `scripts/run_all.py <release_02_root>` — runs inventory → text extraction → analytics → report in one shot.
+2. If you're in a sandboxed/timeout-limited environment, run `extract_text.py` in chunks (e.g. `[0 25] [25 50] ...`) instead of via `run_all.py`, since it's the step most likely to hit a per-call timeout on 200+ page FBI sections. Everything is idempotent, so you can resume a partial run without redoing work.
+3. Skim `REPORT.md` — that's the ten-minute read.
+
+One thing worth doing *before* you kick that off: check the new filenames against `references/agency_vocab.md`. If release 02 introduces prefixes not in that table, they'll land in the `OTHER` bucket in the report instead of being attributed correctly — worth a 30-second glance at the file list first so you're not chasing that after the fact.
+
+And since you'll then have two releases side by side, the natural follow-up once both reports exist is a "what's new/different in release 02 vs. release 01" comparison — I can do that from the two `inventory.csv`/`analytics/` sets directly if you want it, no need to rerun anything.

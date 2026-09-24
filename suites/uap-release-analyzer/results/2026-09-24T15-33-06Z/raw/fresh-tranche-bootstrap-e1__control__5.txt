@@ -1,0 +1,5 @@
+I don't have any context on this from a prior session — no memory exists yet on release 01 or this workflow. Given that, the fastest path depends heavily on two things I don't know: what format the tranche is in (structured data vs. scanned PDFs needing OCR), and roughly how large it is (dozens of docs vs. thousands).
+
+The general shape I'd recommend: build the pipeline **now**, before the drop, as a repeatable script — (1) bulk-download + normalize everything to text, (2) have agents triage documents in parallel against a fixed extraction schema (dates, entities, claims), (3) synthesize the triage output into one written report. The tradeoff is fully automated extraction (fast, but misses nuance) vs. agent-read triage (slower, catches things a keyword search wouldn't) — for a one-time document dump I'd lean toward agent triage since accuracy matters more than shaving minutes.
+
+What format was release 01 in, and what does the report need to answer?

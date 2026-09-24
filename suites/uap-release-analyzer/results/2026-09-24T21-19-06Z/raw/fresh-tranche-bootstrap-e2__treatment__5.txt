@@ -1,0 +1,5 @@
+Fastest path: once release 02 is downloaded, run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → report in one shot, and since every step is idempotent/incremental you can re-run it safely if a call times out partway through extraction (use the `[start] [end]` chunking on `extract_text.py` if you're in a sandbox with short per-call limits).
+
+One thing worth doing before you hit run: skim the new filenames for prefixes not already in `references/agency_vocab.md` — if release 02 introduces a new source agency, its files will land in `OTHER` and skew the agency breakdown until you add the prefix rule to both the vocab doc and `PREFIX_RULES` in `inventory.py`/`analyze.py`. That's a two-minute fix but easy to miss if you just run the pipeline and read the report.
+
+If you've also still got `release_01/` sitting in the parent folder, say so when you kick this off — I'll flag what's new/changed between the two tranches in the report rather than just summarizing release 02 in isolation.

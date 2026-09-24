@@ -1,0 +1,8 @@
+The fastest path is one command: `python scripts/run_all.py <release_root>` (where `release_root` is the parent folder containing your `release_02/` PDFs). That chains all four pipeline steps — inventory → text extraction → analytics → report — and writes a `REPORT.md` you can read in about ten minutes.
+
+Two things worth knowing going in:
+
+1. **Text extraction is the slow part.** If any script call in your environment has a timeout window, run `scripts/extract_text.py <release_root> [start] [end]` in batches (e.g. 25 files at a time) instead of the full range in one shot — it's idempotent, so re-running just picks up where it left off.
+2. **New filename prefixes will likely show up.** The agency classifier keys off filename prefixes (`references/agency_vocab.md`). If release 02 introduces new source-agency naming, `inventory.csv` will bucket unrecognized ones as `OTHER` — check that count; if it's more than ~3% of files, add the new prefixes to the vocab table and `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py` before trusting the report.
+
+Since you've already got `release_01` analyzed, the report will also be a natural jumping-off point for a "what's new in release 02 vs. release 01" comparison if you want that afterward.

@@ -1,0 +1,16 @@
+Once you've got release 02 downloaded into a folder, the fastest path is:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, and each step is idempotent/incremental, so if it's interrupted (or you re-run it after adding more files) it just picks up where it left off rather than redoing work. You end up with `REPORT.md` in `<release_root>` covering inventory, entities, redaction patterns, and cross-doc analysis.
+
+Two things worth doing right after it finishes:
+
+1. **Check the `OTHER` agency bucket.** Release 02 will likely introduce filename prefixes not in `references/agency_vocab.md`. If `OTHER` is more than ~3% of files, add the new prefixes to that vocab table and to `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py` before trusting the agency breakdown.
+2. **Skim the "What's missing" section** — it'll flag files with no text layer (scanned, needs OCR). I won't run OCR automatically since it's slow on hundreds of pages; that's a manual follow-up if you want it.
+
+If your sandbox has call timeouts, run `extract_text.py <release_root> [start] [end]` in chunks instead of via `run_all.py` — same idempotency applies.
+
+If you also have `release_01/` sitting next to it, say so and I'll add a release-over-release diff (new agencies, new locations, term-frequency shifts) to the report.

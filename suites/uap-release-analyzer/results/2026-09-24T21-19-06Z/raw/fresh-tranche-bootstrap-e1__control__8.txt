@@ -1,0 +1,3 @@
+Fastest path: drop the files straight into a working folder and just tell me to go — point me at the directory, I'll `pdftotext`/OCR anything scanned, skim for what's new or notable, and write up a structured markdown report (or a published artifact if you want something shareable/searchable rather than a file). The bottleneck won't be the report step, it'll be OCR/extraction quality if any of the tranche is scanned images rather than text PDFs — worth flagging if that's likely so I can plan for it.
+
+One thing I'd want to know ahead of time: roughly how large is a typical tranche (dozens of pages vs. thousands) and is it mostly text PDFs or scans? That changes whether "fastest" means "read it directly" or "build a quick extraction pass first."

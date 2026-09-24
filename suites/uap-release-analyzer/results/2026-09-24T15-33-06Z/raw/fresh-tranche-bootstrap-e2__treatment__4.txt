@@ -1,0 +1,8 @@
+Fastest path once release 02 lands in a folder:
+
+1. Point me at the folder and say "analyze this" — I'll run the pipeline in order: `inventory.py` → `extract_text.py` (chunked if it's another 200+ page FBI-style set) → `analyze.py` → `build_report.py` (or just `run_all.py` for the whole thing in one shot).
+2. That produces `inventory.csv`, `text/`, `analytics/`, and a `REPORT.md` you can read straight through — same 11-section structure as release 01, so they're directly comparable.
+3. If any filename prefixes don't match the known agency vocab, I'll flag the `OTHER` bucket and extend `agency_vocab.md` before finalizing, rather than let it get miscounted.
+4. Since you'll have two releases side by side, I'll also add a quick "what's new vs. release_01" delta into the report — that's the natural next question once both exist.
+
+You don't need to do anything extra — just drop the files in a folder and give me the path (or say "same as last time" if it lands next to release_01). One thing worth deciding now: do you want OCR run on the scanned/no-text-layer files this time, or keep deferring that (it's slow — hours on a few thousand pages) and just note the gap in the report like before?

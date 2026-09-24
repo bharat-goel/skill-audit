@@ -1,0 +1,14 @@
+Once you've got release_02 downloaded locally, it's one command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in sequence, writing `inventory.csv`, `text/*.txt`, `analytics/`, and `REPORT.md` under `<release_root>`. It's idempotent, so if a step fails partway (e.g. a huge FBI section times out during extraction) you can just re-run it — completed files are skipped.
+
+Two things worth knowing going in:
+
+1. **New filename prefixes** — if release 02 introduces naming conventions not in `references/agency_vocab.md`, they'll fall into an `OTHER` bucket. If `OTHER` exceeds ~3% of files, that's the signal to extend the vocab table (and `PREFIX_RULES` in `inventory.py`/`analyze.py`) before trusting the agency breakdown in the report.
+2. **OCR isn't automatic** — scanned files with no text layer show up as 0-char extractions and get flagged as "needs OCR" in the report's caveats section rather than silently analyzed. That's intentional (Tesseract on thousands of scanned pages is slow), but it means the report may undercount content in image-only files unless you ask for OCR as a follow-up.
+
+If release_01 is still sitting in a sibling folder, mention that when you kick this off — I can add a release_01 vs release_02 comparison to the report rather than just a standalone summary.

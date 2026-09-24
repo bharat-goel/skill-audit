@@ -1,0 +1,14 @@
+Once you have `release_02/` downloaded, run the bundled pipeline against it:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report, writing `inventory.csv`, `text/`, `analytics/`, and a final `REPORT.md` you can read end-to-end. If your environment has per-call timeouts and extraction stalls on the big FBI PDFs, fall back to running `scripts/extract_text.py <release_root> <start> <end>` in ~25-page chunks, then continue with `analyze.py` and `build_report.py`.
+
+Two things worth doing at the same time, since it's a new tranche:
+
+- **Check filenames against the agency vocab first.** If more than ~3% of files land in `OTHER`, that's a sign release 02 introduced new prefixes — add them to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown in the report.
+- **Cross-link with release_01.** If both sit under the same parent folder, ask (or have me ask) "what's new vs release 01?" once the report is built — that's the natural next step and the skill is built to support sibling-tranche comparisons.
+
+When it's actually here, just point me at the folder and say "analyze it" — I'll run the pipeline and flag anything unusual (OCR gaps, new prefixes, heavily redacted files) as part of the report.

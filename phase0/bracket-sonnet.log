@@ -1,0 +1,15 @@
+
+> nullbench@0.1.0 verify:live
+> node --test 'test/live/*.test.mjs'
+
+✔ PLACEBO: an irrelevant skill must produce a null (79750.432084ms)
+✔ KNOWN POSITIVE: a trivially detectable effect must be detected (88764.055375ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 168646.12225
+EXIT=0

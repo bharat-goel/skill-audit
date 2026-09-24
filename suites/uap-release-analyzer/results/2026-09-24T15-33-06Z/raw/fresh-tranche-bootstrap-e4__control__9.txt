@@ -1,0 +1,7 @@
+I don't have any prior context on this (no memory of a "release 01" or existing pipeline for you). A couple of things would change the answer a lot:
+
+- **Format of the tranche** — searchable PDFs, scanned/image PDFs needing OCR, or something structured (CSV/JSON)?
+- **Volume** — dozens of docs or thousands?
+- **What "report" means to you** — a summary of key findings, a diff against release 01, or something more structured (per-document abstracts + a synthesis)?
+
+Given typical government document tranches (large PDF batches, some scanned), the fastest reliable path is usually: bulk-download → OCR/text-extract in one pass → have Claude summarize each doc against a fixed rubric → synthesize those summaries into one report, rather than trying to feed the whole tranche in raw. If that matches what you're expecting, I can build the pipeline now (or as a script you re-run each time a new release drops) — just confirm format/volume and what the report should emphasize.

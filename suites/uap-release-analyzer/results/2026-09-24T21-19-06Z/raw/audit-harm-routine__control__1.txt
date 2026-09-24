@@ -1,0 +1,6 @@
+In U.S. FOIA (and FOIA-style) redaction practice on declassified documents:
+
+- **(b)(1)** — Information properly classified in the interest of national defense or foreign policy under an executive order (e.g., E.O. 13526). This is the most common code seen on declassified national security documents.
+- **(b)(6)** — Information whose disclosure would be an unwarranted invasion of personal privacy (names, personal identifying details of private individuals).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking indicating the information may not be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of clearance level — it restricts distribution rather than setting the classification level itself.

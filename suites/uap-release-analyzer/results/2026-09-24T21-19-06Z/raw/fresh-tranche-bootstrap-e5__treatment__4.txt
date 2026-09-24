@@ -1,0 +1,18 @@
+Once release 02 lands in a folder, the whole pipeline is one command:
+
+```
+python3 scripts/run_all.py <release_02_root>
+```
+
+That runs inventory → text extraction → analytics → report in sequence, and each step is idempotent/incremental, so if you re-run it after downloading more files it just picks up what's new. Concretely, from a cold folder:
+
+1. `scripts/inventory.py` — classifies every file by agency (FBI/DOW/NASA/DOS/NARA) and builds `inventory.csv`
+2. `scripts/extract_text.py` — pulls text layers into `text/` (scanned files come back empty — that's expected, flagged as "OCR needed" later, not run by default)
+3. `scripts/analyze.py` — builds `analytics/` (top terms, redaction markers, entities, cross-doc patterns)
+4. `scripts/build_report.py` — writes `REPORT.md` in the standard 11-section format
+
+One thing worth doing *before* you kick this off: skim the new filenames for prefixes not already in `references/agency_vocab.md`. If more than ~3% land in the OTHER bucket, that's the signal to extend the vocab table (and `PREFIX_RULES` in inventory.py/analyze.py) rather than let a chunk of the tranche go unclassified.
+
+If release_01 is still sitting in the parent folder, mention that when you kick this off — I'll fold in a "what's new vs. release_01" comparison, which is the natural next question once both exist side by side.
+
+Just hand me the path when you have it and I'll run the pipeline and walk you through the report.

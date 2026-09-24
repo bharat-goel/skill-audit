@@ -1,0 +1,3 @@
+The fastest path: drop the downloaded files into a working directory and tell me to process them — I fan out with the `Explore` (or `general-purpose`) agent to skim/extract key facts across the files in parallel if the tranche is large, then synthesize everything into one written report as either a plain markdown file or a published Artifact (better if you want something readable/shareable outside the terminal, with sections and citations back to source docs).
+
+Main tradeoff: parallel subagents pay off once the tranche is big enough that no single pass can hold it all — for a modest batch, doing the read-and-summarize inline (no spawning) is simpler and cheaper. When release 02 actually lands, point me at the folder and I'll pick the right mode based on its size.

@@ -1,0 +1,10 @@
+A few things determine the fastest path here, so let me ask before assuming:
+
+1. **What format does the tranche come in?** (PDFs, scanned images needing OCR, spreadsheets, a mix?) and roughly how large (dozens of files vs. thousands)?
+2. **Did you already process release 01?** If you have a script/pipeline from that, the fastest path for 02 is almost certainly "rerun the same pipeline," not rebuild one.
+
+In general, the shape of this pipeline is: (1) a small script to unzip/normalize the tranche into plain text (OCR via a tool like `pdftotext`/Tesseract if it's scans), (2) batch the documents through Claude (Files API or Message Batches API if it's large) with a consistent extraction prompt to pull out entities/claims/dates per doc, then (3) a second pass that synthesizes those extracts into one written report (markdown, or a Claude Docs artifact if you want something shareable/editable).
+
+The main tradeoff: if the tranche is small and clean text, you can skip straight to feeding it to Claude directly and skip building extraction tooling — much faster for a one-off. If it's large or messy (scanned PDFs, inconsistent structure), the OCR/normalization step is unavoidable and worth scripting once so release 03, 04, etc. are just a rerun.
+
+What does release 01 look like, if you've seen it?

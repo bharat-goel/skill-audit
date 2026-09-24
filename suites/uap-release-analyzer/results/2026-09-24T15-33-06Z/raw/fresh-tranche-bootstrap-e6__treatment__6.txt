@@ -1,0 +1,14 @@
+The fastest path is one command:
+
+```
+python scripts/run_all.py <path-to-release_02>
+```
+
+That chains inventory → text extraction → analytics → report, writing everything into the standard layout next to your PDFs (`inventory.csv`, `text/`, `analytics/`, `REPORT.md`). It's idempotent, so if a call times out partway (the war.gov FBI sections run 200+ pages and can be slow to extract), just re-run it — already-done files are skipped, not redone.
+
+Two things worth doing at the same time, not after:
+
+1. **Watch for new filename prefixes.** If release 02 introduces a source you haven't seen before, `inventory.py` will bucket it as `OTHER`. If `OTHER` creeps above ~3% of files, that's the signal to add the prefix to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown in the report.
+2. **Cross-tranche comparison.** Since you'll have `release_01/` sitting alongside it, once `REPORT.md` for 02 is built, the natural next question is "what's new vs. release 01" — worth asking for once both reports exist.
+
+Just point me at the folder when it lands and I'll run the pipeline.

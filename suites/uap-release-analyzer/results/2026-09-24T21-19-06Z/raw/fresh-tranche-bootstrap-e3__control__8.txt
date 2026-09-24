@@ -1,0 +1,5 @@
+The fastest path is to have a reusable pipeline built *before* release 02 drops, so on the day it's just "run script → get report": a small script that (1) grabs the new files (bulk download if war.gov exposes one, otherwise a scripted fetch of the listed links), (2) extracts text (straight PDF text extraction, falling back to OCR for scanned pages — these DoD releases are often scan quality), then (3) feeds the extracted text to me in chunks against a fixed report template (key findings, redaction/gaps noted, notable names/dates, open questions) so the output is consistent across tranches.
+
+The tradeoff: building the pipeline now costs you setup time you could skip by just handing me the raw files reactively when they land — but reactive means re-deriving the extraction/OCR approach under time pressure and getting a less consistent report.
+
+Want me to build that pipeline now (I'd need to know what release 01 looked like — file types, whether it's a zip/bulk download or individual links) so it's ready to go when release 02 posts?

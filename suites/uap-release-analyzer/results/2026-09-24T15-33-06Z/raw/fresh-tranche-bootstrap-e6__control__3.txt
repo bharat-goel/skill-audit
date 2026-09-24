@@ -1,0 +1,5 @@
+A few things determine the fastest path here, so quick questions first: what format is the tranche (PDFs, scanned images needing OCR, spreadsheets, structured data), roughly how many files/pages, and do you want the report as a doc, artifact, or plain markdown file?
+
+In general, the fastest pipeline once files land is: (1) a script that inventories and normalizes the dump (extract text/OCR as needed, dedupe, tag by file type), (2) a pass that chunks and indexes the content so I can query across it rather than reading everything serially, (3) an extraction pass pulling the specific facts/entities you care about into structured notes, then (4) synthesis into the report. The main lever for speed is whether step 1 needs OCR — that's usually the bottleneck, not the writing.
+
+If this is a recurring drop (release 01, 02, 03...), it's worth building that as a small reusable script now rather than redoing it ad hoc each time — want me to sketch that once I know the format?

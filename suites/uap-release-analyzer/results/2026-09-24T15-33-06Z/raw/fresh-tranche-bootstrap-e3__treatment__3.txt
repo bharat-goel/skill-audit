@@ -1,0 +1,13 @@
+Once you've downloaded `release_02/` into the same parent folder as `release_01/`, run the bundled pipeline end-to-end:
+
+```
+python3 scripts/run_all.py <release_root>/release_02
+```
+
+That chains inventory → text extraction → analytics → report, and each step is idempotent/incremental, so if a call times out partway (the FBI sections are chunky, 200+ pages), just re-run `extract_text.py <release_root> [start] [end]` in slices and pick back up with `analyze.py` + `build_report.py`.
+
+A couple of things worth doing at that point rather than after:
+- **Check for new filename prefixes first.** If release 02 introduces a source agency not in `references/agency_vocab.md`, the `OTHER` bucket in `inventory.csv` will balloon — extend the vocab table + `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- **Since you'll have two releases side by side**, it's worth asking me for a "what's new vs. release_01" comparison once both reports exist — that's a natural follow-up the skill supports.
+
+End state: `REPORT.md` in the release_02 folder, readable in ~10 minutes, with an honest "what's missing" section (OCR gaps, un-downloadable inline-viewer records, etc.). Just say the word when the tranche lands and give me the path — I'll run the pipeline.

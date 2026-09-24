@@ -1,0 +1,5 @@
+The fastest path is a repeatable pipeline rather than manual reading: (1) a script that unpacks the tranche and runs text extraction/OCR on whatever's scanned, (2) a pass that chunks and feeds each doc through an LLM with a fixed extraction prompt (key facts, dates, entities, anomalies) into structured notes, (3) an aggregation pass that rolls those notes into a report template (timeline + findings + open questions), then (4) a human skim of the flagged items before you call it done.
+
+Main tradeoff: fully automated summarization is fast but risks missing context an analyst would catch, so step 4 (spot-checking the highest-stakes claims against source docs) shouldn't be skipped even under time pressure.
+
+If you want, I can build this as an actual script now (extraction + per-doc summarization + report assembly) so it's just `run.sh <release_02_dir>` when the drop lands — tell me the expected file format (PDFs? images? mixed?) and roughly what "report" should cover, and I'll set it up.
