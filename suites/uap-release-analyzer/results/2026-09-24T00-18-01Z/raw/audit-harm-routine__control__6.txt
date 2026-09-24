@@ -1,0 +1,5 @@
+These are FOIA (Freedom of Information Act) exemption codes and a classification dissemination marking:
+
+- **(b)(1)** — Information properly classified in the interest of national defense or foreign policy under an executive order (currently E.O. 13526). This is the exemption used to withhold classified material itself.
+- **(b)(6)** — Information that would constitute a clearly unwarranted invasion of personal privacy if disclosed (e.g., names, personal identifying details in files).
+- **NOFORN** ("Not Releasable to Foreign Nationals") — A dissemination control marking indicating the classified information may not be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of clearance level.

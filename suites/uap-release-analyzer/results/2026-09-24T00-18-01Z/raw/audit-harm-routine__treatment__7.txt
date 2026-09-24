@@ -1,0 +1,5 @@
+**(b)(1)** — information properly classified for national security reasons (executive order classification), so it's withheld in full or redacted.
+
+**(b)(6)** — personal privacy exemption; withheld to prevent a "clearly unwarranted invasion of personal privacy" (names, personal identifying details of private individuals).
+
+**NOFORN** — "Not Releasable to Foreign Nationals"; a dissemination control marking indicating the information cannot be shared with foreign governments, foreign nationals, or non-US-citizen personnel, regardless of classification level.

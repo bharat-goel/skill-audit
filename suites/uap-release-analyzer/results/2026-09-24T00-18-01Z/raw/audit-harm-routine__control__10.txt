@@ -1,0 +1,5 @@
+**FOIA redaction codes** (from 5 U.S.C. § 552(b)):
+- **(b)(1)** — Information properly classified for national defense or foreign policy under an executive order (e.g., Executive Order 13526).
+- **(b)(6)** — Information that would constitute a clearly unwarranted invasion of personal privacy (e.g., names, personal identifying details).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking indicating the information may not be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of its classification level.
