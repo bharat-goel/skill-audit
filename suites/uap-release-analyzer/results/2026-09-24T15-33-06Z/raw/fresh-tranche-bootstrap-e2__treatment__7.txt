@@ -1,0 +1,14 @@
+Once release 02 is downloaded, run the bundled pipeline in one shot:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → `REPORT.md` in the standard order. A few practicalities:
+
+- If your environment has a per-call timeout, `extract_text.py` alone can be run with `[start] [end]` slice args to chunk large PDF batches (the war.gov FBI sections run 200+ pages each) — `run_all.py` will still work end-to-end if it doesn't hit that limit, but chunking is the fallback if it does.
+- New filename prefixes not in `references/agency_vocab.md` land in `OTHER`. If `OTHER` exceeds ~3% of files, add the prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before generating the report, rather than letting misclassified files skew the agency breakdown.
+- OCR isn't run automatically (scanned-only PDFs stay 0-char and get flagged under "What's missing" in the report) — worth deciding upfront if you want that as a follow-up pass.
+- Since you'll then have two releases side by side, it's worth asking for a "what's new vs. release_01" comparison once both reports exist — the skill's cross-tranche note calls that out as the natural next step.
+
+So: point me at the new folder when it lands and say "analyze it" — that's the whole ask.

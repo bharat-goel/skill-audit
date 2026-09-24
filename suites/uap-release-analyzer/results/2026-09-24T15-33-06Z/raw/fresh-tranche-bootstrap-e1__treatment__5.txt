@@ -1,0 +1,14 @@
+Once you've downloaded release 02 into a folder, the fastest path is a single command:
+
+```
+python3 scripts/run_all.py <path_to_release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report in one go, and each step is idempotent, so if it stalls partway (e.g. on a giant FBI section) you can just re-run it and it'll pick up where it left off.
+
+Two things worth doing before/around that run:
+
+1. **Check for new filename prefixes.** If release 02 introduces document sources not in `references/agency_vocab.md` (new agency, new naming convention), those files fall into `OTHER`. If `OTHER` comes out above ~3% of the inventory, add the new prefixes to `references/agency_vocab.md` and the `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py` before trusting the agency breakdown in the report.
+2. **Don't wait on OCR.** A lot of scanned FBI/NARA files won't have a text layer — `extract_text.py` will produce 0-char `.txt` for those and the analytics will just flag them as "scanned, needs OCR" rather than stall. That gap gets called out in the report's "What's missing" section; OCR is a deliberate follow-up, not part of the default run.
+
+When you're ready, just point me at the folder and I'll run the pipeline and hand you `REPORT.md`. If you've also still got release 01 sitting alongside it, I can add a quick release-01-vs-02 delta on top.

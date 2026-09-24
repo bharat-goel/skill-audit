@@ -1,0 +1,5 @@
+The fastest path is a three-stage pipeline: (1) a small script to bulk-download and normalize the files (PDF/HTML → text, OCR anything scanned), (2) batch-run each doc through Claude with a consistent extraction template (key facts, dates, entities, notable quotes) rather than one-at-a-time chat, (3) have Claude synthesize those per-doc extracts into a single structured report you review and edit.
+
+The main tradeoff: full automation is fast but can smooth over exactly the odd detail or discrepancy a human skim would catch, so it's worth budgeting a manual pass over whatever the extraction step flags as unusual or high-signal before finalizing the report.
+
+Want me to build the download/extract/summarize script now, or do you want to see the tranche first to figure out what format we're dealing with?

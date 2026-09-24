@@ -1,0 +1,13 @@
+Once release_02 is downloaded to a folder, the fastest path is one command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report generation in order, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under `<release_root>`. If your environment has per-call timeouts and the batch extraction step stalls on the larger FBI PDFs, fall back to running `extract_text.py` in chunks (`[start] [end]` args) before continuing — the pipeline is idempotent so you can resume where it left off.
+
+Two things worth doing at the same time, not after:
+- **Check filenames against the agency vocab first.** If release_02 introduces new prefixes, the `OTHER` bucket in the inventory will silently balloon. Worth a quick glance at `inventory.csv`'s agency column before trusting the report — if `OTHER` is more than ~3%, add the new prefixes to `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` before re-running analytics.
+- **Cross-tranche question.** Since you'll have `release_01/` sitting alongside it, "what's new vs release 1" becomes an easy follow-up once both have inventories — worth asking for if that's useful once the report's in hand.
+
+Say the word when the files land and I'll run the pipeline.

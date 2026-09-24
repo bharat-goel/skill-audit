@@ -1,0 +1,10 @@
+Fastest path once release 02 lands:
+
+1. Drop the PDFs into `release_root/release_02/` (sibling to your existing `release_01/`).
+2. Run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → report in one shot, and skips any file already processed if you re-run it.
+3. Check the inventory for an `OTHER` bucket >~3% of files — that means release 02 introduced new filename prefixes. Add them to `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+4. Read `REPORT.md` — should be ~10 minutes.
+
+Two things worth doing since you'll have two tranches side by side: ask me to diff `release_01` vs `release_02` analytics (new names/locations, redaction-pattern shifts) once both reports exist, and don't expect OCR — scanned files will show up as 0-char text and get flagged in the "What's missing" section rather than processed, by design (avoids a multi-hour Tesseract run by default).
+
+If your sandbox has a per-call timeout, `extract_text.py` takes optional `[start] [end]` args to chunk large FBI sections (~25 pages/call) instead of running it as one long background call.

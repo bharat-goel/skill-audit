@@ -1,0 +1,10 @@
+Fastest path once release 02 lands:
+
+1. Drop the downloaded files into a `release_02/` folder.
+2. Run the pipeline end-to-end: `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report for you.
+3. If you're in an environment with a short per-call timeout, `extract_text.py` (the slow step) accepts `[start] [end]` slice args, so you can chunk it in batches of ~25 files instead of running the whole thing at once — everything else runs in one shot.
+4. Read `REPORT.md` — that's the finished ten-minute writeup.
+
+One thing to watch for the first time you run it on release 02: any filename prefixes not already in `references/agency_vocab.md` will fall into an `OTHER` bucket. If `OTHER` comes out above ~3% of files, add the new prefixes to `agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown — otherwise it's a one-command process, no manual steps in between.
+
+Since you'll have two tranches on disk at that point, it's also worth asking "what's new vs. release_01?" as a natural follow-up — worth flagging to me when you're ready, since I can diff inventories/entities across releases.

@@ -1,0 +1,7 @@
+I don't have context on what this "release 02" tranche actually contains — could you fill in a few specifics?
+
+1. **What is it** — a document dump (PDFs/scans), a structured dataset (CSV/JSON/DB), or something else?
+2. **Rough size/format** — dozens of files or thousands? Text-native or scanned images needing OCR?
+3. **What "report" means to you** — a summary memo, a structured findings doc, something with citations back to source pages?
+
+Once I know that, the fastest pipeline is usually: **download → normalize/extract (OCR if scanned) → index/search for what matters → draft findings into a doc as you go** rather than reading everything first then writing. But which tools fit each step depends heavily on the answers above.

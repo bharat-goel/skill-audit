@@ -1,0 +1,14 @@
+Once release 02 lands in a folder, it's one command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report, and it's idempotent/incremental, so if you kick it off, get interrupted, or a chunked extraction step needs re-running, it just picks up where it left off rather than redoing work.
+
+Two things worth doing alongside that:
+
+1. **Check for new filename prefixes first.** If release 02 introduces agencies/sources with prefixes not in `references/agency_vocab.md`, they'll fall into `OTHER`. If `OTHER` comes out above ~3% of files, that's the signal to extend the vocab (table + `PREFIX_RULES` in `inventory.py`/`analyze.py`) before trusting the agency breakdown in the report.
+2. **Cross-tranche comparison is a natural follow-up**, not part of `run_all.py` itself — since you'll have `release_01/` sitting next to it, "what's new vs release 01" is worth asking for once the report's done (new locations, new names appearing across both, terminology shifts).
+
+So: drop the files in, run the one script, skim the `OTHER` bucket in `inventory.csv`, read `REPORT.md`. If it's a big tranche (4000+ pages like PURSUE was), extraction is the only step that might need the `[start] [end]` chunking if you're in a timeout-constrained environment — otherwise `run_all.py` alone gets you there.

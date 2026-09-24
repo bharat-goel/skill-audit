@@ -1,0 +1,9 @@
+The fastest path is to build the pipeline now, before release 02 drops, using release 01 as your test data — then drop day is just "run script, read report":
+
+1. **Ingest**: unzip/organize the tranche into a working folder.
+2. **Extract**: pull text per file — `pdftotext`/pypdf for text-based PDFs; only fall back to OCR (Tesseract) for scanned image pages, since OCR is the slow, error-prone step.
+3. **Summarize**: feed extracted text through Claude with a fixed report template/prompt (one pass per doc or batched) to get a structured markdown report.
+
+Main tradeoff: if the tranche turns out to be scanned images rather than native-text PDFs, OCR dominates the runtime and introduces errors — worth checking release 01's actual format to know which path you're on.
+
+Want me to build that ingest→extract→report script now, using release 01 (if you have it locally) as the test case?

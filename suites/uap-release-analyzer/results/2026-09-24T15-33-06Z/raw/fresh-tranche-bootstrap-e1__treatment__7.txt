@@ -1,0 +1,15 @@
+Fastest path once `release_02/` lands on disk:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains all four steps — `inventory.py` → `extract_text.py` → `analyze.py` → `build_report.py` — and writes `REPORT.md` at the end. On a tranche the size of the last one (~4,000 pages) it should finish in a few minutes; the extraction step is idempotent, so if anything times out mid-run, just re-run the same command and it picks up where it left off (skips files that already have `.txt`).
+
+Two things worth doing at the same time, not after:
+- If any filenames use prefixes not in `references/agency_vocab.md`, they'll land in `OTHER` — worth a quick look partway through so you can extend the vocab table + `PREFIX_RULES` before the report locks in agency buckets, rather than discovering it after the fact.
+- If `release_01/` is still sitting in the parent folder, mention it — I'll fold in a "what's new vs. release 1" comparison rather than just a standalone report.
+
+I won't run OCR automatically (it's hours on scanned pages) — the report will just flag the scanned/no-text-layer files under "What's missing" and you can decide if it's worth it.
+
+So in short: drop the files in, tell me the path, say "analyze it" — that's the whole interaction on your end.

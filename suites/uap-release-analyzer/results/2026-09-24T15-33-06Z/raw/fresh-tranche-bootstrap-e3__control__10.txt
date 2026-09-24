@@ -1,0 +1,6 @@
+I don't have context on what release 01 looked like or what format this tranche comes in (PDFs, scanned images, spreadsheets, structured data?), so the fastest path really depends on that. My default recommendation: a small script that (1) pulls/unzips the new files into a dated folder, (2) diffs against release 01 to isolate what's actually new, then (3) feeds the new material to Claude with a fixed report template so output stays consistent release-to-release — the main tradeoff is that step 3 is only fast if you already have that template locked down, otherwise you're rebuilding structure each time.
+
+A few things that would let me make this concrete instead of generic:
+- What format is the tranche in, and roughly how large (a few files vs. thousands)?
+- Did you build anything for release 01 already (a script, a report you liked the shape of)?
+- Is this a one-off or something you'll want to repeat for release 03, 04, etc. (worth scripting vs. just doing by hand)?

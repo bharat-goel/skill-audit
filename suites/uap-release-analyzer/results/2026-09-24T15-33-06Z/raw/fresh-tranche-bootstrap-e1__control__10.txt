@@ -1,0 +1,5 @@
+Fastest path: build the pipeline now, before the tranche drops, so "release 02 day" is just running a script. Concretely — (1) a fetch/dedupe step that pulls the new files from war.gov and diffs filenames/hashes against whatever you kept from release 01, (2) a normalize step that OCRs/extracts text from any scanned or redacted PDFs into plain text with page-level metadata, and (3) a single Claude pass that reads the normalized corpus against a fixed report template (findings, notable docs, what changed vs. release 01, citations back to page numbers) and writes the draft for you to review.
+
+The main tradeoff is where you put the effort: investing an hour now in a repeatable script+prompt means release day is minutes, but it's dead time if release 02 turns out structured very differently than release 01 (different doc types, sizes, redaction patterns).
+
+Want me to build that pipeline now — do you have release 01's files (or its URL) so I can shape the fetch/normalize steps around what actually shows up?

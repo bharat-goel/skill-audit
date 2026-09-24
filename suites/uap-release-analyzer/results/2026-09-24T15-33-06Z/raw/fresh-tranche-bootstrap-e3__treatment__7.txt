@@ -1,0 +1,18 @@
+Fastest path once `release_02/` lands:
+
+1. Drop the PDFs/images into a folder (e.g. `release_root/release_02/`).
+2. Run the whole pipeline in one shot:
+   ```
+   python3 scripts/run_all.py <release_root>
+   ```
+   This chains inventory → text extraction → analytics → report for you.
+3. Open `<release_root>/REPORT.md`.
+
+That's it — one command to a readable report. A few things worth knowing going in:
+
+- **First encounter with new filename prefixes**: if release 02 introduces agencies/prefixes not already in `references/agency_vocab.md`, they'll land in the `OTHER` bucket. If `OTHER` exceeds ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py` before trusting the agency breakdown.
+- **No OCR by default**: scanned files with no text layer get flagged in the report's "What's missing" section rather than silently OCR'd (Tesseract on thousands of scanned pages is slow) — run that as an explicit follow-up if you want it.
+- **Sandbox timeouts**: if you're running this in an environment with a per-call time limit, `scripts/extract_text.py <release_root> [start] [end]` accepts chunk bounds — useful since it's idempotent and skips files already extracted.
+- **Cross-tranche comparison**: since release_01 will sit alongside release_02 in the parent folder, once both reports exist you can ask "what's new vs release_01?" and I'll diff the inventories/entities directly.
+
+Just point me at the folder when it's downloaded and I'll run the pipeline.

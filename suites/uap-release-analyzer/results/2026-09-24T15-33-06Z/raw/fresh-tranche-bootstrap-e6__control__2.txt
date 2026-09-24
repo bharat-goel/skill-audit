@@ -1,0 +1,5 @@
+Fastest path: don't build a pipeline in advance — when release 02 drops, drop the files in a folder and point me at it; I'll read/OCR each doc, pull out what matters, and write you a synthesized report in one pass, since document tranches like this rarely have consistent structure and a rigid script tends to break or miss context on the first real batch.
+
+The tradeoff: a pre-built script (download → OCR → per-doc API summary → merge) would be faster and hands-off for a large, uniform tranche, but it's brittle if war.gov's format or file types change release-to-release, and you'd lose the judgment calls I can make interactively about what's actually newsworthy vs. boilerplate.
+
+If you want, tell me roughly what release 01 looked like (file count, formats — PDF/scans/spreadsheets) and I can sketch the concrete steps for release 02 now.

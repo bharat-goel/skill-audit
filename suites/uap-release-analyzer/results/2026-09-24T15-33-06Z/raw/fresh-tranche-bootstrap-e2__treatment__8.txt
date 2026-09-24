@@ -1,0 +1,14 @@
+Once you've downloaded release 02 into a folder, the fastest path is one command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report generation, writing `inventory.csv`, `text/*.txt`, `analytics/*`, and `REPORT.md` in sequence — each step is idempotent, so if you need to re-run after adding a few late files, it'll skip what's already done.
+
+Two things worth doing before you hit run:
+
+1. **Check for new filename prefixes.** If release 02 introduces a source we haven't seen (new agency, new naming convention), files will pile into the `OTHER` bucket. Worth a quick `ls` scan first — if `OTHER` is going to exceed ~3%, add the new prefix to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before running the pipeline, so the report doesn't need a redo.
+2. **Don't expect OCR.** Scanned files with no text layer will show up as 0-char extracts — that's expected, and the report notes them under "What's missing" rather than silently dropping them. If you want those included, that's a separate OCR pass you'd ask for explicitly.
+
+Since you'll likely have `release_01/` sitting alongside it, once the report's built I can also do a quick release_01 vs release_02 diff (new agencies, new locations, name overlap) if that's useful — just say so when the tranche lands.

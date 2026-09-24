@@ -1,0 +1,10 @@
+Fastest path once release 02 lands in a folder: run the bundled pipeline end-to-end with `scripts/run_all.py <release_root>`, which chains inventory → text extraction → analytics → report. Then just open `REPORT.md`.
+
+A few things worth knowing going in:
+
+- If your sandbox has a per-call timeout, `extract_text.py` supports `[start] [end]` chunk args (FBI sections run 200+ pages) — everything's idempotent, so you can chunk without redoing work.
+- After inventory runs, check the `OTHER` bucket in `inventory.csv` — if new filename prefixes show up (release 02 may introduce new agencies/sources), add them to `references/agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before running analytics, or those files won't get classified correctly.
+- OCR isn't run automatically — scanned files with no text layer show up as 0-char in `text/` and get flagged in the report's "What's missing" section rather than silently skipped.
+- If release_01 is still sitting in the parent folder, the report can note what's new vs. that tranche — worth flagging when you kick it off.
+
+So concretely: drop the files in `release_02/`, tell me the path, and I run `run_all.py` — that's the whole loop from "just downloaded" to a readable `REPORT.md`.

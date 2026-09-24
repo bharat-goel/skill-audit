@@ -1,0 +1,15 @@
+Fastest path once release 02 lands in a folder:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, and it's idempotent/incremental — safe to re-run if a call times out partway through. End state is `REPORT.md` in the release root, following the same 11-section structure as before so it's directly comparable to release 01.
+
+A couple of things worth doing at that point rather than blindly running it:
+
+- **Check for new filename prefixes first.** If war.gov changes naming conventions for release 02, anything not matching `references/agency_vocab.md` falls into OTHER. If OTHER creeps past ~3% of files, extend the vocab table + `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- **Cross-tranche comparison is a natural follow-up** — since you'll have `release_01/` and `release_02/` as siblings, just ask "what's new vs release 1?" afterward and I'll diff the two `analytics/` folders (new locations, new names appearing, terminology shifts) rather than you asking for that upfront.
+- If extraction is chunked (large FBI-style sections), it'll pick up interactive prompts about `[start] [end]` if a single call risks timing out — no action needed from you unless the sandbox call limit is tight.
+
+So: drop the files in, point me at the folder, say "run it," and you'll have a written report in a few minutes plus a flagged "what's missing" section (OCR gaps etc.) at the end.

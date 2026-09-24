@@ -1,0 +1,5 @@
+The fastest path depends a lot on what shape the files are in (searchable PDFs vs. scanned images needing OCR, a handful of docs vs. thousands), and I'd rather not assume — what does release 02 typically look like format-wise?
+
+In general, though, the shortest path is: script the download/unzip, run everything through OCR only if needed (most DoD releases are already text-layer PDFs), then have Claude Code ingest and summarize the batch directly into a structured report (key findings, entities, dates, notable redactions) rather than reading each file manually. The main tradeoff is speed vs. rigor — a single-pass summarization is fast but can miss cross-references between documents, so for anything you'll actually cite, it's worth a second pass where Claude flags claims worth verifying against the source pages before you finalize the report.
+
+If you want, I can build the actual pipeline (download → extract → summarize → report template) once release 02 is out and I can see a sample file — that'll make the report format concrete instead of hypothetical.

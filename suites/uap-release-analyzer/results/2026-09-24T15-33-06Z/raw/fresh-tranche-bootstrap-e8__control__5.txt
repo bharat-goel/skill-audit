@@ -1,0 +1,5 @@
+Fastest path is almost always: a small repeatable pipeline you build once now, then just re-run when release 02 drops — not a one-off manual slog through the new files.
+
+Concretely: (1) a script that unzips/organizes the tranche and extracts text from whatever format it's in (native text is easy; scanned PDFs need OCR — this is the part that usually eats the most time), (2) a fixed report outline/prompt template so Claude Code drafts against a consistent structure instead of you re-deciding shape each release, (3) you review/edit the draft rather than writing from scratch.
+
+Two things I need to tailor this: what file formats does the tranche actually come in (searchable PDFs, scanned images, spreadsheets, mixed), and roughly how big is release 01 was — a folder of a dozen docs vs. thousands changes which of steps 1–2 dominates. What did release 01 look like?

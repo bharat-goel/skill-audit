@@ -1,0 +1,14 @@
+Fastest path once release 02 lands: just run the bundled pipeline end to end.
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → REPORT.md against whatever's in `<release_root>/release_02/`. A few notes for when you actually do this:
+
+- If you're in a sandboxed environment with per-call timeouts, `run_all.py` may not get through text extraction on the biggest FBI sections in one shot — fall back to calling `scripts/extract_text.py <release_root> [start] [end]` in chunks of ~25 pages instead of the all-in-one script.
+- Check the filenames first. If release 02 introduces new prefixes not in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before running — otherwise they'll pile up in `OTHER` and skew the agency breakdown. Rule of thumb: >3% `OTHER` means the vocab needs extending.
+- Don't bother running OCR up front — scanned files with no text layer just get flagged as "needs OCR" in the report's caveats section, and that's fine for a first pass.
+- Since you'll have `release_01/` sitting alongside it, the report can also speak to what's new vs. the first tranche — worth asking for explicitly if you want that framed in the writeup.
+
+So: point me at the folder when it's downloaded and I'll run the four steps and hand you `REPORT.md`.

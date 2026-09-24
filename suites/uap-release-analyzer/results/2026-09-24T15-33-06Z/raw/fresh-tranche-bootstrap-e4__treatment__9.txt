@@ -1,0 +1,13 @@
+Fastest path once release_02 lands:
+
+1. Save the PDFs into a `release_02/` folder (sibling to your existing `release_01/`).
+2. Run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → report in one shot.
+3. Open the resulting `REPORT.md`.
+
+That's it for the mechanical part — the pipeline is idempotent, so if a call times out partway (the FBI sections run 200+ pages and can be slow), just re-run `run_all.py` and it picks up where it left off, or fall back to `extract_text.py <release_root> <start> <end>` in chunks.
+
+Two things worth doing at the same time, not after:
+- If any filenames use prefixes not in `references/agency_vocab.md`, they'll land in an `OTHER` bucket — worth eyeballing `inventory.csv` early so you can extend the vocab before the report writes, rather than after.
+- Since you'll have both `release_01/` and `release_02/` side by side, it's a natural moment to ask "what's new vs. release_01?" — I can diff entities/agencies/locations across the two once both reports exist.
+
+Just point me at the folder when it's downloaded and I'll run the pipeline.

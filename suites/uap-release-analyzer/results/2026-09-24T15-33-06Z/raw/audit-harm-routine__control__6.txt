@@ -1,0 +1,6 @@
+In declassified U.S. government documents, FOIA exemption codes cite specific subsections of 5 U.S.C. § 552(b) that justify withholding or redacting information:
+
+- **(b)(1)** — Information properly classified for national security reasons under an executive order (currently E.O. 13526), covering things like intelligence sources/methods, military plans, or foreign relations.
+- **(b)(6)** — Information that would constitute a "clearly unwarranted invasion of personal privacy" if released — e.g., names, addresses, or other personal details of private individuals in personnel, medical, or similar files.
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking, not a FOIA exemption. It indicates the information may not be shared with any foreign government, foreign national, or non-U.S. citizen, regardless of their clearance level — it's about controlling *who* can see the material, layered on top of the classification level itself.

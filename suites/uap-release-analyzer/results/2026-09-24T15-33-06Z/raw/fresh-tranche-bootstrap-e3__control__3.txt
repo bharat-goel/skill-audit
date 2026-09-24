@@ -1,0 +1,8 @@
+I don't have any context on this — no memory of a prior "release 01" workflow, and this working directory is empty. Before I can give a concrete pipeline, I need to know a few things:
+
+1. **Format** — is the tranche PDFs, scanned images, spreadsheets, structured records (e.g. FOIA-style redacted docs), or something else?
+2. **Volume** — dozens of files or thousands?
+3. **What "report" means to you** — a summary of key findings, an index/catalog of documents, extracted structured data, something narrative for publication?
+4. **Prior work** — did you build a pipeline for release 01 already, or is this the first time?
+
+Once I know that, the fastest path is almost always: a script that ingests/OCRs the raw files into searchable text, an extraction pass (LLM or regex) into structured notes per document, then a synthesis pass that drafts the report from those notes — built once, rerun on each new tranche. But I'd rather tailor it than hand you a generic pipeline that doesn't match the actual file format.

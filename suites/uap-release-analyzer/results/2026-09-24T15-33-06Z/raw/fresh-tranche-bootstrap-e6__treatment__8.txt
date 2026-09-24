@@ -1,0 +1,16 @@
+Fastest path once release 02 lands in a sibling folder next to release 01:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains all four steps — inventory → extract → analyze → report — and each script is idempotent, so if you re-run it later (e.g. after downloading a few stragglers) it only reprocesses what's new.
+
+Two things worth knowing going in:
+
+1. **New filename prefixes will likely show up.** If `OTHER` in the inventory ends up above ~3% of files, that's the signal to add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before trusting the agency breakdown — otherwise a chunk of the release gets miscounted.
+2. **If you're running this somewhere with a ~45s per-call timeout**, `extract_text.py` can hit it on the FBI-style 200+ page files — pass it in batches with the optional `[start] [end]` args rather than backgrounding it.
+
+Since you'll have two tranches side by side, it's also worth asking "what's new vs. release_01?" once release_02's report is built — that's a natural follow-up the skill supports (cross-tranche comparison), just point me at both `inventory.csv`/`analytics/` folders when you want it.
+
+So: drop the files in, tell me the path, and I run `run_all.py` — that's the whole loop from download to readable `REPORT.md`.

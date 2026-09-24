@@ -1,0 +1,5 @@
+No prior context on this — so a quick recommendation rather than a full build-out:
+
+Pipe it through a single script rather than doing it by hand: **bulk-extract text (OCR if scanned) → chunk → have Claude summarize/extract entities per doc → have Claude roll those up into one report**, all driven by one script you write once and rerun on release 02. The main tradeoff is thoroughness vs. speed — per-document summarization catches details a single giant-context dump can miss, but costs more calls and time; a single mega-prompt is faster but risks skimming over documents buried in the middle.
+
+Two things would change the answer: how big/what format the tranche is (a few PDFs vs. thousands of scanned pages changes whether OCR is the bottleneck), and whether you want this reusable for future releases (worth scripting now) or a one-off (just do it manually in a session). Want me to sketch the actual script now against release 01, if you have it, so it's ready to point at release 02 the day it drops?

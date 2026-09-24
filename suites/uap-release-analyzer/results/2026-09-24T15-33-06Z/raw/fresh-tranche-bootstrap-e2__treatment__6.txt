@@ -1,0 +1,14 @@
+When release 02 drops, the fastest path is: download the files into `release_02/`, then run the pipeline end-to-end:
+
+```
+python3 scripts/run_all.py <release_root>/release_02
+```
+
+That chains `inventory.py` → `extract_text.py` → `analyze.py` → `build_report.py`, giving you `inventory.csv`, `text/`, `analytics/`, and `REPORT.md`. A few things worth knowing going in:
+
+1. **New filename prefixes will likely show up.** Release 01's agency vocab (`references/agency_vocab.md`) was built from that tranche's prefixes. If `OTHER` ends up over ~3% of files, extend the vocab table plus `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Don't run OCR by default.** Scanned files will show as 0-char text extractions — that's expected, not a bug. The report notes them under "What's missing"; OCR is a manual follow-up if you want it.
+3. **If your environment has per-call timeouts**, run `extract_text.py <root> [start] [end]` in chunks of ~25 files rather than backgrounding it — it's idempotent, so partial runs are safe to resume.
+4. **You'll have `release_01/` as a sibling**, so once release 02's report is built, "what's new vs release 01?" (year clusters, agency mix, new locations/names) is a natural and easy follow-up — I can diff the two `inventory.csv`/`analytics/` outputs directly.
+
+So in practice: drop the files in, say "analyze release_02," and I'll run the four scripts and hand you `REPORT.md`.

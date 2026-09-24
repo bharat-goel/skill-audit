@@ -1,0 +1,14 @@
+Once you've got release 02 downloaded to a folder, the fastest path is:
+
+```
+python3 scripts/run_all.py <release_02_root>
+```
+
+That chains all four steps — inventory → text extraction → analytics → report — and writes `REPORT.md` at the end. It's idempotent, so if extraction times out partway through on the bigger FBI sections, just re-run the same command and it'll skip files it already processed.
+
+Two things worth doing before you kick it off:
+
+1. **Check for new filename prefixes.** If release 02 introduces a source agency that wasn't in release 01 (new prefix pattern), the inventory step will dump it into `OTHER`. Worth a quick glance at `inventory.csv` after step 1 — if `OTHER` is more than a sliver, add the new prefix to `references/agency_vocab.md` before running analytics, or the agency breakdown in the report will be misleading.
+2. **Cross-tranche question.** Since you'll have `release_01/` sitting alongside it, the natural follow-up once the report's done is "what's new/different vs release 01" — I can diff the two `inventory.csv`/`analytics/` outputs if you want that as a second pass.
+
+Just point me at the folder when it lands and I'll run the pipeline.

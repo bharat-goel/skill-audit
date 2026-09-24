@@ -23,3 +23,10 @@ note: task "fresh-tranche-bootstrap-e7" treatment: 0 graded runs, 8 required
 note: task "fresh-tranche-bootstrap-e8" control: 0 graded runs, 8 required
 note: task "fresh-tranche-bootstrap-e8" treatment: 0 graded runs, 8 required
 ```
+
+## 2026-09-24T15:33:06Z · VOID · H=ef9be7b4ff77bd4a
+```
+model=sonnet judge=sonnet reps=10
+note: task "fresh-tranche-bootstrap-e8" control: 4 graded runs, 8 required
+note: task "fresh-tranche-bootstrap-e8" treatment: 0 graded runs, 8 required
+```

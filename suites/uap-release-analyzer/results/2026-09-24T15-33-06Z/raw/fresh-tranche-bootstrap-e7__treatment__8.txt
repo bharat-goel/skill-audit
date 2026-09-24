@@ -1,0 +1,13 @@
+Fastest path once you've got `release_02/` downloaded:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one go and lands you at `REPORT.md`. If your sandbox has a per-call timeout and a big batch of FBI-section PDFs stalls the extraction step, drop to running `extract_text.py <release_root> [start] [end]` in chunks (~25 files at a time) instead — everything's idempotent, so you can resume without redoing work.
+
+Two things worth doing at that point, not before:
+- If any filenames use prefixes not in `references/agency_vocab.md`, add them there and to the `PREFIX_RULES` in `inventory.py`/`analyze.py` before the OTHER bucket creeps past ~3%.
+- Since you'll have `release_01/` sitting alongside it, the natural next question is a release_01-vs-release_02 diff — worth asking for once the report's in hand.
+
+Say the word when the files are down and I'll run the pipeline.

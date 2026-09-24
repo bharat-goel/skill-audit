@@ -1,0 +1,23 @@
+That skill's already loaded in context, so here's the answer directly from it.
+
+Once release 02 lands in a sibling folder (e.g. `release_02/`), the path from "just downloaded" to "readable report" is one command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That runs the four idempotent stages in order:
+
+1. **`inventory.py`** — walks the folder, classifies each file by filename prefix (FBI/DOW/NASA/DOS/NARA/OTHER), gets page counts, writes `inventory.csv`.
+2. **`extract_text.py`** — pulls text via pdfplumber into `text/*.txt`. If any FBI-style sections are 200+ pages and you're in a sandbox with per-call timeouts, chunk it with the optional `[start] [end]` args rather than backgrounding the call.
+3. **`analyze.py`** — builds `analytics/` (top terms, agency cross-refs, redaction markers, cross-doc patterns).
+4. **`build_report.py`** — writes the final `REPORT.md` in the standard 11-section format.
+
+Two things worth doing on the *first* run against a new tranche specifically:
+
+- **Check the `OTHER` bucket in `inventory.csv`.** If new filename prefixes show up (release 02 may introduce ones not in `references/agency_vocab.md`), add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown — if `OTHER` is above ~3% of files, that's the signal.
+- **Compare against release 01.** Since it'll sit alongside the first tranche, "what's new vs. release_01?" is a natural follow-up once both have `analytics/` — I can diff the two `entities.json`/`cross_doc.json` outputs if you want that.
+
+I won't run OCR automatically on scanned (no-text-layer) files — that gets flagged in the report's "What's missing" section, and I'll offer it as a separate follow-up given how long Tesseract takes on thousands of pages.
+
+So practically: drop the files in a folder, tell me the path, and I run `run_all.py` — that's the whole loop from download to report.

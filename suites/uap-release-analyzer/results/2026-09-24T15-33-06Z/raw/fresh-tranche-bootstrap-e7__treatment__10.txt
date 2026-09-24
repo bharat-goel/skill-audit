@@ -1,0 +1,18 @@
+The fastest path is to run the skill's bundled pipeline end-to-end:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report, and every step is idempotent/incremental, so you can just point it at the folder once the tranche is downloaded.
+
+Two things worth doing before you kick it off:
+
+1. **Skim the filename prefixes first.** If release 02 introduces new naming conventions (agency prefixes not in `references/agency_vocab.md`), extend the vocab table + `PREFIX_RULES` in `inventory.py`/`analyze.py` before running the pipeline — otherwise those files land in `OTHER` and the agency breakdown in the report is wrong from the start.
+2. **If your environment has a per-call timeout**, `extract_text.py` accepts `[start] [end]` slice args — chunk the FBI sections in batches of ~25 pages/files rather than backgrounding the call.
+
+Since you'll also have `release_01/` sitting alongside it, I'd flag "what's new vs. release_01" as a natural follow-up question once `REPORT.md` for release 02 is done — the skill notes this is worth surfacing whenever a sibling release exists.
+
+If you don't already have release 02 downloaded and instead want to pull it from war.gov directly, that's a separate step — check `references/war_gov_quirks.md` first, since the page has pagination/modal quirks that make naive scraping fail.
+
+Want me to start once you've downloaded it — or do you need help pulling it from war.gov first?

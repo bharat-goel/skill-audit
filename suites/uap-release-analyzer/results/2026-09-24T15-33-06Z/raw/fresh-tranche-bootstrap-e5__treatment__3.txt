@@ -1,0 +1,24 @@
+Once release 02 is downloaded, run the bundled pipeline in one shot:
+
+```
+python3 scripts/run_all.py <path/to/release_02_root>
+```
+
+That does inventory → text extraction → analytics → REPORT.md sequentially, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under that root. If the folder is large enough that a single `extract_text.py` call would time out in your environment, run the steps individually with the batching option instead:
+
+```
+python3 scripts/inventory.py <release_root>
+python3 scripts/extract_text.py <release_root> 0 25
+python3 scripts/extract_text.py <release_root> 25 50
+...   # repeat until the whole set is covered
+python3 scripts/analyze.py <release_root>
+python3 scripts/build_report.py <release_root>
+```
+
+Everything is idempotent, so if a batch fails partway you can just rerun it.
+
+Two things worth doing at the start, not after the fact:
+- **Check filenames against `references/agency_vocab.md`.** If more than ~3% of files land in `OTHER`, that means release 02 introduced new filename prefixes — add them to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- **If `release_01/` is a sibling directory**, mention it to me — I'll fold in a "what's new vs. release 01" comparison section rather than treating release 02 in isolation.
+
+When you've got the files locally, just tell me the path and I'll run the whole thing.

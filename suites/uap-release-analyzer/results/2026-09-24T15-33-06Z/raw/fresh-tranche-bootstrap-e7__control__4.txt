@@ -1,0 +1,5 @@
+The fastest path is a repeatable three-step pipeline rather than doing it by hand each time: (1) a small script that pulls everything from the release page into a local folder (so you're not clicking through dozens of links), (2) a bulk extraction pass — text from PDFs/scans, rows from spreadsheets — into plain text/markdown so the content is greppable and feedable to me, and (3) a report-drafting pass where I read the extracted material and write the summary against a template you reuse across tranches (so report structure stays consistent release to release).
+
+The main tradeoff: building that pipeline now costs you setup time before release 02 even drops, versus just doing it manually this once and automating only if there's a release 03. Given you're already anticipating a numbered "release 02," it sounds like there will be more tranches, so I'd lean toward building it.
+
+What format is the tranche typically in — PDFs, scanned images, spreadsheets, a mix? That determines what the extraction step actually needs.

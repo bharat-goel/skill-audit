@@ -1,0 +1,13 @@
+Fastest path: drop the files in a `release_02/` folder next to your `release_01/` (so the report can compare them), then run
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → `REPORT.md` in one shot. Three things worth knowing before you do:
+
+- If any filenames use prefixes not already in `references/agency_vocab.md`, extend the vocab table + `PREFIX_RULES` in `inventory.py`/`analyze.py` first — otherwise they'll pile up in `OTHER` and dilute the agency breakdown.
+- OCR isn't run automatically (it's slow), so scanned files will show as 0-char text and get flagged in the report's "what's missing" section — that's expected, not a bug.
+- Since `release_01/` will be a sibling, the report will naturally support "what's new vs. release 1" — worth asking for explicitly if you want that comparison front and center.
+
+Say the word when the files land and I'll run it.

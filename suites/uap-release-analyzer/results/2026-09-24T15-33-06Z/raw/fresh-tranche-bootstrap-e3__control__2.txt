@@ -1,0 +1,5 @@
+Fastest path: have a repeatable pipeline ready *before* release 02 drops, not built from scratch that day. Concretely — a script that (1) hashes/inventories the new files and diffs them against release 01 so you know what's actually new, (2) runs OCR/text extraction on anything scanned (gov tranches are usually image PDFs), then (3) feeds the extracted text to me in batches to summarize and synthesize into one report, rather than you reading raw PDFs first.
+
+Main tradeoff: building that pipeline now costs you setup time upfront but turns "just downloaded" into "report drafted" in minutes on drop day; doing it ad hoc each time costs nothing to set up but means slow, inconsistent manual triage per release.
+
+Want me to build that ingestion/OCR/summarize script now so it's sitting ready for when release 02 lands?

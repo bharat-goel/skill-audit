@@ -1,0 +1,16 @@
+The fastest path is to run the bundled pipeline end-to-end:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains all four steps (inventory → extract → analyze → report) and lands you a `REPORT.md` you can read in ten minutes. Concretely:
+
+1. **Point it at the folder** once release 02 is downloaded, e.g. `run_all.py ~/Downloads/release_02/`.
+2. **Watch for two things that need a manual nudge:**
+   - If any files are scanned with no text layer, extraction will legitimately produce 0-char `.txt` files — that's expected, not a failure; it'll show up in the report's "What's missing" section rather than blocking anything.
+   - If your environment has a per-call timeout and a section has 200+ page FBI-style PDFs, run `extract_text.py <root> [start] [end]` in chunks of ~25 instead of relying on `run_all.py`'s single unchunked pass.
+3. **Check the `OTHER` agency bucket** in `inventory.csv` — if new filename prefixes show up that aren't in `references/agency_vocab.md`, add them there (and to `PREFIX_RULES` in `inventory.py`/`analyze.py`) before generating the report, so the classification stays accurate instead of dumping everything into OTHER.
+4. Since you'll then have two tranches side by side, it's worth asking "what's new vs. release_01?" as a follow-up — the skill is built to support that cross-tranche comparison once both `release_01/` and `release_02/` sit under the same parent.
+
+When you're ready with the actual folder, just say "analyze the release at `<path>`" and I'll run it.

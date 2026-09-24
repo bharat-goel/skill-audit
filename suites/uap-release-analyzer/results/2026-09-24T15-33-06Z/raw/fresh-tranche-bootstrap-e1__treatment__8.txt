@@ -1,0 +1,13 @@
+Once release 02 lands in a folder (e.g. `release_02/`), the fastest path is:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one go, producing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md`. If the tranche is large enough to hit a per-call timeout in your environment, run `extract_text.py` in chunks (`[start] [end]` args) instead of the all-in-one script for that step — everything is idempotent, so you can resume where it left off.
+
+Two things worth doing on the first pass with a new release:
+- Check filename prefixes against `references/agency_vocab.md` — if more than ~3% of files land in `OTHER`, extend the vocab table (and `PREFIX_RULES` in `inventory.py`/`analyze.py`) before trusting the agency breakdown.
+- Since you'll likely have `release_01/` sitting alongside it, I can add a "what's new vs release 01" comparison to the report — worth doing once both are analyzed.
+
+Want me to walk through this now, or hold until release 02 is actually downloaded?

@@ -1,0 +1,5 @@
+The fastest path, given what's available here: drop the downloaded files into a working directory (or your scratchpad), then have me read and synthesize them directly in this session rather than building a separate pipeline — for PDFs I can read up to 20 pages at a time, and for a handful of documents I can just draft the report straight into chat or into a Claude Doc if you want something persistent and shareable.
+
+The tradeoff is size: if "release 02" is a large tranche (many long PDFs, scanned/OCR-heavy, or dozens of files), reading everything serially will blow through context fast — better to fan out with parallel Explore/general-purpose subagents to extract and summarize each document, then have me compile those summaries into the final report. So: small-to-medium tranche → just point me at the folder and ask for the report; large tranche → say so and I'll set up the extraction/summarize-then-compile approach instead.
+
+Want me to wait until you've actually got the files, or set up the extraction script now so it's ready to run the moment release 02 lands?

@@ -1,0 +1,6 @@
+I don't have any context yet on what release 01 looked like or what format these tranches come in (scanned PDFs, structured data, spreadsheets, etc.), and that's what actually determines the fastest path. Two quick questions:
+
+1. What format is the download in, and roughly how large (dozens of files vs. thousands)?
+2. What did "a written report" mean for release 01 — a summary memo, a structured analysis with citations, something else?
+
+My default recommendation, subject to those answers: build a small repeatable pipeline now (a folder convention + a script that extracts/OCRs text and chunks it, then a Claude pass that drafts the report against your standing outline) rather than re-deriving the workflow by hand when release 02 drops — the tradeoff is an hour of setup now for near-zero turnaround later. If you tell me where release 01's files and outline live, I can start building that pipeline today instead of waiting for release 02.

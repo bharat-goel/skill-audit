@@ -1,0 +1,7 @@
+Depends heavily on what shape "release 02" actually takes (structured data vs. scanned PDFs vs. mixed), which I don't know yet. In general, the fastest repeatable path is: write a small ingestion script now (before the drop) that watches a folder, extracts/OCRs text as needed, then hands it to Claude with a fixed report template/prompt so each new tranche just reruns the same pipeline instead of you re-deriving the workflow each time.
+
+Two things would change the answer a lot:
+1. What format is release 01 (or what you expect 02 to be) — PDFs, CSVs, images, HTML pages? That determines whether you need OCR/parsing or can go straight to analysis.
+2. Where do you want the final report — a local file, or something shareable like a Claude Doc?
+
+What's the file format, and do you have release 01 sitting around I could look at to prototype against?

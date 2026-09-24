@@ -1,0 +1,5 @@
+Depends heavily on what release 02 actually contains — is it text-native PDFs, scanned/image documents needing OCR, spreadsheets, or a mix, and roughly how many files/pages? That determines whether you can go straight to synthesis or need an extraction pass first.
+
+General fastest path either way: point Claude Code at the download folder, have it inventory and extract text (OCR first if scanned), then draft the report against a fixed outline/template in one pass rather than iterating file-by-file. The tradeoff — a single bulk synthesis pass is fast but can miss details buried in a large scanned tranche, vs. a slower page-by-page extraction that's more thorough but takes longer to get to a first draft.
+
+What format is release 02 likely to be in, and roughly how big?

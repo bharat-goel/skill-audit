@@ -1,0 +1,16 @@
+The fast path once release_02 is downloaded to a folder:
+
+```
+python3 scripts/run_all.py <path/to/release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, and skips anything already done if you re-run it. Out the other end you get `REPORT.md` at the release root, ready to read in ~10 minutes.
+
+A few things worth knowing going in:
+
+- **Text extraction can be the slow step.** If you're running in a sandboxed/timeout-limited environment, use `scripts/extract_text.py <root> [start] [end]` in chunks (e.g. batches of ~25 files) instead of the all-in-one runner — the FBI sections especially can be 200+ pages each.
+- **New filename prefixes will likely show up.** Agency classification is prefix-based (`references/agency_vocab.md`). If release_02 introduces new source buckets, anything unrecognized lands in `OTHER` — if that's more than ~3% of files, it's a sign to add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the report.
+- **No OCR by default.** Scanned files with no text layer get flagged in the report's "What's missing" section rather than OCR'd automatically — Tesseract over thousands of scanned pages is a multi-hour job, so that's a deliberate follow-up you'd ask for separately.
+- **Cross-tranche comparison is free upside.** Since release_01 will be a sibling folder, once release_02's report exists it's easy to ask "what's new vs release_01" — worth doing since you'll have both.
+
+So in short: drop the files in a folder, run `run_all.py` against it, skim the vocab file if `OTHER` looks big, and you'll have a REPORT.md.

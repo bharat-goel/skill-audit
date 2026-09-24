@@ -1,0 +1,18 @@
+Once you've got release_02 downloaded to a folder, it's one command:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report writing, and each step is idempotent/incremental, so if you re-run it later (e.g. after grabbing a few more files) it skips work already done rather than redoing everything.
+
+Two things worth knowing going in:
+
+1. **New filename prefixes.** If release_02 introduces naming conventions the vocab hasn't seen (`references/agency_vocab.md`), files land in an `OTHER` bucket. If `OTHER` creeps past ~3% of the tranche, that's the signal to add the new prefixes to the vocab table and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **OCR is not automatic.** Scanned files with no text layer show up as 0-char extractions — expected, not a bug — and get flagged in the report's "What's missing" section rather than silently OCR'd (Tesseract over thousands of scanned pages is a follow-up you'd opt into, not a default).
+
+If your sandbox has a per-call timeout and any FBI section PDFs are 200+ pages, run `extract_text.py <release_root> <start> <end>` in chunks of ~25 instead of the full range in one call.
+
+Once you've got both releases in a parent folder, the natural next question is "what's new in release_02 vs release_01" — flag that if you want a diff-style comparison rather than a standalone report.
+
+Want me to kick this off once the files are in place, or are you asking for the game plan ahead of time?

@@ -1,0 +1,13 @@
+Once you've downloaded release 02 into its own folder (sibling to release_01, e.g. `release_root/release_02/`), the fastest path is a single command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains all four steps — inventory → text extraction → analytics → report — and writes `REPORT.md` at the end. Since the scripts are idempotent, if extraction times out partway on the big FBI sections, just re-run it; it'll skip files it already has and pick up where it left off (or use `extract_text.py <release_root> [start] [end]` manually to chunk it).
+
+Two things worth doing on your end before hitting run_all:
+1. **Drop the files straight into `release_root/release_02/`** rather than a differently-named folder — the report's cross-tranche comparison (release_01 vs release_02) only kicks in automatically if a sibling release directory is present.
+2. **Check filename prefixes against `references/agency_vocab.md`** if this is a new source category war.gov hasn't used before — if the report's OTHER bucket comes out over ~3%, that's the signal to extend the vocab rather than treat it as noise.
+
+So in practice: download → `run_all.py <release_root>` → skim `REPORT.md`, especially section 10 ("what's missing") to see what still needs OCR or a manual pull. Want me to actually run this once the files are in place?

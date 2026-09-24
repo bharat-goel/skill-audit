@@ -1,0 +1,14 @@
+Run the pipeline end to end with one command:
+
+```
+python scripts/run_all.py <path/to/release_02>
+```
+
+That does inventory → text extraction → analytics → REPORT.md in sequence, skipping any work already done (it's idempotent, so re-running after adding a few late files is cheap). If a chunk of the FBI section is huge (200+ pages) and your environment has a per-call timeout, run `extract_text.py <root> <start> <end>` in batches instead of the all-in-one script for that step.
+
+Two things worth doing on a brand-new tranche specifically:
+
+1. **Check the `OTHER` bucket in inventory.csv after step 1.** New tranches often introduce filename prefixes not in `references/agency_vocab.md`. If `OTHER` is more than ~3% of files, add the new prefixes to that file and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before moving on — otherwise a chunk of the release gets silently mis-bucketed in the report.
+2. **Cross-reference with release_01** if it's sitting in the same parent folder — "what's new vs. release_01?" is the natural next question once both reports exist, and I can diff entities/agencies/redaction patterns between them.
+
+So: drop the files in, run `run_all.py`, skim `inventory.csv` for `OTHER`, then read `REPORT.md`. If you want, once release_02 actually lands just point me at the folder and I'll drive the whole thing.

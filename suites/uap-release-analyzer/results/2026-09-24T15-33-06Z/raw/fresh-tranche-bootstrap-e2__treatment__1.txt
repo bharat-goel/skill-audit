@@ -1,0 +1,15 @@
+Fastest path: point me at the release folder and run one command.
+
+1. Download `release_02/` into the same parent directory as your existing `release_01/` (this lets the report compare tranches).
+2. Run `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report in one shot, skipping anything already done if you re-run it.
+3. Read `REPORT.md`.
+
+A couple of things to expect along the way:
+
+- If a filename prefix shows up that isn't in `references/agency_vocab.md` yet, I'll flag it as `OTHER` and extend the vocab rather than leaving it unclassified — worth telling me up front if you already know release 02 introduces a new source agency.
+- Scanned files with no text layer will show as 0-char extractions — that's normal, not a bug; OCR isn't run by default (it's slow), and I'll just note the gap in the report's "What's missing" section rather than silently skipping it.
+- Since `release_01/` will be sitting alongside it, I'll also surface a cross-tranche comparison (what's new, changed agency mix, etc.) as part of the report.
+
+If your sandbox has a per-call timeout, text extraction may need to run in chunks (`extract_text.py <root> <start> <end>`) rather than all at once — `run_all.py` handles this internally if needed, or just tell me the constraint and I'll pace it.
+
+So: drop the files, give me the path, say "analyze it" — that's the whole interaction on your end.

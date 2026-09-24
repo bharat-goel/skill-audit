@@ -1,0 +1,5 @@
+**(b)(1)** — Information properly classified for national security reasons (executive order classification: defense, foreign relations, intelligence sources/methods, etc.). Exempt from FOIA release.
+
+**(b)(6)** — Personal privacy exemption; protects information that would constitute a "clearly unwarranted invasion of personal privacy" (names, personal identifying details of private individuals).
+
+**NOFORN** — "Not Releasable to Foreign Nationals." A dissemination control marking indicating the information cannot be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of clearance level.

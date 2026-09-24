@@ -1,0 +1,7 @@
+These are FOIA/national security classification markings used in declassified U.S. government documents:
+
+- **(b)(1)** — Information properly classified in the interest of national defense or foreign policy under an executive order (currently E.O. 13526). This is the most common exemption for redacting classified material like intelligence sources, methods, or military plans.
+
+- **(b)(6)** — Information that, if disclosed, would constitute a "clearly unwarranted invasion of personal privacy" — typically names, personal identifying details, or other private information about individuals.
+
+- **NOFORN** ("No Foreign Dissemination") — A dissemination control marking indicating the information cannot be shared with foreign nationals, foreign governments, or international organizations, regardless of their clearance level.

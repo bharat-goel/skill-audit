@@ -1,0 +1,3 @@
+A few unknowns determine the actual answer here: what format is the tranche in (PDFs, scanned images, spreadsheets, a mixed dump), roughly how large, and do you already have a script/pipeline from release 01 that this should reuse?
+
+In general terms, the fastest path is usually: (1) a small ingest script that unzips/indexes the tranche and OCRs anything scanned, (2) batch it through Claude for extraction/summarization per document with a consistent prompt template, (3) a rollup pass that merges those per-doc summaries into one report with citations back to source files. If you tell me the format and whether release 01 already has tooling I can build on, I'll set up the actual script rather than sketch it in the abstract.

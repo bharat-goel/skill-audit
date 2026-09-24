@@ -1,0 +1,14 @@
+Fastest path once release_02 lands locally:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → REPORT.md in one shot — it's idempotent, so if a step times out partway you can just rerun it and it'll skip what's already done. A few things worth knowing going in:
+
+- **Extraction is the slow part.** If you're doing this in a sandboxed/timeout-limited environment, use `scripts/extract_text.py <release_root> [start] [end]` in chunks (e.g. batches of ~25) instead of one giant call — same idempotency applies.
+- **New filename prefixes are likely.** Release 02 may introduce prefixes not in `references/agency_vocab.md`. If the `OTHER` bucket in the inventory tops ~3% of files, add the new prefixes to that vocab table and to `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py` before trusting the agency breakdown.
+- **No OCR by default** — scanned files will show up as 0-char text and get flagged in the "What's missing" section rather than silently skipped.
+- **Cross-tranche comparison is free upside**: since `release_01` will be a sibling folder, once release_02's report is built it's worth asking "what's new vs release_01" — inventory.csv diffs and entity-overlap are the natural next question.
+
+So concretely: drop the new PDFs in `release_02/`, point `run_all.py` at it, skim `REPORT.md`. If you want, once you actually have the files I can run the pipeline for you.

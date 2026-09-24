@@ -1,0 +1,12 @@
+Depends heavily on what's actually in the tranche — is it PDFs, scanned images, spreadsheets, video, or a mix, and roughly how many files/pages? That determines whether you need an OCR step first.
+
+In general, the fastest path is:
+
+1. **Extract** — pull text from whatever format (native PDF text extraction, or OCR for scans/images).
+2. **Fan out** — split by document and process them in parallel (e.g., spawn several Explore/general-purpose agents each summarizing a batch) rather than reading serially, since that's the biggest time sink for large tranches.
+3. **Synthesize** — have one pass roll up the per-document summaries into a single narrative with citations back to source files.
+4. **Publish** — drop the result into a shareable report (Artifact if you want a polished doc, or just a markdown/text file if it's for you alone).
+
+The main tradeoff: parallelizing across subagents is much faster but each one loses shared context, so you want a tight, consistent prompt (what to extract, what format to return) so the synthesis step isn't reconciling mismatched summaries.
+
+When release 02 actually drops, tell me the format and volume and I'll set up the concrete pipeline (extraction script + agent fan-out) rather than guessing now.

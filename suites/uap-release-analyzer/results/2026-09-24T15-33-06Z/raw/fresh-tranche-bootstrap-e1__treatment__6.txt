@@ -1,0 +1,16 @@
+Fastest path once you've downloaded `release_02/`:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one go. In practice:
+
+1. Drop the files into `release_root/release_02/`.
+2. Run `run_all.py` — it builds `inventory.csv`, extracts text (skipping any files with no text layer, which it'll flag rather than choke on), computes `analytics/`, and writes `REPORT.md`.
+3. If you're in a sandbox with per-call timeouts and the FBI sections are big, `extract_text.py` alone (called with `[start] [end]` chunk args) is idempotent, so a partial run just picks up where it left off — no need to babysit it.
+4. Skim `REPORT.md`'s "What's missing" section first — it tells you what's OCR-gap or ungettable before you trust the rest.
+
+One thing worth doing at that point rather than after: check `inventory.csv` for any filename prefixes that land in the `OTHER` bucket. If release 02 introduces new source agencies/prefixes not in `references/agency_vocab.md`, the classification (and the agency-cross-reference section of the report) will silently degrade — better to extend the vocab table + `PREFIX_RULES` before generating the report than to catch it after.
+
+If release_01 is still sitting in the parent folder, it's also worth asking "what's new vs release_01?" once the report's done — that's the natural next comparison and the skill supports cross-tranche framing.

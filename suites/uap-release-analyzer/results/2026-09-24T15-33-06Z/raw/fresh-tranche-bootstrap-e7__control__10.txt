@@ -1,0 +1,5 @@
+I don't have prior context on this release, so my answer depends on what format the tranche actually comes in — scanned PDFs, video/audio, spreadsheets, or structured text. Roughly, the fastest path is: bulk-download → OCR/transcribe if needed → have Claude extract and tag key facts per document into a structured intermediate (e.g., JSON/CSV with source citations) → then draft the report from that structured layer rather than raw files, so every claim traces back to a specific document.
+
+The main tradeoff: going straight from raw files to a report is faster but risks hallucinated or unsourced claims, especially with scanned/messy government docs — the structured intermediate step costs time upfront but is what makes the report actually trustworthy and checkable.
+
+What format is release 02 expected to be in, and roughly how large (dozens of files vs. thousands)? That determines whether this is a same-session task or needs a batch pipeline.

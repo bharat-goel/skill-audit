@@ -1,0 +1,5 @@
+For a document tranche (scanned PDFs off a .gov release), the fast path is a four-stage pipeline: **bulk download → OCR/text extraction → per-document batch summarization → cross-document synthesis into one report**. Using Claude's Message Batches API for stage 3 is what actually makes this fast — you fire off summarization for every doc in the tranche at once instead of looping sequentially, then a final pass reads just the summaries to write the report.
+
+The main tradeoff: full-auto (batch-summarize everything, synthesize, done) is fastest but can miss connections between documents that only show up on closer reading; a human-in-loop step (skim flagged/high-signal docs before the final synthesis) costs you time but catches that. I'd default to full-auto with a "flag anything unusual" instruction in the per-doc pass, then you spot-check flags before the report is finalized.
+
+Since release 02 is still weeks out, want me to build this as a reusable script/skill now (download → OCR → batch summarize → report) so it's just "point at the new tranche" when it drops?

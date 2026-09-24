@@ -1,0 +1,18 @@
+Once release 02 is downloaded to a folder, the fastest path is a single command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in order, and each step skips work already done, so if you re-run it after fixing something it won't redo the whole thing.
+
+A couple of things worth knowing going in:
+
+- **If your environment has a per-call timeout**, `extract_text.py` is the one step that can blow through it on large FBI-style sections (200+ pages). If `run_all.py` stalls there, fall back to calling `scripts/extract_text.py <release_root> [start] [end]` directly in chunks (~25 files at a time) instead of the all-in-one script.
+- **Watch for new filename prefixes.** Agency classification is prefix-based (`references/agency_vocab.md`). If `OTHER` ends up over ~3% of files in the inventory, that's the signal to add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- **Don't run OCR.** Scanned files with no text layer will show as 0-char extracts — expected, not a bug. The report notes them under "What's missing" rather than trying to OCR thousands of pages inline.
+- **Cross-tranche comparison** becomes the natural next question once release_02 sits alongside release_01 in the same parent folder — I can diff the two `inventory.csv`/`analytics/` outputs if you want that afterward.
+
+End state: `REPORT.md` in the release root, readable in about ten minutes, in the standard 11-section format so it's directly comparable to the release_01 report.
+
+When you've got it downloaded, just point me at the folder and I'll run the pipeline.

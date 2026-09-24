@@ -1,0 +1,14 @@
+Once release 02 lands in its own folder, the whole pipeline is one command:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That runs inventory → text extraction → analytics → report in sequence and lands you with `REPORT.md` at the root, readable in ~10 minutes. Concretely:
+
+1. **Drop the files** into a `release_02/` folder (sibling to `release_01/` if you kept that around — having both in the same parent lets the report note what's new vs. release 1).
+2. **Run `run_all.py`** against the parent path. It's idempotent/incremental, so if extraction gets interrupted (large FBI PDFs, 200+ pages each) you can just rerun it and it picks up where it left off.
+3. **Check the `OTHER` bucket** in `inventory.csv` — if new filename prefixes show up that aren't in `references/agency_vocab.md`, that's your one manual step: add them to the vocab table and `PREFIX_RULES` before re-running analyze/report, otherwise those files get miscategorized.
+4. **Read `REPORT.md`**, paying attention to section 10 ("What's missing") for OCR gaps — scanned files with no text layer won't be summarized unless you run OCR separately, which isn't automatic.
+
+So: fastest path is literally `run_all.py`, with the only judgment call being whether to pause and extend the agency vocab first. Want me to walk through it live once you actually have the release_02 folder in hand?

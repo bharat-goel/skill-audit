@@ -1,0 +1,3 @@
+The fastest path is to have the pipeline built *before* release 02 drops, not after: a small script that watches/downloads the new files, normalizes them (OCR any scanned PDFs, strip to plain text), and feeds them through a fixed extraction prompt (key entities, dates, claims, anything flagged) into a report template you've already drafted from release 01's structure — so on drop day you're just running a script and proofreading, not building tooling from scratch.
+
+The main tradeoff: prebuilding assumes release 02 looks like release 01 (same file types/structure) — if the format changes, some of that pipeline needs rework on the day. Want me to sketch out that ingestion script now against release 01's files, so it's ready to point at 02 when it lands?
