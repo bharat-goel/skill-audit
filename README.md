@@ -16,7 +16,7 @@ sibling directory (`../nullbench`, override with `NULLBENCH_DIR`) — the tools 
 
 | Phase | State |
 |---|---|
-| 0 — nullbench bracket on Sonnet | not started |
+| 0 — nullbench bracket on Sonnet | passed 2026-09-24 |
 | 1 — selection rule frozen | frozen 2026-09-23, 5cf2831 |
 | 2 — screening | 1 of 100 eligible |
 | 3 — ports registered | not started |
