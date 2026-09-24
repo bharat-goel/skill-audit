@@ -1,0 +1,5 @@
+A couple of things determine the fastest path, so quick check first: what format is the tranche in (PDFs, scanned images, spreadsheets, a mix), roughly how many documents/pages, and did you build any pipeline for release 01 that's worth reusing, or is this cold-start?
+
+My default recommendation, absent that info: don't build a general pipeline — treat it as a one-shot batch job. Unzip/organize the files, OCR anything scanned (most gov PDFs are either text-layer or need `ocrmypdf`), then have me chew through them in batches with one consistent extraction prompt (key facts, dates, entities, anything redacted/notable) into a structured intermediate file, and only then synthesize that into the actual report. The tradeoff: skipping the structured-intermediate step and asking me to "just write the report" straight from raw PDFs is faster to start but risks silently dropping details across a large tranche — the two-pass approach costs you one extra step but is what actually scales past a handful of documents.
+
+Tell me the format/size and I'll turn that into concrete commands rather than a plan.

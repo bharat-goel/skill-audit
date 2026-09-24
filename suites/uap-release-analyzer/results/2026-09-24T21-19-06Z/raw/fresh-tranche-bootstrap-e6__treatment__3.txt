@@ -1,0 +1,13 @@
+For release 02, once the download lands in a folder, this skill's own pipeline is the fast path:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report in one call, giving you `inventory.csv`, `analytics/`, and a final `REPORT.md` you can read end to end. If your sandbox has a per-call timeout, `extract_text.py` (step 2 of `run_all.py`) is the one to watch — for large FBI sections it may need to run in `[start] [end]` chunks rather than all at once, since it's idempotent and safe to resume.
+
+One thing worth doing right when release 02 drops rather than after: check the filenames against `references/agency_vocab.md` first. If any new prefixes show up that aren't in the vocab, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before running the pipeline — otherwise they'll pile up in the `OTHER` bucket and skew the agency breakdown.
+
+Since you'll then have two tranches sitting side by side, it's also worth asking for a release_01-vs-release_02 diff (new locations, new names, redaction-pattern shifts) once the report's done — that's a natural follow-up the skill supports.
+
+So: point me at the release_02 folder when it's down, and I'll run the pipeline straight through to REPORT.md.

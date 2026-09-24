@@ -1,0 +1,16 @@
+Once you've got `release_02/` downloaded, the path is:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains all four pipeline steps — inventory → text extraction → analytics → report — and is idempotent, so if a call times out partway through you can just re-run it and it'll skip finished work.
+
+Two things worth doing on a **new** tranche specifically:
+
+1. **Check the `OTHER` bucket in `inventory.csv` after step 1.** Agency classification is filename-prefix based, and release 02 will likely have prefixes not seen in release 01. If `OTHER` is more than ~3% of files, add the new prefixes to `references/agency_vocab.md` and the `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before moving on — otherwise a chunk of the report will misclassify or drop context.
+2. **If it's a big tranche and extraction times out in one call**, use `scripts/extract_text.py <release_root> [start] [end]` in batches of ~25 files rather than backgrounding it — each chunk finishes fast and it's safe to resume.
+
+Once `run_all.py` finishes you'll have `REPORT.md` in the release root, ready to read.
+
+One more thing worth flagging in advance: since you'll have two releases side by side, I'd also generate a short "what's new vs. release_01" comparison (agency mix, new locations/names, redaction-density delta) — the skill notes this as the natural next question once a sibling release folder exists. Want me to fold that into the report step when release 02 actually lands, or keep it as a separate ad-hoc diff at that point?

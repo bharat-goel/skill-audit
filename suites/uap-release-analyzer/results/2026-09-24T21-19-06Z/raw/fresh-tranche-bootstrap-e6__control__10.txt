@@ -1,0 +1,9 @@
+A few unknowns will change the answer a lot, so quick recommendation first: build a small repeatable pipeline now (script/skill), not a one-off, since you'll likely repeat this for release 03+. The shape is: bulk-download → convert to text (OCR if scanned) → per-document extraction pass (key facts + citations) → synthesis pass into a report draft → your own read/edit. The main tradeoff is a single-shot "summarize everything" prompt is faster to build but riskier on dense/legal-military documents (misses or misattributes details); the two-pass extract-then-synthesize approach costs a bit more time per tranche but gives you citations back to source pages so you can actually trust the report.
+
+Three things determine how "fast" this can be, so it'd help to know:
+
+1. **Format** — text-native PDFs, scanned images needing OCR, spreadsheets, or a mix? (Determines whether an OCR step is even needed.)
+2. **Volume** — dozens of documents or thousands? (Determines whether a single Claude session can read the tranche directly or whether you need chunking/indexing.)
+3. **What "report" means to you** — a flat summary, a timeline, findings tagged by topic/person, or something with a fixed template? (Determines what the synthesis step should target.)
+
+Once I know those, I can either sketch a script you run each time a release drops, or set it up as a project skill so it's a one-command process from download to draft.

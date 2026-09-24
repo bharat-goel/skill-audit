@@ -1,0 +1,8 @@
+I don't have prior context on this project — no memory saved about war.gov or a "release 02" tranche. Before sketching a pipeline, a couple of things change the answer a lot:
+
+1. **What format is the tranche in?** Scanned PDFs need OCR, structured data (CSV/JSON) doesn't, a mixed dump needs triage first.
+2. **What's "a written report" for you?** A quick internal summary vs. something citation-backed for publication changes how much verification/sourcing work belongs in the loop.
+
+If you can tell me those two things (and roughly how large release 01 was, if you've done this before), the fastest path is generally: **auto-triage files by type → extract/OCR text → have me pull the notable findings with source citations → draft the report → you review before it goes out.** I could wire steps 1–3 into a script now and set up a `/loop` or scheduled check against the war.gov page so you get pinged the moment release 02 lands, rather than you having to notice it manually — but I'd rather match the pipeline to your actual file types than build something generic and have you redo it.
+
+What does release 01 look like?

@@ -1,0 +1,3 @@
+- **(b)(1)** — information properly classified for national security reasons (e.g., "SECRET," "TOP SECRET") under an executive order; withheld to protect national defense or foreign policy interests.
+- **(b)(6)** — personal privacy exemption; withholds information that would constitute a "clearly unwarranted invasion of personal privacy" (names, personal identifying details of private individuals).
+- **NOFORN** — "Not Releasable to Foreign Nationals"; a dissemination control marking (not itself a FOIA exemption) indicating the information cannot be shared with foreign governments, nationals, or non-US-cleared entities.

@@ -1,0 +1,16 @@
+Once `release_02/` is downloaded, the shortest path is:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains all four steps (inventory → extract text → analytics → report) and is idempotent, so if a step times out partway you can just re-run it — completed work is skipped.
+
+Two things worth knowing in advance:
+
+1. **If your session has a per-call timeout**, `extract_text.py` alone can exceed it on large FBI-style PDFs (200+ pages). Skip `run_all.py` in that case and call `extract_text.py <release_root> [start] [end]` in chunks of ~25 pages instead — still idempotent, so you can pick up where you left off.
+2. **New filename prefixes.** If release 02 introduces agencies/prefixes not in `references/agency_vocab.md`, the inventory step will bucket them as `OTHER`. If `OTHER` comes out above ~3% of files, add the new prefixes to `agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown in the report.
+
+End state is `REPORT.md` in the release root, following the fixed 11-section structure (inventory → what's in it → locations → phenomena terms → agency cross-refs → year clusters → redactions → notable files → cross-doc patterns → what's missing → source list). OCR is intentionally skipped by default — scanned files just get flagged in section 10 — so if release 02 is heavy on scanned material, expect that section to be long.
+
+If you also still have `release_01/` around, worth asking for a "what's new vs release 01" comparison once both reports exist — that's a natural follow-up the skill supports.

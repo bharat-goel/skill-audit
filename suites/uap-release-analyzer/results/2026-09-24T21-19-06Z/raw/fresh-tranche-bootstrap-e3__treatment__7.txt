@@ -1,0 +1,14 @@
+Fastest path once release 02 lands in a sibling folder (e.g. `release_02/` next to your existing `release_01/`):
+
+```
+scripts/run_all.py <release_root>
+```
+
+That runs inventory → text extraction → analytics → report in one shot, producing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md`. A few notes for when you actually run it:
+
+- **New filename prefixes**: if `OTHER` shows up over ~3% of files in the inventory, check `references/agency_vocab.md` — release 02 will likely introduce prefixes not seen in the first tranche, and it's faster to add them to the vocab table + `PREFIX_RULES` up front than to discover it after the report is written.
+- **Timeouts**: if any single call to `extract_text.py` risks timing out (large FBI sections are 200+ pages), run it with `[start] [end]` chunk args instead of backgrounding — it's idempotent so chunking is safe.
+- **No OCR by default**: scanned files with no text layer will extract as 0-char and get flagged as "needs OCR" in the report's "What's missing" section — that's expected, not a bug.
+- **Cross-tranche question**: since you'll have both `release_01/` and `release_02/` side by side, "what's new vs. release 1?" becomes an easy follow-up once both reports exist — worth asking for once you're at that point.
+
+Say the word when the files are down and I'll kick off `run_all.py` against the path.

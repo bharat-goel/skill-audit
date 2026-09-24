@@ -1,0 +1,8 @@
+Fastest path is usually a fixed pipeline you build once now, so on drop day you just run it: **(1)** bulk-download/mirror the tranche with a script rather than clicking through the site by hand, **(2)** normalize it — OCR any scanned PDFs, extract text/tables into a consistent format, and diff against release 01 to isolate what's actually new, **(3)** hand the normalized corpus to Claude in batches (chunked by document or topic, since a "tranche" from a .gov release is usually too large for one context window) to extract key facts/claims with citations back to source pages, then **(4)** have a final pass stitch those extracts into one written report. The main tradeoff is speed vs. rigor: if you skip the diff-against-release-01 step you'll resummarize things you already covered, and if you skip citations back to source you'll end up unable to verify claims later.
+
+To make this concrete rather than generic, a few things would help:
+- What format is release 01/02 in — PDFs (scanned or text), spreadsheets, HTML pages?
+- Roughly how large (dozens of docs vs. thousands of pages)?
+- Did you already build any tooling for release 01, or is this the first time?
+
+If you want, I can build the actual download → extract → diff → summarize → report pipeline as a script (or a Claude Code skill you invoke each time a release drops) once I know the format.

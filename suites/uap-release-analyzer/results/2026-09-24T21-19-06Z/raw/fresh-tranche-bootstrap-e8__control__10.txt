@@ -1,0 +1,5 @@
+Fastest path: a small script that bulk-extracts text from whatever the tranche contains (`pdftotext`/OCR for scanned PDFs, or direct parsing for structured formats), chunks it, and feeds it to Claude via the API for extraction + summarization into a structured report template — this turns "pile of files" into "draft report" in one pipeline run with no manual triage.
+
+Main tradeoff: that gets you a first-pass report fast but flattens nuance (cross-document connections, ambiguous context) that a human skim would catch — so plan on a human review pass over the draft before treating it as final, especially for anything you'd cite.
+
+Once release 02 actually drops, tell me the file formats/volume and what the report needs to cover (summary, timeline, entity list, etc.) and I'll build the extraction + report pipeline then.

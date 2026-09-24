@@ -1,0 +1,10 @@
+Fastest path: build the pipeline now, before the drop, so release day is just "run it."
+
+1. **Ingest** — drop the files into a folder; if they're PDFs/scans, a quick script (or Claude Code directly) to extract text (and OCR if scanned) beats opening each one by hand.
+2. **Triage** — have Claude Code skim every doc for a one-line summary + key entities/dates, so you can spot what actually matters in the tranche before reading deeply.
+3. **Synthesize** — feed the triage output back in and ask for the report structure you want (findings, timeline, notable names, open questions), citing back to source files.
+4. **Publish** — Artifact or a markdown file, whichever you'll actually reread.
+
+The main tradeoff: pre-building a reusable ingest script now is more setup work today but turns "just downloaded release 02" into a single command instead of re-deriving the extraction/triage steps from scratch that day. If you'd rather not invest upfront, doing it ad hoc when the release drops works fine too, just slower per tranche.
+
+Want me to build that ingest/triage/report skill now so it's ready when release 02 lands, or wait until you have the actual files in front of you?

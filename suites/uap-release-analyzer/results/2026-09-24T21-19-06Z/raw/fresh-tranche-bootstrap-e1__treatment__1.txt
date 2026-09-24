@@ -1,0 +1,9 @@
+Fastest path once release 02 lands in a folder:
+
+1. Drop the PDFs into `release_02/` inside your release root (same layout the skill expects).
+2. Run `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report in one go.
+3. Read `REPORT.md`.
+
+If prefixes in release 02 don't match the known agency vocab, `run_all.py` will still finish but the "What's missing" section will flag an oversized OTHER bucket — worth a quick check of `references/agency_vocab.md` before trusting the agency breakdown.
+
+Want me to actually run this once you've got the files downloaded, or are you asking for the game plan ahead of time?

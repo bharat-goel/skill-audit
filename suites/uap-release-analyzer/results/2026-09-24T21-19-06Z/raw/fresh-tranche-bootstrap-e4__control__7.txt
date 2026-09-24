@@ -1,0 +1,5 @@
+The fastest path is to build the pipeline now, before release 02 drops, so on day one it's just "run one command": a small script/skill that (1) unzips/ingests the tranche, (2) OCRs or extracts text from whatever format it's in (PDF/scanned images/spreadsheets), and (3) feeds the extracted content to Claude with a fixed report template (findings, key entities, notable changes vs. release 01) to produce the write-up.
+
+The tradeoff is upfront setup vs. per-release effort: doing it ad hoc each time (just dropping files into a chat and asking for a summary) has zero setup cost but is slower and less consistent release-to-release, especially if the tranche is large or scanned/unstructured.
+
+Want me to sketch that pipeline now? If so, tell me what release 01 looked like — file types, rough size, and what "report" should contain (summary, timeline, entity list, diff from the prior release, etc.).

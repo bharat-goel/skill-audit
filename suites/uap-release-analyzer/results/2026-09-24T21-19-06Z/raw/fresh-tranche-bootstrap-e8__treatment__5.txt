@@ -1,0 +1,19 @@
+Once release 02 is downloaded, run the bundled pipeline in order:
+
+```
+python3 scripts/run_all.py <path-to-release_02-parent-dir>
+```
+
+That chains all four steps against `release_02/`:
+
+1. **inventory.py** — classifies every file by agency prefix, gets page counts, writes `inventory.csv`
+2. **extract_text.py** — pulls text layers into `text/*.txt` (if a call times out on the big FBI sections, run it as `extract_text.py <root> <start> <end>` in chunks of ~25 files instead of backgrounding it)
+3. **analyze.py** — builds `analytics/` (top terms, redaction markers, entities, cross-doc patterns)
+4. **build_report.py** — writes the final `REPORT.md`
+
+A few things worth knowing going in:
+- If release 02 introduces filename prefixes not in `references/agency_vocab.md`, they'll land in an `OTHER` bucket — worth extending the vocab table (and `PREFIX_RULES` in the scripts) if `OTHER` creeps past ~3%, rather than letting it skew the agency breakdown.
+- OCR isn't run automatically — scanned files with no text layer show up as 0-char and get flagged in the report's "what's missing" section, not silently dropped.
+- Since you'll have both `release_01/` and `release_02/` on disk, that's a natural moment to ask for a release-over-release comparison (new agencies, new locations, redaction-density shifts) as a follow-up once both reports exist.
+
+So: download → `run_all.py` → read `REPORT.md`. Want me to actually kick that off once the files land, or are you just planning ahead?

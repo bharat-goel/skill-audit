@@ -1,0 +1,3 @@
+- **(b)(1)** — exempts info that's properly classified for national security under an executive order (military plans, intelligence sources/methods, etc.).
+- **(b)(6)** — exempts info that would be an unwarranted invasion of personal privacy (names, personal details of individuals in the record).
+- **NOFORN** — "No Foreign Dissemination"; marks intelligence/classified info that cannot be shared with foreign nationals or governments.

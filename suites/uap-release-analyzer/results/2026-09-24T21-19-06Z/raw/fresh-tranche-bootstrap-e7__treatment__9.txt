@@ -1,0 +1,8 @@
+The fastest path is: run `scripts/run_all.py <release_02_path>` — it chains inventory → extract_text → analyze → build_report in one shot, and each step is idempotent/incremental so you can safely re-run if something times out partway through.
+
+Two things worth knowing going in:
+
+1. **New filename prefixes are likely.** If release 02 introduces prefixes not in `references/agency_vocab.md`, they'll fall into `OTHER`. If `OTHER` exceeds ~3% of files, that's the signal to extend the vocab table + `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Text extraction may need chunking.** If you're running in an environment with a per-call timeout, use `extract_text.py <root> [start] [end]` in batches of ~25 pages per file instead of the full `run_all.py` sweep for that step alone — the FBI sections in particular tend to be 200+ pages.
+
+Once you have the tranche downloaded, just point me at the folder and I'll run the pipeline.

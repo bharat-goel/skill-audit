@@ -1,0 +1,8 @@
+Fastest path once `release_02/` lands on disk:
+
+1. **One command:** `python scripts/run_all.py <release_root>` runs inventory → text extraction → analytics → report in sequence against that folder, producing `inventory.csv`, `text/*.txt`, `analytics/*`, and `REPORT.md`.
+2. **Watch the terminal, not the report, first.** If extraction stalls on 200+ page FBI serials, that's expected — chunk it manually with `extract_text.py <root> <start> <end>` instead of letting one call time out.
+3. **Check the `OTHER` bucket in `inventory.csv` before trusting the report.** If new filename prefixes show up (release 02 will likely have some), add them to `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py` *before* generating the report — otherwise those files get miscounted or dropped from the agency breakdown silently.
+4. Read `REPORT.md`, section 10 ("What's missing") first — it tells you what's OCR-gapped or unparsed before you trust anything above it.
+
+Since you'll then have two tranches side by side, it's also worth having me diff `release_01/analytics` against `release_02/analytics` for a "what's new" pass — say the word when it's downloaded and I'll run the pipeline plus that comparison.

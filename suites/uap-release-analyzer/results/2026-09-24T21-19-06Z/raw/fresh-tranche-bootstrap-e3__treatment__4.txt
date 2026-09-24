@@ -1,0 +1,13 @@
+Fastest path once release 02 lands in a folder:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot, and every step is idempotent/incremental, so if the extraction step times out partway (common with the bigger FBI PDFs in a 45-second-call sandbox), just re-run it — it skips files already done. If you need to babysit a large tranche in chunks, you can instead call `extract_text.py <release_root> [start] [end]` yourself in batches of ~25 pages before running `analyze.py` and `build_report.py`.
+
+Two things worth doing at the start, not after the fact:
+- If any filenames use prefixes not in `references/agency_vocab.md`, add them there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before running — otherwise they'll pile up in the `OTHER` bucket.
+- Since you'll then have `release_01/` and `release_02/` side by side, it's worth asking for a "what's new vs release 01" comparison once both reports exist.
+
+End state is `REPORT.md` in the release root, readable in about ten minutes, with an explicit "what's missing" section for anything unOCR'd or unparsed. Just point me at the folder when it's downloaded and say "analyze this release."

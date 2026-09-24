@@ -1,0 +1,13 @@
+Fastest path once release 02 lands in a folder: run the whole pipeline in one shot with `scripts/run_all.py <release_root>`, which chains the four stages —
+
+1. **Inventory** (`inventory.py`) — walks the files, classifies by agency prefix, records page counts → `inventory.csv`
+2. **Extract text** (`extract_text.py`) — pulls text layers into `text/` (scanned files come back 0-char, that's expected — flagged later as OCR-needed, not run by default)
+3. **Analyze** (`analyze.py`) — builds `analytics/` (top terms, agency cross-refs, entities, redaction markers, cross-doc patterns)
+4. **Report** (`build_report.py`) — writes the standardized `REPORT.md`
+
+So concretely: point me at the download folder and say "analyze it," and I run `run_all.py` on it — a few minutes for a tranche this size, done in-turn rather than backgrounded. Two things worth flagging before that:
+
+- If release 02 has filename prefixes not in the current agency vocab, `OTHER` will show up in the inventory — I'll extend `references/agency_vocab.md` and the `PREFIX_RULES` rather than let it sit unclassified.
+- Since you'll have `release_01/` sitting alongside it, I'd add a "what's new vs. release 01" comparison pass at the end — worth doing automatically rather than waiting for you to ask.
+
+Just give me the path when it's downloaded.

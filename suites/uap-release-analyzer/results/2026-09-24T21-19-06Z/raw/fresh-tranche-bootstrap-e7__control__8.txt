@@ -1,0 +1,5 @@
+The fastest path is to have the pipeline built *before* release 02 drops, not after: a small script that (1) downloads/unzips the tranche and diffs filenames/hashes against release 01 so you only process what's new, then (2) hands the new files to Claude Code (or a subagent fan-out if it's large) to extract and summarize into a templated report structure you define now. When the drop happens, you run one command instead of designing the workflow under time pressure.
+
+The main tradeoff: full auto-summarization is fast but risks flattening nuance or missing a buried detail — better to have Claude produce a structured first-pass report with citations back to source files/pages, then you spot-check the claims that matter most rather than reading everything raw.
+
+Want me to set up that download-diff-summarize scaffold now, so it's just "run it" when release 02 lands? I'd need to know the tranche's file format (PDFs, a zip of documents, etc.) and roughly how big it is.

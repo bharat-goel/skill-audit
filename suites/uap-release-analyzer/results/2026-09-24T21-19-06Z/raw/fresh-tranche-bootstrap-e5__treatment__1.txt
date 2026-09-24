@@ -1,0 +1,13 @@
+Fastest path: run the bundled pipeline end-to-end, then extend the vocab if needed.
+
+1. **Drop the files** into `release_02/` alongside your existing `release_01/` (sibling folders let the report pick up cross-tranche comparisons).
+2. **Run the four scripts in order** (or just call `run_all.py` once):
+   - `scripts/inventory.py release_02` → `inventory.csv`
+   - `scripts/extract_text.py release_02 [start] [end]` → `text/*.txt` (chunk this if any single call risks timing out — it's idempotent, so re-running just fills in gaps)
+   - `scripts/analyze.py release_02` → `analytics/`
+   - `scripts/build_report.py release_02` → `REPORT.md`
+   - or simply: `scripts/run_all.py release_02`
+3. **Check the `OTHER` bucket** in `inventory.csv` before trusting the report. War.gov often introduces new filename prefixes each drop — if `OTHER` is more than ~3% of files, add the new prefixes to `references/agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py`, then re-run steps 1 and 3 (fast, since text extraction doesn't need to redo).
+4. **Read `REPORT.md`** — it's structured the same way every time (inventory → narrative → locations → terminology → agencies → year clusters → redactions → notable files → cross-doc patterns → what's missing → source list), so once you've read one tranche's report the next is skimmable in the same order.
+
+Total hands-on time is just watching the `[N/total]` progress lines during extraction — everything else is one command each. When you're ready to actually run it, point me at the folder and I'll drive the pipeline.

@@ -1,0 +1,14 @@
+Once release 02 lands in a folder, the fastest path is a single command:
+
+```
+python3 scripts/run_all.py <path/to/release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report writeup, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` in sequence. It's idempotent, so if a step times out partway (the FBI PDF sections can run 200+ pages) you can just rerun it — completed files are skipped.
+
+Two things worth doing alongside it:
+
+1. **Check the `OTHER` bucket in `inventory.csv` first.** If release 02 introduces new filename prefixes, they'll land as `OTHER` in the agency classification, and if that's >3% of files it's a sign to extend `references/agency_vocab.md` + the `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown in the report.
+2. **If you have `release_01/` sitting alongside it**, mention that when you kick this off — the report can call out what's new vs. release 1 (new agencies, new locations, term frequency shifts) rather than just describing release 02 in isolation.
+
+Realistically: a few minutes of script runtime plus however long the vocab check takes, and you're at a readable `REPORT.md`. Just point me at the folder when it's down and I'll run the pipeline.

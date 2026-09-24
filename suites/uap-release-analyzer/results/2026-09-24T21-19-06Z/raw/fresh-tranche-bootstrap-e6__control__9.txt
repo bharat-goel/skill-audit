@@ -1,0 +1,5 @@
+The fastest path is a two-stage pipeline: (1) a bulk-extraction pass — OCR if the tranche is scans/PDFs, then feed each doc through Claude with a fixed extraction schema (entities, dates, claims, anomalies) so every file produces the same structured JSON regardless of length — and (2) a synthesis pass where you hand all the extracted JSON back to Claude in one context to produce the narrative report, since letting one model draft prose per-document first just creates redundant editing work later.
+
+The main tradeoff is extraction schema rigidity vs. flexibility: a tight schema makes the synthesis pass fast and consistent but can miss things that don't fit the fields you predefined, so it's worth a quick first pass on a handful of files to see what fields actually matter before running the schema across the whole tranche.
+
+Two things would change the approach a lot: what format release 02 actually ships in (native text/PDF vs. scanned images needing OCR), and roughly how many documents/pages we're talking about. What do you know about those so far?

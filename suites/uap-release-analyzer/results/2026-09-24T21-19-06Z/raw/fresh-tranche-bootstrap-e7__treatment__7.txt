@@ -1,0 +1,16 @@
+Fastest path once release_02 lands, from your download folder to a finished report:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report writeup in one call, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` into `<release_root>`. Point `<release_root>` at the parent folder containing the `release_02/` files.
+
+A couple of things worth doing on a fresh tranche specifically:
+
+- **Watch for `OTHER`-bucket filenames.** If any prefixes in release_02 aren't in `references/agency_vocab.md`, inventory will dump them in `OTHER`. If that bucket exceeds ~3% of files, add the new prefixes to `agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- **If your sandbox has a per-call timeout**, don't run `run_all.py` blind on 200+ page FBI sections — call `extract_text.py <release_root> <start> <end>` in chunks of ~25 instead; it's idempotent so you can resume.
+- **Don't run OCR.** Scanned files will show up as 0-char text — that's expected, and the report will flag them under "What's missing" rather than silently omitting them.
+- **If you also still have `release_01/` in the parent folder**, mention it and I'll add a release-over-release diff (new locations, new names, agency mix shift) as a bonus section rather than treating them as separate reports.
+
+Just give me the path once it's downloaded and I'll run the pipeline.

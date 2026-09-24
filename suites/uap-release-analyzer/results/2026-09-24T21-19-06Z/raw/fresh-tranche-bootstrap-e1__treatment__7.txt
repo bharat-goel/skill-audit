@@ -1,0 +1,14 @@
+Fastest path once you've got `release_02/` sitting on disk:
+
+1. Drop it alongside `release_01/` under the same `release_root/` (so the report can also flag what's new vs. release 1).
+2. Run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → report in one shot.
+3. Skim the printed `[N/total]` progress and the resulting `REPORT.md`.
+
+Two things worth doing before you kick it off:
+
+- **Check for new filename prefixes.** If war.gov changes naming conventions between tranches, anything not in `references/agency_vocab.md` lands in `OTHER`. If `OTHER` comes out >~3% of files, add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+- **If your sandbox has a per-call timeout**, don't run `run_all.py` as one giant call for the extraction step — call `extract_text.py <release_root> <start> <end>` in batches of ~25 pages/files instead. It's idempotent, so partial progress is safe.
+
+Expect a large chunk of scanned FBI/NARA files to extract as 0-char text (no text layer) — that's normal, the report notes them as "OCR needed" rather than analyzing garbage.
+
+When you've actually got the folder in hand, just say "analyze the release at `<path>`" and I'll run the pipeline.

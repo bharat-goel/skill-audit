@@ -1,0 +1,17 @@
+Once you've downloaded release 02, the fastest path is a single command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+That chains all four pipeline steps in order — inventory → text extraction → analytics → report — and each step is idempotent/incremental, so if you re-run it later after adding a few stragglers, it only processes what's new.
+
+Two things worth knowing before you run it:
+
+1. **If your environment has a per-call timeout**, `extract_text.py` (called internally by `run_all.py`) processes the whole folder in one pass. If release 02 has the same 200+ page FBI-style PDFs as release 01 and you're hitting timeouts, run the extraction step manually in chunks first (`scripts/extract_text.py <release_root> <start> <end>`), then run `inventory.py`/`analyze.py`/`build_report.py` (or just `run_all.py` again — it'll skip the already-extracted files).
+
+2. **New filename prefixes.** If release 02 introduces a naming convention not in `references/agency_vocab.md`, those files land in `OTHER`. Worth a quick glance at `inventory.csv`'s agency column after step 1 — if `OTHER` is more than ~3%, add the new prefixes to `agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before generating the report, otherwise the agency breakdown undercounts.
+
+End state: `REPORT.md` in the release root, readable in ~10 minutes, with the "What's missing" section flagging anything that needed OCR or couldn't be pulled.
+
+When you're ready to point me at the actual folder, just give me the path and I'll run the pipeline directly.

@@ -1,0 +1,3 @@
+- **(b)(1)** — Information properly classified for national security reasons (e.g., under an executive order like EO 13526). Withheld to protect classified defense/foreign-relations info.
+- **(b)(6)** — Personal privacy exemption. Withholds info that would constitute a "clearly unwarranted invasion of personal privacy" — names, personal details of private individuals.
+- **NOFORN** — "Not releasable to foreign nationals." A dissemination control marking (paired with a classification level like SECRET) indicating the material can't be shared with foreign governments, foreign nationals, or non-U.S. citizens.

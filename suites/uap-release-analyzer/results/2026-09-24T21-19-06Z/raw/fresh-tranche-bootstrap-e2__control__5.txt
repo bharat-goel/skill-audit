@@ -1,0 +1,5 @@
+The fastest path is to have the pipeline built and tested *before* release 02 drops, so "just downloaded" turns into "report" in one command: a script that (1) unpacks/normalizes whatever format the tranche comes in (PDFs → OCR/text extraction if scanned, else direct parse), (2) feeds the docs to Claude in batches for extraction/summarization against a fixed set of questions you care about, and (3) assembles the structured outputs into a report draft you edit rather than write from scratch.
+
+The main tradeoff: building that pipeline now requires guessing the file format (PDF bundle? spreadsheet? individual docs?) and report structure ahead of time — if release 02 doesn't match release 01's shape, some of it needs reworking on the day.
+
+Want me to build that pipeline now, based on how release 01 was formatted/structured (if you have it or a link to it)?

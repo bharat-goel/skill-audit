@@ -1,0 +1,3 @@
+Once you've got release 02 downloaded, run `scripts/run_all.py <release_root>` — it chains inventory → text extraction → analytics → REPORT.md in one shot, so "just downloaded" to "readable report" is a single command in most cases.
+
+The one thing that can slow that down: if release 02 introduces new filename prefixes not in `references/agency_vocab.md`, those files fall into an `OTHER` bucket rather than being properly classified — worth a quick glance at the inventory's `OTHER` count before trusting the report, and adding new prefixes to the vocab table + `PREFIX_RULES` if it's more than a few files.

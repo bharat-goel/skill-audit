@@ -1,0 +1,13 @@
+Fastest path once release 02 lands in a folder:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report in one shot and writes `REPORT.md` at the end. Since the scripts are idempotent/incremental, if a call times out partway through (the FBI sections can be 200+ pages) you can just rerun it and it'll pick up where it left off — or fall back to `extract_text.py <root> [start] [end]` in chunks if needed.
+
+Two things worth doing manually alongside that, since they're not fully automatic:
+- If any filenames don't match the known agency prefixes, they'll land in `OTHER` — worth eyeballing and adding new prefixes to `references/agency_vocab.md` + `PREFIX_RULES` if `OTHER` is more than a few files.
+- OCR isn't run by default (scanned PDFs come back as 0-char text, flagged in the report's "what's missing" section) — only worth doing as an explicit follow-up if you actually need those pages.
+
+If release_01 is still sitting in the parent folder, having both around also makes "what's new in release_02 vs release_01" a natural next question I can answer once both reports exist.

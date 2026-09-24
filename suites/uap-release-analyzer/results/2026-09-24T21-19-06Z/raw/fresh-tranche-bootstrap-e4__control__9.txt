@@ -1,0 +1,5 @@
+Fastest path, assuming you don't have tooling for this yet: when the files land, point me (Claude Code) at the download folder and I'll extract text from whatever formats are in there (PDF/OCR if scanned, plain text otherwise), and write a structured report — organized by theme/entity, with citations back to source files — as a markdown or artifact doc in one pass. That's zero setup now but the process is re-derived each time and quality depends on how messy the files are.
+
+The alternative is spending an hour now building a small repeatable script (ingest → extract → summarize → diff-against-release-01 → report template) so release 02 (and 03, 04...) runs consistently and faster — worth it only if you expect more tranches after this one.
+
+Is this a series you're tracking release-over-release, and do you know the file formats war.gov tends to drop (PDFs, scans, CSVs)? That'll decide which of these is actually faster for you.

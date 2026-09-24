@@ -1,0 +1,7 @@
+The fastest repeatable path is a small script you set up now, before release 02 drops, so the day it lands you just run one command:
+
+1. **Extract** — unzip the tranche, run everything through `pdftotext`/OCR (`ocrmypdf` for scans) into plain text, one file per document.
+2. **Summarize** — batch-feed the text files to Claude with a fixed extraction prompt (key facts, dates, entities, anomalies) so every doc gets a consistent structured summary instead of you reading each one.
+3. **Assemble** — concatenate the structured summaries into a single markdown report, with Claude doing a final pass to dedupe/cross-reference and write the narrative.
+
+Main tradeoff: building this pipeline (a script + a fixed prompt) costs you an hour now but turns release-day into minutes; skipping it means you're doing manual reading/summarizing from scratch each time a tranche drops. Since you mention "release 02" implying there was a release 01, want me to build that script now using whatever you did last time as the template?

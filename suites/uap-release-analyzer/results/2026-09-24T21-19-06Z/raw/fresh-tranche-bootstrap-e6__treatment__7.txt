@@ -1,0 +1,20 @@
+Fastest path once release 02 lands: drop the files in a folder and run one script.
+
+```
+python3 scripts/run_all.py <path_to_release_02_folder>
+```
+
+That chains inventory → text extraction → analytics → report, and it's idempotent/incremental, so if a chunk times out or you re-run it, already-done files are skipped rather than reprocessed. Concretely:
+
+1. **Inventory** (`inventory.py`) — classifies every file by agency from the filename prefix, gets page counts, writes `inventory.csv`.
+2. **Extract text** (`extract_text.py`) — pulls text per PDF into `text/`. If it's a big batch (the last tranche had 200+ page FBI sections) and you're running in a sandbox with call timeouts, do it in chunks: `extract_text.py <root> 1 25`, `26 50`, etc.
+3. **Analytics** (`analyze.py`) — term counts, agency cross-refs, redaction markers, entities — fast even on hundreds of thousands of characters.
+4. **Report** (`build_report.py`) — writes `REPORT.md` in the fixed 11-section format (inventory → what's in it → locations → phenomena terms → agencies → years → redactions → notable files → cross-doc patterns → what's missing → source files).
+
+Two things worth doing proactively for release 02 specifically:
+- **Check for new filename prefixes.** If more than ~3% of files land in the `OTHER` bucket, that's the signal to add new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in the scripts before trusting the agency breakdown.
+- **Compare against release 01.** Since you'll have both tranches side by side, it's worth asking "what's new vs. release 01" — new locations, new agencies, names that now show up in both — once the report's built.
+
+I won't run OCR by default (scanned files with no text layer get flagged in "What's missing," not silently skipped) — that stays a manual follow-up since it can take hours on thousands of pages.
+
+Just point me at the folder when it's downloaded and I'll run the pipeline.

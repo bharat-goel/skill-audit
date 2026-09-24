@@ -1,0 +1,5 @@
+Fastest path once you have the files locally: (1) normalize everything to text — OCR any scanned PDFs, extract text from the rest — into one directory; (2) have an LLM pass over each doc (or chunk) to pull out key facts/entities into structured notes rather than reading raw dumps; (3) synthesize those notes into a single report with citations back to source files/pages.
+
+The main tradeoff is chunking strategy: feeding whole documents individually is simpler and gives higher fidelity but is slower and costlier for a large tranche, while batching/summarizing hierarchically (per-doc summary → cluster summary → report) scales better but risks losing specific details unless you keep source pointers at each level.
+
+If you want, I can build this as a repeatable script/pipeline now (OCR + extraction + summarization + report assembly) so when release 02 actually drops you just point it at the download folder — want me to set that up, and do you know roughly how many files/what format (PDF scans, text, spreadsheets) release 02 will be?

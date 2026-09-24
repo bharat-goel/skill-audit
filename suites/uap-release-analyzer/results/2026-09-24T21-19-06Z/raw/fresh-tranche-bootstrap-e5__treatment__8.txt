@@ -1,0 +1,13 @@
+Once you've downloaded release 02 into its own folder (e.g. `release_root/release_02/`), the pipeline is one command:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That runs inventory → text extraction → analytics → report in sequence, and writes `REPORT.md` at the end — the same standardized 11-section report as release 01, so they're directly comparable. It's idempotent, so if a call times out partway (extraction can be slow on 200+ page FBI serials) you can just re-run it and it'll skip finished work.
+
+One thing worth doing *before* you run it: check the new filenames against `references/agency_vocab.md`. If release 02 introduces new prefixes, they'll fall into an `OTHER` bucket rather than being classified — worth fixing at the vocab/script level rather than after the fact if `OTHER` is more than a few percent of files.
+
+Since you'll then have two releases side by side, I'd also flag "what's new vs. release 01" as the natural follow-up question — happy to diff the two `inventory.csv`/`analytics/` sets once both exist.
+
+When you've got the files downloaded, just point me at the path and I'll run it.

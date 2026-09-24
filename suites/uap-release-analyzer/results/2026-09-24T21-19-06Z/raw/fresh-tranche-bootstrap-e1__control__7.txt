@@ -1,0 +1,5 @@
+That depends entirely on what shape the release comes in — war.gov tranches have varied between plain PDFs, scanned image PDFs needing OCR, and structured data (spreadsheets/CSVs). The fastest reliable path is a repeatable local pipeline: (1) a script that unzips/inventories whatever lands, (2) text extraction (direct PDF text where possible, OCR fallback like Tesseract or a vision-capable model for scans), (3) Claude summarizing/tagging each doc against whatever angle you care about, and (4) a template that assembles those summaries into your report format — built once now, so on release day it's just "point script at new folder, run."
+
+The tradeoff: building this now means guessing at the format; if release 02 turns out structured differently than release 01, parts of the extraction step need rework anyway.
+
+Two things would let me actually build this instead of describing it: what did release 01 look like (file types), and do you have it locally to test against, or should I build against assumptions?

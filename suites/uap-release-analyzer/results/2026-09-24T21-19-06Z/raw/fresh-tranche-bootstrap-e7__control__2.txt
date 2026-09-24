@@ -1,0 +1,9 @@
+Fastest path, assuming a typical bulk document dump (PDFs/CSVs/zips):
+
+1. **Ingest & diff** — a small script that unzips into a working dir, checksums everything, and diffs filenames against release 01 so you're only triaging what's new.
+2. **Normalize to text** — bulk `pdftotext` (or OCR for scanned pages) and direct parsing for any CSV/JSON, dumped into one flat, greppable folder.
+3. **Hand it to me in one shot** — point me at that folder and ask for a structured summary/report; I can read the whole batch faster than manual triage, so the real bottleneck becomes step 2's conversion quality, not analysis.
+
+Main tradeoff: if a chunk of the tranche is scanned/low-quality PDFs, OCR errors will cap how good the report can be — better for me to flag illegible sections than silently guess at their content.
+
+If you want, I can write the ingest/normalize script now so it's just "run it" the moment release 02 lands — let me know the expected file format (PDF tranche, CSV/data release, mixed zip, etc.) and where you'd be downloading from.

@@ -1,0 +1,8 @@
+A few things determine the fastest path here, so quick check before I sketch it:
+
+- What format does the tranche come in (PDFs, scanned images, spreadsheets, a mixed dump)?
+- Was there a "release 01" you already processed — is there an existing script/pipeline I should extend, or is this greenfield?
+
+In general terms, the fastest route is usually: a small ingest script that unzips/organizes the new files → OCR or text-extraction pass for anything non-text-native → a Claude-driven extraction step (structured JSON per document: entities, dates, claims) → an aggregation pass that rolls those into a draft report. The main tradeoff is upfront pipeline-building time vs. ad-hoc reading — worth automating only if release 02 is large or you expect release 03+.
+
+If you tell me the format and whether release 01 already has tooling, I can build the actual ingest→extract→report pipeline now rather than guessing at its shape.

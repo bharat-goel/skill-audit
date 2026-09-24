@@ -1,0 +1,7 @@
+I don't have any context on this from earlier — no memory or files reference war.gov, a "release," or a "tranche." Before I can suggest a concrete pipeline, I need to know:
+
+1. **What is release 02, specifically?** (e.g., a set of PDFs/documents, a structured dataset, FOIA records — and roughly how large)
+2. **What did you do for release 01** (if there was one)? Any script or process already in place I should build on?
+3. **What does "report" mean here** — a summary of contents, an analysis answering specific questions, something formatted for others to read?
+
+Once I know the format of the tranche and what the report needs to contain, I can sketch the fastest path (e.g., download → extract/OCR → chunk → targeted extraction → draft → review). Right now I'd just be guessing at the pipeline shape.

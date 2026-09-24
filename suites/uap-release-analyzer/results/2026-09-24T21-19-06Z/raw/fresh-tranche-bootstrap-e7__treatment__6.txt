@@ -1,0 +1,14 @@
+Fastest path from a fresh `release_02/` download to a readable report:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That's the one command — it chains inventory → extract → analyze → report in order. Given the size of release 01 (2.5 GB / 4,000 pages), expect the extraction step to be the slow part; if you're in a sandbox with per-call timeouts, run `extract_text.py` in chunks (`[start] [end]` args) instead of `run_all.py` for that step alone — it's idempotent, so you can pick up where a timeout left off.
+
+Two things worth doing before you hit go:
+
+1. **Check for new filename prefixes first.** Point me at the folder and I'll skim filenames before running inventory — if release 02 introduces prefixes not in `references/agency_vocab.md`, they'll fall into `OTHER`, and if that bucket exceeds ~3% of files it's a sign the vocab needs extending (add to `agency_vocab.md` + `PREFIX_RULES` in `inventory.py`/`analyze.py`) rather than treating it as noise in the report.
+2. **Cross-tranche diff.** Since you'll have `release_01/` sitting alongside it, the natural next question is "what's new in 02 vs 01" — I can do a quick comparison pass (new agencies, new locations, redaction-pattern shifts) once both reports exist.
+
+So in practice: drop the files in, tell me the path, and I'll run `run_all.py`, watch for OCR gaps and OTHER-bucket overflow, and hand you `REPORT.md`.

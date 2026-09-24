@@ -1,0 +1,6 @@
+I don't have any context here on what release 01 looked like or what format these files come in (PDFs, scanned images, spreadsheets, video), and that determines the pipeline. Two quick questions:
+
+1. What did you do with release 01 — do you have a script/pipeline already, or was that manual?
+2. What file types are we expecting, roughly what volume, and what should "report" mean — a summary of contents, an analysis against specific questions, or something else?
+
+If you want a generic starting shape while you check: **ingest → extract text (OCR if scanned) → tag/index by topic or entity → have me draft the report against a template you define → you review/edit.** The bottleneck is almost always OCR quality and de-duplication if it's a document dump — worth knowing in advance if that's what you're dealing with.

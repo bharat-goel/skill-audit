@@ -1,0 +1,5 @@
+Fastest path: don't read documents one by one — build a two-stage pipeline. Stage 1 is mechanical extraction (OCR any scanned PDFs, normalize filenames/metadata, split into per-document text) so everything is machine-readable; stage 2 is an LLM pass that summarizes and tags each document (entities, dates, key claims) in parallel, then a synthesis pass that rolls those summaries into a structured draft report with citations back to source pages.
+
+The main tradeoff is speed vs. trust: this gets you a full draft in the time it takes to run the batch, but you still need a manual spot-check pass against the original pages before treating any quote or claim as solid, since bulk LLM summarization on a large tranche will occasionally misattribute or flatten nuance.
+
+If you want, once release 02 actually drops I can help you script the extraction/summarization pipeline against the real file formats — just point me at the tranche when it lands.

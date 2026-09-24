@@ -1,0 +1,8 @@
+For a document tranche like that, the fastest reliable path is a two-stage pipeline rather than reading everything serially yourself:
+
+1. **Ingest + extract**: a small script that unzips/downloads the files, converts each to text (OCR if any are scanned PDFs), and tags them with metadata (filename, date, doc type) — this part should just be code, not agent time.
+2. **Parallel summarize, then synthesize**: fan out per-document summarization to subagents (or batched Claude calls) since docs are independent, but always follow with one final synthesis pass that reads all the summaries together and writes the actual report — skipping that last pass is the main failure mode, since parallel summaries alone read as disjointed and miss cross-document connections (e.g., the same event described in two different files).
+
+The main tradeoff is speed vs. coherence: more parallelism in step 2 is faster but pushes more weight onto that final synthesis step to hold the narrative together.
+
+I'd hold off building the actual pipeline until release 02 is out and you can show me the real file format (PDF bundle? individual links? a manifest?) — that determines the extraction step. Want me to sketch the script now so it's ready to run the moment you download it, or wait until you have a sample file to test against?

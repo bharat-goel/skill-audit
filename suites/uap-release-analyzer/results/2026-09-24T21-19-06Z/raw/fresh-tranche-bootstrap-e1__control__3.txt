@@ -1,0 +1,5 @@
+I don't have any memory of a "release 01" workflow for this, so I'm working from general principles here — happy to be corrected if you've already got scaffolding.
+
+Fastest path: a small repeatable pipeline rather than a manual one-off — (1) a script that unzips/verifies the tranche and dedupes against what you already have, (2) text extraction (plus OCR if any of it is scanned images, which is the usual bottleneck with .gov document dumps), (3) a per-document summarization pass into structured notes, then a rollup pass that synthesizes those notes into the actual report, (4) render to Markdown/PDF. The main tradeoff: pre-building steps 1-4 now, before you've seen release 02's actual format, is faster on drop day but risks breaking if the tranche's structure differs from release 01 (different file types, naming, folder layout).
+
+Two things would sharpen this: what format was release 01 in (PDFs, scans, structured data, mixed), and do you already have a script or repo from that pass I should build on rather than starting fresh?

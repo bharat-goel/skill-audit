@@ -1,0 +1,14 @@
+Fastest path, once release 02 lands in a folder:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That chains all four steps — `inventory.py` → `extract_text.py` → `analyze.py` → `build_report.py` — and is idempotent/incremental, so if you re-run it after adding more files or fixing OCR gaps, it skips what's already done rather than redoing everything.
+
+Two things worth doing before you hit run:
+
+1. **Check for new filename prefixes.** If release 02 introduces agencies/sources not in `references/agency_vocab.md` (anything showing up as `OTHER` beyond ~3% of files), add the prefix rule to that file and `PREFIX_RULES` in `inventory.py`/`analyze.py` first — otherwise a chunk of the tranche gets lumped into an unhelpful bucket.
+2. **If your environment has a per-call timeout**, don't run `extract_text.py` over the whole folder in one shot — pass `[start] [end]` and chunk it (~25 files at a time), since some FBI sections run 200+ pages. `run_all.py` doesn't chunk on its own, so for a big tranche you'd call the extraction step manually in slices rather than going through `run_all.py`.
+
+End result is `REPORT.md` in the release root, plus `inventory.csv` and `analytics/` for anything you want to dig into beyond the report. Since you'll have `release_01/` sitting alongside it, worth asking me for a release_01 vs release_02 diff once both reports exist — that's the natural next question the skill is built to support.

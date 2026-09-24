@@ -1,0 +1,8 @@
+Fastest path once `release_02/` lands on disk:
+
+1. **Run `scripts/run_all.py <release_root>`** — this chains inventory → extract_text → analyze → build_report in one shot. For a tranche this size (a few thousand pages), it should finish in a few minutes.
+2. If your environment has per-call timeouts, `extract_text.py` alone accepts `[start] [end]` slice args — process the release in batches of ~25 files rather than backgrounding the whole thing.
+3. **Check the `OTHER` bucket in `inventory.csv` before trusting the report.** Release 02 will almost certainly introduce new filename prefixes not in `references/agency_vocab.md`. If `OTHER` is more than ~3% of files, add the new prefixes to `agency_vocab.md` and the `PREFIX_RULES` in `inventory.py`/`analyze.py`, then re-run — the pipeline is idempotent so this just fills in the gaps rather than redoing work.
+4. Read `REPORT.md` — that's the ten-minute-read deliverable, with the "What's missing" section telling you what still needs OCR or manual follow-up.
+
+Since you already have `release_01/` on hand, once release_02's report exists it's also worth diffing the two `inventory.csv`/`analytics/` sets for what's new — agencies, locations, terminology — if you want a "what changed" angle rather than just a standalone report.

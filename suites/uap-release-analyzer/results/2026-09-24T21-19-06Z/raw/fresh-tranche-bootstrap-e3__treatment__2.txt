@@ -1,0 +1,16 @@
+For release 02, the fastest path is one command:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+where `<release_root>` is the parent folder containing your `release_02/` directory (same shape as before — the script expects `release_02/` as a subfolder and writes `text/`, `inventory.csv`, `analytics/`, and `REPORT.md` alongside it). It runs inventory → text extraction → analytics → report in sequence, and every step is idempotent, so if it stalls partway (e.g. a per-call timeout on the extraction step) you can just re-run it and it'll skip finished work.
+
+Two things worth doing on the first pass with a *new* tranche:
+
+1. **Check the OTHER bucket.** If any filenames use prefixes not in `references/agency_vocab.md`, they'll land in an "OTHER" agency bucket. If that exceeds ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Expect scanned files with no text layer** — those get 0-char `.txt` files, which is normal and gets flagged in the report's "What's missing" section rather than silently skipped. OCR isn't run automatically (too slow for thousands of pages); it's offered as a follow-up if you want it.
+
+If release_01 is still sitting in the parent folder alongside release_02, say so when you kick this off — I can add a release_01-vs-release_02 comparison (new terms, new agencies, entity overlap) on top of the standard report.
+
+Just point me at the folder when it's downloaded and I'll run the pipeline.

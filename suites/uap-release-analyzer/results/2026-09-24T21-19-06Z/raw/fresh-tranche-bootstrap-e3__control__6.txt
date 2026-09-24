@@ -1,0 +1,10 @@
+Fastest realistic path, assuming you don't yet know the exact file formats release 02 will ship in:
+
+1. **Bulk-fetch + fingerprint** — script the download, hash each file, and diff filenames/hashes against release 01 so you immediately know what's *new* vs. re-shipped.
+2. **Normalize to text** — PDFs/scans through OCR (or direct text extraction if they're not scanned), spreadsheets/CSVs loaded as-is, video/audio transcribed if relevant. This is usually the slowest step and worth automating once, since it'll repeat for release 03+.
+3. **Structured extraction pass** — feed chunks to Claude with a fixed schema (entities, dates, dollar amounts, claims, whatever your report needs) rather than open-ended summarization; structured output is what makes the final report assemble itself instead of you re-reading everything.
+4. **Draft report from the structured data** — a template that pulls from the extracted fields, with citations back to source file/page, then you do a human pass for accuracy on anything load-bearing.
+
+Main tradeoff: steps 2–4 fully automated get you a draft fast, but LLM misreads on scanned/low-quality documents are the real risk — budget a manual spot-check on high-stakes claims rather than trusting the draft outright.
+
+Want me to build this as an actual script/pipeline now (before release 02 drops), or is this just process planning for the moment? If scripting it, knowing the expected file types (PDFs? spreadsheets? raw scans?) would change step 2 a lot.

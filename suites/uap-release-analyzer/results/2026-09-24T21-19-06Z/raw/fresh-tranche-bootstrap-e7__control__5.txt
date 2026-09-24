@@ -1,0 +1,3 @@
+The fastest path is a repeatable pipeline, not a one-off read-through: (1) a script that pulls/dedupes the new files and normalizes format (OCR any scanned PDFs), (2) a batch pass where an LLM does structured extraction per document (key facts, dates, entities, flags) into a common schema, (3) a synthesis pass that rolls those extractions up into the actual report. The main tradeoff is upfront setup time vs. every future release after that being nearly instant — worth it if there's a release 03, 04 coming.
+
+Two things would change my answer: did you already build something for release 01 I should extend, and what format do these documents actually come in (text PDFs, scanned images, mixed)?

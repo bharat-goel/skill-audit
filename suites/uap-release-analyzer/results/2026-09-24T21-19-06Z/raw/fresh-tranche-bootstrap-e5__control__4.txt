@@ -1,0 +1,5 @@
+A few things determine the fastest path here, mainly: what format the tranche is in (PDFs/scans vs. structured data vs. a folder dump), and whether you want summarization or actual analysis (cross-referencing, entity extraction, etc.).
+
+My default recommendation: don't build a custom pipeline — just point Claude Code at the downloaded folder and have it (1) inventory the files, (2) extract/OCR anything that's scanned PDFs, (3) summarize per-document, then (4) synthesize into one report, saved as a file or an Artifact you can read/share. That's "download → point me at it → ask for the report" with no infra to maintain, but it trades off against speed/cost on very large or messy tranches, where a scripted extraction step first would be more reliable than doing OCR/parsing ad hoc through the agent.
+
+When release 02 actually lands, tell me the file types and rough size and I'll set up the fastest concrete path for it rather than guessing now.

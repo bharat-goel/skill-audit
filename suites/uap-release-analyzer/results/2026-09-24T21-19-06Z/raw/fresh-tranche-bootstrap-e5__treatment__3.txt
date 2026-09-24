@@ -1,0 +1,16 @@
+Once you've got release 02 downloaded locally, the fastest path is one command:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains inventory → text extraction → analytics → report in sequence, writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under `<release_root>`. For a tranche the size of the last one (~160 files, thousands of pages), expect it to take a few minutes — it's incremental, so if a step times out or you rerun it, already-processed files are skipped.
+
+Two things worth doing before you hit go:
+
+1. **Check filename prefixes against `references/agency_vocab.md` first.** If release 02 introduces new source agencies or naming conventions, anything unmatched falls into `OTHER`, and once that bucket is above ~3% of files, the report is less useful. Better to extend the vocab (table + `PREFIX_RULES` in `inventory.py`/`analyze.py`) before running than to patch it after.
+2. **If you're running this somewhere with a per-tool-call timeout**, use the chunked form of extraction instead of `run_all.py`'s all-at-once call: `scripts/extract_text.py <release_root> <start> <end>` in batches of ~25 files.
+
+Since you'll have both `release_01/` and `release_02/` on disk at that point, it's also worth asking "what's new vs release 01?" as a follow-up — that's the natural next question once both reports exist, and I can diff the two `inventory.csv`/`analytics/` outputs for that.
+
+Want me to walk through this live once the files land, or are you asking for reference now?

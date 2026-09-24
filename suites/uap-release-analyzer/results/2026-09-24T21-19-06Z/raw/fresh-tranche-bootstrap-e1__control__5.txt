@@ -1,0 +1,8 @@
+The fastest path is to not build the pipeline *after* release 02 drops — set it up now against release 01 (or a sample), so on drop day it's just "point script at new folder, run."
+
+A few things determine the actual shape of that pipeline:
+- What format is the tranche in (PDFs, scanned images needing OCR, spreadsheets, mixed)?
+- Roughly how large — a few dozen files or thousands?
+- What does "report" mean to you — a summary of contents, a diff against release 01, answers to specific questions you're tracking?
+
+Once I know that, the concrete recommendation is usually: a small ingest script (extract/OCR to text + a manifest) → a Claude Code skill that takes the manifest and your report template and drafts the write-up, so the repeatable steps are one command instead of you re-deriving the approach each time. Want to build that skill now against release 01 so it's ready?

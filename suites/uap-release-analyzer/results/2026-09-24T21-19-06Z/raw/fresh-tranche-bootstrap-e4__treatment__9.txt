@@ -1,0 +1,12 @@
+The fastest path is one command: `scripts/run_all.py <release_02_root>` — it chains inventory → text extraction → analytics → report in order, and every step is idempotent so it's safe to re-run if a call times out partway through.
+
+Concretely, once you've downloaded the new tranche:
+
+1. Drop the files under a `release_02/` folder (sibling to `release_01/` if you kept that around — having both in the parent directory automatically makes "what's new vs. release 1" answerable later).
+2. Point me at the root and say "analyze it" — I'll run `run_all.py` which does inventory.csv → text/ extraction → analytics/ → REPORT.md.
+3. If any FBI-style sections are huge (200+ pages), I'll chunk the extraction step with `[start] [end]` rather than background it, so it stays visible in-turn.
+4. One thing worth doing on a *new* tranche specifically: if filenames don't match the known prefix vocab, I'll flag anything landing in `OTHER` and extend `references/agency_vocab.md` before finishing the report, rather than let it accumulate silently.
+
+End result is a `REPORT.md` in the release root, readable in about ten minutes, with an honest "what's missing" section (OCR gaps, un-downloadable inline-viewer files, etc.).
+
+So really: **download → tell me the folder path → I run the pipeline → you read REPORT.md.** No manual steps in between unless a new agency prefix shows up.

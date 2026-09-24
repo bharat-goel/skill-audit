@@ -1,0 +1,16 @@
+The fastest path once release 02 lands in a folder is to run the pipeline end-to-end in one shot:
+
+```
+scripts/run_all.py <release_02_root>
+```
+
+That chains inventory → text extraction → analytics → report, and everything's idempotent/incremental, so if you re-run it later (e.g. after adding more files) it skips already-done work rather than redoing it.
+
+A couple of things worth knowing going in:
+
+- **New filename prefixes will likely show up.** Release 01's classifier only knows the war.gov/FBI/DOW/NASA/DOS/NARA prefixes it's seen so far. If `OTHER` exceeds ~3% of files after inventory, that's the signal to add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in the scripts before re-running analyze/build_report — otherwise a chunk of release 02 gets silently bucketed as unknown.
+- **If your sandbox has a per-call timeout**, run `extract_text.py <root> [start] [end]` in batches instead of relying on `run_all.py`'s single call for that step — some FBI sections are 200+ pages and can blow a 45s window.
+- **Since release 01 already exists as a sibling folder**, the report should call out what's new/changed vs. release 01 in the cross-document section — that's the natural next question once both reports exist.
+- Don't bother with OCR up front — scanned files with empty `.txt` are expected and get flagged in the "What's missing" section; offer OCR only if you actually need those pages.
+
+So: drop the files in, run `run_all.py`, skim `inventory.csv` for an `OTHER` spike, patch the vocab if needed, re-run, then read `REPORT.md`.

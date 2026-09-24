@@ -1,0 +1,14 @@
+The fastest path is the bundled `run_all.py`, which chains all four pipeline steps:
+
+```
+python3 scripts/run_all.py <path/to/release_02>
+```
+
+That runs inventory → extract_text → analyze → build_report in sequence and lands you a `REPORT.md` in the release folder. A few notes for when you actually do this:
+
+1. **Point it at the right folder** — the script expects a `release_root` with the raw PDFs inside (per the layout in the skill: `release_root/release_NN/...`).
+2. **Check the OTHER bucket after inventory runs.** If release 02 introduces new filename prefixes not in `references/agency_vocab.md`, they'll fall into `OTHER`. If that's >~3% of files, add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before moving on — otherwise the agency breakdown in the report will be wrong.
+3. **If extraction times out** on the larger FBI-style PDFs (200+ pages), fall back to `extract_text.py <root> <start> <end>` in chunks of ~25 instead of relying on `run_all.py`'s single call — it's idempotent so re-running just picks up where it left off.
+4. **Cross-tranche comparison is a natural follow-up** once release 01 already exists alongside it — worth asking for once the report's done, since the skill treats "what's new vs release_01" as the obvious next question.
+
+So in practice: drop the download in a `release_02/` folder, run `run_all.py` on it, skim the inventory for `OTHER` stragglers, and you'll have a readable `REPORT.md` in a few minutes. Want me to actually run this once you've got the files downloaded?

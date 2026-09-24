@@ -1,0 +1,16 @@
+Once release 02 is downloaded, the fastest path is a single command:
+
+```
+python3 scripts/run_all.py <release_02_root>
+```
+
+That runs the four-stage pipeline in order — inventory → text extraction → analytics → REPORT.md — and each step is idempotent/incremental, so if you re-run it after adding more files later, it skips what's already done rather than redoing everything.
+
+Two things worth doing alongside that first run:
+
+1. **Watch for `OTHER`-bucket files** in the inventory step. If release 02 introduces new filename prefixes not in `references/agency_vocab.md`, they'll land in `OTHER`. If that bucket exceeds ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Since you'll have release_01 sitting alongside it**, mention you want a comparison and I'll add a "what's new vs. release_01" pass — that's the natural next question once two tranches exist in the same parent folder.
+
+If your sandbox has short per-call timeouts, the extraction step alone might need chunking (`extract_text.py <root> <start> <end>` in batches of ~25 pages) — but `run_all.py` is the one-shot version to try first.
+
+Just point me at the folder when it lands and I'll kick this off.

@@ -1,0 +1,14 @@
+Fastest path once release 02 lands in a folder (say `~/Downloads/release_02/`):
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains all four steps — inventory → text extraction → analytics → report — and writes `REPORT.md` at the end. A couple of things worth knowing before you run it:
+
+1. **New filename prefixes.** If release 02 introduces prefixes not in `references/agency_vocab.md`, they'll fall into `OTHER`. If `OTHER` comes out above ~3% of files, add the new prefixes to the vocab table and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Timeouts on extraction.** If you're running this in a sandboxed/tool-call environment with a per-call time limit, `extract_text.py` alone can be chunked (`[start] [end]` args) — but `run_all.py` itself doesn't chunk, so if the tranche is large (the last one was ~4,000 pages), it may be faster for me to call `extract_text.py` in batches directly rather than via `run_all.py`.
+3. **OCR isn't run automatically.** Scanned files with no text layer will show as 0-char extractions and get flagged in the "What's missing" section — that's expected, not a bug.
+4. **Cross-tranche comparison** — since release_01 will be a sibling folder, "what's new vs. release_01?" becomes answerable by diffing the two `inventory.csv`/`analytics/` outputs once release_02 is done.
+
+When you have the path, tell me and I'll kick off `run_all.py` (or the chunked version if it's big).

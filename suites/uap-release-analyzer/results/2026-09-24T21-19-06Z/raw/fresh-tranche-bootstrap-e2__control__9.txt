@@ -1,0 +1,5 @@
+Fastest path: don't improvise it on the day — build a small repeatable pipeline now, before release 02 drops, so "downloaded tranche" → "report" is a single command. Concretely: a folder-drop script that unzips/normalizes files (OCR any scanned PDFs), a search/index step (grep or a lightweight vector index if it's large), and a Claude Code skill or slash command that reads the indexed content against a fixed report template and writes the draft — you just fill in doc-specific pointers each time instead of re-deriving the workflow.
+
+The tradeoff: building this now costs you an hour or two of setup for a thing that's still hypothetical, versus doing it ad hoc when the files land, which is slower and less consistent release-to-release but requires zero prep.
+
+Two things would let me actually build this rather than describe it in the abstract: what did release 01 look like (file types — PDFs, spreadsheets, emails, scans?), and do you have a report format/template you used last time, or should I help design one?

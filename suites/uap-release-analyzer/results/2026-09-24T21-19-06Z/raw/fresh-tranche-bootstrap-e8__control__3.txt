@@ -1,0 +1,5 @@
+Fastest path: don't build the pipeline *after* the drop — build it now so "just downloaded" triggers a single script. Concretely: a script that bulk-extracts text from whatever format the tranche is in (pdftotext, with OCR fallback via `ocrmypdf`/`tesseract` for scanned pages), then greps/indexes for your keywords of interest across the batch, then feeds the flagged docs (or all of them, chunked) to Claude for per-document summaries, and finally has Claude synthesize those summaries into one report.
+
+Main tradeoff: fully automated summarization is fast but risks missing context a human skim would catch — worth doing a manual spot-check pass on the highest-relevance docs before the report goes out, especially for a document release where sourcing/authenticity matters.
+
+Want me to actually write that extraction+summarize script now (I can stub it against sample files), so it's just `./process.sh release02/` when the drop lands?

@@ -1,0 +1,5 @@
+I don't have context on this specific tranche yet (fresh session, empty directory). The fastest path depends heavily on one thing: **what format the release comes in** — scanned PDFs need OCR before anything else can happen, while text/structured data (JSON, searchable PDFs, HTML) skips straight to analysis.
+
+Assuming it's the common case (a batch of PDFs, some possibly scanned): script the download and dump everything into one folder, convert/OCR to text, then feed the corpus to Claude with a standing prompt template (what to extract, how to structure the report) rather than re-explaining the task each time — that's the main lever for speed since re-deriving the report structure each release is the slow part, not the reading. Tradeoff: a fully scripted pipeline is fast but you should spot-check OCR'd pages against source PDFs before trusting the report, especially anything with numbers or names.
+
+Two things worth pinning down before I build this: what does release 01 (or whatever came before) actually look like format-wise, and do you have a target report structure/template already, or should the first report draft one?

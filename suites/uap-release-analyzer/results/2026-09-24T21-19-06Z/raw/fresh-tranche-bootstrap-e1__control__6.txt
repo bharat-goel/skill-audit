@@ -1,0 +1,9 @@
+Fastest realistic path: build the pipeline now, before the drop, so on release day it's just "point script at folder."
+
+1. **Ingest**: a small script that unzips/organizes the tranche and OCRs any scanned PDFs (many gov releases are image-only scans) into plain text.
+2. **Extract**: run each doc (or chunked doc) through Claude in batch — one pass to pull entities, dates, and a per-doc summary into structured JSON, so you're not re-reading raw text for synthesis.
+3. **Synthesize**: a second pass over the extracted summaries to draft the actual report (themes, timeline, notable items), written to a doc you can read.
+
+Main tradeoff: full automation (script + batched Claude calls, no human in the loop) is fastest but riskiest for a sensitive/scanned corpus — OCR errors or context-free chunking can produce a confidently wrong report. A lighter-touch version keeps a manual spot-check pass between extract and synthesize, costing you maybe 20-30 minutes but catching misreads before they land in the writeup.
+
+Want me to build the ingest+extract script now so it's ready to point at release 02 the moment it's downloaded?

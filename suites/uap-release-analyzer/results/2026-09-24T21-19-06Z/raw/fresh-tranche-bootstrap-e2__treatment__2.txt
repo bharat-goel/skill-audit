@@ -1,0 +1,10 @@
+Fastest path, once `release_02/` lands on disk:
+
+1. **Run the whole pipeline in one shot**: `scripts/run_all.py <release_root>` — this chains inventory → text extraction → analytics → report, so you don't invoke each script by hand.
+2. **Watch for new filename prefixes** as inventory builds — if `OTHER` climbs above ~3% of files, stop and add the new prefix(es) to `references/agency_vocab.md` and the `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py` before continuing, otherwise a chunk of release 02 gets silently misclassified.
+3. **If extraction times out** on the big FBI-style 200+ page PDFs in a sandboxed/45s-call environment, fall back to `scripts/extract_text.py <release_root> <start> <end>` in ~25-page chunks — it's idempotent, so re-running just fills gaps.
+4. Out comes `REPORT.md` in the standard 11-section format, directly comparable to release 01's.
+
+Since you'll then have two tranches side by side, it's worth asking "what's new vs. release_01?" as a follow-up — cross-tranche diffing (new locations, new names, redaction-pattern shifts) is the natural next question once both `inventory.csv`s exist.
+
+When release 02 actually shows up, just point me at the folder and say "run it" — I'll drive `run_all.py` and flag anything that needs a vocab update along the way.

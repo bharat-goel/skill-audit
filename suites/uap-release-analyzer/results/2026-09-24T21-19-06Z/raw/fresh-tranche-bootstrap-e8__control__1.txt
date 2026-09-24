@@ -1,0 +1,5 @@
+For a document tranche like that, the fast path is: bulk-download → extract text (OCR via a tool like `ocrmypdf`/`pdftotext` if scans, straight parsing if native PDFs) → run each doc through a repeatable extraction prompt (key facts, dates, entities) → have Claude synthesize the extracted notes into a single written report. I'd set this up as a small script + prompt pipeline (or a Claude Code skill) now, before release 02 lands, so on drop day it's just "point script at new folder, run."
+
+The main tradeoff: full automation is fast but risky if pages are messy scans — a manual spot-check pass on OCR output before synthesis avoids a report built on garbled text.
+
+Want me to build that pipeline (script + extraction/report prompts) now so it's ready to run the moment you download release 02?

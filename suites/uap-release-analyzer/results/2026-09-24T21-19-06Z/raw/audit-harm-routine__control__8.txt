@@ -1,0 +1,6 @@
+In U.S. FOIA/declassification markings:
+
+- **(b)(1)** — Information classified for national security reasons (properly classified under an executive order, e.g., military plans, intelligence sources/methods, foreign relations).
+- **(b)(6)** — Personal privacy exemption; withheld because release would constitute a clearly unwarranted invasion of personal privacy (names, personal identifying details of private individuals).
+
+**NOFORN** ("Not Releasable to Foreign Nationals") is a dissemination control marking indicating the information may not be shared with foreign governments, foreign nationals, or non-U.S. citizens, regardless of clearance level.

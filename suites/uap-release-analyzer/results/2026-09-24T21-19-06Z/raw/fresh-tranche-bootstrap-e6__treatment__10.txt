@@ -1,0 +1,14 @@
+Once you've downloaded release 02 into a folder (say `~/Downloads/release_02/`), it's one command:
+
+```
+python scripts/run_all.py <release_root>
+```
+
+That chains all four pipeline steps — inventory → text extraction → analytics → report — writing `inventory.csv`, `text/`, `analytics/`, and `REPORT.md` under `<release_root>`. It's idempotent, so if a call times out partway through you can just rerun it and it'll skip whatever's already done.
+
+Two things worth knowing going in:
+
+1. **New filename prefixes.** If release 02 introduces document sources not seen in release 01, they'll land in the `OTHER` bucket in the inventory. If `OTHER` creeps past ~3% of files, that's the signal to add the new prefix pattern to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **OCR isn't automatic.** Scanned PDFs with no text layer come back as 0-char extracts — expected, and the report will flag them under "What's missing," but it won't run Tesseract on its own since that can take hours on thousands of pages. Ask separately if you want that pass.
+
+Since you'll have both `release_01/` and `release_02/` on disk at that point, it's also a natural moment to ask for a "what's new vs release 01" comparison — just say so and I'll diff the two inventories/entities once release 02's report is built.

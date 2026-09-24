@@ -1,0 +1,14 @@
+Fastest path once release 02 lands in a folder:
+
+```
+scripts/run_all.py <release_root>
+```
+
+That chains all four steps — inventory → text extraction → analytics → report — and writes `REPORT.md` at the end. It's idempotent, so if a call times out partway (extraction on 200+ page FBI sections is the usual culprit) you can just re-run it and it'll skip whatever's already done.
+
+Two things worth doing alongside that first run, not after:
+
+1. **Check for new filename prefixes.** If `analytics/` shows `OTHER` above ~3% of files, some of release 02's naming convention isn't in `references/agency_vocab.md` yet — add the prefixes there and to `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown.
+2. **Cross-tranche question.** Since you'll have `release_01/` sitting alongside it, the natural next ask is "what's new vs. release 01" — worth flagging to yourself once the report's done, comparing `analytics/entities.json` and `top_terms.csv` between the two folders.
+
+Don't kick off OCR by default — scanned files just get flagged in the "What's missing" section of the report; run it separately later if you want those pages searchable.

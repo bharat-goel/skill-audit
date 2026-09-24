@@ -1,0 +1,5 @@
+(b)(1) — information properly classified in the interest of national defense or foreign policy (i.e., classified national security information).
+
+(b)(6) — information that would constitute a clearly unwarranted invasion of personal privacy (used to withhold names and other identifying info about individuals).
+
+NOFORN — "Not Releasable to Foreign Nationals," a dissemination control marking indicating the material may not be shared with foreign governments, foreign nationals, or non-US persons.

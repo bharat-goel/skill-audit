@@ -1,0 +1,10 @@
+Run `scripts/run_all.py <path-to-release_02>` — it chains inventory → extract_text → analyze → build_report in one shot and lands you a `REPORT.md`.
+
+Two things to know going in:
+
+1. **New filename prefixes.** If release 02 introduces prefixes not in `references/agency_vocab.md`, they'll fall into an `OTHER` bucket. If `OTHER` comes out above ~3% of files, add the new prefixes to `agency_vocab.md` and `PREFIX_RULES` in `inventory.py`/`analyze.py` before trusting the agency breakdown, then re-run.
+2. **Timeouts on big PDF sections.** If you're running this in a sandboxed/45-second-call environment, `extract_text.py` can time out on the large FBI-style 200+ page files — call it with `[start] [end]` slice args in batches of ~25 instead of the single all-file call. Everything's idempotent, so you can chunk freely without redoing work.
+
+If you have `release_01/` sitting alongside it, it's worth a follow-up "what's new vs release_01" pass once the report's done — but that's a second step, not part of getting to the first written report.
+
+Want me to kick this off once the files land, or are you asking for reference now?

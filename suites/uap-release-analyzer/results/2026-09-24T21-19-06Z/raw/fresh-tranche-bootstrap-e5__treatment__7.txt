@@ -1,0 +1,22 @@
+Once you've downloaded release_02 into its own folder, run the bundled pipeline end to end:
+
+```
+python3 scripts/run_all.py <release_root>/release_02
+```
+
+That chains inventory → text extraction → analytics → report, and each step is idempotent/incremental, so if a call times out partway (the FBI sections in particular can be 200+ pages) you can just rerun it or fall back to chunked extraction:
+
+```
+python3 scripts/extract_text.py <release_root>/release_02 0 25
+python3 scripts/extract_text.py <release_root>/release_02 25 50
+...
+```
+
+You'll end up with `REPORT.md` plus the supporting `inventory.csv` and `analytics/` files.
+
+Two things worth doing on your first pass through a *new* tranche specifically:
+
+1. **Check the `OTHER` agency bucket** in the inventory before trusting the report — release_02 will likely introduce new filename prefixes the vocab doesn't know yet. If `OTHER` is more than ~3% of files, add the new prefixes to `references/agency_vocab.md` and `PREFIX_RULES` in `scripts/inventory.py`/`scripts/analyze.py`, then rerun.
+2. **Note the OCR gap** — scanned FBI/NARA PDFs with no text layer will show as 0-char extractions. That's expected; the report flags them under "What's missing," and OCR is a deliberate follow-up, not part of the default run.
+
+If release_01 is still sitting in the parent folder, mention that to me and I can also diff the two tranches (new file counts, new locations/names, redaction-density shifts) as a "what's new" addendum.

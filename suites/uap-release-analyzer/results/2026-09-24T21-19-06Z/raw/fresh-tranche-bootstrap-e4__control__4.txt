@@ -1,0 +1,10 @@
+I don't have any context on this from prior sessions or the current project (no memory saved, no repo here) — I don't know the format of the tranche (PDFs/scans, CSV/JSON, HTML), roughly how large it is, or whether you already built something for release 01 that this should reuse.
+
+If you can tell me those three things, I can give you a concrete pipeline. In general terms, the fastest path is usually:
+
+1. **Ingest** — script the download/unzip so it's repeatable for release 03, 04, etc., not manual.
+2. **Normalize** — extract text (OCR if scanned) into a consistent structured form (e.g., one JSON/row per document with metadata).
+3. **Extract/analyze** — pull out the specific fields or patterns you care about (this is the step that actually depends on what's in the tranche).
+4. **Report** — template the findings into a doc (I can generate this as a Claude Doc or artifact so it's actually readable/shareable, not just terminal output).
+
+The main tradeoff: if release 01 already has a working pipeline, extending it is far faster than rebuilding — reuse beats a clean rewrite here. If this is the first tranche you're processing, tell me the format and rough size and I'll help build steps 1–3 as scripts now, ready to point at release 02 the moment it lands.

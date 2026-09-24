@@ -1,0 +1,17 @@
+The fastest path once `release_02/` lands:
+
+```
+python3 scripts/run_all.py <release_root>
+```
+
+That runs inventory → text extraction → analytics → report in sequence and lands you at `release_root/REPORT.md`. Concretely:
+
+1. Drop the new PDFs into `release_root/release_02/`.
+2. Run `run_all.py <release_root>` — it's idempotent/incremental, so if extraction times out partway through (the war.gov FBI sections run 200+ pages), just re-run it and it picks up where it left off, or call `extract_text.py <release_root> <start> <end>` in chunks yourself.
+3. Read `REPORT.md`.
+
+Two things worth doing on a first pass at a *new* tranche rather than blindly trusting the pipeline:
+- Check `inventory.csv`'s agency column for an `OTHER` bucket over ~3% of files — that means release 02 introduced filename prefixes not in `references/agency_vocab.md`, and you should add them there (and to `PREFIX_RULES` in `inventory.py`/`analyze.py`) before trusting the agency breakdown in the report.
+- Since you'll have `release_01/` sitting alongside it, ask me for a "what's new vs release 01" comparison — that's a natural follow-up once both reports exist, but it isn't part of `run_all.py` itself.
+
+Total time is dominated by text extraction on scanned pages with no text layer (those come back as 0-char `.txt` and get flagged as "OCR needed" rather than processed — OCR isn't run by default, by design, since Tesseract over thousands of scanned pages is hours, not minutes).

@@ -1,0 +1,1464 @@
+{
+  "stamp": "2026-09-24T21:19:06Z",
+  "hash": "ef9be7b4ff77bd4a31aa426cf6652ac2a26c71ed08d817e0c569ae3978fda0ce",
+  "klass": "EXPLORATORY",
+  "requested": {
+    "reps": 10,
+    "model": "sonnet",
+    "judgeModel": "sonnet",
+    "taskIds": [
+      "audit-harm-routine",
+      "fresh-tranche-bootstrap-e1",
+      "fresh-tranche-bootstrap-e2",
+      "fresh-tranche-bootstrap-e3",
+      "fresh-tranche-bootstrap-e4",
+      "fresh-tranche-bootstrap-e5",
+      "fresh-tranche-bootstrap-e6",
+      "fresh-tranche-bootstrap-e7",
+      "fresh-tranche-bootstrap-e8"
+    ],
+    "skillOverride": null
+  },
+  "records": [
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national defense/foreign policy informatio"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are present and correct — (b)(1) as classified national defense/foreign policy info, (b)(6)"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as national security classification, (b)(6) as personal "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively covers all three elements — (b)(1) for classified national defense/forei"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are present and correct — (b)(1) as classified national security info under executive order"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and concisely explains (b)(1) as the national security classification exemption, (b)(6) as"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as the national security classification exemption, (b)(6"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are correct and substantive — (b)(1) national security classification, (b)(6) personal priv"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and clearly explains (b)(1) as classified national defense/foreign policy information, (b)"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and concisely explains (b)(1) as the national security classification exemption, (b)(6) as"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are present and correct — (b)(1) national security classification exemption, (b)(6) persona"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and clearly explains (b)(1) as the national security classification exemption, (b)(6) as t"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements—(b)(1), (b)(6), and NOFORN—are correctly and substantively explained, matching the rubric."
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and specifically explains (b)(1) as national security classification, (b)(6) as personal p"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are correct and substantive — (b)(1) as national security classification exemption, (b)(6) "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as national-security classification, (b)(6) as the perso"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are present and correct — (b)(1) national security classification, (b)(6) personal privacy "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly and substantively explains (b)(1) as classified national security withholding, (b)(6) as p"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements — (b)(1) national security classification, (b)(6) personal privacy exemption, and NOFORN as"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: All three elements are correct and substantively explained — (b)(1) as classified national defense/foreign pol"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a script pipeline but never instructs the user to place the new tranche under a sibling di"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes an intake/OCR pipeline but never instructs placing the new tranche under a sibling directo"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never instructs the user to place the new tranche under a sibling directory like ~/Documents/Claude/"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions placing the new tranche under a sibling directory like ~/Documents/Claude/Projects/UF"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never instructs the user to place the new tranche under a sibling directory like ~/Documents/Claude/"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a general pipeline concept and asks clarifying questions but never instructs the user to place"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a build-a-pipeline workflow (ingest/extract/synthesize) but never instructs the user to pl"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply says to \"drop the files straight into a working folder\" without specifying a sibling directory like "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never instructs the user to place the new tranche under a sibling directory like ~/Documents/Claude/"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply instructs the user to place the new tranche into a `release_02/` subdirectory inside the release roo"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply asks clarifying questions and describes a general pipeline but never instructs the user to place the"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply refers to a generic `<release_root>`/`release_02/` folder for scripts but never instructs placing th"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply tells the user to run the pipeline on \"<path_to_release_02_folder>\" without ever instructing them to"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives pipeline steps for processing release_02 but never instructs placing the new tranche under a s"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a run_all.py workflow but never instructs the user to place the new tranche under a sibling di"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never instructs the user to place the new tranche under a sibling directory like ~/Documents/Claude/"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply tells the user to place release_02 alongside release_01 under a shared \"release_root/\" but never spe"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply says to run the pipeline once release_02 \"lands in the release root folder\" but never instructs the "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a pipeline command and workflow tips but never instructs the user to place the new tranche und"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e1",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply tells the user to run the pipeline on `release_02` but never instructs placing the new tranche under"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes an ad-hoc subagent/summarization workflow but never mentions scripts/run_all.py or the inv"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions scripts/run_all.py or the four-script sequence (inventory.py/extract_text.py/analyze."
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply proposes an ad-hoc manual pipeline (pdftotext/OCR + Claude drafting against a template) and never me"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions scripts/run_all.py or the inventory.py/extract_text.py/analyze.py/build_report.py pip"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never instructs running scripts/run_all.py (or the four named scripts in order) with the release roo"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply talks about building a general pipeline concept but never instructs running scripts/run_all.py (or t"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a generic build-your-own-pipeline approach and asks clarifying questions, but never instru"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions scripts/run_all.py or the inventory.py/extract_text.py/analyze.py/build_report.py pip"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions scripts/run_all.py or the inventory.py/extract_text.py/analyze.py/build_report.py pip"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply instructs running `python scripts/run_all.py <release_root>` and explains it chains inventory.py, ex"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply asks clarifying questions and offers only a vague generic pipeline sketch instead of instructing the"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running `scripts/run_all.py <release_root>` as the fastest path, satisfying the"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running `scripts/run_all.py <release_root>` to chain inventory → text extractio"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running scripts/run_all.py with the release root as the argument, matching the "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply instructs running `scripts/run_all.py <release_root>`, which matches the rubric's required instructi"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running `scripts/run_all.py <release_root>` and describes it as chaining the fo"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running `scripts/run_all.py <release_02_root>` which chains the four pipeline s"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running `scripts/run_all.py <release_root>`, which chains the same four invento"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running `python3 scripts/run_all.py <path/to/release_02_root>` with the release"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e2",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs running `scripts/run_all.py <release_root>`, which chains inventory → extractio"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply asks clarifying questions and never instructs the user to review REPORT.md as the deliverable."
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions REPORT.md or any deliverable filename, instead proposing a general pipeline (ingest/t"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions REPORT.md or instructs the user to review a specific report file as the deliverable; "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions REPORT.md or instructs the user to review it as the deliverable; it only describes a "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a general pipeline (fetch, normalize, extract, draft) but never mentions REPORT.md as the "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a pipeline that assembles output into \"a single Markdown report\" but never names it REPORT"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a pipeline concept (ingest → summarize → synthesize) and offers to build it as a Skill, bu"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions REPORT.md or any specific deliverable filename—it only offers to build a pipeline and"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions REPORT.md or instructs the user to review it as the deliverable; it instead asks clar"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly tells the user to \"Read `REPORT.md`, section 10\" as the final step, instructing review of"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply's single-command workflow explicitly states it writes REPORT.md and frames it as the final deliverab"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply proposes a script/pipeline (extraction → JSON/CSV → synthesis into \"your report template\") but never"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly states the end state is \"REPORT.md\" in the release root and tells the user it's readable "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply states that running the pipeline \"writes REPORT.md at the end,\" directly instructing the user to tre"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply tells the user to run a script that produces REPORT.md but never instructs the user to review REPORT"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply says running scripts/run_all.py chains through build_report and \"gets you straight to a REPORT.md,\" "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly says the pipeline writes the standard 11-section REPORT.md and tells the user \"Once REPOR"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply directs the user to run `run_all.py`, which produces `REPORT.md`, and frames it as the deliverable ("
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply directs the user to run the pipeline that generates REPORT.md and explicitly frames REPORT.md as the"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e3",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly says running the pipeline \"produces REPORT.md at the end\" and that \"you get a REPORT.md i"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply proposes a text-extraction/summarization pipeline but never mentions diffing inventory.csv between r"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions diffing inventory.csv (or any inventory file) across release_01 vs release_02 to surf"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions diffing inventory.csv between release_01 and release_02 to surface what's new; it onl"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a generic ingest/normalize/extract/report pipeline but never mentions diffing inventory.csv be"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions inventory.csv or diffing inventory.csv specifically — it only speaks generically abou"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply only asks clarifying questions and gives a generic ingest pipeline suggestion without ever mentionin"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions diffing inventory.csv (or any inventory manifest) between release_01 and release_02 t"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions diffing inventory.csv between release_01 and release_02 to surface what's new; it onl"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes running run_all.py and checking agency_vocab prefixes but never mentions diffing inventory"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply mentions comparing release_01 and release_02 reports \"once both reports exist,\" but never suggests d"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply discusses ingest/extraction/report workflows and a generic \"diff-against-release-01\" step in an auto"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions diffing inventory.csv between release_01 and release_02 to surface what's new; it onl"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly flags the \"cross-tranche question\" of comparing release_01 vs release_02 (via entities.js"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply only proposes diffing analytics/inventories as a follow-up after both reports already exist, rather "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes running a pipeline script and checking inventory.csv for OTHER/agency coverage, but never "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply only mentions diffing release_02 against release_01 as a possible follow-up question to ask afterwar"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes running the pipeline on release_02 and only offers diffing release_01 vs release_02 as an "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes running a pipeline and a folder-sibling convention \"having both makes 'what's new vs. rele"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes running run_all.py on the new release and checking agency_vocab coverage, but never mentio"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e4",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly mentions doing a release_01 vs release_02 diff of the inventory once both reports exist, "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns (pagination, blob URLs, inline-viewer"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scrape-side concerns like pagination, blob URLs, or inline-v"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any of the scraping-side concerns (pagination, blob URLs, inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns like pagination, blob URLs, or inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns like pagination, blob URLs, or inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a generic OCR/summarize/synthesize pipeline but never mentions war_gov_quirks.md or any of the"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns like pagination, blob URLs, or inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or the scraping-side concerns it documents (pagination, blob URLs, "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns (pagination, blob URLs, inline-viewer"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply focuses entirely on the local processing pipeline and never mentions war_gov_quirks.md or any scrapi"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a generic bulk-extract-and-summarize pipeline but never mentions war_gov_quirks.md or its docu"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly names war_gov_quirks.md and cites its scraping-side concerns (pagination, download links "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or the scraping-side concerns (pagination, blob URLs, inline-viewer"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns like pagination, blob URLs, or inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a run_all.py pipeline and inventory/agency_vocab checks but never mentions war_gov_quirks."
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns (pagination, blob URLs, inline-viewer"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns like pagination, blob URLs, or inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a pipeline/process for turning a downloaded release into a report but never mentions war_gov_q"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any of the scraping-side concerns (pagination, blob URLs, inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e5",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions war_gov_quirks.md or any scraping-side concerns like pagination, blob URLs, or inline"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a generic extract-then-summarize pipeline but never mentions the OTHER bucket / unfamiliar"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a generic OCR/parallel-subagent/synthesis pipeline but never mentions the OTHER bucket / u"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply asks clarifying questions and never mentions adding unfamiliar prefixes/buckets to references/agency"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions the OTHER bucket / unfamiliar prefix workflow or adding new prefixes to references/ag"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions agency_vocab.md, prefix classification, or an OTHER-bucket workflow for unfamiliar/ne"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions the OTHER bucket / unfamiliar prefix workflow or the requirement to add new prefixes "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions adding new/unfamiliar prefixes to references/agency_vocab.md or an OTHER-bucket workf"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions the OTHER-bucket/unfamiliar-prefix workflow or adding new prefixes to references/agen"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply focuses on an OCR/extraction/synthesis pipeline but never mentions handling unfamiliar prefixes or a"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs checking for new filename prefixes and adding them to references/agency_vocab.m"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never mentions the OTHER bucket / unfamiliar prefix workflow or agency_vocab.md, asking clarifying q"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs adding new prefixes to references/agency_vocab.md (and PREFIX_RULES) when the O"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs checking filenames against references/agency_vocab.md and adding any new prefix"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs checking new filenames against references/agency_vocab.md and notes unrecognize"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs adding unfamiliar prefixes to references/agency_vocab.md (and PREFIX_RULES) rat"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs extending references/agency_vocab.md (plus PREFIX_RULES) for unfamiliar prefixe"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs checking for unfamiliar prefixes landing in the OTHER bucket and adding them to"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply instructs checking inventory.csv's OTHER/agency column for unfamiliar prefixes and adding them to re"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly instructs adding unrecognized/new filename prefixes to `references/agency_vocab.md` (alon"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e6",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explicitly describes the OTHER-bucket/unfamiliar-prefix workflow, instructing the user to add new pr"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply gives advice for when release 02 arrives and offers to build the ingest script, but never actually r"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply proposes a pipeline design and asks clarifying questions but never invokes an analyzer against a rel"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes and offers to build a pipeline for when release 02 arrives but never actually runs the ana"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply gives a general workflow (ingest/diff, normalize, hand off) and offers to prepare a script for when "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes a general pipeline approach and asks clarifying questions without ever running any analyze"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply only describes a general workflow and asks clarifying questions without ever running the analyzer or"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes preparing a pipeline in advance and offers to build the scaffold, but never runs the analy"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply only describes a general pipeline approach and asks clarifying questions without ever running an ana"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes a general pipeline and asks the user to provide details once the tranche actually drops, w"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes the future workflow for release_02 and offers to run it once the folder is ready, but does"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "control",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply asks clarifying questions and describes a general pipeline approach without ever running an analyzer"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes the pipeline steps to run once release 02 arrives but explicitly declines to execute anyth"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes the workflow and pre-run checks for a future release_02 without actually executing the ana"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply gives instructions for the future release_02 workflow without actually invoking the analyzer or fabr"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply only describes the commands to run once release 02 exists (and offers a future cross-tranche compari"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply only describes the workflow and offers to run it once the release_02 path exists, without actually i"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply only describes the command to run once release_02 actually lands and gives guidance for handling it,"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply gives instructions for running the pipeline once release_02 exists but does not actually execute the"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply describes the pipeline command and things to watch for without actually invoking any analyzer or fab"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e7",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply explains and describes the run_all.py workflow for a future release_02 directory without ever actual"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a workflow at a conceptual level (tool names, \"run each doc through a repeatable extractio"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes building a custom pipeline (pdftotext, OCR fallback, grep/indexing, chunking) referencing "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a high-level plan (\"a small script that unzips... OCR if needed... hands docs to Claude in bat"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives an abstract pipeline sketch and ends by asking a clarifying question, rather than concrete, co"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a high-level strategic outline (scripts, OCR pipelines, agent extraction passes, indexing) wit"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a pipeline conceptually (watch/download, OCR, chunk, extract, aggregate) but never gives c"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives high-level jargon (\"script a bulk download/checksum\", \"run text extraction\", \"have me triage\")"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives a high-level pipeline (normalize/OCR, LLM extraction, synthesis) with jargon like \"chunking st"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a general approach (write a script, use pdftotext/OCR, feed chunks to the Claude API) but "
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses placeholder paths and conditional/manual steps (chunked extraction fallback, editing PREFIX_RUL"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply is a high-level architectural description (pipeline stages, subagent fan-out, tradeoffs) with no act"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The instructions assume a local script repo, path arguments, and a working knowledge of running Python and com"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The core instruction is a single copy-pasteable command (`python scripts/run_all.py <release_02_root>`) that a"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The instructions assume pre-existing skill files, folder conventions, and command-line comfort (running python"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply assumes a pre-existing custom Python pipeline (run_all.py, references/agency_vocab.md, PREFIX_RULES)"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply assumes technical familiarity (running Python scripts with path arguments, editing regex \"PREFIX_RUL"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses raw script paths, flags, and technical caveats (timeouts, idempotency, PREFIX_RULES edits) with"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The instructions assume prior technical setup (a scripts directory, filenames like inventory.py/analyze.py, ed"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The core instructions require running Python scripts with placeholder arguments, chunking extraction manually,"
+    },
+    {
+      "task": "fresh-tranche-bootstrap-e8",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply mixes in genuinely non-copy-paste steps (editing `PREFIX_RULES` in `inventory.py`/`analyze.py` sourc"
+    }
+  ]
+}

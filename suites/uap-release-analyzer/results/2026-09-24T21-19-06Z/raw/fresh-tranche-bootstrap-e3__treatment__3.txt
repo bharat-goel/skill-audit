@@ -1,0 +1,5 @@
+Once release 02 lands, the fastest path is a single command: `scripts/run_all.py <release_root>`, which chains inventory → extract_text → analyze → build_report in order and writes `REPORT.md` at the end — no need to invoke the four scripts individually unless something breaks mid-pipeline.
+
+The main tradeoff: `run_all.py` doesn't do the `[start] [end]` chunking that `extract_text.py` supports, so if the new tranche has large scanned FBI-style sections (200+ pages) and you're in a sandbox with per-call timeouts, a full-tranche `run_all` could stall on extraction — in that case it's safer to run `extract_text.py` yourself in ~25-page batches first, then run `analyze.py` + `build_report.py`. Also worth a quick eyeball at `inventory.csv` afterward for any `OTHER`-classified files >3%, since that means new filename prefixes need adding to `agency_vocab.md` before the report's agency breakdown is trustworthy.
+
+When you've got the files downloaded, just point me at the folder and I'll run the pipeline.
