@@ -1,0 +1,67 @@
+{
+  "verdict": "claim holds",
+  "kC": 10,
+  "nC": 80,
+  "kT": 44,
+  "nT": 80,
+  "lo": 28.377560139447986,
+  "hi": 54.31585380317501,
+  "perTask": [
+    {
+      "taskId": "fresh-tranche-bootstrap-e1",
+      "kC": 0,
+      "nC": 10,
+      "kT": 1,
+      "nT": 10
+    },
+    {
+      "taskId": "fresh-tranche-bootstrap-e2",
+      "kC": 0,
+      "nC": 10,
+      "kT": 10,
+      "nT": 10
+    },
+    {
+      "taskId": "fresh-tranche-bootstrap-e3",
+      "kC": 0,
+      "nC": 10,
+      "kT": 9,
+      "nT": 10
+    },
+    {
+      "taskId": "fresh-tranche-bootstrap-e4",
+      "kC": 0,
+      "nC": 10,
+      "kT": 2,
+      "nT": 10
+    },
+    {
+      "taskId": "fresh-tranche-bootstrap-e5",
+      "kC": 0,
+      "nC": 10,
+      "kT": 1,
+      "nT": 10
+    },
+    {
+      "taskId": "fresh-tranche-bootstrap-e6",
+      "kC": 0,
+      "nC": 10,
+      "kT": 10,
+      "nT": 10
+    },
+    {
+      "taskId": "fresh-tranche-bootstrap-e7",
+      "kC": 10,
+      "nC": 10,
+      "kT": 10,
+      "nT": 10
+    },
+    {
+      "taskId": "fresh-tranche-bootstrap-e8",
+      "kC": 0,
+      "nC": 10,
+      "kT": 1,
+      "nT": 10
+    }
+  ]
+}
