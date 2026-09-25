@@ -238,6 +238,54 @@ source 3 is selected on the very property E3 tests.
 | — | O0000-code/paper-search-pro | 3 | — | — | — | — | — | **skipped**, already in log at row #72 (source 2) | — |
 | 139 | nank1ro/solid | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/nank1ro/solid/blob/c6a15d388d4d485dc78d42fde88cafbcb4b64fe1/README.md |
 
+| 140 | resend/resend-cli | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/resend/resend-cli/blob/8c6ed56e0773f59b65e1c20dcdd0cb9c7469a81b/README.md |
+| 141 | ryanthedev/code-foundations | 3 | ✓ | ✗ | – | – | – | excluded: E2, `benchmarks/tdd-vs-siv/` is a rigorous, mutation-tested A/B — but between **two variants of the same `build-doctrine` skill** (SIV vs TDD bodies), not skill-vs-no-skill; there is no true without-skill baseline arm, so it does not publish a with-versus-without number in the sense E2 requires (also no LICENSE file in the repo — would fail E4 independently) | https://github.com/ryanthedev/code-foundations/blob/6ce37b9fcf79fe81e43aafa900acb4e3af215330/benchmarks/tdd-vs-siv/README.md |
+| 142 | ollygarden/opentelemetry-agent-skills — otel-go | 3 | ✓ | ✓ | ✓ | ✓ | ✓ | **ELIGIBLE** — `evals/results.md` publishes a with-vs-without table for the single eval case: target skill withheld 0/3 pass vs proposed skill 3/3 pass (current origin/main 1/3); a deterministic grader checks whether all four prose expectations are present in the model's final answer text — portable via `judge`; the one referenced fixture (`evals/files/go-v145-upgrade.md`) is in-repo; skill is a plain reference doc (no external service); Apache-2.0; author ollygarden, distinct from #83 and #129 | https://github.com/ollygarden/opentelemetry-agent-skills/blob/78f750caf60801efdc2963e4bc3990db7072146d/skills/otel-go/evals/results.md |
+
+### Selected: otel-go
+
+- Repo: https://github.com/ollygarden/opentelemetry-agent-skills @ `78f750caf60801efdc2963e4bc3990db7072146d`
+- SKILL.md: `skills/otel-go/SKILL.md`
+- Claim: "Skill withheld: 0 pass, 3 fail; proposed skill: 3 pass, 0 fail" — [skills/otel-go/evals/results.md](https://github.com/ollygarden/opentelemetry-agent-skills/blob/78f750caf60801efdc2963e4bc3990db7072146d/skills/otel-go/evals/results.md)
+- Method: task prompt — [skills/otel-go/evals/evals.json](https://github.com/ollygarden/opentelemetry-agent-skills/blob/78f750caf60801efdc2963e4bc3990db7072146d/skills/otel-go/evals/evals.json), single case `go-v145-upgrade-review`, with its one in-repo fixture `skills/otel-go/evals/files/go-v145-upgrade.md` (P1: portable, no external path) · pass criterion — same file's four `expectations` (prose criteria about the final answer, mapped to a `judge` rubric per P2); no P7 trimming needed, the suite has only one case
+- Author's model and n: Codex CLI 0.147.0 driving `gpt-5.6-sol` (not Claude — note for DEVIATIONS.md, the audit reruns under its own harness regardless); 3 selected repetitions per arm (withheld / current / proposed), chosen as "the earliest valid fresh repetitions... not chosen by outcome"; several additional attempts were run and excluded for harness/quota failures, logged transparently in the results doc
+- License: Apache-2.0
+- Caveats for `DEVIATIONS.md` (Task 5): grader is deterministic keyword/fact presence, not published as code — only the `expectations` prose (P2/P5 judge + canaries apply); author's harness used Codex/GPT, not Claude, so the ported run is a new measurement under a different model, not a replication; only 1 eval case exists for this skill (no P7 trimming was needed, but also no scope for a second task or a harm-task substitute); "current origin/main skill" arm (1/3) shows the skill's own baseline version underperforms the proposed revision, worth noting if the audit ports against `origin/main` content rather than the proposed/pinned SHA content
+
+## Outcome — source 3
+
+Screening stopped at row #142 per Amendment 1's stopping rule: **3 eligible skills in
+total** reached (1 from sources 1-2, plus 2 from source 3), before the 100-candidate cap
+for source 3.
+
+Source-3 candidates screened: 23 (rows 120-142; `O0000-code/paper-search-pro` was
+skipped as a duplicate of row #72 and does not count toward this total). Exclusions by
+first failed criterion, source-3 rows only (not pooled with sources 1-2 per Amendment 1):
+
+| Criterion | Count |
+|---|---|
+| E1 | 0 |
+| E2 | 20 |
+| E3 | 1 |
+| E4 | 0 |
+| E5 | 0 |
+| **Eligible** | **2** |
+| **Total (source-3 rows)** | **23** |
+
+**Source-3 eligible rate: 2/23 (8.7%)**, sharply higher than sources 1-2's 1/100 (1%).
+This is expected and not comparable: source 3 was selected on `evals.json` +
+`expectations` specifically because that is the one format sources 1-2 showed could
+satisfy E3, so source 3 is not an independent random draw — see Amendment 1's own
+reasoning for why the two rates are not pooled. Both source-3 eligible skills
+(coinbase/cds — cds-code, ollygarden/opentelemetry-agent-skills — otel-go) reached
+eligibility primarily by publishing a real with-vs-without pass-rate number in prose/
+table form (E2), the same bar 20 of 23 source-3 candidates failed — most source-3
+repos that ship an `evals.json` still never publish a with-vs-without result, only
+task/expectation scaffolding (consistent with #120 SkillAnything, #130 qdrant/skills,
+#133-135 spellbook, and others). The audit now has **3 selected skills total**:
+`ckpxgfnksd-max/uap-release-analyzer` (#83), `coinbase/cds` — cds-code (#129), and
+`ollygarden/opentelemetry-agent-skills` — otel-go (#142).
+
 ## Outcome (revised, fix round 1)
 
 **Rows 1–100, in log order, are the result. Rows 101–119 are beyond the rule's
