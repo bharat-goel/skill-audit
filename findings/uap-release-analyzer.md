@@ -30,7 +30,7 @@ is reported and not used as a headline. Before the run, a result above the claim
 | e7 does not fabricate a release_02 report | 10/10 | 10/10 | +0.0pp | [-27.8, +27.8] |
 | e8 concrete enough to copy-paste | 0/10 | 1/10 | +10.0pp | [-18.9, +40.4] |
 
-Harm task (auditor-written blind, from the description alone): 10/10 → 10/10, +0.0pp —
+Harm task (written by a separate agent given only the skill's description): 10/10 → 10/10, +0.0pp —
 `predict: no-effect` HIT. The skill did not degrade a routine answer in its own domain.
 
 ## What the number measures
