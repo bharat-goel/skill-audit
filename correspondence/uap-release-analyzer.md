@@ -11,8 +11,9 @@ Route: a GitHub issue on
 Hi — I re-ran part of the evaluation published in this repo (at `c171d88`) with
 [nullbench](https://github.com/bharat-goel/nullbench), a pre-registration harness, as part
 of an audit of published skill claims. Your skill was the only one of 100 screened that
-published both a with-versus-without number and a method someone else could re-run, so
-thank you for publishing `evals/evals.json`.
+met all of the audit's eligibility criteria, including publishing a with-versus-without
+number and a method someone else could re-run, so thank you for publishing
+`evals/evals.json`.
 
 What I did: eval 3 (fresh-tranche bootstrap) only — evals 0–2 need the release_01 corpus
 at a home-directory path. Your prompt, verbatim; each of your 8 expectations graded as its
