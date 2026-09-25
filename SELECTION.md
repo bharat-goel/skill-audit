@@ -231,6 +231,13 @@ source 3 is selected on the very property E3 tests.
 | 133 | majiayu000/spellbook — xray | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published for this skill; repo's `docs/skill-test-report.md` and `docs/skill-optimization-report.md` do not mention xray | https://github.com/majiayu000/spellbook/blob/3660f914b02d0d521ef9e2ddf820530054259cea/docs/skill-test-report.md |
 | 134 | majiayu000/spellbook — idea-team | 3 | ✓ | ✗ | – | – | – | excluded: E2, same repo-wide check as #133, no published with-vs-without number for this skill | https://github.com/majiayu000/spellbook/blob/3660f914b02d0d521ef9e2ddf820530054259cea/docs/skill-test-report.md |
 
+| 135 | majiayu000/spellbook — threads | 3 | ✓ | ✗ | – | – | – | excluded: E2, same repo-wide check as #133, no published with-vs-without number for this skill | https://github.com/majiayu000/spellbook/blob/3660f914b02d0d521ef9e2ddf820530054259cea/docs/skill-test-report.md |
+| 136 | hubeiqiao/apple-bento-grid | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/hubeiqiao/apple-bento-grid/blob/235f740b245a6763773c3c80da25980ef2ef8460/README.md |
+| 137 | diegosouzapw/awesome-omni-skills — shadcn-v2 | 3 | ✓ | ✗ | – | – | – | excluded: E2, README mentions a "curated baseline" catalog surface (maintained skill catalog, not an effect claim); no with-vs-without number published | https://github.com/diegosouzapw/awesome-omni-skills/blob/c3af0048b70a4b84b2f2324e2f7b7ae5206d89b2/README.md |
+| 138 | yizhiyanhua-ai/fireworks-open-eli5 | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/yizhiyanhua-ai/fireworks-open-eli5/blob/e90d5f9dae1bb823573388654e381a9844169e1b/README.md |
+| — | O0000-code/paper-search-pro | 3 | — | — | — | — | — | **skipped**, already in log at row #72 (source 2) | — |
+| 139 | nank1ro/solid | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/nank1ro/solid/blob/c6a15d388d4d485dc78d42fde88cafbcb4b64fe1/README.md |
+
 ## Outcome (revised, fix round 1)
 
 **Rows 1–100, in log order, are the result. Rows 101–119 are beyond the rule's
