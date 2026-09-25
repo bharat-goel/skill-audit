@@ -39,6 +39,37 @@ Stop at three eligible skills or 100 candidates screened, whichever comes first.
 than three eligible: the audit proceeds with fewer and reports the shortfall as a
 finding.
 
+## Amendment 1 — frozen 2026-09-25, before any source-3 candidate was viewed
+
+**Reason.** Sources 1–2 produced 1 eligible skill of 100 (see Outcome). One audited skill
+cannot support any claim about published evals in general. The one eligible skill
+qualified because it ships an `evals/evals.json` in the format written by Anthropic's
+skill-creator eval loop (task prompts plus per-task `expectations`), which is exactly what
+E3 requires. Source 3 targets that format directly. The rule in the section above is
+unchanged; E1–E5 are unchanged and apply to source 3 exactly as written.
+
+### Source 3
+
+GitHub code search, frozen to `selection/github-code-search-evals.json` by running
+exactly:
+
+```
+gh search code expectations --filename evals.json --limit 100 \
+  --json repository,path,url
+```
+
+Candidates are the distinct repositories in the order first returned, skipping any
+repository already in the log above. A repository with several skills that each ship
+their own `evals.json` counts as one candidate per such skill, in the order returned.
+
+### Stopping (source 3)
+
+Screen in order until **3 eligible skills in total** (the 1 from sources 1–2 plus 2 more)
+or **100 source-3 candidates** screened, whichever comes first. Fewer than 2 more eligible:
+the audit proceeds with what it has and reports the source-3 rate as a finding, reported
+separately from the sources 1–2 rate — the two denominators are not pooled, because
+source 3 is selected on the very property E3 tests.
+
 ## Log
 
 | # | Candidate | Source | E1 | E2 | E3 | E4 | E5 | Result | Evidence |
