@@ -1,0 +1,42 @@
+{
+  "model": "sonnet",
+  "judge_model": "sonnet",
+  "reps": 10,
+  "tasks": [
+    {
+      "id": "cds-e1-profile-card",
+      "file": "tasks/cds-e1-profile-card.json",
+      "sha256": "65f5bb66a3b60237d57a69a04422bda75657b68c8e5efa6524bf05d3edd14c01",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "cds-e2-create-team-modal",
+      "file": "tasks/cds-e2-create-team-modal.json",
+      "sha256": "b6ea2e7025663112d108f7b2b9f0b79791b0a45e7d1e7d9821f77afb69a8eef8",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "cds-e3-banner-progress",
+      "file": "tasks/cds-e3-banner-progress.json",
+      "sha256": "0f56f0fe3a98aeb000639d26f88400fa68fa557c3c0c68ad8e757c12a29ca496",
+      "kind": "signal",
+      "predict": "no-effect"
+    },
+    {
+      "id": "cds-e4-sidebar-nav",
+      "file": "tasks/cds-e4-sidebar-nav.json",
+      "sha256": "b045321bfe601c3b1ecc2b1b5f39298fb4cf37872a3bf78605c0d1331b956b03",
+      "kind": "signal",
+      "predict": "no-effect"
+    },
+    {
+      "id": "cds-e5-empty-state",
+      "file": "tasks/cds-e5-empty-state.json",
+      "sha256": "b0cf8e64dbadc78a474de4927923ef3f8a218f41bed4c597a4f0786b8aac1db9",
+      "kind": "signal",
+      "predict": "helps"
+    }
+  ]
+}
