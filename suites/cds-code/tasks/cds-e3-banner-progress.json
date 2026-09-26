@@ -1,0 +1,12 @@
+{
+  "id": "cds-e3-banner-progress",
+  "skill": "cds-code",
+  "kind": "signal",
+  "predict": "no-effect",
+  "prompt": "Build a banner that shows a warning message 'You have unsaved changes' with a 'Save now' link action. Below it, in a container with 2 units of horizontal padding, show a progress bar at 60% completion and a spinner for a secondary loading operation.",
+  "rationale": "Ported from eval 3 (\"Banner + progress visualizations\") in evals/evals.json at 9aca6aebcb62f731a5a754af66c0bd05df86beec (https://github.com/coinbase/cds/blob/9aca6aebcb62f731a5a754af66c0bd05df86beec/skills/cds-code/evals/evals.json). Author's criterion: that eval's `expectations` array, verbatim, all six of which must be met (README.md's per-eval breakdown reports this eval at 100% with skill AND 100% without — the author's own data shows no claimed effect here, per the P3 ruling this task is `predict: no-effect`, not `helps`). Author's grader is not published as code, only this expectations prose; the rubric restates it and nothing more, per P2.",
+  "verify": {
+    "type": "judge",
+    "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses Banner with variant=\"warning\" for the unsaved changes message\n2. Renders a container below the banner with padding applied via the paddingX, paddingStart or paddingEnd props (e.g. paddingX={2})\n3. Uses ProgressBar with a progress value representing 60% for the determinate progress indicator\n4. Uses ProgressCircle with the indeterminate prop for the spinner\n5. ProgressBar and ProgressCircle are imported from @coinbase/cds-web/visualizations (the correct subpath), not from a generic top-level import or the separate @coinbase/cds-web-visualization package\n6. No hardcoded hex, rgb, or raw color values in the output"
+  }
+}
