@@ -14,7 +14,7 @@
     {
       "id": "audit-harm-routine",
       "file": "tasks/audit-harm-routine.json",
-      "sha256": "10275fa81085dfea543dbf232cc5fe8c3250f9a4d8083874848b40ed71b581e5",
+      "sha256": "b784204e9a2839972c701e49f03d2017847c5a70972dafcf9cd9e6c038f50b3e",
       "kind": "harm",
       "predict": "no-effect"
     }
