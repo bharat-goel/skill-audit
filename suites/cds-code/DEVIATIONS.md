@@ -8,8 +8,9 @@
 | Dropped evals 6–10 | spec P7 cap: keep the author's first 5 published evals only |
 | `cds-e1-profile-card` expectation 9 ("All CDS import paths are valid subpath exports (no invented deep paths like /layout/Box)") kept, graded literally from reply text, no package export list supplied | P2 decision — see "Eval 1 portability" below |
 | `audit-harm-routine`: prompt, rubric, and 3 canaries copied verbatim from a blind sonnet agent's output (`.superpowers/sdd/2026-09-23-skill-audit/blind-harm-cds.json`), except that the two disputed PASS canaries were replaced by porter-written ones (see "Harm task" below) | The agent was given only the skill's frontmatter `description` text and told to make one `Write` call, per P4/Step 4. It made 2 tool calls (the harness's count includes the hand-back call that returns its output, so this is not necessarily 2 *content-producing* calls, but the second could not be independently verified either way); this is disclosed as-is rather than asserting strict one-call compliance |
-| `skill_dir: "skill"` — the full `skills/cds-code` directory at the pinned SHA, excluding `evals/` | Per the cds re-port ruling in progress.md ("nullbench skill_dir: re-review 2" onward): a real Claude Code skill is more than SKILL.md, and grading only SKILL.md's text understated what the skill does (review I-1). `evals/` is excluded so the treatment arm cannot read its own grading criteria |
+| `skill_dir: "skill"` — the full `skills/cds-code` directory at the pinned SHA, excluding `evals/` | Per the cds re-port ruling in progress.md ("nullbench skill_dir: re-review 2" onward): a real Claude Code skill is more than SKILL.md, and grading only SKILL.md's text understated what the skill does (review I-1). `evals/` is excluded so the treatment arm cannot read its own `expectations` text or grader; it is **not** a claim that no part of `skill_dir` hints at what is graded — `README.md`'s per-eval labels do, disclosed in "Author repo context readable in `skill/README.md` (N-6)" below |
 | `cds-app/` fixture (auditor-written minimal CDS project) on all 5 signal tasks, not on the harm task | Reconstructs the author's unpublished in-repo baseline — see "Control-arm fixture (C-2)" below |
+| Fixture package versions are the pinned repo's actual published versions (`@coinbase/cds-web` 9.28.0, `@coinbase/cds-common` 9.28.0, `@coinbase/cds-icons` 5.25.0), plus `@coinbase/cds-web-visualization` 4.0.0 added as a dependency | Corrects a review finding (N-7): the prior fixture used illustrative example figures from `guidelines/code-review.md` (9.4.1/5.19.0), not the real pinned versions. Verified directly against each package's `package.json` at `9aca6aebcb62f731a5a754af66c0bd05df86beec` via `gh api`. `cds-web-visualization` is added for package-identity only (a declared dependency, no source) — see "Reading rule (N-1) and N-4/N-7 disclosure" below for what this does and does not change |
 | Claimed delta: pooled over the 5 ported evals (+60pp), not per-task | spec, Verdicts — see "Claim unit and pooled-verdict rule" below |
 
 ## Eval 1 portability (P2)
@@ -112,20 +113,32 @@ every 100% eval necessarily passes all of them.
 | `cds-e5-empty-state` | 100% | 40% | `helps` |
 
 Evals 3 and 4 show no author-claimed effect (100% both arms) and are marked `no-effect` per the
-P3 ruling. **Corrected from the pre-review version of this row, which had this backwards:** e3/e4
-carry an actual author claim — "no effect" — not the "author made no claim at all" case the P3
-ruling's own caveat is about. Per nullbench's own HIT/MISS rule (`src/ledger.mjs`: for
-`no-effect`, HIT is an interval that spans zero, MISS is one that does not), a MISS on `cds-e3` or
-`cds-e4` individually **does** mean exactly "the author's no-effect result was not borne out" —
-i.e., this port's run found a significant per-task effect (in either direction) where the
-author's own data showed none. That is a legitimate, informative reading, not a demoted or
-suppressed one, and it will be reported as such if it occurs.
+P3 ruling. e3/e4 carry an actual author claim — "no effect" — not the "author made no claim at
+all" case the P3 ruling's own caveat is about, so a per-task HIT/MISS on them is not meaningless
+in principle. Per nullbench's own HIT/MISS rule (`src/ledger.mjs`: for `no-effect`, HIT is an
+interval that spans zero, MISS is one that does not), a MISS on `cds-e3` or `cds-e4` individually
+would ordinarily mean "the author's no-effect result was not borne out."
+
+**However, per the cds re-review ruling (N-1), this port's per-task e3/e4 HIT/MISS is NOT
+published as confirming or refuting the author's no-effect result, in either direction.** The
+reason is the residual control-arm environment gap disclosed in "Control-arm fixture (C-2)" and
+the "Reading rule" section below: this port's control arm still lacks the monorepo context
+(`node_modules`, docs, an MCP docs server) that the author's own control had, and that gap is
+expected to inflate the measured delta — most sharply on e3 and e4, the two evals where the
+author's own control scored 100%. A MISS on e3 or e4 caused by an artificially weak control cell
+would look identical, in nullbench's own report, to a MISS caused by a real absence of author-
+claimed no-effect — the report cannot tell the two apart from the HIT/MISS label alone. Reporting
+either as "the author's claim not borne out" would attribute an artefact of this port's
+environment to the author's own published result. **Only the pooled +60pp verdict (below) is
+interpreted as a result of this suite; individual e3/e4 HIT/MISS labels are reported, since
+nullbench prints them, but are not read as evidence about the author's claim.**
 
 Separately: `tools/verdict.mjs`'s `verdict()` throws on `claimPp === 0` (`if (!Number.isFinite(claimPp) || claimPp === 0) throw ...`), so `cds-e3` and `cds-e4` cannot be
 passed through the per-task `verdict-task.mjs <results-dir> <taskId> <claimPp>` path with
 `claimPp: 0` — they get only nullbench's own HIT/MISS classification per task, never a
 `"claim holds"` / `"inconclusive"` / `"claim not reproduced"` string individually. Only the
-pooled call below (`claimPp: 60`, across all 5 tasks together) produces a `verdict()` string.
+pooled call below (`claimPp: 60`, across all 5 tasks together) produces a `verdict()` string, and
+that pooled string is what this port treats as interpretable, per the paragraph above.
 
 e3/e4 remain part of the pooled +60pp claim below because that claim is defined over the
 task-level pass rate across all 5 ported evals together, and the author's own without-skill
@@ -146,9 +159,11 @@ Modelled word-for-word on the uap-release-analyzer suite's final (round-2-review
   `cds-e4-sidebar-nav`, even though both carry `predict: no-effect`. The +60pp claim is defined
   over the task-level pass rate across all 5 ported evals together (5/5 vs 2/5), not over a
   subset — dropping e3/e4 from the pool would change what is being tested from "the author's
-  published 5-eval claim" to a different, smaller claim the author never stated. `no-effect`
-  governs how a MISS on e3/e4 alone is read (not "claim not borne out"); it does not exclude
-  them from a claim that is inherently about all 5 evals pooled.
+  published 5-eval claim" to a different, smaller claim the author never stated. Per-task e3/e4
+  HIT/MISS is not published as confirming or refuting the author's no-effect result either way
+  (see "Predict per task (P3)" above and "Reading rule (N-1)" below) — that reading rule governs
+  how a per-task MISS on e3/e4 is *not* used; it does not exclude e3/e4 from a pooled claim that
+  is inherently about all 5 evals together.
 - **Interval.** A Newcombe interval (nullbench's `stats.newcombe`, as implemented, 95%
   confidence) computed on the pooled counts, reported in percentage points.
 - **Verdict.** The pooled delta and interval are passed to `verdict({ claimPp: 60, lo, hi })` in
@@ -189,6 +204,50 @@ Modelled word-for-word on the uap-release-analyzer suite's final (round-2-review
   figure is intentionally computed and reported for this suite even when nullbench's own average
   is suppressed, scoped to this suite only.
 
+## Reading rule (N-1): the residual control-arm gap, and how e3/e4 will be read
+
+**Pre-registered, before any run**, per the cds re-review ruling ("cds re-review (opus)" onward
+in progress.md):
+
+Even with the `cds-app` fixture (added in the prior fix round; versions corrected in this round,
+see N-7 below), this port's control arm still lacks everything else the author's own control had:
+the Coinbase monorepo's `CLAUDE.md`, `AGENTS.md`, an `.mcp.json` docs server, the actual
+`packages/web` source tree, and a real `node_modules` with real package exports. The author's own
+control scored 100% on eval 3 and 100% on eval 4 *without* the skill — evidence that the author's
+control environment supplied real CDS context on its own, independent of SKILL.md. This port's
+control has only a bare `package.json` naming five dependencies; it cannot read real component
+source, real exports, or repo-level agent instructions the way the author's control could.
+
+**This residual gap is expected to inflate this port's measured delta relative to the author's
+own contrast, concentrated on `cds-e3-banner-progress` and `cds-e4-sidebar-nav` — the two evals
+where the author's control scored 100%.** A control cell that is artificially weak (because it
+lacks monorepo context the author's had) will tend to score lower than the author's own baseline
+on exactly these two tasks, which widens the measured with-vs-without gap beyond what the
+author's own environment would have shown.
+
+**Consequence for interpretation, stated before any run:**
+- Per-task `cds-e3`/`cds-e4` HIT/MISS labels are **not** published as confirming or refuting the
+  author's no-effect result, in either direction (restated from "Predict per task (P3)" above).
+- **Only the pooled +60pp verdict is interpreted as this suite's result**, and it is read with
+  the inflation direction stated here: if the pooled interval excludes zero and contains +60pp
+  ("claim holds"), that is read as *at least* consistent with the author's claim, not stronger
+  than the author's claim, because part of any measured gap may be this port's own control-arm
+  weakness rather than the skill's real effect. If the pooled interval sits entirely above +60pp
+  (`lo > 60`, one of the two "claim not reproduced" cases), that specific outcome is read as
+  **more likely explained by this residual environment gap than by the skill outperforming its
+  own author's measurement** — the opposite reading (the skill is more effective than its author
+  found) is not ruled out, but the environment explanation is disclosed here as the prior,
+  before seeing any data.
+- This rule does not change how `cds-e1`, `cds-e2`, or `cds-e5` are read (their `predict: helps`
+  tasks are not the ones the residual gap concentrates on to the same degree, and their own
+  per-task verdicts remain interpretable as before).
+
+**What this rule does not do:** it does not attempt to rebuild the Coinbase monorepo inside the
+sandbox (ruled out explicitly — "do not try to rebuild the Coinbase monorepo"), and it does not
+retroactively change `predict` labels, rubrics, or any hashed content. It is a reading
+constraint on how the eventual report is interpreted and written up, agreed before any run, not a
+change to what is measured.
+
 ## Environment and harness differences
 
 | Deviation | Reason |
@@ -197,7 +256,15 @@ Modelled word-for-word on the uap-release-analyzer suite's final (round-2-review
 | Subject not denied Write/Edit/Bash by an explicit flag; code must still appear in the reply | See "Tool restriction (C-1)" below — corrects the prior, false version of this row |
 | Model: Sonnet (this audit) vs the author's "Cursor eval runner" (model not stated) | The audit reruns under its own harness and model regardless of what the author used; this is a new measurement under a different model and agent harness, not a replication of the author's exact conditions |
 | n=10 vs the author's n≈1 per arm per eval | spec P6; the author's own repo describes no replication for iteration 4 |
-| Baseline swings between the author's iterations 3 (2026-06-26) and 4 (2026-07-22), consistent with single-run noise | **Corrected from the pre-review version of this row, which had two of the four eval numbers reversed and miscounted the stable set.** The repo's git history retains README.md from iteration 3 (commit `fb3cf0744beed5f687ba45c3523aecc6899af977`). Checked directly, side by side with iteration 4: eval 1 (78→89, `helps` in both), eval 2 (100→86 — **iteration 3 has no claimed effect here (100/100); iteration 4 claims `helps` (100/86) — the predict label flips between iterations**), eval 4 (80→100 — **the reverse flip: iteration 3 claims `helps` (100/80); iteration 4 has no claimed effect (100/100)**), eval 5 (60→40, `helps` in both, magnitude only), eval 8 (71→86, **moved, not stable**). Only evals 3, 6 and 7 are stable across the two iterations (all three at 100/100, 83/83, 17/17 respectively) — **not** "3, 6, 7, 8" as the pre-review row said. With n=1 per arm per eval and no stated model, these swings are consistent with ordinary run-to-run noise rather than a change in the skill's real effect. The predict labels this port uses for `cds-e2-create-team-modal` (`helps`) and `cds-e4-sidebar-nav` (`no-effect`) are pinned to iteration 4 specifically (the SHA this suite is pinned to; PR #784's body confirms "Existing evals 1–8 are unchanged" at the pinned commit, consistent with the pinned SKILL.md being the one iteration 4 measured) — under iteration 3's data those two labels would swap. The pooled 2/5 without-skill task-level baseline does **not** change between iterations (evals 3 and 4 are the two full-task passes either way, just for different reasons), so the +60pp claim itself is stable across the two published iterations even though two individual predict labels are not. This is disclosed as a limitation of the author's own published methodology, not something this port can correct |
+| Baseline swings between the author's iterations 3 (2026-06-26) and 4 (2026-07-22), consistent with single-run noise | **Corrected from the pre-review version of this row, which had two of the four eval numbers reversed and miscounted the stable set.** The repo's git history retains README.md from iteration 3 (commit `fb3cf0744beed5f687ba45c3523aecc6899af977`). Checked directly, side by side with iteration 4: eval 1 (78→89, `helps` in both), eval 2 (100→86 — **iteration 3 has no claimed effect here (100/100); iteration 4 claims `helps` (100/86) — the predict label flips between iterations**), eval 4 (80→100 — **the reverse flip: iteration 3 claims `helps` (100/80); iteration 4 has no claimed effect (100/100)**), eval 5 (60→40, `helps` in both, magnitude only), eval 8 (71→86, **moved, not stable**). Only evals 3, 6 and 7 are stable across the two iterations (all three at 100/100, 83/83, 17/17 respectively) — **not** "3, 6, 7, 8" as the pre-review row said. With n=1 per arm per eval and no stated model, these swings are consistent with ordinary run-to-run noise rather than a change in the skill's real effect. The predict labels this port uses for `cds-e2-create-team-modal` (`helps`) and `cds-e4-sidebar-nav` (`no-effect`) are pinned to iteration 4 specifically (the SHA this suite is pinned to; PR #784's body confirms "Existing evals 1–8 are unchanged" at the pinned commit, consistent with the pinned SKILL.md being the one iteration 4 measured) — under iteration 3's data those two labels would swap. **Corrected in this round (N-2): the
+pre-review version of this sentence was itself wrong.** The pooled 2/5 without-skill task-level
+baseline does not change *in count* between iterations, but the two full-task passes are not the
+same pair: at iteration 4 (the pinned SHA) they are evals 3 and 4 (both 100%); at iteration 3 they
+are evals **2 and 3** (eval 2 was 100/100 at iteration 3, per the flip noted above; eval 4 was
+100/80, a helps case, so it is not a full pass at iteration 3). The 2/5 *count* is stable across
+both published iterations — which is what keeps the +60pp claim itself stable — but which two
+evals supply that count is not, and the pre-review text's claim that it was "evals 3 and 4 either
+way, just for different reasons" conflated the two iterations' different pairs into one. This is disclosed as a limitation of the author's own published methodology, not something this port can correct |
 | Grader mechanism unpublished | The author's `expectations` arrays are the only published grading artifact; no grader code exists in the repo to wrap in `fidelity/`, so **spec P2's fidelity check** does not apply to this suite (unlike a suite with a published deterministic grader) — corrected from the pre-review version of this row, which mis-cited this as "the P7 fidelity-check step" |
 
 ## Tool restriction (C-1)
@@ -258,17 +325,31 @@ CDS project — see the top-level deviation row) is set as the `fixture` on all 
 copied into *both* arms' sandboxes (PROTOCOL.md §7: "A fixture is copied fresh for every run,"
 copied to every arm, control included). This gives the control arm the one piece of context it
 was otherwise structurally denied — that this is a project with `@coinbase/cds-web`,
-`@coinbase/cds-common`, `@coinbase/cds-icons`, `react` and `react-dom` as dependencies — without
-telling it anything about CDS's actual API surface, which is exactly what SKILL.md and its
-injected `guidelines/` supply to the treatment arm alone. This reconstructs the author's
-unpublished in-repo baseline as far as a `package.json` alone can: it does not include a real
-`node_modules` (so `discover-cds-packages.sh` still finds nothing even though it now exists in the
-sandbox, and it cannot run there anyway per C-1), and it does not include any existing source file
-with a real CDS import for either arm to imitate (SKILL.md's own "match whatever scope existing
-files use" guidance has nothing to match against). The fixture closes the *is this a CDS project
-at all* gap; it does not close the *what does the CDS API actually look like* gap, which remains
-the treatment arm's exclusive advantage via the injected `skill/guidelines/*.md` — as it should
-be, since that gap is the very thing under test.
+`@coinbase/cds-common`, `@coinbase/cds-icons`, `@coinbase/cds-web-visualization`, `react` and
+`react-dom` as dependencies (versions corrected to the pinned repo's real published versions in
+this round — see N-7 below) — without telling it anything about CDS's actual API surface, which
+is exactly what SKILL.md and its injected `guidelines/` supply to the treatment arm alone. This
+reconstructs the author's unpublished in-repo baseline as far as a `package.json` alone can: it
+does not include a real `node_modules` (so `discover-cds-packages.sh` still finds nothing even
+though it now exists in the sandbox, and it cannot run there anyway per C-1), it does not include
+any existing source file with a real CDS import for either arm to imitate (SKILL.md's own "match
+whatever scope existing files use" guidance has nothing to match against), and it does not include
+the monorepo's `CLAUDE.md`/`AGENTS.md`/`.mcp.json` docs server or the real `packages/web` source
+the author's own control had.
+
+**Corrected from the pre-review version of this section, which framed the remaining gap as
+uncomplicated and fully intentional ("as it should be, since that gap is the very thing under
+test"):** that framing is not wrong about what the fixture accomplishes — it closes the *is this
+a CDS project at all* question and leaves the *what does the CDS API actually look like* question
+as the treatment arm's exclusive advantage via `skill/guidelines/*.md`, which is correctly the
+thing under test. But it is incomplete, because the fixture does not fully close the control-side
+gap either: the author's own control, per PR #784, ran inside the real monorepo and scored 100%
+on eval 3 and eval 4 without the skill, which our bare-`package.json` control structurally cannot
+approach. So a portion of the *is this a CDS project* gap remains open on the control side even
+after the fixture, on top of the *API surface* gap that is deliberately left open on the treatment
+side. **See "Reading rule (N-1)" above for exactly how this residual gap is disclosed and how it
+constrains interpretation of the eventual result** — it is not treated as fully resolved by the
+fixture, and it is not silently absorbed into "as it should be."
 
 ## Guidelines and scripts now present via `skill_dir` (I-1)
 
@@ -288,6 +369,14 @@ icon sizing/active-state conventions (`icons.md`), and illustration-dimension co
 above) — the model can *read* their source (e.g. to see which package suffixes
 `discover-cds-packages.sh` looks for) but cannot *run* them in either arm.
 
+**N-8, disclosed only, not fixed:** `scripts/discover-cds-packages.sh` is `100755` (executable) in
+the upstream repo and `100644` (non-executable) as copied into `suites/cds-code/skill/`. File mode
+is not covered by PROTOCOL.md §3's `H` (the manifest hashes bytes, not mode bits), so this does not
+move the registration hash, and it has no behavioral effect in this port regardless — the script
+never executes either way, since headless mode refuses `Bash` outright (see "Tool restriction
+(C-1)" above). This is a nit against a literal byte-for-byte copy claim, not a measurement defect,
+and per the ruling is disclosed rather than corrected.
+
 **Contradiction disclosed as a finding, not fixed:** `guidelines/components.md` (lines 315, 322,
 391 at the pinned SHA) tells the model that circular and linear progress indicators come from
 `@coinbase/cds-web-visualization` — the separate package, not a `cds-web` subpath. `cds-e3`'s own
@@ -300,6 +389,54 @@ follows its own injected guideline literally would fail `cds-e3` expectation 5 o
 point the guideline told it to get right — a plausible, disclosed source of treatment-arm MISSes
 on `cds-e3` that has nothing to do with the model's competence and everything to do with the
 author's own guidelines and evals not agreeing with each other.
+
+**Consequence for the verdict, spelled out (N-4), not left implicit:**
+- (a) If enough treatment replies follow `components.md`'s guidance on `cds-e3` and fail
+  expectation 5 as a result, `cds-e3`'s own interval can move down — potentially far enough that,
+  combined with the pooled Newcombe interval, it pulls the pooled result toward (or below) zero.
+  Per nullbench's HIT/MISS rule this would register as a `no-effect` **MISS in the harms
+  direction** for `cds-e3` specifically (an interval below zero, not spanning it) — and per the
+  "Reading rule (N-1)" above, that per-task MISS is *not* published as "the author's claim not
+  borne out," precisely because this guideline/eval contradiction (not a real skill weakness) is
+  a plausible cause.
+- (b) Any `cds-e3` treatment MISSes caused this way lower the pooled treatment pass rate that
+  feeds the +60pp pooled verdict, working in the *opposite* direction from the control-arm
+  inflation disclosed in "Reading rule (N-1)" — i.e., this is one of the few mechanisms in this
+  port that could plausibly work *against* the claimed delta rather than for it, partially
+  offsetting (not necessarily cancelling) the control-arm inflation.
+- (c) The author's own treatment arm, running inside the real monorepo, could consult real
+  `node_modules` exports directly (per SKILL.md's own Initialization fallback) rather than relying
+  solely on `components.md`'s prose — so the author's treatment plausibly avoided this exact trap
+  by checking the real package structure, an option this port's treatment arm does not have
+  (no real `node_modules`, and `discover-cds-packages.sh` cannot run — see "Tool restriction
+  (C-1)"). This is a further way in which this port's treatment arm is measured under weaker
+  conditions than the author's own, on this one expectation specifically.
+- Also disclosed: `cds-app/package.json` in this round adds `@coinbase/cds-web-visualization` as a
+  declared dependency (see N-7 below), for real-repo package identity. This does not resolve the
+  contradiction — `components.md` still names that package for progress indicators, and `cds-e3`'s
+  expectation 5 still FAILs an import from it — but it is disclosed here because declaring the
+  package as a dependency (rather than omitting it, as the pre-review fixture did) makes it a
+  slightly more available, plausible import target for either arm to reach for, which bears
+  directly on the exact expectation this contradiction is about.
+
+## Author repo context readable in `skill/README.md` (N-6)
+
+**New disclosure, this round.** `skill/README.md` (copied verbatim, part of `skill_dir`) is
+readable by the treatment arm and carries a "Per-eval breakdown" table whose row labels are
+one-to-one hints at this suite's own prompts and expectations: "Profile card (Avatar, ListCell,
+tokens)" (→ `cds-e1`), "Create team modal (Modal, Select alpha)" (→ `cds-e2`), "Sidebar nav (icon
+names, active state)" (→ `cds-e4`), "Empty state + illustration sizing" (→ `cds-e5`). Keeping
+`README.md` in `skill_dir` is author-faithful — it ships with the real skill, and excluding it
+would mean the treatment arm sees less of the real skill than a real installation provides.
+SKILL.md itself never points to `README.md`, so this is not something the skill instructs the
+model to read, but it is present on disk and readable if the model looks. This means the claim
+made in the top-of-file deviation row and in "Eval 1 portability" above — that excluding `evals/`
+keeps the treatment arm from reading its own grading criteria — is not fully true: `README.md`'s
+row labels are not the `expectations` text itself, but they do name several of the exact
+components each rubric grades for (`ListCell`, `Select alpha`, "icon names, active state"). This
+is disclosed rather than fixed by editing the file, since editing `README.md` would break its
+byte-identity to the pinned SHA (verified in Step 1 of this suite's construction) and this port's
+whole premise is porting the skill unmodified.
 
 ## Harm task
 
