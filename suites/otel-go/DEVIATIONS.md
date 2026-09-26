@@ -1,5 +1,7 @@
 # Deviations — otel-go
 
+**Superseded registration:** an earlier registration of this suite, H=`4e1d8a9c701d8fc8`, was frozen and reviewed (`task-5-otel-review.md`) but never run (no `LEDGER.md` entries exist for it). That review's fix round (C-2 ceiling verdict, I-1 withheld-arm correction, I-2 canary boundaries, I-3 attribution caveat, M-1..M-4) is this file and the registration it accompanies; the M-2 harm-task rationale edit moved the task's declared hash and therefore `H`. H=`4e1d8a9c701d8fc8` is recorded here as superseded, before any run.
+
 | Deviation | Reason |
 |---|---|
 | Re-pin: `73a557bd3a79c0590995f90ab2cebaae203409b3` (originally pinned to a different revision at selection) | Task 4b review found the original SELECTION.md pin was wrong for "the proposed PR skill"; re-pinned to the PR #218 merge commit, the exact revision the author's "proposed" arm measured (Ruling, progress.md) |
