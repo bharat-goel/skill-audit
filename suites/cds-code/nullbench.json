@@ -7,35 +7,35 @@
     {
       "id": "cds-e1-profile-card",
       "file": "tasks/cds-e1-profile-card.json",
-      "sha256": "65f5bb66a3b60237d57a69a04422bda75657b68c8e5efa6524bf05d3edd14c01",
+      "sha256": "f54822306a7867d380d693e2c7f1026c27599066628e57c7499cbb4a758548f0",
       "kind": "signal",
       "predict": "helps"
     },
     {
       "id": "cds-e2-create-team-modal",
       "file": "tasks/cds-e2-create-team-modal.json",
-      "sha256": "b6ea2e7025663112d108f7b2b9f0b79791b0a45e7d1e7d9821f77afb69a8eef8",
+      "sha256": "321bfacd2599b718eded8764adde92d973babd1a11894ca28477107c2e6f5914",
       "kind": "signal",
       "predict": "helps"
     },
     {
       "id": "cds-e3-banner-progress",
       "file": "tasks/cds-e3-banner-progress.json",
-      "sha256": "0f56f0fe3a98aeb000639d26f88400fa68fa557c3c0c68ad8e757c12a29ca496",
+      "sha256": "32b65eaa7c8d61c00089bb8bcfb7fcadf6f9b25a2ce1b2255967eba044e627dc",
       "kind": "signal",
       "predict": "no-effect"
     },
     {
       "id": "cds-e4-sidebar-nav",
       "file": "tasks/cds-e4-sidebar-nav.json",
-      "sha256": "b045321bfe601c3b1ecc2b1b5f39298fb4cf37872a3bf78605c0d1331b956b03",
+      "sha256": "d9d413f51ef2e072dda60bf415d163720e1e201074b0d9323763e54fd5480f13",
       "kind": "signal",
       "predict": "no-effect"
     },
     {
       "id": "cds-e5-empty-state",
       "file": "tasks/cds-e5-empty-state.json",
-      "sha256": "b0cf8e64dbadc78a474de4927923ef3f8a218f41bed4c597a4f0786b8aac1db9",
+      "sha256": "4db37236f45f6f0bc5a7381652ff021db0850dffad1c54634e121325924ef17c",
       "kind": "signal",
       "predict": "helps"
     },
