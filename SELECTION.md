@@ -39,6 +39,37 @@ Stop at three eligible skills or 100 candidates screened, whichever comes first.
 than three eligible: the audit proceeds with fewer and reports the shortfall as a
 finding.
 
+## Amendment 1 — frozen 2026-09-25, before any source-3 candidate was viewed
+
+**Reason.** Sources 1–2 produced 1 eligible skill of 100 (see Outcome). One audited skill
+cannot support any claim about published evals in general. The one eligible skill
+qualified because it ships an `evals/evals.json` in the format written by Anthropic's
+skill-creator eval loop (task prompts plus per-task `expectations`), which is exactly what
+E3 requires. Source 3 targets that format directly. The rule in the section above is
+unchanged; E1–E5 are unchanged and apply to source 3 exactly as written.
+
+### Source 3
+
+GitHub code search, frozen to `selection/github-code-search-evals.json` by running
+exactly:
+
+```
+gh search code expectations --filename evals.json --limit 100 \
+  --json repository,path,url
+```
+
+Candidates are the distinct repositories in the order first returned, skipping any
+repository already in the log above. A repository with several skills that each ship
+their own `evals.json` counts as one candidate per such skill, in the order returned.
+
+### Stopping (source 3)
+
+Screen in order until **3 eligible skills in total** (the 1 from sources 1–2 plus 2 more)
+or **100 source-3 candidates** screened, whichever comes first. Fewer than 2 more eligible:
+the audit proceeds with what it has and reports the source-3 rate as a finding, reported
+separately from the sources 1–2 rate — the two denominators are not pooled, because
+source 3 is selected on the very property E3 tests.
+
 ## Log
 
 | # | Candidate | Source | E1 | E2 | E3 | E4 | E5 | Result | Evidence |
@@ -173,6 +204,112 @@ finding.
 | 117 | LOGIN-TB/claude-skills — ai-seo | 2 | ✓ | ✗ | – | – | – | **BEYOND CAP — not part of the result.** Excluded: E2, no with-vs-without number published | https://github.com/LOGIN-TB/claude-skills/blob/e80bcfdb34dee7cc94265fc8ce54f156f440e4c8/README.md |
 | 118 | pc-style/skill-view | 2 | ✗ | – | – | – | – | **BEYOND CAP — not part of the result.** Excluded: E1, no SKILL.md in repo | https://github.com/pc-style/skill-view/blob/7dde350d6ed3af071c16ce7c833ea5adbaefdfd9/README.md |
 | 119 | fivetaku/claude-office-skills — 3-statement-model | 2 | ✓ | ✗ | – | – | – | **BEYOND CAP — not part of the result.** Excluded: E2, no with-vs-without number published | https://github.com/fivetaku/claude-office-skills/blob/039902691e7d0a735ef4e67ee007d7832da9fcab/README.md |
+| 120 | AgentSkillOS/SkillAnything | 3 | ✓ | ✗ | – | – | – | excluded: E2, the "87% pass rate (vs 42% baseline)" is illustrative demo output in the README for a *generated* skill, not a published result for skill-anything itself; `evals/evals.json` expectations are file-system checks (dist/ dirs, SKILL.md existing) with no with-vs-without comparison for this skill | https://github.com/AgentSkillOS/SkillAnything/blob/0f7d527492ca84b28148600880a4854374df8c24/README.md |
+| 121 | smixs/pohuy | 3 | ✓ | ✗ | – | – | – | excluded: E2, `ЧЕСТНЫЕ-ЦИФРЫ.md` ("honest numbers") publishes "~96% root savings" as a vocabulary/morpheme-count ratio, not a with-vs-without effect number, and states outright "Бенчмарка нет" (there is no benchmark) | https://github.com/smixs/pohuy/blob/56a6277d44c91a8a102607f60fbc08aa0eaa99f2/%D0%A7%D0%95%D0%A1%D0%A2%D0%9D%D0%AB%D0%95-%D0%A6%D0%98%D0%A4%D0%A0%D0%AB.md |
+| 122 | wgpsec/AboutSecurity — ctf-pwn | 3 | ✓ | ✗ | – | – | – | excluded: E2, repo's `Doc/Skill-Benchmark-Guide.md` is generic A/B-testing tooling documentation with an illustrative example ("85% ± 5%... Delta +0.45"); its own "Skills with existing evals" list names only sql-injection-methodology, idor-methodology, ssti-detect — not ctf-pwn; no published with-vs-without number for this skill | https://github.com/wgpsec/AboutSecurity/blob/1b027e1d71027e9f9fa414de0826342c3b7ea4e9/Doc/Skill-Benchmark-Guide.md |
+| 123 | wgpsec/AboutSecurity — ctf-misc | 3 | ✓ | ✗ | – | – | – | excluded: E2, same repo-wide benchmark tooling as #122, no published with-vs-without number for this skill | https://github.com/wgpsec/AboutSecurity/blob/1b027e1d71027e9f9fa414de0826342c3b7ea4e9/Doc/Skill-Benchmark-Guide.md |
+| 124 | wgpsec/AboutSecurity — xray-scan | 3 | ✓ | ✗ | – | – | – | excluded: E2, same repo-wide benchmark tooling as #122, no published with-vs-without number for this skill | https://github.com/wgpsec/AboutSecurity/blob/1b027e1d71027e9f9fa414de0826342c3b7ea4e9/Doc/Skill-Benchmark-Guide.md |
+| 125 | wgpsec/AboutSecurity — ctf-malware | 3 | ✓ | ✗ | – | – | – | excluded: E2, same repo-wide benchmark tooling as #122, no published with-vs-without number for this skill | https://github.com/wgpsec/AboutSecurity/blob/1b027e1d71027e9f9fa414de0826342c3b7ea4e9/Doc/Skill-Benchmark-Guide.md |
+| 126 | crawfordxx/xiaoma-durex-copywriter | 3 | ✓ | ✗ | – | – | – | excluded: E2, README's numeric claims ("道具~40%", visual proportions) are stylistic/compositional ratios; the "跑评测跑出来的" prose references `evals/` but publishes no with-vs-without pass-rate number | https://github.com/crawfordxx/xiaoma-durex-copywriter/blob/d892bfb7bcae28e6758fa318093f6774d99b7eba/README.md |
+| 127 | gotempsh/temps — temps | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published for the `temps` skill anywhere in the monorepo (checked README, skill dir, RESULTS docs) | https://github.com/gotempsh/temps/blob/7a5409d9160cb890e6a14a1eb9a1e7a55784f9d1/skills/temps/SKILL.md |
+| 128 | Eriemon/verilog-generator | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published; README describes the skill's behavior and an eval suite exists (`evals/evals.json`, `evals/vg_semantic_gate_cases.json`) but no published pass-rate or effect comparison | https://github.com/Eriemon/verilog-generator/blob/007372fb63fe1d0b51e5bb10f4569d0b62ae6730/README.md |
+| 129 | coinbase/cds — cds-code | 3 | ✓ | ✓ | ✓ | ✓ | ✓ | **ELIGIBLE** (fix round 1: claim unit corrected, harm-task error struck) — README "Performance" section publishes a with/without table across 8 coding/review tasks, columns labeled "With skill / Without skill" (100% vs 75.0%, +25.0%); each per-eval figure is that eval's share of `expectations` passed (e.g. 89% = 8/9), so 75.0% is the unweighted mean of 8 per-eval rates, not a task pass rate — at the all-expectations-pass task level the baseline is 2/8 = 25%; `evals/evals.json`'s 10 evals grade generated code text via prose `expectations` ("Uses Avatar for...", "No hardcoded hex...") judgeable from the reply alone, no execution needed; per P7 keep evals 1-5 only (evals 6-10 dropped, no harm-task allowance exists — P4's harm task is auditor-written); on evals 3 and 4 the author's own baseline is already 100%, i.e. two of the five kept tasks are claimed zero-effect; skill runs locally (discovery shell script; CDS MCP/docs skill are optional fallbacks, not required); Apache-2.0 (short-form LICENSE notice — GitHub's SPDX detector shows NOASSERTION because of the short form, confirmed by reading the file directly); author Coinbase, distinct from #83's and #142's authors | https://github.com/coinbase/cds/blob/9aca6aebcb62f731a5a754af66c0bd05df86beec/skills/cds-code/README.md |
+
+### Selected: cds-code
+
+- Repo: https://github.com/coinbase/cds @ `9aca6aebcb62f731a5a754af66c0bd05df86beec`
+- SKILL.md: `skills/cds-code/SKILL.md`
+- Claim: "Pass rate 100% with skill vs 75.0% without skill, +25.0%" — [skills/cds-code/README.md, Performance section](https://github.com/coinbase/cds/blob/9aca6aebcb62f731a5a754af66c0bd05df86beec/skills/cds-code/README.md). **Claim unit (fix round 1):** each per-eval percentage is the mean share of that eval's `expectations` met (89% = 8/9, 86% = 6/7, 40% = 2/5, 83% = 5/6, 17% = 1/6, etc.); 75.0% is the unweighted mean of the 8 per-eval rates (sum 6.003 / 8), not a per-task pass rate. The README does not state n; the figures are consistent with one run per arm per eval. At the task level (an eval counts as passed only if every expectation passes), the author's own without-skill baseline is 2/8 = 25%, not 75%.
+- Method: task prompts — [skills/cds-code/evals/evals.json](https://github.com/coinbase/cds/blob/9aca6aebcb62f731a5a754af66c0bd05df86beec/skills/cds-code/evals/evals.json). Per P7, keep only the first 5 published evals — ids 1-5, "Profile card" through "Empty state + illustration sizing." Evals 6-10 are dropped solely by the P7 cap (**fix round 1: struck** — the original block wrongly claimed evals 9/10 could serve as a "harm/scope task per P7's harm-task allowance"; no such allowance exists — P7 means the first 5 author tasks in order, and P4 makes the harm task the only one the auditor writes, from the skill's `description` alone, blind to the author's evals). Pass criterion: same file, each kept eval's `expectations` array (prose criteria about the generated code text, mapped to a `judge` rubric per P2). Two of the five kept tasks (evals 3, 4) have an author-reported 100% baseline — no claimed effect — which a pooled predict-vs-result design must not silently read as "claim not borne out" on a MISS.
+- Author's model and n: not stated in README beyond "Cursor eval runner"; iteration 4, dated 2026-07-22; per-eval n not stated — the per-eval percentages (89%, 86%, 40%, 83%, 17%, etc.) are inconsistent with small-integer-run fractions in a couple of cases and are treated as n≈1 per arm per eval unless DEVIATIONS.md finds otherwise
+- License: Apache-2.0. `LICENSE` is a short-form Apache-2.0 notice ("Apache-2.0 License / Copyright 2026 Coinbase / Licensed under the Apache License, Version 2.0..."); GitHub's repo-level SPDX detector reports `NOASSERTION` for this file specifically because of the short form, not because the license is missing or non-permissive — confirmed by reading `LICENSE` directly at the pinned SHA.
+- Caveats for `DEVIATIONS.md` (Task 5): evals 6-10 dropped per P7's 5-task cap, logged above; grader code itself is not published, only the `expectations` prose (P2/P5 judge + canaries apply); author's per-run methodology (Cursor eval runner, iteration 4) is not fully documented, so replication fidelity beyond the published percentages is uncertain; the expectations grade "the output code" — if the ported subject writes files via Write/Edit and replies with only a summary, the judge sees no code to grade (nullbench disallows Write/Edit/Bash for the subject, per #83's DEVIATIONS, which forces code into the reply — disclose this and add a canary: a summary-only reply must FAIL); the skill's mandatory Initialization step runs `scripts/discover-cds-packages.sh` against `node_modules`, which finds nothing in a bare sandbox — the with-skill arm therefore runs in a weaker condition than the author's own environment, disclose this too
+
+| 130 | qdrant/skills | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published anywhere in the repo (README, per-skill docs); `evals/evals.json` and `evals/test-prompts/*` are trigger/routing test prompts for the "Qdrant Advisor" meta-skill, not an effect claim | https://github.com/qdrant/skills/blob/6a03d0ce8f554a579c2e14a81fb7e2245a708db0/README.md |
+| 131 | jvm-skills/jvm-skills — tdd-task | 3 | ✓ | ✓ | ✗ | – | – | excluded: E3, `evals/tdd-task/iteration-2/benchmark.json` does publish real with_skill/without_skill pass rates (e.g. eval 1: 1.0 vs 0.6) — E2 passes — but every task prompt (e.g. "PHO-378: fix subdomain validation in WeddingOnboarding.kt") targets files in "PhotoQuest," a private external codebase not included in this repo (`files: []` in every eval, no fixtures), and grading requires running the real test suite plus a `ui-review` subagent, not judging reply text alone | https://github.com/jvm-skills/jvm-skills/blob/c6d477fb61d834f82d43e4fc3eec102dccf1e5d2/evals/tdd-task/iteration-2/benchmark.json |
+| 132 | dirien/minectl | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published anywhere in the repo | https://github.com/dirien/minectl/blob/cafd3a4826ad11cd57eec8fdee90c6d31fd6f070/README.md |
+| 133 | majiayu000/spellbook — xray | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published for this skill; repo's `docs/skill-test-report.md` and `docs/skill-optimization-report.md` do not mention xray | https://github.com/majiayu000/spellbook/blob/3660f914b02d0d521ef9e2ddf820530054259cea/docs/skill-test-report.md |
+| 134 | majiayu000/spellbook — idea-team | 3 | ✓ | ✗ | – | – | – | excluded: E2, same repo-wide check as #133, no published with-vs-without number for this skill | https://github.com/majiayu000/spellbook/blob/3660f914b02d0d521ef9e2ddf820530054259cea/docs/skill-test-report.md |
+
+| 135 | majiayu000/spellbook — threads | 3 | ✓ | ✗ | – | – | – | excluded: E2, same repo-wide check as #133, no published with-vs-without number for this skill | https://github.com/majiayu000/spellbook/blob/3660f914b02d0d521ef9e2ddf820530054259cea/docs/skill-test-report.md |
+| 136 | hubeiqiao/apple-bento-grid | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/hubeiqiao/apple-bento-grid/blob/235f740b245a6763773c3c80da25980ef2ef8460/README.md |
+| 137 | diegosouzapw/awesome-omni-skills — shadcn-v2 | 3 | ✓ | ✗ | – | – | – | excluded: E2, README mentions a "curated baseline" catalog surface (maintained skill catalog, not an effect claim); no with-vs-without number published | https://github.com/diegosouzapw/awesome-omni-skills/blob/c3af0048b70a4b84b2f2324e2f7b7ae5206d89b2/README.md |
+| 138 | yizhiyanhua-ai/fireworks-open-eli5 | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/yizhiyanhua-ai/fireworks-open-eli5/blob/e90d5f9dae1bb823573388654e381a9844169e1b/README.md |
+| — | O0000-code/paper-search-pro | 3 | — | — | — | — | — | **skipped**, already in log at row #72 (source 2) | — |
+| 139 | nank1ro/solid | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/nank1ro/solid/blob/c6a15d388d4d485dc78d42fde88cafbcb4b64fe1/README.md |
+
+| 140 | resend/resend-cli | 3 | ✓ | ✗ | – | – | – | excluded: E2, no with-vs-without number published | https://github.com/resend/resend-cli/blob/8c6ed56e0773f59b65e1c20dcdd0cb9c7469a81b/README.md |
+| 141 | ryanthedev/code-foundations | 3 | ✓ | ✗ | – | – | – | excluded: E2, `benchmarks/tdd-vs-siv/` is a rigorous, mutation-tested A/B — but between **two variants of the same `build-doctrine` skill** (SIV vs TDD bodies), not skill-vs-no-skill; there is no true without-skill baseline arm, so it does not publish a with-versus-without number in the sense E2 requires (also no LICENSE file in the repo — would fail E4 independently) | https://github.com/ryanthedev/code-foundations/blob/6ce37b9fcf79fe81e43aafa900acb4e3af215330/benchmarks/tdd-vs-siv/README.md |
+| 142 | ollygarden/opentelemetry-agent-skills — otel-go | 3 | ✓ | ✓ | ✓ | ✓ | ✓ | **ELIGIBLE** (fix round 1: re-pinned to the commit the author actually measured; original pin `78f750c` was 33 commits later with a different SKILL.md and 6 changed references — see re-pinned note below) — `evals/results.md` publishes a with-vs-without table for the single eval case: target-skill-withheld arm 0/3 pass vs proposed-PR-skill arm 3/3 pass (current-origin/main-skill arm, a separate before/after claim, 1/3); a deterministic grader checks whether all four prose expectations are present in the model's final answer text — portable via `judge`; the one referenced fixture (`evals/files/go-v145-upgrade.md`) is in-repo; skill is a plain reference doc (no external service); Apache-2.0 (SPDX-detected); author ollygarden, distinct from #83 and #129 | https://github.com/ollygarden/opentelemetry-agent-skills/blob/73a557bd3a79c0590995f90ab2cebaae203409b3/skills/otel-go/evals/results.md |
+
+**Re-pinned (fix round 1):** originally logged at `78f750c` (the tip of the branch at the time of screening). The PR #218 body ([commit message](https://github.com/ollygarden/opentelemetry-agent-skills/commit/73a557bd3a79c0590995f90ab2cebaae203409b3)) names three arms by exact revision: **withheld** = otel-go skill absent entirely; **current origin/main** = `cedd0080db38593f01600137fb2d3a8a43a75b5c` (the version before the PR); **proposed PR skill** = `e1b4e9935a2dcbc3b2f628f4ce60c82c2dcf91e6`, merged into main as `73a557bd3a79c0590995f90ab2cebaae203409b3`. The published 0/3 vs 3/3 number describes the proposed-PR-skill content at that merge commit, not the later `78f750c` tip — by `78f750c`, otel-go's SKILL.md had drifted (+4/−4 lines, a v1.46 refresh in PR #231) along with 6 reference files (#231, #239). The verification-path instruction that drives the whole result (see Claim below) is still present at `78f750c` (SKILL.md L22-24), so the drift does not overturn eligibility, but registering against the wrong commit would measure a skill the author never measured. **Re-pinned to `73a557bd3a79c0590995f90ab2cebaae203409b3`.**
+
+### Selected: otel-go
+
+- Repo: https://github.com/ollygarden/opentelemetry-agent-skills @ `73a557bd3a79c0590995f90ab2cebaae203409b3` (re-pinned, fix round 1 — see note above; this is the PR #218 merge commit, i.e. the exact "proposed PR skill" revision the author measured)
+- SKILL.md: `skills/otel-go/SKILL.md`
+- Claim: "Skill withheld: 0 pass, 3 fail; proposed skill: 3 pass, 0 fail" — [skills/otel-go/evals/results.md](https://github.com/ollygarden/opentelemetry-agent-skills/blob/73a557bd3a79c0590995f90ab2cebaae203409b3/skills/otel-go/evals/results.md) and the [PR #218 body](https://github.com/ollygarden/opentelemetry-agent-skills/commit/73a557bd3a79c0590995f90ab2cebaae203409b3). One case, 3 fresh repetitions per arm, Codex CLI 0.147.0 driving `gpt-5.6-sol`; a repetition passes only if the final answer meets all four `expectations`. **What drives the result (fix round 1 detail):** expectations A, B, C (the three v1.45.0 facts, all given directly in the fixture) pass in every repetition of every arm, withheld included — the entire 0→3 lift is expectation D alone (the answer must not claim it compiled or validated anything, and must propose a safe local compile/test path). PR #218 added exactly that instruction to SKILL.md: "For upgrade reviews, always finish with a safe local verification path (`go mod tidy -diff`, `go build ./...`, `go test ./...`)…". The eval, the instruction that satisfies it, and the proposed-skill content were co-developed together against this one case (13 superseded "proposed" revisions preceded the merged one). This is a real with/without number, but the skill was tuned to this test — a finding to report alongside the result, not a disqualifier.
+- Method: task prompt — [skills/otel-go/evals/evals.json](https://github.com/ollygarden/opentelemetry-agent-skills/blob/73a557bd3a79c0590995f90ab2cebaae203409b3/skills/otel-go/evals/evals.json), single case `go-v145-upgrade-review`, with its one in-repo fixture `skills/otel-go/evals/files/go-v145-upgrade.md` (P1: portable, no external path) · pass criterion — same file's four `expectations` (prose criteria about the final answer, mapped to a `judge` rubric per P2); no P7 trimming needed, the suite has only one case. **Fixture isolation (fix round 1):** when porting, copy only `skills/otel-go/evals/files/go-v145-upgrade.md` into the sandbox at that relative path. Never copy the surrounding `skills/otel-go/` tree — it also holds `evals.json`, `results.md`, and `SKILL.md`, any of which would let either arm read the grading criteria or (for the control arm) the skill itself.
+- Author's model and n: Codex CLI 0.147.0 driving `gpt-5.6-sol` through ChatGPT auth (not Claude — note for DEVIATIONS.md, the audit reruns under its own harness regardless); 3 selected repetitions per arm (withheld / current-origin/main / proposed-PR), chosen as "the earliest valid fresh repetitions... not chosen by outcome"; the withheld arm ran Codex with the target skill removed but "identical prompt and tool access" to the other arms, i.e. other repo skills were possibly still present; several additional attempts were run and excluded for harness/quota failures, logged transparently in the results doc
+- License: Apache-2.0 (SPDX-detected)
+- Caveats for `DEVIATIONS.md` (Task 5): grader is deterministic keyword/fact presence, not published as code — only the `expectations` prose (P2/P5 judge + canaries apply); author's harness used Codex/GPT, not Claude, so the ported run is a new measurement under a different model, not a replication; only 1 eval case exists for this skill (no P7 trimming was needed, but also no scope for a second task or a harm-task substitute); "current origin/main skill" arm (1/3, at `cedd0080db38593f01600137fb2d3a8a43a75b5c`) is a separate before/after-the-edit claim, distinct from the withheld-vs-proposed with/without claim — do not conflate the two; report that the whole measured lift rests on expectation D alone, co-developed with the SKILL.md instruction that satisfies it, over 16 "proposed" iterations; report the later drift at `78f750c` (SKILL.md +4/−4 in PR #231, 6 changed reference files) as a finding if the audit ever needs to reconcile the pinned SHA against the current published skill
+
+## Outcome — source 3
+
+Screening stopped at row #142 per Amendment 1's stopping rule: **3 eligible skills in
+total** reached (1 from sources 1-2, plus 2 from source 3), before the 100-candidate cap
+for source 3.
+
+Source-3 candidates screened: 23 (rows 120-142; `O0000-code/paper-search-pro` was
+skipped as a duplicate of row #72 and does not count toward this total). Exclusions by
+first failed criterion, source-3 rows only (not pooled with sources 1-2 per Amendment 1):
+
+**Repo-grouping reading (fix round 1).** The Amendment's "distinct repositories in the
+order first returned … one candidate per such skill" was read as: group a repo's
+several skills at the position of that repo's *first* appearance in the 100 raw search
+results, screening all of that repo's skills together before moving to the next
+first-appearance repo. Under this reading, `majiayu000/spellbook — threads` (the raw
+search result's 99th hit) is screened at row 135, immediately after its sibling skills
+`xray`/`idea-team`, rather than out near the end of the raw order. Under the other
+defensible reading — screening strictly in raw result order, never regrouping a repo's
+later-appearing skills forward — the run would have stopped one row earlier, at 22
+source-3 candidates screened instead of 23 (source-3 rate 2/22 instead of 2/23). Neither
+reading changes which skills are eligible or selected: `coinbase/cds` — cds-code (#129)
+and `ollygarden/opentelemetry-agent-skills` — otel-go (#142) are eligible under both
+orderings, and no row between them and the stopping point flips.
+
+**Pace.** Screening rows 120 through 142 took roughly 10 minutes end to end (source
+search committed, then the stop at 3 eligible), about 26 seconds per candidate on
+average, including two eligibility write-ups. That is fast for a check meant to read
+actual file content rather than grep for `%` — it is the same pace the Task 4 review of
+sources 1-2 flagged, and it is the likely cause of the #142 pinning error caught in this
+fix round (which revision "proposed" referred to was missed at that pace). Flagging this
+here so the E2/E3 counts above are not read as a slower, more careful per-row pass than
+what actually happened; the fix-round review's 6-row spot sample found no further errors.
+
+| Criterion | Count |
+|---|---|
+| E1 | 0 |
+| E2 | 20 |
+| E3 | 1 |
+| E4 | 0 |
+| E5 | 0 |
+| **Eligible** | **2** |
+| **Total (source-3 rows)** | **23** |
+
+**Source-3 eligible rate: 2/23 (8.7%)**, sharply higher than sources 1-2's 1/100 (1%).
+This is expected and not comparable: source 3 was selected on `evals.json` +
+`expectations` specifically because that is the one format sources 1-2 showed could
+satisfy E3, so source 3 is not an independent random draw — see Amendment 1's own
+reasoning for why the two rates are not pooled. Both source-3 eligible skills
+(coinbase/cds — cds-code, ollygarden/opentelemetry-agent-skills — otel-go) reached
+eligibility primarily by publishing a real with-vs-without pass-rate number in prose/
+table form (E2), the same bar 20 of 23 source-3 candidates failed — most source-3
+repos that ship an `evals.json` still never publish a with-vs-without result, only
+task/expectation scaffolding (consistent with #120 SkillAnything, #130 qdrant/skills,
+#133-135 spellbook, and others). The audit now has **3 selected skills total**:
+`ckpxgfnksd-max/uap-release-analyzer` (#83), `coinbase/cds` — cds-code (#129), and
+`ollygarden/opentelemetry-agent-skills` — otel-go (#142).
 
 ## Outcome (revised, fix round 1)
 

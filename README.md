@@ -18,7 +18,7 @@ sibling directory (`../nullbench`, override with `NULLBENCH_DIR`) — the tools 
 |---|---|
 | 0 — nullbench bracket on Sonnet | passed 2026-09-24 |
 | 1 — selection rule frozen | frozen 2026-09-23, 5cf2831 |
-| 2 — screening | 1 of 100 eligible |
+| 2 — screening | 3 eligible (1/100 sources 1-2, 2/23 source 3 — rates not pooled, see SELECTION.md Amendment 1) |
 | 3 — ports registered | not started |
 | 4 — runs | not started |
 | 5 — authors notified, published | not started |
