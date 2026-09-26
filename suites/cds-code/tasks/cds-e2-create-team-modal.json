@@ -8,5 +8,6 @@
   "verify": {
     "type": "judge",
     "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses Modal, ModalHeader, ModalBody, and ModalFooter to compose the dialog\n2. Uses TextInput for the team name field\n3. Uses Select (from the alpha subpath) for the team size dropdown with Small/Medium/Large options\n4. ModalFooter receives a primary Button (Save) and a secondary variant Button (Cancel)\n5. No style prop used for padding, color, gap, or other values that have CDS style prop equivalents\n6. Select is imported from the correct alpha subpath (e.g., @coinbase/cds-web/alpha/select or equivalent)\n7. No raw pixel values or hex/rgb colors in the output"
-  }
+  },
+  "fixture": "cds-app"
 }

@@ -8,5 +8,6 @@
   "verify": {
     "type": "judge",
     "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses the exact icon names home, activity, and settings for the three nav items\n2. Applies active state specifically to Home and keeps Activity/Settings inactive\n3. Uses navigation-appropriate icon sizing\n4. Pairs selected state with token-based color treatment (no bespoke hex/rgb values)\n5. No raw pixel values for spacing or border radius (explicit layout dimensions like sidebar width are acceptable)"
-  }
+  },
+  "fixture": "cds-app"
 }

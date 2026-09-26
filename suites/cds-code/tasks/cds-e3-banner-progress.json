@@ -8,5 +8,6 @@
   "verify": {
     "type": "judge",
     "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses Banner with variant=\"warning\" for the unsaved changes message\n2. Renders a container below the banner with padding applied via the paddingX, paddingStart or paddingEnd props (e.g. paddingX={2})\n3. Uses ProgressBar with a progress value representing 60% for the determinate progress indicator\n4. Uses ProgressCircle with the indeterminate prop for the spinner\n5. ProgressBar and ProgressCircle are imported from @coinbase/cds-web/visualizations (the correct subpath), not from a generic top-level import or the separate @coinbase/cds-web-visualization package\n6. No hardcoded hex, rgb, or raw color values in the output"
-  }
+  },
+  "fixture": "cds-app"
 }

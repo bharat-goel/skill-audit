@@ -1,0 +1,12 @@
+{
+  "name": "cds-app",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "@coinbase/cds-web": "9.4.1",
+    "@coinbase/cds-common": "9.4.1",
+    "@coinbase/cds-icons": "5.19.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

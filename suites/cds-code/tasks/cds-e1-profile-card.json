@@ -8,5 +8,6 @@
   "verify": {
     "type": "judge",
     "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses Avatar for the user photo\n2. Uses ListCell with accessory=\"arrow\" for the three settings rows\n3. Uses fgMuted (not foregroundMuted or bespoke color) for the email address text\n4. Uses the generic Text component with the font prop, not derivitive Text components (e.g. TextHeadline, TextLabel1, etc.)\n5. Uses the borderRadius prop for the rounded container corners and uses a design token for the value (no pixels/percentages)\n6. No hardcoded hex, rgb, or raw color values anywhere in the output code\n7. No raw pixel values used for spacing or border radius (e.g., no '16px', '8px' as literal strings)\n8. Uses VStack or HStack for layout composition\n9. All CDS import paths are valid subpath exports (no invented deep paths like /layout/Box)"
-  }
+  },
+  "fixture": "cds-app"
 }

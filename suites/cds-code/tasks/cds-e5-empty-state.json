@@ -8,5 +8,6 @@
   "verify": {
     "type": "judge",
     "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses a CDS illustration component (SpotIcon, SpotSquare, Pictogram, or similar) — not a raw img, svg, or emoji\n2. Shows two clearly distinct size variants (compact and roomy) with different illustration dimensions\n3. Uses CDS layout and generic Text primitives\n4. Does not use or suggest scaleMultiplier\n5. No raw pixel or hex/rgb values are used"
-  }
+  },
+  "fixture": "cds-app"
 }
