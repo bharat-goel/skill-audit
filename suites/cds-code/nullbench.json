@@ -2,6 +2,7 @@
   "model": "sonnet",
   "judge_model": "sonnet",
   "reps": 10,
+  "skill_dir": "skill",
   "tasks": [
     {
       "id": "cds-e1-profile-card",
