@@ -1,0 +1,112 @@
+{
+  "cds-e1-profile-card": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "Here's the profile card:\n\n```jsx\nimport { Avatar, Text, ListCell, VStack, HStack } from '@coinbase/cds-web';\n\nfunction ProfileCard({ user, onAccountSettings, onNotifications, onSignOut }) {\n  return (\n    <VStack borderRadius=\"roundedLarge\" background=\"bgPrimary\" padding={3} gap={2}>\n      <HStack gap={2} alignItems=\"center\">\n        <Avatar src={user.avatarUrl} name={user.displayName} size=\"m\" />\n        <VStack gap={0}>\n          <Text font=\"title3\">{user.displayName}</Text>\n          <Text font=\"body\" color=\"fgMuted\">{user.email}</Text>\n        </VStack>\n      </HStack>\n      <VStack>\n        <ListCell title=\"Account settings\" accessory=\"arrow\" onPress={onAccountSettings} />\n        <ListCell title=\"Notifications\" accessory=\"arrow\" onPress={onNotifications} />\n        <ListCell title=\"Sign out\" accessory=\"arrow\" onPress={onSignOut} />\n      </VStack>\n    </VStack>\n  );\n}\n\nexport default ProfileCard;\n```\n\nThis uses Avatar for the photo, ListCell rows with the arrow accessory for the three settings items, fgMuted for the email, generic Text with the font prop throughout, a token-based borderRadius, and VStack/HStack for layout — no raw colors or pixel values anywhere, and every import is a top-level CDS export."
+    },
+    {
+      "label": "near-miss-derivative-text",
+      "expect": "FAIL",
+      "reply": "Here's the profile card:\n\n```jsx\nimport { Avatar, TextLabel1, Text, ListCell, VStack, HStack } from '@coinbase/cds-web';\n\nfunction ProfileCard({ user, onAccountSettings, onNotifications, onSignOut }) {\n  return (\n    <VStack borderRadius=\"roundedLarge\" background=\"bgPrimary\" padding={3} gap={2}>\n      <HStack gap={2} alignItems=\"center\">\n        <Avatar src={user.avatarUrl} name={user.displayName} size=\"m\" />\n        <VStack gap={0}>\n          <TextLabel1>{user.displayName}</TextLabel1>\n          <Text font=\"body\" color=\"fgMuted\">{user.email}</Text>\n        </VStack>\n      </HStack>\n      <VStack>\n        <ListCell title=\"Account settings\" accessory=\"arrow\" onPress={onAccountSettings} />\n        <ListCell title=\"Notifications\" accessory=\"arrow\" onPress={onNotifications} />\n        <ListCell title=\"Sign out\" accessory=\"arrow\" onPress={onSignOut} />\n      </VStack>\n    </VStack>\n  );\n}\n\nexport default ProfileCard;\n```\n\nUsed TextLabel1 for the display name to get a bolder look out of the box."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the profile card component using Avatar for the photo, ListCell rows with arrow accessories for the three settings items, fgMuted for the email, and VStack/HStack for layout, with token-based border radius and no raw colors or pixel values. Let me know if you'd like any adjustments to spacing or the accessory icons on the settings rows."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Built this using CDS design tokens throughout — fgMuted, bgPrimary, the borderRadius scale, VStack/HStack primitives, Avatar, and ListCell rows with arrow accessories — the standard pattern for a profile surface like this.\n\n```jsx\nfunction ProfileCard({ user }) {\n  return (\n    <div style={{ borderRadius: '12px', padding: '16px', background: '#FFFFFF' }}>\n      <div style={{ display: 'flex', gap: '8px' }}>\n        <img src={user.avatarUrl} style={{ borderRadius: '50%', width: 40, height: 40 }} />\n        <div>\n          <div style={{ fontWeight: 600 }}>{user.displayName}</div>\n          <div style={{ color: '#6B7280', fontSize: 14 }}>{user.email}</div>\n        </div>\n      </div>\n      <div>\n        <div className=\"settings-row\" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>Account settings &gt;</div>\n        <div className=\"settings-row\" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>Notifications &gt;</div>\n        <div className=\"settings-row\" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>Sign out &gt;</div>\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e2-create-team-modal": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "Here's the modal:\n\n```jsx\nimport { Modal, ModalHeader, ModalBody, ModalFooter, TextInput, Button } from '@coinbase/cds-web';\nimport { Select } from '@coinbase/cds-web/alpha/select';\n\nfunction CreateTeamModal({ isOpen, onClose, onSave }) {\n  const [name, setName] = useState('');\n  const [size, setSize] = useState('small');\n\n  return (\n    <Modal isOpen={isOpen} onClose={onClose}>\n      <ModalHeader title=\"Create team\" onClose={onClose} />\n      <ModalBody>\n        <TextInput label=\"Team name\" value={name} onChangeText={setName} />\n        <Select\n          label=\"Team size\"\n          value={size}\n          onChange={setSize}\n          options={[\n            { label: 'Small', value: 'small' },\n            { label: 'Medium', value: 'medium' },\n            { label: 'Large', value: 'large' },\n          ]}\n        />\n      </ModalBody>\n      <ModalFooter>\n        <Button variant=\"secondary\" onPress={onClose}>Cancel</Button>\n        <Button variant=\"primary\" onPress={() => onSave({ name, size })}>Save</Button>\n      </ModalFooter>\n    </Modal>\n  );\n}\n```\n\nModal/ModalHeader/ModalBody/ModalFooter compose the dialog, TextInput handles the name field, Select comes from the alpha subpath with the three size options, and the footer has a primary Save and secondary Cancel — no style objects or raw colors anywhere."
+    },
+    {
+      "label": "near-miss-style-prop-for-color",
+      "expect": "FAIL",
+      "reply": "Here's the modal:\n\n```jsx\nimport { Modal, ModalHeader, ModalBody, ModalFooter, TextInput, Button } from '@coinbase/cds-web';\nimport { Select } from '@coinbase/cds-web/alpha/select';\n\nfunction CreateTeamModal({ isOpen, onClose, onSave }) {\n  const [name, setName] = useState('');\n  const [size, setSize] = useState('small');\n\n  return (\n    <Modal isOpen={isOpen} onClose={onClose}>\n      <ModalHeader title=\"Create team\" onClose={onClose} />\n      <ModalBody>\n        <TextInput label=\"Team name\" value={name} onChangeText={setName} style={{ color: 'inherit' }} />\n        <Select\n          label=\"Team size\"\n          value={size}\n          onChange={setSize}\n          options={[\n            { label: 'Small', value: 'small' },\n            { label: 'Medium', value: 'medium' },\n            { label: 'Large', value: 'large' },\n          ]}\n        />\n      </ModalBody>\n      <ModalFooter>\n        <Button variant=\"secondary\" onPress={onClose}>Cancel</Button>\n        <Button variant=\"primary\" onPress={() => onSave({ name, size })}>Save</Button>\n      </ModalFooter>\n    </Modal>\n  );\n}\n```\n\nAdded an inherited-color override on the name field so it matches the surrounding form text exactly."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the Create team modal with Modal/ModalHeader/ModalBody/ModalFooter, a TextInput for the team name, a Select from the alpha subpath with Small/Medium/Large options, and primary Save / secondary Cancel buttons in the footer — all styled via CDS props, no raw style objects or hardcoded colors."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Built using the Modal/ModalHeader/ModalBody/ModalFooter composition, the TextInput field convention, the alpha Select dropdown, and primary/secondary Button variants per CDS conventions.\n\n```jsx\nfunction CreateTeamModal({ isOpen, onClose, onSave }) {\n  if (!isOpen) return null;\n  return (\n    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)' }}>\n      <div style={{ background: '#FFFFFF', padding: '24px', borderRadius: '8px' }}>\n        <h2>Create team</h2>\n        <input type=\"text\" placeholder=\"Team name\" style={{ padding: '8px', border: '1px solid #ccc' }} />\n        <select style={{ padding: '8px' }}>\n          <option>Small</option>\n          <option>Medium</option>\n          <option>Large</option>\n        </select>\n        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>\n          <button onClick={onClose}>Cancel</button>\n          <button onClick={onSave} style={{ background: '#1652F0', color: '#fff' }}>Save</button>\n        </div>\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e3-banner-progress": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "```jsx\nimport { Banner, VStack } from '@coinbase/cds-web';\nimport { ProgressBar, ProgressCircle } from '@coinbase/cds-web/visualizations';\n\nfunction StatusPanel({ onSaveNow }) {\n  return (\n    <VStack gap={2}>\n      <Banner variant=\"warning\" action={{ label: 'Save now', onPress: onSaveNow }}>\n        You have unsaved changes\n      </Banner>\n      <VStack paddingX={2} gap={2}>\n        <ProgressBar progress={0.6} />\n        <ProgressCircle indeterminate />\n      </VStack>\n    </VStack>\n  );\n}\n```\n\nThe Banner uses the warning variant with a Save now link action, the container below it uses paddingX={2}, ProgressBar sits at 60%, ProgressCircle is indeterminate for the spinner, and both come from the visualizations subpath — no hardcoded colors."
+    },
+    {
+      "label": "near-miss-wrong-import-path",
+      "expect": "FAIL",
+      "reply": "```jsx\nimport { Banner, VStack, ProgressBar, ProgressCircle } from '@coinbase/cds-web';\n\nfunction StatusPanel({ onSaveNow }) {\n  return (\n    <VStack gap={2}>\n      <Banner variant=\"warning\" action={{ label: 'Save now', onPress: onSaveNow }}>\n        You have unsaved changes\n      </Banner>\n      <VStack paddingX={2} gap={2}>\n        <ProgressBar progress={0.6} />\n        <ProgressCircle indeterminate />\n      </VStack>\n    </VStack>\n  );\n}\n```\n\nPulled ProgressBar and ProgressCircle in from the main package export alongside Banner and VStack to keep the import list short."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've added a warning Banner with a 'Save now' link action, a container with paddingX={2}, a ProgressBar at 60%, and an indeterminate ProgressCircle, both imported from the CDS visualizations package — no hardcoded colors anywhere."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Uses the Banner warning variant, the visualizations package's ProgressBar and ProgressCircle, and horizontal padding tokens per CDS conventions.\n\n```jsx\nfunction StatusPanel() {\n  return (\n    <div style={{ background: '#FFF3CD', padding: '12px', border: '1px solid #FFEEBA' }}>\n      <span>You have unsaved changes</span>\n      <a href=\"#\" style={{ color: '#1652F0' }}>Save now</a>\n      <div style={{ paddingLeft: '16px', paddingRight: '16px' }}>\n        <div style={{ width: '60%', height: '4px', background: '#1652F0' }} />\n        <div className=\"spinner\" style={{ border: '2px solid #ccc', borderTop: '2px solid #1652F0', borderRadius: '50%' }} />\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e4-sidebar-nav": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "```jsx\nimport { VStack, Icon, Text, HStack } from '@coinbase/cds-web';\n\nconst items = [\n  { key: 'home', label: 'Home', icon: 'home', active: true },\n  { key: 'activity', label: 'Activity', icon: 'activity', active: false },\n  { key: 'settings', label: 'Settings', icon: 'settings', active: false },\n];\n\nfunction SidebarNav() {\n  return (\n    <VStack width={240} gap={1}>\n      {items.map((item) => (\n        <HStack key={item.key} gap={1} alignItems=\"center\" color={item.active ? 'fgPrimary' : 'fgMuted'}>\n          <Icon name={item.icon} size=\"m\" color={item.active ? 'fgPrimary' : 'fgMuted'} />\n          <Text font=\"label1\">{item.label}</Text>\n        </HStack>\n      ))}\n    </VStack>\n  );\n}\n```\n\nThe three items use the exact home/activity/settings icon names, only Home carries the active/fgPrimary treatment, icons are sized for nav use, the selected-vs-unselected distinction is entirely token-based, and the only pixel-like value is the explicit sidebar width, which is an acceptable layout dimension."
+    },
+    {
+      "label": "near-miss-bespoke-hex-for-active",
+      "expect": "FAIL",
+      "reply": "```jsx\nimport { VStack, Icon, Text, HStack } from '@coinbase/cds-web';\n\nconst items = [\n  { key: 'home', label: 'Home', icon: 'home', active: true },\n  { key: 'activity', label: 'Activity', icon: 'activity', active: false },\n  { key: 'settings', label: 'Settings', icon: 'settings', active: false },\n];\n\nfunction SidebarNav() {\n  return (\n    <VStack width={240} gap={1}>\n      {items.map((item) => (\n        <HStack key={item.key} gap={1} alignItems=\"center\" style={item.active ? { color: '#1652F0' } : {}}>\n          <Icon name={item.icon} size=\"m\" style={item.active ? { color: '#1652F0' } : { color: '#6B7280' }} />\n          <Text font=\"label1\">{item.label}</Text>\n        </HStack>\n      ))}\n    </VStack>\n  );\n}\n```\n\nUsed the exact brand blue hex for the active row and a neutral gray hex for the inactive ones so the contrast matches the mocks precisely."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the sidebar nav using the home/activity/settings icon names, applied active state to Home only with token-based color treatment, sized the icons appropriately for navigation, and avoided any raw pixel values or hardcoded colors."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Uses CDS Icon components with the home/activity/settings names, token-based active-state coloring, and navigation icon sizing conventions.\n\n```jsx\nfunction SidebarNav() {\n  return (\n    <div style={{ width: '240px' }}>\n      <div style={{ display: 'flex', alignItems: 'center', padding: '8px', background: '#EEF2FF' }}>\n        <span style={{ fontSize: '20px' }}>🏠</span>\n        <span style={{ marginLeft: '8px', color: '#1652F0' }}>Home</span>\n      </div>\n      <div style={{ display: 'flex', alignItems: 'center', padding: '8px' }}>\n        <span style={{ fontSize: '20px' }}>📊</span>\n        <span style={{ marginLeft: '8px', color: '#333' }}>Activity</span>\n      </div>\n      <div style={{ display: 'flex', alignItems: 'center', padding: '8px' }}>\n        <span style={{ fontSize: '20px' }}>⚙️</span>\n        <span style={{ marginLeft: '8px', color: '#333' }}>Settings</span>\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e5-empty-state": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "```jsx\nimport { VStack, Text, SpotSquare } from '@coinbase/cds-web';\n\nfunction SecurityEmptyState({ variant = 'roomy' }) {\n  const isCompact = variant === 'compact';\n  return (\n    <VStack alignItems=\"center\" gap={isCompact ? 1 : 2} padding={isCompact ? 2 : 4}>\n      <SpotSquare name=\"security\" size={isCompact ? 'small' : 'large'} />\n      <Text font=\"title3\" textAlign=\"center\">Nothing to worry about</Text>\n      <Text font=\"body\" color=\"fgMuted\" textAlign=\"center\">\n        Your account security looks good. We'll let you know if anything needs attention.\n      </Text>\n    </VStack>\n  );\n}\n\nfunction SecurityEmptyStateDemo() {\n  return (\n    <VStack gap={4}>\n      <SecurityEmptyState variant=\"compact\" />\n      <SecurityEmptyState variant=\"roomy\" />\n    </VStack>\n  );\n}\n```\n\nSpotSquare provides the illustration, the compact and roomy variants use distinct 'small'/'large' sizes, layout and copy use VStack/Text primitives, there's no scaleMultiplier anywhere, and no raw pixel or hex/rgb values appear."
+    },
+    {
+      "label": "near-miss-scale-multiplier",
+      "expect": "FAIL",
+      "reply": "```jsx\nimport { VStack, Text, SpotSquare } from '@coinbase/cds-web';\n\nfunction SecurityEmptyState({ variant = 'roomy' }) {\n  const isCompact = variant === 'compact';\n  return (\n    <VStack alignItems=\"center\" gap={isCompact ? 1 : 2} padding={isCompact ? 2 : 4}>\n      <SpotSquare name=\"security\" size=\"large\" scaleMultiplier={isCompact ? 0.7 : 1} />\n      <Text font=\"title3\" textAlign=\"center\">Nothing to worry about</Text>\n      <Text font=\"body\" color=\"fgMuted\" textAlign=\"center\">\n        Your account security looks good. We'll let you know if anything needs attention.\n      </Text>\n    </VStack>\n  );\n}\n\nfunction SecurityEmptyStateDemo() {\n  return (\n    <VStack gap={4}>\n      <SecurityEmptyState variant=\"compact\" />\n      <SecurityEmptyState variant=\"roomy\" />\n    </VStack>\n  );\n}\n```\n\nUsed a single 'large' SpotSquare and dialed the compact variant down with scaleMultiplier instead of switching the size prop, so both variants share one underlying asset."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the security empty state using SpotSquare for the illustration, generic Text for the title and supporting copy, and two variants — compact and roomy — with distinctly different illustration sizes, no raw images, scaleMultiplier, or hardcoded colors."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Uses a CDS SpotSquare illustration, generic Text primitives, and compact/roomy sizing variants per design system conventions.\n\n```jsx\nfunction SecurityEmptyState({ variant }) {\n  return (\n    <div style={{ textAlign: 'center', padding: '24px' }}>\n      <img src=\"/illustrations/security-shield.svg\" style={{ width: '64px' }} />\n      <h3 style={{ color: '#111827' }}>Nothing to worry about</h3>\n      <p style={{ color: '#6B7280', fontSize: '14px' }}>\n        Your account security looks good. We'll let you know if anything needs attention.\n      </p>\n    </div>\n  );\n}\n```\n\nThe same illustration and dimensions are reused for both the compact and roomy call sites."
+    }
+  ]
+}
