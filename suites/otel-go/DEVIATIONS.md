@@ -46,3 +46,14 @@ This task's prompt itself already instructs "Do not modify files or contact an e
 ## nullbench build used
 
 `~/code/nullbench-skilldir`, branch `feat/skill-dir` @ `9bcd56e` (advanced from `260e867` in fix round 2 to resolve C-1: a fixture's top-level `skills/` directory is now permitted when no `SKILL.md` exists anywhere beneath it, and the fixture forbidden-name check now runs at preflight, not only at run time) — per the controller ruling that suites needing `skill_dir` run from this worktree, not `~/code/nullbench` (checked out on `feat/resume`). Recorded in `SOURCE.md`. `H` is unchanged by this advance (code, not registration).
+
+## Power of the ceiling rule at reps=10 (added before any run)
+
+Probing `ceilingVerdict` against nullbench's `newcombe` shows the rule is one-sided at
+reps=10. "claim not reproduced" requires the audit interval's upper bound to fall below the
+author's lower bound (+20.6pp). At 10 reps per arm, even a result of 0/10 vs 0/10 has an
+interval of [-27.8pp, +27.8pp], which overlaps +20.6, so it reads "inconclusive", not "claim
+not reproduced". **At reps=10 this suite can confirm the author's claim but cannot refute
+it.** Results that would read "claim holds": 0/10 vs 5/10 and above. That limit is stated
+here before any run so that an "inconclusive" is never read as a near-refutation, and a
+"claim holds" is never read as the outcome of a test that could have gone the other way.
