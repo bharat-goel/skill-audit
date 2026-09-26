@@ -1,10 +1,8 @@
-nullbench — 5 registered task(s), running 5
-  registration  9942bef1e0238e66
+nullbench — 6 registered task(s), running 6
+  registration  f4b21e29c65887ec
   model         sonnet (judge sonnet), reps 10
-  subject runs  100
-  judge calls   100
-  canary runs   20
-  TOTAL         220 CLI invocations
-  est. spend    ~$4.40 at an assumed $0.02/call — override with --cost-per-call
-  drift detected — this run cannot be confirmatory:
-    - no harm task; a suite with no negative control cannot be confirmatory
+  subject runs  120
+  judge calls   120
+  canary runs   23
+  TOTAL         263 CLI invocations
+  est. spend    ~$5.26 at an assumed $0.02/call — override with --cost-per-call

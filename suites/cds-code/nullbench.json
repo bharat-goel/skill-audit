@@ -37,6 +37,13 @@
       "sha256": "b0cf8e64dbadc78a474de4927923ef3f8a218f41bed4c597a4f0786b8aac1db9",
       "kind": "signal",
       "predict": "helps"
+    },
+    {
+      "id": "audit-harm-routine",
+      "file": "tasks/audit-harm-routine.json",
+      "sha256": "360d19f7751f9a73b1ed19ad171db12aba71ff7d27991477409962b4da286eed",
+      "kind": "harm",
+      "predict": "no-effect"
     }
   ]
 }

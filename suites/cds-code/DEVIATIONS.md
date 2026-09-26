@@ -7,7 +7,7 @@
 | `cds-e1`..`cds-e5`: author's grader → nullbench `judge`, one task per eval, rubric lists that eval's `expectations` verbatim, PASS only if all are met | spec P2, all-pass unit per the #129 ruling; fidelity check not applicable — author's grader is not published as code, only the `expectations` prose (no `fidelity/` step per the brief, since there is no author-grader code to wrap) |
 | Dropped evals 6–10 | spec P7 cap: keep the author's first 5 published evals only |
 | `cds-e1-profile-card` expectation 9 ("All CDS import paths are valid subpath exports (no invented deep paths like /layout/Box)") kept, graded literally from reply text, no package export list supplied | P2 decision — see "Eval 1 portability" below |
-| `audit-harm-routine`: pending, not written by this porter | Dispatching is not allowed for this session; the controller will produce it with a blind agent per P4 and add it to `tasks/`, `nullbench.json`, and `canaries.json` |
+| `audit-harm-routine`: prompt, rubric, and 3 canaries copied verbatim from a blind sonnet agent's output (`.superpowers/sdd/2026-09-23-skill-audit/blind-harm-cds.json`) | The agent was given only the skill's frontmatter `description` text and told to make one `Write` call, per P4/Step 4. It made 2 tool calls; what the second one was could not be verified, and this is disclosed as-is rather than asserting strict one-call compliance |
 | Claimed delta: pooled over the 5 ported evals (+60pp), not per-task | spec, Verdicts — see "Claim unit and pooled-verdict rule" below |
 
 ## Eval 1 portability (P2)
@@ -123,10 +123,17 @@ Modelled word-for-word on the uap-release-analyzer suite's final (round-2-review
 - **Interval.** A Newcombe interval (nullbench's `stats.newcombe`, as implemented, 95%
   confidence) computed on the pooled counts, reported in percentage points.
 - **Verdict.** The pooled delta and interval are passed to `verdict({ claimPp: 60, lo, hi })` in
-  `tools/verdict.mjs`, via a pooled mode of `tools/verdict-task.mjs` — this mode does not exist
-  yet; it will be added and tested (unit tests, same rigor as the existing per-task path) before
-  any run's analysis, i.e. before Task 7. `verdict.mjs` returns exactly one of three strings, used
-  exactly as written:
+  `tools/verdict.mjs`, via the pooled mode of `tools/verdict-task.mjs`, merged to `main` as
+  `8db40e2` ("Merge feat/pooled-verdict: pooled verdict with per-cell floor") and present on this
+  branch (confirmed: `git merge-base --is-ancestor 8db40e2 HEAD`). Invocation:
+  `node tools/verdict-task.mjs <results-dir> --pooled <claimPp> <taskId> [<taskId> ...]`, i.e. for
+  this suite `node tools/verdict-task.mjs suites/cds-code/results/<timestamp> --pooled 60
+  cds-e1-profile-card cds-e2-create-team-modal cds-e3-banner-progress cds-e4-sidebar-nav
+  cds-e5-empty-state`. `pooledVerdictForTasks()` sums `k`/`n` per arm across the named tasks using
+  graded records only, enforces PROTOCOL.md §5.1's graded-run floor (`max(3, ceil(reps*0.8))`) per
+  task×arm cell before summing — throwing rather than silently pooling a thin or all-dead cell —
+  computes one Newcombe interval on the pooled counts, and passes it to `verdict()` once.
+  `verdict.mjs` returns exactly one of three strings, used exactly as written:
   - `"claim not reproduced"` — the pooled interval `[lo, hi]` does **not** contain +60pp. This
     covers both a smaller-than-claimed effect (`hi < 60`) and a larger-than-claimed one
     (`lo > 60`); the two are told apart by reading `lo`/`hi` in the report, not by the verdict
@@ -166,9 +173,13 @@ Modelled word-for-word on the uap-release-analyzer suite's final (round-2-review
 
 ## Harm task
 
-`tasks/audit-harm-routine.json` is intentionally absent from this commit. Per the brief,
-dispatching a blind sub-agent is not permitted in this session; the controller will produce it
-separately (written from the skill's frontmatter `description` alone, blind to SKILL.md's body
-and to `evals/evals.json`, per P4) and add it to `tasks/`, `nullbench.json`, and `canaries.json`.
-Until that lands, `--dry-run` on this registration is expected to report `NO_HARM_TASK` drift —
-this is the one open item blocking a CONFIRMATORY-eligible freeze, not a structural error.
+`tasks/audit-harm-routine.json`'s `prompt`, `verify.rubric`, and `canaries.json`'s three
+`audit-harm-routine` canaries are copied verbatim from
+`.superpowers/sdd/2026-09-23-skill-audit/blind-harm-cds.json`, produced by a separate sonnet
+agent given only the skill's frontmatter `description` text (never SKILL.md's body, never
+`evals/evals.json`) and told to make one `Write` call, per P4/Step 4. It made 2 tool calls; the
+controller could not verify what the second one was. This is disclosed as-is rather than
+asserting strict one-call compliance — the task's content (a routine, out-of-scope TypeScript
+formatting request, matching the description's own "not... tests" exclusion) gives no indication
+the extra call leaked SKILL.md content into the draft, but the audit does not claim to have ruled
+that out.
