@@ -1,0 +1,22 @@
+{
+  "model": "sonnet",
+  "judge_model": "sonnet",
+  "reps": 10,
+  "skill_dir": "skill",
+  "tasks": [
+    {
+      "id": "go-v145-upgrade-review",
+      "file": "tasks/go-v145-upgrade-review.json",
+      "sha256": "813e1088814495a8baebb54892ccffa95e596508666361e0371c466f921b3813",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "audit-harm-routine",
+      "file": "tasks/audit-harm-routine.json",
+      "sha256": "10275fa81085dfea543dbf232cc5fe8c3250f9a4d8083874848b40ed71b581e5",
+      "kind": "harm",
+      "predict": "no-effect"
+    }
+  ]
+}
