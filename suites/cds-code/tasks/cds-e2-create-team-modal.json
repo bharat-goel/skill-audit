@@ -1,0 +1,13 @@
+{
+  "id": "cds-e2-create-team-modal",
+  "skill": "cds-code",
+  "kind": "signal",
+  "predict": "helps",
+  "prompt": "I need a 'Create team' modal with a text input for the team name, a dropdown to pick the team size (Small / Medium / Large), and Save / Cancel buttons in the footer.",
+  "rationale": "Ported from eval 2 (\"Create team modal\") in evals/evals.json at 9aca6aebcb62f731a5a754af66c0bd05df86beec (https://github.com/coinbase/cds/blob/9aca6aebcb62f731a5a754af66c0bd05df86beec/skills/cds-code/evals/evals.json). Author's criterion: that eval's `expectations` array, verbatim, all seven of which must be met (README.md's per-eval breakdown reports this eval at 100% with skill vs 86% without). Author's grader is not published as code, only this expectations prose; the rubric restates it and nothing more, per P2.",
+  "verify": {
+    "type": "judge",
+    "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses Modal, ModalHeader, ModalBody, and ModalFooter to compose the dialog\n2. Uses TextInput for the team name field\n3. Uses Select (from the alpha subpath) for the team size dropdown with Small/Medium/Large options\n4. ModalFooter receives a primary Button (Save) and a secondary variant Button (Cancel)\n5. No style prop used for padding, color, gap, or other values that have CDS style prop equivalents\n6. Select is imported from the correct alpha subpath (e.g., @coinbase/cds-web/alpha/select or equivalent)\n7. No raw pixel values or hex/rgb colors in the output"
+  },
+  "fixture": "cds-app"
+}

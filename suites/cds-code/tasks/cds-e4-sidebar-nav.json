@@ -1,0 +1,13 @@
+{
+  "id": "cds-e4-sidebar-nav",
+  "skill": "cds-code",
+  "kind": "signal",
+  "predict": "no-effect",
+  "prompt": "Create a left sidebar nav with 3 items: Home, Activity, Settings. Home is currently selected.",
+  "rationale": "Ported from eval 4 (\"Sidebar nav\") in evals/evals.json at 9aca6aebcb62f731a5a754af66c0bd05df86beec (https://github.com/coinbase/cds/blob/9aca6aebcb62f731a5a754af66c0bd05df86beec/skills/cds-code/evals/evals.json). Author's criterion: that eval's `expectations` array, verbatim, all five of which must be met (README.md's per-eval breakdown reports this eval at 100% with skill AND 100% without — the author's own data shows no claimed effect here, per the P3 ruling this task is `predict: no-effect`, not `helps`). Author's grader is not published as code, only this expectations prose; the rubric restates it and nothing more, per P2.",
+  "verify": {
+    "type": "judge",
+    "rubric": "PASS only if the reply's code satisfies ALL of the following expectations. FAIL if any one of them is not met.\n\n1. Uses the exact icon names home, activity, and settings for the three nav items\n2. Applies active state specifically to Home and keeps Activity/Settings inactive\n3. Uses navigation-appropriate icon sizing\n4. Pairs selected state with token-based color treatment (no bespoke hex/rgb values)\n5. No raw pixel values for spacing or border radius (explicit layout dimensions like sidebar width are acceptable)"
+  },
+  "fixture": "cds-app"
+}

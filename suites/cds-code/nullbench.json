@@ -1,0 +1,50 @@
+{
+  "model": "sonnet",
+  "judge_model": "sonnet",
+  "reps": 10,
+  "skill_dir": "skill",
+  "tasks": [
+    {
+      "id": "cds-e1-profile-card",
+      "file": "tasks/cds-e1-profile-card.json",
+      "sha256": "f54822306a7867d380d693e2c7f1026c27599066628e57c7499cbb4a758548f0",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "cds-e2-create-team-modal",
+      "file": "tasks/cds-e2-create-team-modal.json",
+      "sha256": "321bfacd2599b718eded8764adde92d973babd1a11894ca28477107c2e6f5914",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "cds-e3-banner-progress",
+      "file": "tasks/cds-e3-banner-progress.json",
+      "sha256": "32b65eaa7c8d61c00089bb8bcfb7fcadf6f9b25a2ce1b2255967eba044e627dc",
+      "kind": "signal",
+      "predict": "no-effect"
+    },
+    {
+      "id": "cds-e4-sidebar-nav",
+      "file": "tasks/cds-e4-sidebar-nav.json",
+      "sha256": "d9d413f51ef2e072dda60bf415d163720e1e201074b0d9323763e54fd5480f13",
+      "kind": "signal",
+      "predict": "no-effect"
+    },
+    {
+      "id": "cds-e5-empty-state",
+      "file": "tasks/cds-e5-empty-state.json",
+      "sha256": "4db37236f45f6f0bc5a7381652ff021db0850dffad1c54634e121325924ef17c",
+      "kind": "signal",
+      "predict": "helps"
+    },
+    {
+      "id": "audit-harm-routine",
+      "file": "tasks/audit-harm-routine.json",
+      "sha256": "360d19f7751f9a73b1ed19ad171db12aba71ff7d27991477409962b4da286eed",
+      "kind": "harm",
+      "predict": "no-effect"
+    }
+  ]
+}

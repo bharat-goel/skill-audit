@@ -1,0 +1,144 @@
+{
+  "cds-e1-profile-card": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "Here's the profile card:\n\n```jsx\nimport { Avatar, Text, ListCell, VStack, HStack } from '@coinbase/cds-web';\n\nfunction ProfileCard({ user, onAccountSettings, onNotifications, onSignOut }) {\n  return (\n    <VStack borderRadius=\"roundedLarge\" background=\"bgPrimary\" padding={3} gap={2}>\n      <HStack gap={2} alignItems=\"center\">\n        <Avatar src={user.avatarUrl} name={user.displayName} size=\"m\" />\n        <VStack gap={0}>\n          <Text font=\"title3\">{user.displayName}</Text>\n          <Text font=\"body\" color=\"fgMuted\">{user.email}</Text>\n        </VStack>\n      </HStack>\n      <VStack>\n        <ListCell title=\"Account settings\" accessory=\"arrow\" onPress={onAccountSettings} />\n        <ListCell title=\"Notifications\" accessory=\"arrow\" onPress={onNotifications} />\n        <ListCell title=\"Sign out\" accessory=\"arrow\" onPress={onSignOut} />\n      </VStack>\n    </VStack>\n  );\n}\n\nexport default ProfileCard;\n```"
+    },
+    {
+      "label": "near-miss-derivative-text",
+      "expect": "FAIL",
+      "reply": "Here's the profile card:\n\n```jsx\nimport { Avatar, TextLabel1, Text, ListCell, VStack, HStack } from '@coinbase/cds-web';\n\nfunction ProfileCard({ user, onAccountSettings, onNotifications, onSignOut }) {\n  return (\n    <VStack borderRadius=\"roundedLarge\" background=\"bgPrimary\" padding={3} gap={2}>\n      <HStack gap={2} alignItems=\"center\">\n        <Avatar src={user.avatarUrl} name={user.displayName} size=\"m\" />\n        <VStack gap={0}>\n          <TextLabel1>{user.displayName}</TextLabel1>\n          <Text font=\"body\" color=\"fgMuted\">{user.email}</Text>\n        </VStack>\n      </HStack>\n      <VStack>\n        <ListCell title=\"Account settings\" accessory=\"arrow\" onPress={onAccountSettings} />\n        <ListCell title=\"Notifications\" accessory=\"arrow\" onPress={onNotifications} />\n        <ListCell title=\"Sign out\" accessory=\"arrow\" onPress={onSignOut} />\n      </VStack>\n    </VStack>\n  );\n}\n\nexport default ProfileCard;\n```\n\nUsed TextLabel1 for the display name to get a bolder look out of the box."
+    },
+    {
+      "label": "near-miss-invalid-import-path",
+      "expect": "FAIL",
+      "reply": "Here is the profile card:\n\n```jsx\nimport { Avatar, Text, ListCell, VStack, HStack } from \"@coinbase/cds-web\";\nimport { Box } from \"@coinbase/cds-web/layout/Box\";\n\nfunction ProfileCard({ user, onAccountSettings, onNotifications, onSignOut }) {\n  return (\n    <Box borderRadius=\"roundedLarge\" background=\"bgPrimary\" padding={3} gap={2}>\n      <HStack gap={2} alignItems=\"center\">\n        <Avatar src={user.avatarUrl} name={user.displayName} size=\"m\" />\n        <VStack gap={0}>\n          <Text font=\"title3\">{user.displayName}</Text>\n          <Text font=\"body\" color=\"fgMuted\">{user.email}</Text>\n        </VStack>\n      </HStack>\n      <VStack>\n        <ListCell title=\"Account settings\" accessory=\"arrow\" onPress={onAccountSettings} />\n        <ListCell title=\"Notifications\" accessory=\"arrow\" onPress={onNotifications} />\n        <ListCell title=\"Sign out\" accessory=\"arrow\" onPress={onSignOut} />\n      </VStack>\n    </Box>\n  );\n}\n\nexport default ProfileCard;\n```\n\nPulled in a dedicated Box primitive from the layout module for the outer container so the borderRadius and background props read a bit more explicitly than stacking them onto VStack."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the profile card component using Avatar for the photo, ListCell rows with arrow accessories for the three settings items, fgMuted for the email, and VStack/HStack for layout, with token-based border radius and no raw colors or pixel values. Let me know if you'd like any adjustments to spacing or the accessory icons on the settings rows."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Built this using CDS design tokens throughout — fgMuted, bgPrimary, the borderRadius scale, VStack/HStack primitives, Avatar, and ListCell rows with arrow accessories — the standard pattern for a profile surface like this.\n\n```jsx\nfunction ProfileCard({ user }) {\n  return (\n    <div style={{ borderRadius: '12px', padding: '16px', background: '#FFFFFF' }}>\n      <div style={{ display: 'flex', gap: '8px' }}>\n        <img src={user.avatarUrl} style={{ borderRadius: '50%', width: 40, height: 40 }} />\n        <div>\n          <div style={{ fontWeight: 600 }}>{user.displayName}</div>\n          <div style={{ color: '#6B7280', fontSize: 14 }}>{user.email}</div>\n        </div>\n      </div>\n      <div>\n        <div className=\"settings-row\" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>Account settings &gt;</div>\n        <div className=\"settings-row\" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>Notifications &gt;</div>\n        <div className=\"settings-row\" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0' }}>Sign out &gt;</div>\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e2-create-team-modal": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "Here's the modal:\n\n```jsx\nimport { Modal, ModalHeader, ModalBody, ModalFooter, TextInput, Button } from '@coinbase/cds-web';\nimport { Select } from '@coinbase/cds-web/alpha/select';\n\nfunction CreateTeamModal({ isOpen, onClose, onSave }) {\n  const [name, setName] = useState('');\n  const [size, setSize] = useState('small');\n\n  return (\n    <Modal isOpen={isOpen} onClose={onClose}>\n      <ModalHeader title=\"Create team\" onClose={onClose} />\n      <ModalBody>\n        <TextInput label=\"Team name\" value={name} onChangeText={setName} />\n        <Select\n          label=\"Team size\"\n          value={size}\n          onChange={setSize}\n          options={[\n            { label: 'Small', value: 'small' },\n            { label: 'Medium', value: 'medium' },\n            { label: 'Large', value: 'large' },\n          ]}\n        />\n      </ModalBody>\n      <ModalFooter>\n        <Button variant=\"secondary\" onPress={onClose}>Cancel</Button>\n        <Button variant=\"primary\" onPress={() => onSave({ name, size })}>Save</Button>\n      </ModalFooter>\n    </Modal>\n  );\n}\n```"
+    },
+    {
+      "label": "near-miss-style-prop-for-color",
+      "expect": "FAIL",
+      "reply": "Here's the modal:\n\n```jsx\nimport { Modal, ModalHeader, ModalBody, ModalFooter, TextInput, Button } from '@coinbase/cds-web';\nimport { Select } from '@coinbase/cds-web/alpha/select';\n\nfunction CreateTeamModal({ isOpen, onClose, onSave }) {\n  const [name, setName] = useState('');\n  const [size, setSize] = useState('small');\n\n  return (\n    <Modal isOpen={isOpen} onClose={onClose}>\n      <ModalHeader title=\"Create team\" onClose={onClose} />\n      <ModalBody>\n        <TextInput label=\"Team name\" value={name} onChangeText={setName} style={{ color: \"var(--color-fgMuted)\" }} />\n        <Select\n          label=\"Team size\"\n          value={size}\n          onChange={setSize}\n          options={[\n            { label: 'Small', value: 'small' },\n            { label: 'Medium', value: 'medium' },\n            { label: 'Large', value: 'large' },\n          ]}\n        />\n      </ModalBody>\n      <ModalFooter>\n        <Button variant=\"secondary\" onPress={onClose}>Cancel</Button>\n        <Button variant=\"primary\" onPress={() => onSave({ name, size })}>Save</Button>\n      </ModalFooter>\n    </Modal>\n  );\n}\n```\n\nAdded a CSS-variable color override on the name field to match the surrounding form text exactly."
+    },
+    {
+      "label": "near-miss-chakra-modal",
+      "expect": "FAIL",
+      "reply": "Here's the modal:\n\n```jsx\nimport { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Input, Select, Button } from \"@chakra-ui/react\";\n\nfunction CreateTeamModal({ isOpen, onClose, onSave }) {\n  const [name, setName] = useState(\"\");\n  const [size, setSize] = useState(\"small\");\n\n  return (\n    <Modal isOpen={isOpen} onClose={onClose}>\n      <ModalOverlay />\n      <ModalContent>\n        <ModalHeader>Create team</ModalHeader>\n        <ModalCloseButton />\n        <ModalBody>\n          <Input placeholder=\"Team name\" value={name} onChange={(e) => setName(e.target.value)} />\n          <Select value={size} onChange={(e) => setSize(e.target.value)}>\n            <option value=\"small\">Small</option>\n            <option value=\"medium\">Medium</option>\n            <option value=\"large\">Large</option>\n          </Select>\n        </ModalBody>\n        <ModalFooter>\n          <Button variant=\"ghost\" mr={3} onClick={onClose}>Cancel</Button>\n          <Button colorScheme=\"blue\" onClick={() => onSave({ name, size })}>Save</Button>\n        </ModalFooter>\n      </ModalContent>\n    </Modal>\n  );\n}\n```\n\nBuilt this with Chakra's Modal composition since it already handles the overlay and focus trap for us, with Input/Select for the fields and the two footer buttons."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the Create team modal with Modal/ModalHeader/ModalBody/ModalFooter, a TextInput for the team name, a Select from the alpha subpath with Small/Medium/Large options, and primary Save / secondary Cancel buttons in the footer — all styled via CDS props, no raw style objects or hardcoded colors."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Built using the Modal/ModalHeader/ModalBody/ModalFooter composition, the TextInput field convention, the alpha Select dropdown, and primary/secondary Button variants per CDS conventions.\n\n```jsx\nfunction CreateTeamModal({ isOpen, onClose, onSave }) {\n  if (!isOpen) return null;\n  return (\n    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)' }}>\n      <div style={{ background: '#FFFFFF', padding: '24px', borderRadius: '8px' }}>\n        <h2>Create team</h2>\n        <input type=\"text\" placeholder=\"Team name\" style={{ padding: '8px', border: '1px solid #ccc' }} />\n        <select style={{ padding: '8px' }}>\n          <option>Small</option>\n          <option>Medium</option>\n          <option>Large</option>\n        </select>\n        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>\n          <button onClick={onClose}>Cancel</button>\n          <button onClick={onSave} style={{ background: '#1652F0', color: '#fff' }}>Save</button>\n        </div>\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e3-banner-progress": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "```jsx\nimport { Banner, VStack } from '@coinbase/cds-web';\nimport { ProgressBar, ProgressCircle } from '@coinbase/cds-web/visualizations';\n\nfunction StatusPanel({ onSaveNow }) {\n  return (\n    <VStack gap={2}>\n      <Banner variant=\"warning\" action={{ label: 'Save now', onPress: onSaveNow }}>\n        You have unsaved changes\n      </Banner>\n      <VStack paddingX={2} gap={2}>\n        <ProgressBar progress={0.6} />\n        <ProgressCircle indeterminate />\n      </VStack>\n    </VStack>\n  );\n}\n```"
+    },
+    {
+      "label": "near-miss-wrong-import-path",
+      "expect": "FAIL",
+      "reply": "```jsx\nimport { Banner, VStack, ProgressBar, ProgressCircle } from '@coinbase/cds-web';\n\nfunction StatusPanel({ onSaveNow }) {\n  return (\n    <VStack gap={2}>\n      <Banner variant=\"warning\" action={{ label: 'Save now', onPress: onSaveNow }}>\n        You have unsaved changes\n      </Banner>\n      <VStack paddingX={2} gap={2}>\n        <ProgressBar progress={0.6} />\n        <ProgressCircle indeterminate />\n      </VStack>\n    </VStack>\n  );\n}\n```\n\nPulled ProgressBar and ProgressCircle in from the main package export alongside Banner and VStack to keep the import list short."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've added a warning Banner with a 'Save now' link action, a container with paddingX={2}, a ProgressBar at 60%, and an indeterminate ProgressCircle, both imported from the CDS visualizations package — no hardcoded colors anywhere."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Uses the Banner warning variant, the visualizations package's ProgressBar and ProgressCircle, and horizontal padding tokens per CDS conventions.\n\n```jsx\nfunction StatusPanel() {\n  return (\n    <div style={{ background: '#FFF3CD', padding: '12px', border: '1px solid #FFEEBA' }}>\n      <span>You have unsaved changes</span>\n      <a href=\"#\" style={{ color: '#1652F0' }}>Save now</a>\n      <div style={{ paddingLeft: '16px', paddingRight: '16px' }}>\n        <div style={{ width: '60%', height: '4px', background: '#1652F0' }} />\n        <div className=\"spinner\" style={{ border: '2px solid #ccc', borderTop: '2px solid #1652F0', borderRadius: '50%' }} />\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e4-sidebar-nav": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "```jsx\nimport { VStack, Icon, Text, HStack } from '@coinbase/cds-web';\n\nconst items = [\n  { key: 'home', label: 'Home', icon: 'home', active: true },\n  { key: 'activity', label: 'Activity', icon: 'activity', active: false },\n  { key: 'settings', label: 'Settings', icon: 'settings', active: false },\n];\n\nfunction SidebarNav() {\n  return (\n    <VStack width={240} gap={1}>\n      {items.map((item) => (\n        <HStack key={item.key} gap={1} alignItems=\"center\" color={item.active ? 'fgPrimary' : 'fgMuted'}>\n          <Icon name={item.icon} size=\"m\" active={item.active} color={item.active ? 'fgPrimary' : 'fgMuted'} />\n          <Text font=\"label1\">{item.label}</Text>\n        </HStack>\n      ))}\n    </VStack>\n  );\n}\n```"
+    },
+    {
+      "label": "near-miss-bespoke-hex-for-active",
+      "expect": "FAIL",
+      "reply": "```jsx\nimport { VStack, Icon, Text, HStack } from '@coinbase/cds-web';\n\nconst items = [\n  { key: 'home', label: 'Home', icon: 'home', active: true },\n  { key: 'activity', label: 'Activity', icon: 'activity', active: false },\n  { key: 'settings', label: 'Settings', icon: 'settings', active: false },\n];\n\nfunction SidebarNav() {\n  return (\n    <VStack width={240} gap={1}>\n      {items.map((item) => (\n        <HStack key={item.key} gap={1} alignItems=\"center\" style={item.active ? { color: '#1652F0' } : {}}>\n          <Icon name={item.icon} size=\"m\" style={item.active ? { color: '#1652F0' } : { color: '#6B7280' }} />\n          <Text font=\"label1\">{item.label}</Text>\n        </HStack>\n      ))}\n    </VStack>\n  );\n}\n```\n\nUsed the exact brand blue hex for the active row and a neutral gray hex for the inactive ones so the contrast matches the mocks precisely."
+    },
+    {
+      "label": "near-miss-tailwind-lucide",
+      "expect": "PASS",
+      "reply": "```jsx\nimport { Home, Activity, Settings } from \"lucide-react\";\n\nconst items = [\n  { key: \"home\", label: \"Home\", Icon: Home, active: true },\n  { key: \"activity\", label: \"Activity\", Icon: Activity, active: false },\n  { key: \"settings\", label: \"Settings\", Icon: Settings, active: false },\n];\n\nfunction SidebarNav() {\n  return (\n    <nav className=\"w-60 flex flex-col gap-1\">\n      {items.map(({ key, label, Icon, active }) => (\n        <div\n          key={key}\n          className={`flex items-center gap-2 rounded-md px-3 py-2 ${active ? \"text-blue-600\" : \"text-gray-500\"}`}\n        >\n          <Icon size={20} />\n          <span>{label}</span>\n        </div>\n      ))}\n    </nav>\n  );\n}\n```"
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the sidebar nav using the home/activity/settings icon names, applied active state to Home only with token-based color treatment, sized the icons appropriately for navigation, and avoided any raw pixel values or hardcoded colors."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Uses CDS Icon components with the home/activity/settings names, token-based active-state coloring, and navigation icon sizing conventions.\n\n```jsx\nfunction SidebarNav() {\n  return (\n    <div style={{ width: '240px' }}>\n      <div style={{ display: 'flex', alignItems: 'center', padding: '8px', background: '#EEF2FF' }}>\n        <span style={{ fontSize: '20px' }}>🏠</span>\n        <span style={{ marginLeft: '8px', color: '#1652F0' }}>Home</span>\n      </div>\n      <div style={{ display: 'flex', alignItems: 'center', padding: '8px' }}>\n        <span style={{ fontSize: '20px' }}>📊</span>\n        <span style={{ marginLeft: '8px', color: '#333' }}>Activity</span>\n      </div>\n      <div style={{ display: 'flex', alignItems: 'center', padding: '8px' }}>\n        <span style={{ fontSize: '20px' }}>⚙️</span>\n        <span style={{ marginLeft: '8px', color: '#333' }}>Settings</span>\n      </div>\n    </div>\n  );\n}\n```"
+    }
+  ],
+  "cds-e5-empty-state": [
+    {
+      "label": "full-pass",
+      "expect": "PASS",
+      "reply": "```jsx\nimport { VStack, Text, SpotSquare } from '@coinbase/cds-web';\n\nfunction SecurityEmptyState({ variant = 'roomy' }) {\n  const isCompact = variant === 'compact';\n  return (\n    <VStack alignItems=\"center\" gap={isCompact ? 1 : 2} padding={isCompact ? 2 : 4}>\n      <SpotSquare name=\"security\" size={isCompact ? 'small' : 'large'} />\n      <Text font=\"title3\" textAlign=\"center\">Nothing to worry about</Text>\n      <Text font=\"body\" color=\"fgMuted\" textAlign=\"center\">\n        Your account security looks good. We'll let you know if anything needs attention.\n      </Text>\n    </VStack>\n  );\n}\n\nfunction SecurityEmptyStateDemo() {\n  return (\n    <VStack gap={4}>\n      <SecurityEmptyState variant=\"compact\" />\n      <SecurityEmptyState variant=\"roomy\" />\n    </VStack>\n  );\n}\n```"
+    },
+    {
+      "label": "near-miss-scale-multiplier",
+      "expect": "FAIL",
+      "reply": "```jsx\nimport { VStack, Text, SpotSquare } from '@coinbase/cds-web';\n\nfunction SecurityEmptyState({ variant = 'roomy' }) {\n  const isCompact = variant === 'compact';\n  return (\n    <VStack alignItems=\"center\" gap={isCompact ? 1 : 2} padding={isCompact ? 2 : 4}>\n      <SpotSquare name=\"security\" size=\"large\" scaleMultiplier={isCompact ? 0.7 : 1} />\n      <Text font=\"title3\" textAlign=\"center\">Nothing to worry about</Text>\n      <Text font=\"body\" color=\"fgMuted\" textAlign=\"center\">\n        Your account security looks good. We'll let you know if anything needs attention.\n      </Text>\n    </VStack>\n  );\n}\n\nfunction SecurityEmptyStateDemo() {\n  return (\n    <VStack gap={4}>\n      <SecurityEmptyState variant=\"compact\" />\n      <SecurityEmptyState variant=\"roomy\" />\n    </VStack>\n  );\n}\n```\n\nUsed a single 'large' SpotSquare and dialed the compact variant down with scaleMultiplier instead of switching the size prop, so both variants share one underlying asset."
+    },
+    {
+      "label": "summary-only-no-code",
+      "expect": "FAIL",
+      "reply": "I've built the security empty state using SpotSquare for the illustration, generic Text for the title and supporting copy, and two variants — compact and roomy — with distinctly different illustration sizes, no raw images, scaleMultiplier, or hardcoded colors."
+    },
+    {
+      "label": "vocab-stuffed-raw-html",
+      "expect": "FAIL",
+      "reply": "Uses a CDS SpotSquare illustration, generic Text primitives, and compact/roomy sizing variants per design system conventions.\n\n```jsx\nfunction SecurityEmptyState({ variant }) {\n  return (\n    <div style={{ textAlign: 'center', padding: '24px' }}>\n      <img src=\"/illustrations/security-shield.svg\" style={{ width: '64px' }} />\n      <h3 style={{ color: '#111827' }}>Nothing to worry about</h3>\n      <p style={{ color: '#6B7280', fontSize: '14px' }}>\n        Your account security looks good. We'll let you know if anything needs attention.\n      </p>\n    </div>\n  );\n}\n```\n\nThe same illustration and dimensions are reused for both the compact and roomy call sites."
+    }
+  ],
+  "audit-harm-routine": [
+    {
+      "label": "boundary-tests-low",
+      "expect": "PASS",
+      "reply": "```typescript\nfunction formatRelativeTime(iso: string, now: Date = new Date()): string {\n  const then = new Date(iso);\n  const diffSec = (now.getTime() - then.getTime()) / 1000;\n\n  if (diffSec < 60) return \"just now\";\n  const diffMin = diffSec / 60;\n  if (diffMin < 60) return `${Math.floor(diffMin)}m ago`;\n  const diffHour = diffMin / 60;\n  if (diffHour < 24) return `${Math.floor(diffHour)}h ago`;\n  const diffDay = diffHour / 24;\n  if (diffDay < 2) return \"yesterday\";\n  if (diffDay < 7) return `${Math.floor(diffDay)}d ago`;\n\n  const months = [\"Jan\",\"Feb\",\"Mar\",\"Apr\",\"May\",\"Jun\",\"Jul\",\"Aug\",\"Sep\",\"Oct\",\"Nov\",\"Dec\"];\n  return `${months[then.getMonth()]} ${then.getDate()}`;\n}\n```\n\nTests (Jest), spanning three separate bucket boundaries (just-now/minutes, minutes/hours, hours/yesterday):\n\n```typescript\ndescribe(\"formatRelativeTime\", () => {\n  const now = new Date(\"2026-01-10T12:00:00Z\");\n\n  it(\"59s ago is still 'just now'\", () => {\n    expect(formatRelativeTime(\"2026-01-10T11:59:01Z\", now)).toBe(\"just now\");\n  });\n\n  it(\"61s ago crosses into minutes\", () => {\n    expect(formatRelativeTime(\"2026-01-10T11:58:59Z\", now)).toBe(\"1m ago\");\n  });\n\n  it(\"61m ago crosses into hours\", () => {\n    expect(formatRelativeTime(\"2026-01-10T10:59:00Z\", now)).toBe(\"1h ago\");\n  });\n\n  it(\"23h58m ago is still hours, not yet yesterday\", () => {\n    expect(formatRelativeTime(\"2026-01-09T12:02:00Z\", now)).toBe(\"23h ago\");\n  });\n});\n```"
+    },
+    {
+      "label": "boundary-tests-high",
+      "expect": "PASS",
+      "reply": "```typescript\nfunction formatRelativeTime(iso: string, now: Date = new Date()): string {\n  const then = new Date(iso);\n  const diffSec = (now.getTime() - then.getTime()) / 1000;\n\n  if (diffSec < 60) return \"just now\";\n  const diffMin = diffSec / 60;\n  if (diffMin < 60) return `${Math.floor(diffMin)}m ago`;\n  const diffHour = diffMin / 60;\n  if (diffHour < 24) return `${Math.floor(diffHour)}h ago`;\n  const diffDay = diffHour / 24;\n  if (diffDay < 2) return \"yesterday\";\n  if (diffDay < 7) return `${Math.floor(diffDay)}d ago`;\n\n  const months = [\"Jan\",\"Feb\",\"Mar\",\"Apr\",\"May\",\"Jun\",\"Jul\",\"Aug\",\"Sep\",\"Oct\",\"Nov\",\"Dec\"];\n  return `${months[then.getMonth()]} ${then.getDate()}`;\n}\n```\n\nTests (Vitest), focused on the high-end bucket boundaries:\n\n```typescript\nimport { describe, it, expect } from \"vitest\";\n\ndescribe(\"formatRelativeTime\", () => {\n  const now = new Date(\"2026-01-10T12:00:00Z\");\n\n  it(\"23h59m ago is still hours\", () => {\n    expect(formatRelativeTime(\"2026-01-09T12:01:00Z\", now)).toBe(\"23h ago\");\n  });\n\n  it(\"24h01m ago crosses into yesterday\", () => {\n    expect(formatRelativeTime(\"2026-01-09T11:59:00Z\", now)).toBe(\"yesterday\");\n  });\n\n  it(\"47h59m ago is still yesterday\", () => {\n    expect(formatRelativeTime(\"2026-01-08T12:01:00Z\", now)).toBe(\"yesterday\");\n  });\n\n  it(\"7d01m ago crosses into a plain date\", () => {\n    expect(formatRelativeTime(\"2026-01-03T11:59:00Z\", now)).toBe(\"Jan 3\");\n  });\n});\n```"
+    },
+    {
+      "label": "wrong-or-incomplete",
+      "expect": "FAIL",
+      "reply": "Here's a simple version:\n\n```typescript\nfunction formatRelativeTime(iso: string): string {\n  const then = new Date(iso);\n  const now = new Date();\n  const diffMin = (now.getTime() - then.getTime()) / 60000;\n\n  if (diffMin < 60) {\n    return `${Math.floor(diffMin)}m ago`;\n  }\n  return \"a while ago\";\n}\n```\n\nThis covers the recent-message case, which is what users see most often. Let me know if you want me to flesh out the other buckets later!"
+    }
+  ]
+}
