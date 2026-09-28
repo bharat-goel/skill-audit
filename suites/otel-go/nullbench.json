@@ -1,7 +1,7 @@
 {
   "model": "sonnet",
   "judge_model": "sonnet",
-  "reps": 10,
+  "reps": 20,
   "skill_dir": "skill",
   "tasks": [
     {

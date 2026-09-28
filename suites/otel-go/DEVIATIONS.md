@@ -57,3 +57,13 @@ not reproduced". **At reps=10 this suite can confirm the author's claim but cann
 it.** Results that would read "claim holds": 0/10 vs 5/10 and above. That limit is stated
 here before any run so that an "inconclusive" is never read as a near-refutation, and a
 "claim holds" is never read as the outcome of a test that could have gone the other way.
+
+## reps=20, not the spec's reps=10 (P6) — decided 2026-09-28, before any run
+
+The section above shows that at reps=10 the ceiling rule can confirm the author's claim but
+never refute it. The user chose reps=20 before any run, so that the test can go either way:
+at 20 reps per arm a null result (0/20 vs 0/20) has an interval of [-16.1pp, +16.1pp],
+wholly below the author's lower bound of +20.6pp, and reads "claim not reproduced". This is
+a deviation from P6 (reps=10), made for statistical power and not after seeing any data.
+It changes H: the registration at reps=10 (H=`7e8dffc732f050df`) is superseded before any
+run. uap-release-analyzer and cds-code stay at reps=10.
