@@ -1,8 +1,8 @@
 nullbench — 2 registered task(s), running 2
-  registration  7e8dffc732f050df
-  model         sonnet (judge sonnet), reps 10
-  subject runs  40
-  judge calls   40
+  registration  22d04167d4f430c6
+  model         sonnet (judge sonnet), reps 20
+  subject runs  80
+  judge calls   80
   canary runs   10
-  TOTAL         90 CLI invocations
-  est. spend    ~$1.80 at an assumed $0.02/call — override with --cost-per-call
+  TOTAL         170 CLI invocations
+  est. spend    ~$3.40 at an assumed $0.02/call — override with --cost-per-call
