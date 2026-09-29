@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply fails A, B and C: it never converts log.String/StringValue to attribute.*, hedges that the pathless URL "may" post to `/`, and explicitly declines to say how v1.44.0 and v1.45.0 handle Retry-After.

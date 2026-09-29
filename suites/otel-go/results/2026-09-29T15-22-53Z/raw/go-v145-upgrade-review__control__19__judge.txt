@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply refuses to state the required changes: it doesn't replace log.* with attribute.*, doesn't state that pathless WithEndpointURL uses "/" in v1.45.0, and doesn't state the Retry-After seconds/HTTP-date fix versus v1.44.0's nanosecond misreading. It also offers no local compile or test path.

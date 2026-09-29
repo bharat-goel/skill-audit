@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply fails A, B and C: it never states the log.* to attribute.* migration, never says the pathless WithEndpointURL root-path behavior is new in v1.45.0, and never gives the Retry-After seconds/HTTP-date versus v1.44.0 nanosecond/ignored-date distinction.

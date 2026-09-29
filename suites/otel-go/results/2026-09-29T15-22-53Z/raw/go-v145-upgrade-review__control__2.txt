@@ -1,0 +1,28 @@
+I can't give you exact v1.45.0 changes, because I have no source that documents them. The review file only describes the scenario, and the `skills/otel-go` directory contains nothing else. My attempt to fetch the upstream changelog was denied, and I didn't work around that. I also won't reconstruct release notes from memory and present them as verified.
+
+**What the file establishes**
+- The upgrade is core v1.44.0 → v1.45.0 and log API/SDK v0.20.0 → v0.21.0.
+- The log code calls `rec.SetBody(...)`, `rec.AddAttributes(...)` and `logger.Emit(ctx, rec)` on a zero-value `log.Record`.
+- The trace exporter uses `otlptracehttp.WithEndpointURL("http://otel-gateway:4318")`, but the Collector expects `/v1/traces`.
+- The team wants to know whether v1.45.0 honors both `Retry-After: 5` and an HTTP-date value, and how that differs from v1.44.0.
+
+**Changes I can justify without the changelog**
+1. Bump every module to matching versions in `go.mod`, then run `go mod tidy` and `go build ./...`:
+   - Core modules (`otel`, `sdk`, `otel/trace`, `exporters/otlp/otlptrace/otlptracehttp`) go to `v1.45.0`.
+   - Log modules (`otel/log`, `otel/sdk/log`) go to `v0.21.0`.
+   - Mixing versions across modules is the most common source of breakage.
+2. Make the endpoint explicit so it doesn't depend on version-specific path handling. Pass the full URL:
+   ```go
+   otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces")
+   ```
+   Alternatively, use `WithEndpoint("otel-gateway:4318")` plus `WithInsecure()`, which lets the exporter append its default `/v1/traces`. The full URL works whichever way `WithEndpointURL` treats a bare host. I can't confirm whether the current config, with no path, would reach `/v1/traces` in either version. Point a local test at an `httptest` server and check the request path.
+3. Let the compiler check the log code. If `AddAttributes` or `SetBody` changed in log v0.21.0, `go build` will flag it. Log v0.x releases are allowed to make breaking changes, so check that release's notes before merging.
+
+**What I can't tell you**
+- Whether v1.45.0 honors seconds, HTTP-date, or both forms of `Retry-After`. The same goes for v1.44.0, so I can't state the difference between them.
+- Whether any log Record API changed in v0.21.0.
+
+**How to close the gap**
+- Grant WebFetch permission, and I'll pull the v1.45.0/v0.21.0 and v1.44.0/v0.20.0 changelog entries and answer each item with citations.
+- Alternatively, paste those sections here.
+- Or run a local test with an `httptest` server returning `Retry-After: 5` and then an HTTP-date, against each version. That answers the retry question empirically without contacting `otel-gateway`.

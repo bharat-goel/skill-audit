@@ -1,0 +1,20 @@
+I can't give you the exact v1.45.0 versus v1.44.0 behavior changes from this file. The file is only the scenario. It has no changelog, release notes or diff, and the `skills/otel-go` directory holds nothing else. I also can't confirm the v1.45.0 and log v0.21.0 release contents from memory, so I won't invent them. I made no changes and contacted no endpoint.
+
+**What the file shows**
+- **Versions:** core moves from v1.44.0 to v1.45.0, and log API/SDK from v0.20.0 to v0.21.0.
+- **Log emission:** the code builds a `log.Record` with `SetBody`, `AddAttributes` and `logger.Emit`. This is the log API surface, which is v0.x and can break between minor versions.
+- **Trace exporter:** `otlptracehttp.WithEndpointURL("http://otel-gateway:4318")` has no path, but the Collector expects `/v1/traces`.
+- **Throttling:** the Collector may send `Retry-After: 5` (seconds) or an HTTP-date value.
+
+**Changes I'd make, and how sure I am of each**
+1. **Exporter endpoint (safe in any version).** Spell out the full path so you don't depend on whether the exporter appends `/v1/traces` for a bare URL:
+   ```go
+   exporter, err := otlptracehttp.New(ctx,
+       otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+   )
+   ```
+   `WithEndpointURL` treats the URL as the full target. `WithEndpoint("otel-gateway:4318")` plus `WithInsecure()` is the form that gets the default path. Check that a bare-URL path isn't silently wrong in either version.
+2. **Log record (not verified).** I can't confirm whether v0.21.0 changed `log.Record`, `SetBody`, `AddAttributes` or `Emit`. Build against v0.21.0 and let the compiler flag any break. Use `log.Record` through the SDK's supported constructors rather than relying on the zero value if the release notes say so.
+3. **`Retry-After` (not verified).** I can't say whether v1.45.0 honors both the seconds form and the HTTP-date form, or how that differs from v1.44.0. Don't rely on the Collector's HTTP-date form until the exporter's retry code confirms it. The safest Collector-side setting is the seconds form (`Retry-After: 5`), which works either way.
+
+**Where to get the missing answers.** Read the v1.45.0 and v0.21.0 entries in the `opentelemetry-go` `CHANGELOG.md`. Look for `otlptracehttp` retry handling and `log` record changes. Alternatively, read `exporters/otlp/otlptrace/otlptracehttp/internal/retry` and the client's `Retry-After` parsing in the module cache after `go get`. I held off on fetching the changelog because you said not to contact an endpoint. If you want me to fetch it from GitHub, say so and I'll turn this into a checked list of exact changes for each version.

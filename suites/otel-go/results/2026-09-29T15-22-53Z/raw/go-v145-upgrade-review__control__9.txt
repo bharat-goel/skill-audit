@@ -1,0 +1,18 @@
+I can't give you exact v1.45.0 changes. The file doesn't contain them, and I couldn't verify them another way.
+
+**What I checked**
+- The file `skills/otel-go/evals/files/go-v145-upgrade.md` only describes the current code and asks the questions. It has no changelog or release notes.
+- `skills/otel-go/` contains nothing else, so there is no local reference for v1.45.0 or log v0.21.0.
+- I tried to fetch the upstream `CHANGELOG.md`, but the fetch permission was denied. My own knowledge of these releases isn't reliable enough to state exact behavior changes and call them verified. If I guessed, I'd be inventing the v1.44.0 versus v1.45.0 differences you asked me to separate.
+
+**What the file shows** (facts from the code, not release notes)
+1. **Log record.** `var rec log.Record`, `rec.SetBody(...)`, `rec.AddAttributes(...)` and `logger.Emit(ctx, rec)` are the code to check against log v0.21.0. The `log.Record` API is the most likely place for a break on a v0.20.0 → v0.21.0 bump, but I can't tell you the replacement without the release notes.
+2. **Trace exporter endpoint.** The Collector expects `http://otel-gateway:4318/v1/traces`. The code passes `WithEndpointURL("http://otel-gateway:4318")`, which has no path. Whether v1.45.0 appends `/v1/traces` to a path-less URL, and whether v1.44.0 did, is what decides if you need to change it. If either version doesn't append it, the fix would be `WithEndpointURL("http://otel-gateway:4318/v1/traces")`. I'm not certain that applies, so I'm not giving it as the answer.
+3. **Retry-After.** You need to know whether the exporter honors both `Retry-After: 5` and an HTTP-date value, and whether that differs from v1.44.0. That is only answerable from the exporter source or changelog.
+
+**How to get the exact answer**
+- Allow WebFetch and I'll pull the v1.45.0 / v0.21.0 and v1.44.0 / v0.20.0 changelog sections and give you the exact diffs.
+- Or paste those sections here.
+- Or run `go doc go.opentelemetry.io/otel/log Record` and `go doc go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp WithEndpointURL` on both versions, and check the `retry` code in `otlptracehttp/internal`. The exporter's parsing of the `Retry-After` header is the part to look at.
+
+I made no changes to any files and contacted no endpoint.

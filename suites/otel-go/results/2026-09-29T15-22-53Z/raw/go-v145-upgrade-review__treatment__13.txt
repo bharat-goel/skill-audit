@@ -1,0 +1,63 @@
+I reviewed `go-v145-upgrade.md` and checked it against the skill's `breaking-changes.md` and `performance.md`. I didn't modify any files or contact any endpoint. The findings below come from those skill references, which I did not check against upstream release notes.
+
+## 1. Log record: `log.*` values become `attribute.*` (log v0.21.0, core v1.45.0)
+
+**What changed:** `log.Kind`, `log.Value`, `log.KeyValue`, their constructors and the conversion helpers are removed. Log bodies and record attributes now use `attribute.Value` and `attribute.KeyValue`. As written, the current code won't compile against v0.21.0. The `log.Record` type itself stays.
+
+**Change:**
+```go
+import "go.opentelemetry.io/otel/attribute"
+
+var rec log.Record
+rec.SetBody(attribute.StringValue("checkout failed"))
+rec.AddAttributes(attribute.String("component", "checkout"))
+logger.Emit(ctx, rec)
+```
+- Drop any `log.StringValue`, `log.String` and similar calls left elsewhere. Use the matching typed `attribute.*` constructors.
+- If you use `sdk/log/logtest.RecordFactory` in tests, remove any `AttributeValueLengthLimit` and `AttributeCountLimit` fields. Test records now keep attribute limits disabled.
+- If you call `sdk/log.WithExportBufferSize`, remove it. It is deprecated and has no effect as of v0.21.0.
+
+**Compared with v1.44.0:** v0.20.0 accepted `log.StringValue` and `log.String`. This is a compile-time break that only appears with the v0.21.0 log modules.
+
+## 2. Trace exporter URL: the signal path is no longer appended (core v1.45.0)
+
+**What changed:** `otlptracehttp.WithEndpointURL` (and `otlpmetrichttp.WithEndpointURL`) no longer append `/v1/traces` or `/v1/metrics` when the URL has no path. They now use `/`. This matches the signal-specific endpoint environment variables and the log exporter.
+
+**Impact:** `WithEndpointURL("http://otel-gateway:4318")` now posts to `http://otel-gateway:4318/`. Your Collector expects `/v1/traces`, so this would fail silently at runtime. It compiles fine.
+
+**Change:**
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+
+**Compared with v1.44.0:** v1.44.0 appended `/v1/traces` automatically, so the original code worked.
+
+## 3. `Retry-After` handling: both forms are honored in v1.45.0
+
+**Answer:** Yes, v1.45.0 honors both forms.
+
+| Header value | v1.44.0 | v1.45.0 |
+|---|---|---|
+| `Retry-After: 5` | Read as 5 **nanoseconds**, so the delay was effectively zero. | Read as 5 seconds. |
+| HTTP-date | Ignored. | Supported. |
+
+**Change:** None in code. This is a bug fix in the HTTP exporters.
+
+**Behavior to expect:** Throttled clients will now actually back off. That is the intended behavior, but expect longer retry delays under throttling. Retries still follow the defaults: initial interval 5s, max interval 30s, max elapsed time 1 minute.
+
+## Related v1.44.0 behavior (not new in v1.45.0)
+
+All OTLP exporters cap requests at 64 MiB before compression. Oversized requests are dropped as non-retryable. You can tune this with `WithMaxRequestSize`. This has been in place since v1.44.0, so it isn't part of this upgrade.
+
+## Dependency and verification steps
+
+Log modules are on a separate v0.x line, so don't pin them to the core version:
+```bash
+go get go.opentelemetry.io/otel@v1.45.0 go.opentelemetry.io/otel/sdk@v1.45.0 \
+       go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.45.0
+go get go.opentelemetry.io/otel/log@v0.21.0 go.opentelemetry.io/otel/sdk/log@v0.21.0
+go mod tidy -diff && go build ./... && go test ./...
+```
+To test the exporter path and `Retry-After`, use a local `httptest.Server`. Assert that the request path is `/v1/traces`. Have it return 429 with `Retry-After: 5`, then with an HTTP-date, and check the retry delays.

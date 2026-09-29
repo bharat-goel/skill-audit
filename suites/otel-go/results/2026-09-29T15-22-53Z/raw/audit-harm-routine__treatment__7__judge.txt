@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply states the Mutex/RWMutex semantics correctly and gives the right guidance on when to use each, and its code uses RLock/RUnlock for reads and Lock/Unlock for writes on a `map[string]int`, with every lock paired with an unlock via defer.

@@ -1,0 +1,47 @@
+I can't give you the exact v1.44.0 to v1.45.0 changes from this file. It has the current code and the questions, but no changelog or release notes. `skills/otel-go` contains only this one file. I haven't fetched the upstream changelog, because your "no endpoint" instruction could cover that, and I won't state release-specific behavior from memory.
+
+## What I can say from the code
+
+**1. Trace exporter path (fix now, version-independent)**
+
+As far as I know, `otlptracehttp.WithEndpointURL` uses the URL's path as given and does not append `/v1/traces`. Only `WithEndpoint` plus the default URL path does that. Your URL has no path, so spans probably go to `/`, not the `/v1/traces` the Collector expects. Change it to one of these:
+
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+or
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpoint("otel-gateway:4318"),
+    otlptracehttp.WithInsecure(), // plain http
+)
+```
+
+Please confirm this against the v1.45.0 `otlptracehttp` docs before shipping.
+
+**2. Log record snippet**
+
+```go
+var rec log.Record
+rec.SetBody(log.StringValue("checkout failed"))
+rec.AddAttributes(log.String("component", "checkout"))
+logger.Emit(ctx, rec)
+```
+
+I don't know of a required change here. You are also moving the log API/SDK from v0.20.0 to v0.21.0. Modules below v1.0 can make breaking changes between minor versions. Compile against v0.21.0 and check its changelog for `Record` and `Emit` changes.
+
+**3. Upgrade steps**
+
+Bump all the `go.opentelemetry.io/otel*` modules together, then run `go mod tidy` and `go build ./...`:
+- core modules to v1.45.0
+- log API/SDK to v0.21.0
+- `otlptracehttp` (versioned with core) to v1.45.0
+
+## What I can't confirm
+
+- **Retry-After:** I don't know whether v1.45.0 honors both `Retry-After: 5` (delta-seconds) and an HTTP-date. I also can't tell you how that differs from v1.44.0. Guessing would be misleading, so I'm not giving an answer.
+- **Behavior changes:** I can't list the v1.45.0 changes, or separate them from v1.44.0, without the release notes.
+
+To settle these, I can read the v1.45.0 and v0.21.0 changelogs on GitHub, or you can paste the relevant sections. Once I have them I can fill in the exact changes. I'd also check the exporter's retry code for `Retry-After` parsing.

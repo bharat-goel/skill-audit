@@ -1,0 +1,79 @@
+# OpenTelemetry Go v1.45.0 upgrade: required changes
+
+I made no changes and contacted no endpoint. This is a static review. The eval file `go-v145-upgrade.md` describes the service, and the skill's `references/breaking-changes.md`, `performance.md` and `api.md` supply the version facts.
+
+## 1. Log record uses removed `log.*` value types (build break)
+
+**Behavior change (log API/SDK v0.21.0):** Log bodies and record attributes now use `go.opentelemetry.io/otel/attribute` types. `log.StringValue`, `log.String`, `log.Value`, `log.KeyValue` and `log.Kind` were removed. In v0.20.0 (with core v1.44.0) they still existed, so this only breaks once you move to v0.21.0.
+
+```go
+import "go.opentelemetry.io/otel/attribute"
+
+var rec log.Record
+rec.SetBody(attribute.StringValue("checkout failed"))
+rec.AddAttributes(attribute.String("component", "checkout"))
+logger.Emit(ctx, rec)
+```
+
+`log.Record` and `logger.Emit` are unchanged. Only the value constructors move.
+
+Related v0.21.0 changes to check:
+- `sdk/log.WithExportBufferSize` is deprecated and has no effect. Remove it if you use it.
+- `logtest.RecordFactory` no longer has `AttributeValueLengthLimit` or `AttributeCountLimit`. Test records now keep attribute limits disabled.
+
+## 2. `WithEndpointURL` no longer appends `/v1/traces` (silent misrouting)
+
+**Behavior change (core v1.45.0):**
+- **v1.44.0:** `WithEndpointURL("http://otel-gateway:4318")` had no path, so the exporter sent to `/v1/traces`.
+- **v1.45.0:** With no path, the exporter posts to `/`. This matches the signal-specific endpoint environment variables and the log exporter. Nothing fails to compile. The Collector would just stop receiving traces, and the Collector will reject or ignore posts to `/`.
+
+Fix: put the signal path in the URL.
+
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+
+The same applies to `otlpmetrichttp.WithEndpointURL`, which needs `/v1/metrics`. Do the same for any metric exporter in the service.
+
+## 3. `Retry-After` handling in the HTTP exporters (no code change)
+
+The v1.45.0 exporter honors both forms of `Retry-After`. It reads `Retry-After: 5` as 5 seconds and also parses HTTP-date values.
+
+**v1.44.0:** integer values were mistakenly treated as nanoseconds, so the retry wait was effectively zero. HTTP-date values were ignored.
+
+**Effect in v1.45.0:** Retries now wait as the Collector asks. A throttling Collector gets real back-off and the exporter no longer retries immediately. Retry limits are unchanged:
+- The initial interval is 5s.
+- The maximum interval is 30s.
+- The maximum elapsed time is 1 minute.
+
+A large `Retry-After` can therefore consume the retry budget and drop a batch sooner than before. This is a behavior change, not something you need to configure.
+
+## What did not change in v1.45.0
+
+These changes were already in v1.44.0. They are not part of this upgrade, so do not attribute any change you see after it to v1.45.0:
+- The metric SDK's default cardinality limit of 2000.
+- The 64 MiB OTLP request cap.
+- Baggage limits enforced at parse time.
+
+## Optional contrib and otelconf checks
+
+Only relevant if you use these packages:
+- **otelhttp v0.70.0 (contrib v1.45.0):** `network.protocol.*` now comes from the negotiated response protocol.
+- **Contrib v1.45.0 semconv:** it moves to semconv v1.43.0, so use that exact versioned package and avoid mixing in helpers from older versions.
+- **otelconf v0.25.0:** the resolved resource now includes the SDK default resource attributes.
+
+## Dependencies and verification
+
+Module lines are independent. Use `@latest` per group rather than forcing v1.45.0 onto the log modules:
+
+```bash
+go get go.opentelemetry.io/otel@latest go.opentelemetry.io/otel/sdk@latest \
+       go.opentelemetry.io/otel/log@latest go.opentelemetry.io/otel/sdk/log@latest
+go mod tidy -diff
+go build ./...
+go test ./...
+```
+
+Point any integration test at a disposable local receiver, not the real gateway, and check that it receives `POST /v1/traces`. A stub that answers `Retry-After: 5` and then an HTTP-date value also lets you confirm the retry timing.

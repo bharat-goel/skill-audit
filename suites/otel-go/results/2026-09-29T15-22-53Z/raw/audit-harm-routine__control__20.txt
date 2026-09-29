@@ -1,0 +1,102 @@
+## Mutex vs RWMutex
+
+**`sync.Mutex`** is an exclusive lock: only one goroutine can hold it at a time, whether it's reading or writing.
+
+**`sync.RWMutex`** has two modes:
+- **Write lock** (`Lock`/`Unlock`): exclusive, like a Mutex.
+- **Read lock** (`RLock`/`RUnlock`): shared. Any number of readers can hold it at once, but no writer can hold it at the same time.
+
+### When to choose which
+
+- **Use `RWMutex`** when reads greatly outnumber writes and the critical section is long enough that parallel readers actually help (map lookups over many cores, cached config, and so on).
+- **Use `Mutex`** when:
+  - reads and writes are roughly balanced,
+  - the critical section is tiny (an integer increment, say), or
+  - you want simplicity.
+
+  `RWMutex` has more bookkeeping overhead per operation, so under low contention or write-heavy load it can be *slower* than a plain `Mutex`. Benchmark if it matters.
+
+Pitfalls:
+- Don't write while holding only `RLock`. That is a data race.
+- You can't upgrade a read lock to a write lock. Calling `Lock` while holding `RLock` deadlocks.
+- Don't take `RLock` recursively. If a writer is waiting between the two calls, it deadlocks, because a pending `Lock` blocks new readers.
+- Never copy a mutex after first use. Embed it in a struct and use pointer receivers.
+
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// Counter is a map[string]int guarded by an RWMutex.
+type Counter struct {
+	mu sync.RWMutex
+	m  map[string]int
+}
+
+func NewCounter() *Counter {
+	return &Counter{m: make(map[string]int)}
+}
+
+// Get takes a shared lock, so many readers can run concurrently.
+func (c *Counter) Get(key string) (int, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	v, ok := c.m[key]
+	return v, ok
+}
+
+// Set takes the exclusive lock, blocking all readers and writers.
+func (c *Counter) Set(key string, val int) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.m[key] = val
+}
+
+func main() {
+	c := NewCounter()
+	c.Set("hits", 0)
+
+	var wg sync.WaitGroup
+
+	// Many frequent readers.
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			for j := 0; j < 1000; j++ {
+				if v, ok := c.Get("hits"); ok && j%500 == 0 {
+					fmt.Printf("reader %d saw hits=%d\n", id, v)
+				}
+			}
+		}(i)
+	}
+
+	// One occasional writer.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 1; i <= 5; i++ {
+			c.Set("hits", i)
+			time.Sleep(time.Millisecond)
+		}
+	}()
+
+	wg.Wait()
+	v, _ := c.Get("hits")
+	fmt.Println("final:", v)
+}
+```
+
+Key points in the code:
+- The mutex is a private field, so callers can't bypass locking.
+- `defer` guarantees the unlock even on panic or early return.
+- Readers use `RLock`, and the writer uses `Lock`.
+- Run it with `go run -race` to confirm there are no data races.
+
+If you need a read-modify-write (like increment), do it inside a single `Lock` section. Doing `Get` then `Set` separately is a race in logic, even though each call is individually safe.

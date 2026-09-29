@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't identify the log.Value/KeyValue to attribute.Value/KeyValue migration (A), doesn't state that Retry-After integers are seconds with HTTP-date support versus v1.44.0's nanosecond misparse (C), and only hedges on the /v1/traces path without saying v1.45.0 uses root `/` (B).

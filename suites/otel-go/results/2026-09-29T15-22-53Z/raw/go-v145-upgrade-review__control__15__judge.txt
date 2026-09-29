@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't state the log.String→attribute.String migration, the root-path behavior change in v1.45.0, or the Retry-After seconds/HTTP-date fix (it explicitly declines to assert them), so A and C fail and B is only partly met.

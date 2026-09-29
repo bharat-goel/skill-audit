@@ -1,0 +1,37 @@
+I can't give the exact v1.45.0 changes from what's on disk, and I won't guess them. The review file only describes the scenario and doesn't list any v1.45.0 or v1.44.0 changes. `skills/otel-go/` contains nothing else, so there's no changelog or skill reference to check against. Fetching the upstream release notes would be the fix, but you said not to contact an endpoint, so I haven't.
+
+**What the file gives us**
+
+- **Versions:** core v1.44.0 → v1.45.0, and log API/SDK v0.20.0 → v0.21.0.
+- **Log emission:**
+  ```go
+  var rec log.Record
+  rec.SetBody(log.StringValue("checkout failed"))
+  rec.AddAttributes(log.String("component", "checkout"))
+  logger.Emit(ctx, rec)
+  ```
+- **Trace exporter:**
+  ```go
+  otlptracehttp.New(ctx, otlptracehttp.WithEndpointURL("http://otel-gateway:4318"))
+  ```
+  The Collector expects traces at `/v1/traces`.
+- **Retry-After:** the Collector may send `Retry-After: 5` or an HTTP-date value.
+
+**Where to look for changes, and what I can't confirm**
+
+I can't say whether any of these changed in v1.45.0 or v0.21.0, and I can't separate those changes from v1.44.0. Which of these apply is not something I can verify from the file.
+
+1. **Log record construction (`log.Record` in v0.21.0):** `log.Record` may have changed. Check the changelog for `SetBody`, `AddAttributes` and how records are built. If they changed, the snippet would need the new form. I won't invent that form.
+2. **Trace endpoint path (`WithEndpointURL`):** the URL has no path. The exporter may send to `/` instead of `/v1/traces`, or append the default, depending on the release. The safe change is to make the path explicit, which works whichever way it behaves:
+   ```go
+   otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces")
+   ```
+   Alternatively, use `WithEndpoint("otel-gateway:4318")`, `WithInsecure()` and `WithURLPath("/v1/traces")`. Confirm this against the v1.45.0 changelog.
+3. **`Retry-After` handling:** I can't confirm whether v1.45.0 honors both the seconds form and the HTTP-date form, or how v1.44.0 differed. Don't tell the team either way until the changelog or the `otlptracehttp` retry code confirms it. The seconds form (`5`) is the more likely to be handled. If HTTP-date support is missing, the fix would be on the Collector side (send seconds) or a custom retry policy.
+
+**To finish this**
+
+Any one of these would let me give you the exact v1.44.0 vs v1.45.0 comparison:
+- Approve fetching the CHANGELOG from GitHub for `opentelemetry-go` v1.45.0 and v0.21.0. This is the public changelog, not the example endpoint, but I'd like your OK given your instruction.
+- Paste the relevant changelog entries here.
+- Point me to a vendored copy of the module in the repo.

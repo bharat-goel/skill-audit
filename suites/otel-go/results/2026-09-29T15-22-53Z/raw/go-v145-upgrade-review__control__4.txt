@@ -1,0 +1,36 @@
+I can't give you the exact v1.45.0 changes, and inventing them would be worse than leaving them out. The review file has no changelog, and the skill directory contains only that one file. It has no reference notes on v1.44.0 or v1.45.0. I didn't fetch the upstream release notes, because you said not to contact an endpoint. So I can't verify a v1.44.0 to v1.45.0 behavior difference, and I haven't made one up.
+
+**Change I'd make regardless of version: put the full path in the trace exporter URL**
+
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+
+- `WithEndpointURL` takes a full URL, and the path in it is used as given. You want traces at `/v1/traces`, so this makes that explicit.
+- The current form, `http://otel-gateway:4318`, leaves the path empty. Whether an empty path falls back to `/v1/traces` is exactly what could differ between releases.
+- With the full path, the result is the same on v1.44.0 and v1.45.0, so the upgrade can't change it.
+- The alternative is `WithEndpoint("otel-gateway:4318")` plus `WithInsecure()`, which leaves the default path in place.
+
+**Log record code: no change I can confirm**
+
+```go
+var rec log.Record
+rec.SetBody(log.StringValue("checkout failed"))
+rec.AddAttributes(log.String("component", "checkout"))
+logger.Emit(ctx, rec)
+```
+
+This is valid against the log API as I know it. The log modules are pre-1.0, so a v0.20.0 to v0.21.0 bump is where breaking changes tend to land. That could mean `Record` construction, `Emit` or attribute helpers. I can't tell you which, if any, apply here. Run `go build ./...` after bumping and let the compiler show the breakage.
+
+**Retry-After: `Retry-After: 5` versus an HTTP-date**
+
+I can't say whether the v1.45.0 exporter honors both forms, or how that differs from v1.44.0. The delta-seconds form (`5`) is the usual one for OTLP/HTTP exporters to support. HTTP-date support is what varies. The two forms differ like this:
+
+- **`Retry-After: 5`**: the exporter waits 5 seconds.
+- **`Retry-After: Wed, 21 Oct 2026 07:28:00 GMT`**: the exporter has to parse the date and wait until then. If it can't, it falls back to its own backoff.
+
+To settle it, read the "Fixed" and "Changed" entries under 1.45.0 in the upstream `CHANGELOG.md`. Or grep the vendored `otlptracehttp` client, in `internal/retry` and `client.go`, for `Retry-After`. You can also write a local test with `httptest.NewServer` that returns 429 with each header form and records the retry timing. That needs no external endpoint.
+
+If you'd like, I can fetch the upstream changelog and give you the exact v1.44.0 versus v1.45.0 differences with sources. Say so and I'll do that.

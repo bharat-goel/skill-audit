@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't meet A, B or C: it never identifies the log.Value to attribute.Value migration, and it won't confirm that pathless WithEndpointURL uses `/` in v1.45.0 or the Retry-After seconds/HTTP-date change. It only meets D, since it proposes a local httptest path.

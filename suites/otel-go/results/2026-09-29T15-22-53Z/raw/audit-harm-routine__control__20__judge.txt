@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply correctly explains Mutex (exclusive) vs RWMutex (many readers or one writer) and when to use each. Its code uses RLock/RUnlock for reads and Lock/Unlock for writes, with correct defer pairing on a `map[string]int`.

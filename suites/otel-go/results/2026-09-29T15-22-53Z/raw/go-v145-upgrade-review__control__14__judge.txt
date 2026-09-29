@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't state the log.String to attribute.String migration (A), hedges on the path behavior instead of stating v1.45.0 uses root (B), explicitly declines to state the Retry-After change (C), though it does propose a local build (D).

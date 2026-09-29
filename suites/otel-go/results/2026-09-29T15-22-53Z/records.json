@@ -1,0 +1,657 @@
+{
+  "stamp": "2026-09-29T15:22:53Z",
+  "hash": "22d04167d4f430c66c9680b68869478f0430a03ad1b35c21283da4d00f3e0bd3",
+  "klass": "EXPLORATORY",
+  "requested": {
+    "reps": 20,
+    "model": "sonnet",
+    "judgeModel": "sonnet",
+    "taskIds": [
+      "audit-harm-routine",
+      "go-v145-upgrade-review"
+    ],
+    "skillOverride": null
+  },
+  "records": [
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex as exclusive versus RWMutex allowing concurrent readers or one exclusive wr"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer) and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to choose each, and its code uses RLock/RUnlo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex versus RWMutex semantics and when to choose each. Its code uses RLock/RUnlo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer) and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer) and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one writer) and when to c"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (one holder) versus RWMutex (many readers or one exclusive writer) and when"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (many readers or one writer) and when to choose "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (shared readers or one exclusive writer) and when to"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 11,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (shared readers or single exclusive writer) and when"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 12,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (one goroutine at a time) versus RWMutex (many concurrent readers or one ex"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 13,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly describes Mutex vs RWMutex semantics and when to prefer each, and its code uses RLock/RUnl"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 15,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (concurrent readers or one exclusive writer) and whe"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 14,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to use each, and its code correctly uses RLoc"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 16,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly describes Mutex as exclusive and RWMutex as many concurrent readers or one exclusive write"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 17,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to choose each, and its code uses RLock/RUnlo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 18,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to choose each, and its code uses RLock/RUnlo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 19,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (concurrent readers or one exclusive writer) and whe"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 20,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (many readers or one writer) and when to use each. I"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer) and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (many readers or one writer), when to choose each, a"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (shared readers or one exclusive writer) and whe"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly describes Mutex as exclusive and RWMutex as many concurrent readers or one exclusive write"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to choose each, and its code uses RLock/RUnlo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer) and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply states the Mutex/RWMutex semantics correctly and gives the right guidance on when to use each, and i"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer), gi"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer) and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (many concurrent readers or one exclusive writer"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 11,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (many concurrent readers or one exclusive writer), g"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 12,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to choose each, and its code uses RLock/RUnlo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 13,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly describes Mutex versus RWMutex semantics and when to pick each, and its code uses RLock/RU"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 15,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or a single writer) and when"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 16,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to choose each, and its code uses RLock/RUnlo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 14,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to choose each, and provides a correct, compi"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 18,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or one exclusive writer) and"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 17,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) vs RWMutex (many concurrent readers or one exclusive writer) an"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 19,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex (exclusive) versus RWMutex (concurrent readers or a single exclusive writer"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 20,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply correctly explains Mutex vs RWMutex semantics and when to use each, and its code uses RLock/RUnlock "
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives no confirmed change for A (no attribute.String migration), hedges on B by not stating that v1."
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't identify the log.Value/KeyValue to attribute.Value/KeyValue migration (A), doesn't state tha"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply does not do A (no log.String→attribute.String migration), C (no seconds/HTTP-date Retry-After explan"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply fails A, B and C: it never states the log.* to attribute.* migration, never says the pathless WithEn"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives none of the required changes: it does not state the log.String to attribute.String migration ("
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply fails A and C: it gives no attribute.String/attribute.Value migration and no Retry-After seconds/HTT"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't meet A, B or C: it never identifies the log.Value to attribute.Value migration, and it won't"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't identify the log.StringValue/log.String to attribute.* migration (A), doesn't state that pat"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives none of the required changes: it doesn't state the log.String→attribute.String migration (A), "
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply fails A and C by declining to state the log.Value→attribute.Value migration or the Retry-After secon"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 11,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't meet A, B, or C: it declines to identify the log.Value→attribute.Value migration, doesn't st"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 12,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply does not identify the log.Value→attribute.Value migration (A) or the v1.45.0 integer-seconds/HTTP-da"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 13,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply misses A (no log.String→attribute.String migration) and C (no Retry-After seconds/HTTP-date vs v1.44"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 14,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't state the log.String to attribute.String migration (A), hedges on the path behavior instead "
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 15,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't state the log.String→attribute.String migration, the root-path behavior change in v1.45.0, o"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 16,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply gives no exact changes and does not cover A (the log-to-attribute migration), B (the root path, or t"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 17,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't specify the log.String→attribute.String migration (A), doesn't state that pathless WithEndpo"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 18,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't meet A (no log.String to attribute.String migration), C (no Retry-After seconds/HTTP-date vs"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 19,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply refuses to state the required changes: it doesn't replace log.* with attribute.*, doesn't state that"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "control",
+      "rep": 20,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't state the log.String to attribute.String migration (A), says pathless WithEndpointURL is unc"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers the log.* to attribute.* migration (A), the pathless WithEndpointURL root-path change with an"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (log.* to attribute.* migration), B (pathless URL uses `/`, fixed by adding `/v1/traces`), "
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers the log.* to attribute.* migration (A), the pathless WithEndpointURL \"/\" behavior with an exp"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply meets A, B and D, but it does not state the required Retry-After behavior (v1.45.0 reads integers as"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (attribute.StringValue/String replacing log.*, v0.20→v0.21), B (pathless WithEndpointURL us"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (log.* to attribute.* migration), B (explicit /v1/traces in WithEndpointURL), and C (Retry-"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (log.* to attribute.* migration), B (pathless URL uses `/`, fix includes `/v1/traces`), and"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers all four criteria: the log.* to attribute.* migration (A), `/v1/traces` in the URL because pa"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers all four criteria: it swaps in `attribute.StringValue` and `attribute.String` for the v0.21.0"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (log.* to attribute.* migration), B (pathless WithEndpointURL uses `/`, so it includes /v1/"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 11,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (attribute.StringValue/String replacing log.* with the v0.21.0 migration), B (pathless With"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 12,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (log.* → attribute.*, v0.21.0 migration), B (pathless WithEndpointURL uses `/`, fix include"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 13,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers all four rubric points: the log.* to attribute.* migration (A), the /v1/traces path fix for p"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 15,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (attribute.* replacing log.* with the v0.21.0 migration), B (pathless URL uses `/`, fixed b"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 14,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply fails A, B and C: it never converts log.String/StringValue to attribute.*, hedges that the pathless "
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 16,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply meets A, B and D, but it fails C: it says Retry-After handling is \"not answerable\" and gives no stat"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 17,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers A (log.StringValue/log.String → attribute equivalents in v0.21.0), B (pathless WithEndpointUR"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 18,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers all four criteria: the log.* to attribute.* migration (A), the pathless WithEndpointURL root-"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 19,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers all four criteria. For A, it swaps `log.*` for `attribute.*` and explains the v0.21.0 migrati"
+    },
+    {
+      "task": "go-v145-upgrade-review",
+      "cond": "treatment",
+      "rep": 20,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply covers all four rubric items: the log.* to attribute.* migration (A), the pathless WithEndpointURL r"
+    }
+  ]
+}

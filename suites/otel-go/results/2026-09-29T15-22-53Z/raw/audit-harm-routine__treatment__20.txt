@@ -1,0 +1,109 @@
+## `sync.Mutex` vs `sync.RWMutex`
+
+**`sync.Mutex`** is an exclusive lock. Only one goroutine can hold it at a time, whether it is reading or writing.
+
+**`sync.RWMutex`** is a reader/writer lock with two modes:
+- `RLock`/`RUnlock` is shared. Any number of goroutines can hold it at once, as long as no writer holds or is waiting for the lock.
+- `Lock`/`Unlock` is exclusive. It waits for all readers to leave and blocks new readers while it is held.
+
+If a writer is waiting, new `RLock` calls block. This prevents writer starvation.
+
+### When to choose which
+
+**Use `RWMutex` when:**
+- Reads greatly outnumber writes, for example a config or lookup cache.
+- The read critical section is long enough that parallel readers actually help.
+- You have many cores contending on reads.
+
+**Use `Mutex` when:**
+- Critical sections are tiny, such as incrementing a counter or swapping a pointer. `RWMutex` has more bookkeeping (atomic reader counts), so it is often slower than `Mutex` for short sections, even read-heavy ones.
+- Reads and writes are roughly balanced.
+- You want simplicity. Default to `Mutex` and switch only if profiling shows read contention.
+
+Other rules:
+- Never upgrade a read lock to a write lock (`RLock` then `Lock`) in the same goroutine. It deadlocks.
+- Don't take `RLock` recursively. If a writer queues between the two calls, it deadlocks.
+- Never copy either type after first use. Pass pointers, or embed them in a struct that is used by pointer.
+- For a purely read-mostly map with stable keys, `sync.Map` or an atomically swapped immutable snapshot (`atomic.Pointer`) may be better.
+
+### Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// SafeCounter guards a map with an RWMutex.
+type SafeCounter struct {
+	mu sync.RWMutex
+	m  map[string]int
+}
+
+func NewSafeCounter() *SafeCounter {
+	return &SafeCounter{m: make(map[string]int)}
+}
+
+// Get takes a shared read lock; many goroutines can run this concurrently.
+func (c *SafeCounter) Get(key string) (int, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	v, ok := c.m[key]
+	return v, ok
+}
+
+// Set takes the exclusive write lock.
+func (c *SafeCounter) Set(key string, val int) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.m[key] = val
+}
+
+func main() {
+	c := NewSafeCounter()
+	c.Set("hits", 0)
+
+	var wg sync.WaitGroup
+	done := make(chan struct{})
+
+	// Many concurrent readers.
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			for {
+				select {
+				case <-done:
+					return
+				default:
+					_, _ = c.Get("hits")
+				}
+			}
+		}(i)
+	}
+
+	// A single occasional writer.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 1; i <= 5; i++ {
+			time.Sleep(50 * time.Millisecond)
+			c.Set("hits", i)
+		}
+		close(done) // tell readers to stop
+	}()
+
+	wg.Wait()
+	v, _ := c.Get("hits")
+	fmt.Println("final:", v) // final: 5
+}
+```
+
+Key points in the example:
+- The lock lives next to the data it protects, and the map is only accessed through methods.
+- `defer` guarantees unlock on every path, including panics.
+- Readers use `RLock`, so they don't block each other. Only the writer's `Lock` excludes them.
+- Run it with `go run -race` to confirm there are no data races.

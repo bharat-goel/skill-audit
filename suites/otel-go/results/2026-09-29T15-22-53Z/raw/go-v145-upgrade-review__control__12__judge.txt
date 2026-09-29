@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply does not identify the log.Value→attribute.Value migration (A) or the v1.45.0 integer-seconds/HTTP-date Retry-After behavior vs v1.44.0 nanoseconds (C), and it does not state that pathless WithEndpointURL uses root `/` in v1.45.0 (B).

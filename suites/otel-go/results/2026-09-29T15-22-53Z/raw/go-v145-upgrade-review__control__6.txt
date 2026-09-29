@@ -1,0 +1,26 @@
+I can't give you the exact v1.44.0 vs v1.45.0 behavior changes from this review. The file only describes the scenario and asks the questions. It has no changelog, release notes or expected answers, and `skills/otel-go` contains nothing else. I didn't fetch the upstream release notes, since you said not to contact an endpoint. Anything I stated as a v1.45.0 change would be a guess.
+
+**Changes that are safe whichever way the release notes read**
+
+1. **Trace exporter URL.** Put the full path in the endpoint URL, so the exporter doesn't depend on how a version handles a path-less URL:
+   ```go
+   exporter, err := otlptracehttp.New(ctx,
+       otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+   )
+   ```
+   The Collector expects `/v1/traces`, and the current value stops at `:4318`. As far as I recall, `WithEndpointURL` uses the URL's path as given rather than appending the signal path. If so, the current code would post to `/` in v1.44.0 as well. I haven't confirmed that for either version, so check it.
+
+2. **Version bump.** Move the core modules (`go.opentelemetry.io/otel`, `otel/sdk`, `otel/exporters/otlp/otlptrace/otlptracehttp`) to `v1.45.0`. Move `otel/log` and `otel/sdk/log` to `v0.21.0`. Keep all core modules on the same version and all log modules on the same version.
+
+3. **Log record.** Compile against v0.21.0 and fix any errors. I can't confirm whether `log.Record`, `SetBody` and `AddAttributes` changed in that release. If the build fails on them, the release notes for `otel/log` v0.21.0 will say what replaces them.
+
+**Retry-After: seconds vs HTTP-date**
+
+I can't tell you whether v1.45.0 honors both forms, or how v1.44.0 differed. My recollection is that the OTLP retry code has historically parsed only integer seconds, but I haven't confirmed this for either version. To settle it:
+
+- Read the `otlptracehttp` and `internal/retry` (or `otlpconfig`) source and the CHANGELOG entries for v1.45.0 and v1.44.0. Search for "Retry-After".
+- Or run a local unit test against an `httptest.Server` that returns 429 with each header form. That doesn't touch the real Collector.
+
+Until then, configure the Collector or gateway to send `Retry-After` in integer seconds, which is the form you can rely on.
+
+If you want the exact per-version differences, I can fetch the release notes if you allow web access, or read them if you put the CHANGELOG or module source in the repo.

@@ -1,0 +1,27 @@
+I can't give you the exact v1.45.0 changes from this review. The file only describes the scenario and doesn't include the changelog, and I haven't checked release notes or source. `skills/otel-go` contains nothing else, and I didn't fetch anything, per your instruction. I'm not going to guess at behaviour changes and present them as fact.
+
+**What the file establishes**
+- The upgrade is core v1.44.0 → v1.45.0 and log API/SDK v0.20.0 → v0.21.0.
+- The log code builds a `log.Record` with `SetBody` and `AddAttributes`, then calls `logger.Emit(ctx, rec)`.
+- The trace exporter uses `WithEndpointURL("http://otel-gateway:4318")`, with no path. The Collector expects `/v1/traces`.
+- The team wants to know whether v1.45.0 honors both `Retry-After: 5` and an HTTP-date, and how that differs from v1.44.0.
+
+**Change I'm confident is safe in any version**
+
+Put the full path in the URL. Don't rely on the exporter to append `/v1/traces` to a bare host.
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+I believe `WithEndpointURL` uses the URL's path as given, but I haven't confirmed that for v1.44.0 or v1.45.0. Spelling out the path avoids the question entirely.
+
+**Not determinable without the release notes**
+- **Log record API in v0.21.0:** whether `SetBody`, `AddAttributes` or `Emit(ctx, rec)` changed. Compiling against v0.21.0 will show any signature changes immediately.
+- **`Retry-After` handling:** whether v1.45.0 accepts both seconds (`5`) and an HTTP-date, and what v1.44.0 did.
+
+To settle both, I need either:
+- the v1.45.0 and log v0.21.0 sections of the opentelemetry-go `CHANGELOG.md`, or
+- your OK to fetch that changelog (not the example endpoint).
+
+Once I have that, I'll give the exact code changes and explain each behavior change against v1.44.0.

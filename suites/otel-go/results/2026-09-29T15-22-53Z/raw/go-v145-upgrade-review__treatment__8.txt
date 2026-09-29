@@ -1,0 +1,75 @@
+# OpenTelemetry Go v1.44.0 → v1.45.0 upgrade: required changes
+
+This is a static review of `go-v145-upgrade.md` against the skill's reference docs. I didn't modify any files or contact any endpoint. Two changes are required and one is a behavior note.
+
+## 1. Log record API (log v0.20.0 → v0.21.0): compile break
+
+In v0.21.0, log bodies and attributes use `go.opentelemetry.io/otel/attribute` types. The old `log.Value`, `log.KeyValue`, `log.String` and `log.StringValue` are removed, so the current snippet no longer compiles. `log.Record`, `SetBody`, `AddAttributes` and `Emit` are unchanged.
+
+```go
+import "go.opentelemetry.io/otel/attribute"
+
+var rec log.Record
+rec.SetBody(attribute.StringValue("checkout failed"))
+rec.AddAttributes(attribute.String("component", "checkout"))
+logger.Emit(ctx, rec)
+```
+
+- Your other imports of `go.opentelemetry.io/otel/log` stay, because `log.Record` and the severity constants are still there.
+- If tests use `logtest.RecordFactory`, drop `AttributeValueLengthLimit` and `AttributeCountLimit`. They were removed, and test records now keep attribute limits disabled.
+- If you set `sdk/log.WithExportBufferSize`, remove it. It is deprecated and has no effect in v0.21.0, because the batch processor no longer keeps a separate export buffer.
+- Log modules are a separate v0.x line, so don't pin them to v1.45.0. Use `go get go.opentelemetry.io/otel/log@latest go.opentelemetry.io/otel/sdk/log@latest`.
+
+## 2. OTLP HTTP `WithEndpointURL`: silent behavior change, no compile error
+
+- **v1.44.0:** `WithEndpointURL("http://otel-gateway:4318")` has no path, so the exporter appended `/v1/traces`. Requests went to `http://otel-gateway:4318/v1/traces`.
+- **v1.45.0:** With no path, the exporter uses `/`. Requests go to `http://otel-gateway:4318/`. The Collector expects `/v1/traces`, so traces would fail (likely 404) with nothing flagged at build time. The same change applies to `otlpmetrichttp`. It now matches the signal-specific endpoint environment variables and the log exporter.
+
+Fix by including the path explicitly:
+
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+
+If you also use `otlpmetrichttp.WithEndpointURL`, give it `.../v1/metrics` in the same way.
+
+## 3. `Retry-After` handling in the HTTP exporters
+
+The answer is yes for v1.45.0 and no for v1.44.0.
+
+| Header value | v1.44.0 | v1.45.0 |
+|---|---|---|
+| `Retry-After: 5` | Misread as 5 **nanoseconds**, so the exporter retried almost immediately and ignored the throttle | Read as 5 **seconds** |
+| HTTP-date (e.g. `Wed, 21 Oct 2026 07:28:00 GMT`) | Ignored, so the exporter used its normal backoff | Honored |
+
+- **No code change is needed.** v1.45.0 fixes this bug.
+- **Expect slower retries under throttling.** The exporter now actually waits as long as the Collector asks. Its own backoff settings are unchanged (5s initial interval, 30s max interval, 1 minute max elapsed time).
+- **Check the total retry budget.** A long `Retry-After` can use up the 1-minute budget, so a batch may be dropped after fewer attempts.
+
+## Other 1.44.0 behavior you should already have absorbed
+
+These came in with v1.44.0, not v1.45.0. They matter only if you are upgrading from an older release than your baseline:
+
+- The metric SDK has a default cardinality limit of 2000 series (`WithCardinalityLimit(0)` restores unlimited).
+- OTLP exporters cap requests at 64 MiB.
+- Baggage extraction enforces the 8192-byte limit.
+
+## Contrib and `otelconf` items (only if you use them)
+
+- **`otelhttp` v0.70.0:** `network.protocol.*` now comes from the negotiated response protocol.
+- **Semconv:** Contrib v1.45.0 moves to semconv v1.43.0. Import the exact versioned semconv package rather than mixing versions.
+- **`otelconf` v0.25.0:** The resolved resource now includes the SDK's default resource attributes. Account for this when comparing telemetry before and after the upgrade.
+
+## Verify locally
+
+```bash
+go get go.opentelemetry.io/otel@latest go.opentelemetry.io/otel/sdk@latest \
+       go.opentelemetry.io/otel/log@latest go.opentelemetry.io/otel/sdk/log@latest
+go mod tidy -diff
+go build ./...
+go test ./...
+```
+
+To confirm the URL and retry behavior, point the exporter at an `httptest.Server` in a test. Have it record `r.URL.Path` (expect `/v1/traces`) and return 429 with `Retry-After: 5` and then with an HTTP-date. Don't test against `otel-gateway`.

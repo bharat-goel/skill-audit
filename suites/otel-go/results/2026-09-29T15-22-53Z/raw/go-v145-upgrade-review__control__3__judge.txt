@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply gives no confirmed change for A (no attribute.String migration), hedges on B by not stating that v1.45.0 pathless URLs use `/`, and does not state C's seconds-vs-nanoseconds/HTTP-date difference, and it offers no local compile or test path for D.

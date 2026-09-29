@@ -1,0 +1,97 @@
+## `sync.Mutex` vs `sync.RWMutex`
+
+**`sync.Mutex`** is an exclusive lock. Only one goroutine can hold it at a time, whether it is reading or writing.
+
+**`sync.RWMutex`** is a reader/writer lock with two modes:
+- `RLock()` / `RUnlock()` is a shared lock. Any number of goroutines can hold it at once, as long as no writer holds the lock.
+- `Lock()` / `Unlock()` is an exclusive lock. It waits for all readers to release, and it blocks new readers while held.
+
+If a writer is waiting, new `RLock()` calls block until that writer has finished. This stops readers from starving writers.
+
+### When to choose which
+
+| Choose | When |
+|---|---|
+| `Mutex` | Critical sections are very short, reads and writes are roughly balanced, contention is low, or you want the simplest and fastest option. |
+| `RWMutex` | Reads far outnumber writes (for example 10:1 or more), and the read-side critical section is non-trivial, so letting readers run in parallel pays off. |
+
+Caveats:
+- `RWMutex` has more bookkeeping overhead than `Mutex`. For tiny critical sections or write-heavy workloads it can be slower, so benchmark before assuming it helps.
+- You can't upgrade a read lock to a write lock. Calling `Lock()` while holding `RLock()` deadlocks.
+- Don't take `RLock()` recursively in the same goroutine. If a writer is queued between the two calls, it deadlocks.
+- For a simple read-mostly map, `sync.Map` or an atomically swapped immutable snapshot (`atomic.Pointer`) are alternatives worth considering.
+
+### Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// SafeCounter protects a map with an RWMutex.
+type SafeCounter struct {
+	mu sync.RWMutex
+	m  map[string]int
+}
+
+func NewSafeCounter() *SafeCounter {
+	return &SafeCounter{m: make(map[string]int)}
+}
+
+// Get takes a shared lock, so many readers can run concurrently.
+func (c *SafeCounter) Get(key string) (int, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	v, ok := c.m[key]
+	return v, ok
+}
+
+// Set takes the exclusive lock, so it blocks all readers and writers.
+func (c *SafeCounter) Set(key string, val int) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.m[key] = val
+}
+
+func main() {
+	c := NewSafeCounter()
+	c.Set("hits", 0)
+
+	var wg sync.WaitGroup
+
+	// Many frequent readers.
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			for j := 0; j < 5; j++ {
+				v, _ := c.Get("hits")
+				fmt.Printf("reader %d saw hits=%d\n", id, v)
+				time.Sleep(10 * time.Millisecond)
+			}
+		}(i)
+	}
+
+	// One occasional writer.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for n := 1; n <= 3; n++ {
+			time.Sleep(20 * time.Millisecond)
+			c.Set("hits", n)
+		}
+	}()
+
+	wg.Wait()
+}
+```
+
+Key points in the snippet:
+- The mutex is a field next to the data it guards, and it is never copied. Use pointer receivers.
+- Readers use `RLock`/`RUnlock` and the writer uses `Lock`/`Unlock`. Using `RLock` around a write is a data race.
+- `defer` guarantees the unlock even on panic or early return.
+- Run it with `go run -race` to confirm there are no data races.

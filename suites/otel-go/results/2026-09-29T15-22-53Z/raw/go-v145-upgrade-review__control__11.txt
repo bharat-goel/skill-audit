@@ -1,0 +1,26 @@
+I can't give you exact, verified v1.45.0 changes, because the review file doesn't contain them. It only describes the current setup and asks three questions. The `skills/otel-go` directory holds nothing else: no changelog, no reference files. I also haven't fetched the upstream release notes, since you said not to contact an endpoint. I don't want to invent version-specific behavior, so what follows is what I can say and what still needs checking.
+
+**What the file tells us**
+- The upgrade is core v1.44.0 → v1.45.0 and log API/SDK v0.20.0 → v0.21.0.
+- The log code uses `log.Record`, `SetBody`, `AddAttributes` and `logger.Emit`.
+- The trace exporter is `otlptracehttp.WithEndpointURL("http://otel-gateway:4318")`. The Collector expects `http://otel-gateway:4318/v1/traces`.
+- The team wants to know whether the exporter honors both `Retry-After: 5` and an HTTP-date value, and how that differs between v1.44.0 and v1.45.0.
+
+**Code changes I can't confirm**
+- **Log record (v0.21.0):** I know of no v0.21.0 change that breaks this snippet. `SetBody` and `AddAttributes` should still compile. The log module is pre-1.0, so v0.21.0 may still have breaking changes. Run `go build ./...` after bumping and read the v0.21.0 section of the log changelog.
+- **Trace endpoint:** I believe `WithEndpointURL` uses the URL's path as given. As I recall, the exporter falls back to `/v1/traces` only when the path is empty, but I haven't confirmed that for either version. If the path is used as given, an empty path would be a real risk, so the safest change is to spell out the path. It works the same in both versions and doesn't depend on the default:
+  ```go
+  exporter, err := otlptracehttp.New(ctx,
+      otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+  )
+  ```
+  The alternative is `WithEndpoint("otel-gateway:4318")` plus `WithInsecure()`, which uses the default `/v1/traces` path.
+- **`Retry-After`:** I can't say whether v1.45.0 honors the HTTP-date form or how v1.44.0 differs. I recall the numeric-seconds form being supported, but I can't confirm HTTP-date support in either version. Please don't rely on my memory for this one.
+
+**How to settle it without touching the network**
+1. Read the v1.45.0 and log v0.21.0 sections of `CHANGELOG.md` in the opentelemetry-go repo. Once the upgrade is done, `$(go env GOMODCACHE)/go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.45.0/` also holds the source.
+2. In that source, `grep -n "Retry-After" -r .` to see whether the retry code parses seconds only or also HTTP-dates. Do the same on the v1.44.0 module to see the difference.
+3. Check how `WithEndpointURL` handles an empty path in `internal/otlpconfig`.
+4. Add a unit test that points the exporter at a local `httptest.Server`. Have it return 429 with each `Retry-After` form and check the retry timing. That tests both forms without contacting `otel-gateway`.
+
+If you want, I can fetch the upstream changelog and source and write up the exact diff between v1.44.0 and v1.45.0. That would contact GitHub, so I'll wait for your go-ahead.

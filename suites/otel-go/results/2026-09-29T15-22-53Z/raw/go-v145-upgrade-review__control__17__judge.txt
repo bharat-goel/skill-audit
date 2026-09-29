@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't specify the log.String→attribute.String migration (A), doesn't state that pathless WithEndpointURL uses root path in v1.45.0 (B, only hedged recollection), gives no Retry-After seconds/HTTP-date vs v1.44.0 nanoseconds explanation (C), and proposes only a build after bumping rather than a clear safe local test path.

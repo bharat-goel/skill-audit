@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply correctly explains Mutex (exclusive) vs RWMutex (concurrent readers or one exclusive writer) and when to choose each, and its code uses RLock/RUnlock for reads and Lock/Unlock for writes with correct pairing via defer.

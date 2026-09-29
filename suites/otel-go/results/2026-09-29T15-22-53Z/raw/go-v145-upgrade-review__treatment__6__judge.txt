@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply covers A (log.* to attribute.* migration), B (explicit /v1/traces in WithEndpointURL), and C (Retry-After seconds/HTTP-date vs v1.44.0 nanoseconds/ignored). For D, it disclaims compiling or contacting an endpoint and proposes a local build/test path and a disposable local receiver.

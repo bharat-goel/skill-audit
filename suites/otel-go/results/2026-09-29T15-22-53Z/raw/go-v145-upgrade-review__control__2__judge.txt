@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply does not do A (no log.String→attribute.String migration), C (no seconds/HTTP-date Retry-After explanation of v1.45.0 vs v1.44.0), or B's statement that pathless WithEndpointURL uses root `/` in v1.45.0. It only adds `/v1/traces` as a precaution, and it does propose a safe local httptest path for D.

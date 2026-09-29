@@ -1,0 +1,20 @@
+I can't give you verified v1.45.0 versus v1.44.0 behavior changes. The review file is the only file in `skills/otel-go`, and it has no release notes or changelog. It only describes the scenario. I didn't fetch upstream release notes, since you said not to contact an endpoint. I also don't have reliable knowledge of these releases, so anything more specific would be a guess.
+
+**Changes I'm confident about**
+
+1. **Trace exporter URL.** Set the full signal path in `WithEndpointURL`:
+   ```go
+   exporter, err := otlptracehttp.New(ctx,
+       otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+   )
+   ```
+   The Collector expects `/v1/traces`, and the current URL stops at `:4318`. As I remember it, `WithEndpointURL` uses the URL's path as given rather than appending the signal path. That is my recollection, not something I checked against the v1.45.0 source. Spelling out the path is correct whichever way v1.45.0 handles it.
+
+2. **Version bumps.** Move to the versions you named: `go.opentelemetry.io/otel*` at v1.45.0 and `go.opentelemetry.io/otel/log` and `otel/sdk/log` at v0.21.0. Then run `go mod tidy`. Keep the modules in step, because mixed core and log versions are a common cause of build failures.
+
+**Changes I can't specify**
+
+- **Log record code.** The `var rec log.Record`, `SetBody`, `AddAttributes` and `Emit` pattern could be affected by v0.21.0 changes to the `log.Record` API. I can't say what changed. After bumping, build the code and fix any compiler errors. Check the `otel/log` v0.21.0 release notes for the exact replacement.
+- **`Retry-After` handling.** I can't say whether v1.45.0 honors both the seconds form (`Retry-After: 5`) and the HTTP-date form, or how v1.44.0 differed. Please confirm this in the v1.45.0 `otlptracehttp` section of `CHANGELOG.md` and in the exporter's retry code (`otlptracehttp/internal/retry` and the client's response handling). Until you've confirmed it, don't assume the HTTP-date form is honored.
+
+If you'd like, I can fetch the upstream CHANGELOG for v1.45.0 and v0.21.0 and turn it into the exact diffs. That would contact GitHub, not your example endpoint, so I'll only do it if you say so.

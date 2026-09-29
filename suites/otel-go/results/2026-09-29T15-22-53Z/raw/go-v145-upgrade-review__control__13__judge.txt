@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply misses A (no log.String→attribute.String migration) and C (no Retry-After seconds/HTTP-date vs v1.44.0 nanosecond claim), gives only a hedged B, and offers no local compile/test path for D.
