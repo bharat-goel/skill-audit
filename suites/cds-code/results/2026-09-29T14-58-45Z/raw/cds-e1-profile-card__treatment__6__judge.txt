@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code, only a description, and it admits the import paths were guessed and may be invalid; it also uses `borderRadius={200}` and `Text font="title3"` without any verified code, so the rubric expectations can't be confirmed.

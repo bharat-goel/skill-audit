@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual function code and no actual unit tests, only a prose description of a plan, because the file writes were refused.

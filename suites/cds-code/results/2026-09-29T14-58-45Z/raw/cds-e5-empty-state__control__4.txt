@@ -1,0 +1,9 @@
+I've built the empty state page, but I haven't published it yet. The publish call needs your approval, and it hasn't been granted.
+
+The page is at `/tmp/claude-0/-tmp-nullbench-fx-93NGdW/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/security-empty-state.html`. I didn't write it to the project folder because that write was also denied. I haven't previewed it, so the layout is untested.
+
+- **Compact:** a dashboard widget with a small shield illustration, the title "No security alerts", one line of supporting text, scan metadata and a single button.
+- **Roomy:** the same shield at twice the size, a larger title, a longer explanation and a primary "Run scan now" button beside a secondary one.
+- **Shared design:** both versions use the same illustration, with a scan line that moves across the shield. They follow light and dark themes and stack to one column on phones.
+
+If you approve the publish, I'll upload it as a private artifact and send you the link.

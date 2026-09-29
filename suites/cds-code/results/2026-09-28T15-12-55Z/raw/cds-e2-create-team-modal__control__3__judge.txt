@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't use ModalHeader/ModalBody/ModalFooter subcomponents (uses a single Modal with title/footer props instead) and imports Select from '@coinbase/cds-web/inputs' rather than the required alpha subpath.

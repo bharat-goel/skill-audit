@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, and its description of the page never addresses the rubric's requirements for icon names, token-based color, icon sizing, or spacing without pixel values.

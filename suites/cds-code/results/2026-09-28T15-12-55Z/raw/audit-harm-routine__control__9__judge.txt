@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply provides a self-contained `formatRelativeTime` function matching the requested signature with correct, consistently-ordered boundary logic (just now/Xm/Xh/yesterday/Xd/plain date) and includes 4 Jest tests that accurately exercise the stated boundaries and match the function's actual behavior, with no UI/rendering content.

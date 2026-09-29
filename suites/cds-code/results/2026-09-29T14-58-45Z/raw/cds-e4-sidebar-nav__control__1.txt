@@ -1,0 +1,8 @@
+I couldn't create the sidebar because the write to `/tmp/nullbench-fx-cOSgaT/index.html` was denied. Nothing has been written yet.
+
+If you grant write access to that directory, I'll retry. I can also write it to the scratchpad directory instead, or paste the code here.
+
+The page is a single self-contained `index.html` with no dependencies:
+- **Sidebar:** a 240px left nav with Home, Activity and Settings, each with an inline SVG icon.
+- **Selected state:** Home is marked with `aria-current="page"` and gets a highlighted background and accent colour.
+- **Styling:** hover and keyboard-focus styles, light and dark themes, and a collapse to icons only on narrow screens.

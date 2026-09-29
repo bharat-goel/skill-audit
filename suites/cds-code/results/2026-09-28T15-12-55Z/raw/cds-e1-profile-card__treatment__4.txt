@@ -1,0 +1,76 @@
+File writes and shell commands aren't permitted in this sandbox session, so I can't save the component to disk. Here's the finished `ProfileCard` component — copy it into `src/components/ProfileCard.tsx` (or wherever your home page components live):
+
+```tsx
+import { VStack, HStack, Text, Avatar, ListCell, Icon, Divider } from "@coinbase/cds-web";
+
+export type ProfileCardProps = {
+  avatarSrc?: string;
+  displayName: string;
+  email: string;
+  onAccountSettingsClick?: () => void;
+  onNotificationsClick?: () => void;
+  onSignOutClick?: () => void;
+};
+
+export function ProfileCard({
+  avatarSrc,
+  displayName,
+  email,
+  onAccountSettingsClick,
+  onNotificationsClick,
+  onSignOutClick,
+}: ProfileCardProps) {
+  return (
+    <VStack
+      borderWidth={1}
+      borderColor="line"
+      borderRadius={1}
+      background="bg"
+      overflow="hidden"
+    >
+      <HStack gap={2} alignItems="center" padding={3}>
+        <Avatar src={avatarSrc} alt={displayName} size="l" />
+        <VStack gap={0}>
+          <Text font="title4">{displayName}</Text>
+          <Text font="body" color="fgMuted">
+            {email}
+          </Text>
+        </VStack>
+      </HStack>
+
+      <Divider />
+
+      <VStack>
+        <ListCell
+          title="Account settings"
+          onClick={onAccountSettingsClick}
+          end={<Icon name="caretRight" size="s" color="fgMuted" />}
+        />
+        <ListCell
+          title="Notifications"
+          onClick={onNotificationsClick}
+          end={<Icon name="caretRight" size="s" color="fgMuted" />}
+        />
+        <ListCell
+          title="Sign out"
+          onClick={onSignOutClick}
+          end={<Icon name="caretRight" size="s" color="fgMuted" />}
+        />
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+**What it uses and why:**
+- `VStack`/`HStack` — layout, with `borderRadius={1}` for the subtle rounded corners (CDS numeric spacing/radius scale) and `borderColor="line"` for a light container edge instead of a shadow.
+- `Avatar` — the user photo, `size="l"`.
+- `Text font="title4"` for the name, `Text font="body" color="fgMuted"` for the muted email — no raw colors/pixels.
+- `Divider` separates the identity block from the settings rows.
+- `ListCell` for each menu row (`title` prop), with a trailing `Icon name="caretRight"` as the right-side arrow.
+
+**Two things to verify once you have `node_modules` available**, since this sandbox has none installed and I couldn't run the discovery/typecheck scripts:
+1. Import path — I used the root `@coinbase/cds-web` barrel (matches how stable components are imported elsewhere in your guidelines; only alpha components need deep imports). If your setup differs, adjust the import path.
+2. Icon name — `"caretRight"` is my best guess based on your icons guide's caret terminology; run `node skill/scripts/discover-cds-icons.mjs right` once dependencies are installed to confirm the exact name, and swap `end` for `accessory`/`accessoryNode` if `ListCell`'s trailing-content prop differs in your installed version.
+
+If you'd like, grant file-write permission and I'll save this directly and run lint/typecheck against it.

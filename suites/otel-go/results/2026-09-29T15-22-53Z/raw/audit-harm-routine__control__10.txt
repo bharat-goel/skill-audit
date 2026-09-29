@@ -1,0 +1,95 @@
+## Mutex vs RWMutex
+
+**`sync.Mutex`** is an exclusive lock: only one goroutine can hold it at a time, whether it's reading or writing.
+
+**`sync.RWMutex`** has two modes:
+- **Write lock** (`Lock`/`Unlock`): exclusive. It blocks all other readers and writers.
+- **Read lock** (`RLock`/`RUnlock`): shared. Any number of goroutines can hold it at once, but no writer can while readers are active.
+
+### When to choose which
+
+- Use **`RWMutex`** when reads greatly outnumber writes and the critical section is not trivially tiny. Concurrent readers then don't serialize on each other.
+- Use **`Mutex`** when:
+  - reads and writes are balanced, or writes are frequent;
+  - critical sections are very short. `RWMutex` has more bookkeeping overhead (atomic counters and reader tracking), so it can be slower than a plain `Mutex` when there's little contention to exploit;
+  - you want simplicity.
+
+Rules to remember for `RWMutex`:
+- Never mutate under `RLock`. Writes need `Lock`.
+- You can't upgrade an `RLock` to a `Lock` (it deadlocks). Release the read lock and then take the write lock, and re-check state afterward.
+- Don't take `RLock` recursively. If a writer is waiting, a pending `Lock` blocks new readers, so a nested `RLock` can deadlock.
+- Don't copy a mutex after first use. Embed it in a struct and use pointer receivers.
+- For simple counters, `sync/atomic` is often better. For a read-mostly map, also consider `sync.Map` or copy-on-write with `atomic.Pointer`.
+
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// SafeMap protects a map with an RWMutex.
+type SafeMap struct {
+	mu sync.RWMutex
+	m  map[string]int
+}
+
+func NewSafeMap() *SafeMap {
+	return &SafeMap{m: make(map[string]int)}
+}
+
+// Get takes a shared read lock, so many readers can run concurrently.
+func (s *SafeMap) Get(key string) (int, bool) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	v, ok := s.m[key]
+	return v, ok
+}
+
+// Set takes the exclusive write lock.
+func (s *SafeMap) Set(key string, val int) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.m[key] = val
+}
+
+func main() {
+	sm := NewSafeMap()
+	sm.Set("hits", 0)
+
+	var wg sync.WaitGroup
+
+	// Many frequent readers.
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			for j := 0; j < 5; j++ {
+				v, _ := sm.Get("hits")
+				fmt.Printf("reader %d saw hits=%d\n", id, v)
+				time.Sleep(10 * time.Millisecond)
+			}
+		}(i)
+	}
+
+	// One occasional writer.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for n := 1; n <= 3; n++ {
+			time.Sleep(20 * time.Millisecond)
+			sm.Set("hits", n)
+		}
+	}()
+
+	wg.Wait()
+}
+```
+
+Run it with `go run -race main.go` to confirm there are no data races. Removing the locks would make the race detector flag concurrent map read/write, and the Go runtime may also crash with `fatal error: concurrent map read and map write`.
+
+The `defer Unlock()` pattern keeps the lock released even if the code panics or returns early. Keep the critical sections small, and don't do slow work such as I/O while holding the lock.

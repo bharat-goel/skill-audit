@@ -1,0 +1,14 @@
+I couldn't write `CreateTeamModal.tsx` because the write permission wasn't granted, so nothing has been created yet. Please approve the write and I'll retry.
+
+I also haven't checked any of it. The CDS packages aren't installed, so the import paths and prop names come from my memory of the CDS API. I also couldn't run the discovery script or read the component docs.
+
+The modal I drafted has:
+- **Header:** a `ModalHeader` titled "Create team".
+- **Body:** a `TextInput` for the team name and a `Select` for the size (Small / Medium / Large), stacked with `gap={2}`.
+- **Footer:** a `ModalFooter` with a primary Save button and a secondary Cancel button.
+- **Behavior:** Save is disabled until there is a name and a size. Cancel and closing the modal both reset the form.
+- **Interface:** `visible`, `onRequestClose` and `onSave({ name, size })` props.
+
+It has no raw colors, pixel values or inline styles, only CDS style props.
+
+To let me verify it, you can either run `npm install` or approve the discovery script. Then I'll confirm the imports and run typechecking.

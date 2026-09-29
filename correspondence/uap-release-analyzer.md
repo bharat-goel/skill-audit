@@ -4,14 +4,14 @@
 
 Route: a GitHub issue on
 [ckpxgfnksd-max/uap-release-analyzer](https://github.com/ckpxgfnksd-max/uap-release-analyzer)
-(issues are enabled). To be sent by Bharat, under his own name.
+(issues are enabled). To be sent by Bharat, under Bharat's own name.
 
 **Title:** Independent re-measurement of the eval 3 result
 
 Hi — I re-ran part of the evaluation published in this repo (at `c171d88`) with
 [nullbench](https://github.com/bharat-goel/nullbench), a pre-registration harness, as part
-of an audit of published skill claims. Your skill was the only one of 100 screened that
-met all of the audit's eligibility criteria, including publishing a with-versus-without
+of an audit of published skill claims. Your skill was one of three, out of 123 screened,
+that met all of the audit's eligibility criteria, including publishing a with-versus-without
 number and a method someone else could re-run, so thank you for publishing
 `evals/evals.json`.
 

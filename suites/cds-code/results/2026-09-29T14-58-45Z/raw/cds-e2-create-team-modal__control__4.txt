@@ -1,0 +1,13 @@
+I couldn't create the modal: my write to `/tmp/nullbench-fx-urngeO/src/CreateTeamModal.tsx` was blocked because write permission wasn't granted. I also didn't run `npm install`, because the sandbox asked for approval, so I couldn't check the CDS component APIs.
+
+I'd write `src/CreateTeamModal.tsx` as a controlled component built from `@coinbase/cds-web` (your `package.json` dependency):
+
+- **Props:** `visible`, `onRequestClose`, and `onSave({ name, size })`.
+- **Layout:** `Modal` with a `ModalHeader` titled "Create team". The `ModalBody` holds a `TextInput` labelled "Team name" and a `Select` labelled "Team size" with Small / Medium / Large (default Small).
+- **Footer:** `ModalFooter` with a primary Save button and a secondary Cancel button.
+- **Save:** disabled until the trimmed name is non-empty. Clicking it calls `onSave`, resets the form and closes the modal.
+- **Cancel:** resets the form and closes the modal. The Escape key and overlay click also close it.
+
+The props I'm least sure of are `Select`'s `options` and `onChange` signature, and `ModalFooter`'s `primaryAction` and `secondaryAction`. The installed CDS 9.28 may differ, for example if it uses `SelectAlpha`.
+
+Could you either grant write access to that directory or allow `npm install`? Then I'll create the file and check it against the installed types.

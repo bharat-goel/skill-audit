@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code uses a raw numeric `borderRadius={200}` (plausibly a token) but imports from likely invented paths like `@coinbase/cds-web/layout` and `typography/Text` that the reply itself admits are unverified from memory, and the arrow-accessory ListCell and Avatar paths are also unconfirmed, so import-path validity (criterion 9) cannot be satisfied.

@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function correctly implements all buckets with consistent boundary handling (<60s, <60m, <24h, <48h, ≤7d, then "MMM D"), and four Jest-style tests cover the boundaries consistently with the function's logic, with no UI or design content.

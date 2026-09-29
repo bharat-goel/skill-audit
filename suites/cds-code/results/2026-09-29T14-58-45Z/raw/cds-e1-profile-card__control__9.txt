@@ -1,0 +1,11 @@
+I couldn't build the profile card. Writing `src/ProfileCard.tsx` was blocked because the write permission wasn't granted. `npm install` was blocked the same way, so I also couldn't check the CDS component APIs.
+
+The project has only a `package.json` with `@coinbase/cds-web` 9.28.0, `cds-icons` and React 18, so I planned the card around CDS components. The code I drafted is unverified against the installed CDS version:
+
+- **Profile card:** a `Box` with `borderRadius={200}` and a subtle `bgLine` border. It holds an `Avatar` (size `xxl`), the display name in `Text` `title3`, and the email in `Text` with `color="fgMuted"`.
+- **Menu rows:** a `VStack` with the same rounded corners and `overflow="hidden"`. It contains three `ListCell`s, "Account settings", "Notifications" and "Sign out", each with `accessory="arrow"` for the right-side arrow.
+- **Props:** `displayName`, `email`, `avatarSrc`, and an `on…Press` handler for each row.
+
+The import paths, the `ListCell` `accessory="arrow"` prop and the `borderRadius={200}` token are from memory.
+
+If you approve the write and the install, I'll create the file, install the dependencies, check the imports and prop names against the real package, and wire the card into your home page. If your project uses a different UI setup, tell me and I'll rewrite it to match.

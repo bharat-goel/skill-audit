@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: No code was written, only a plan; it also uses borderRadius={200} (a plausible token but unverified), assumed import paths like `/layout` and `/media/Avatar` that are unchecked, and uses `font="body"` etc. without actual code to satisfy the rubric.

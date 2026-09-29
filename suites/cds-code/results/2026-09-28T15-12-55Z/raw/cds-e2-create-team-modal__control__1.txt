@@ -1,0 +1,6 @@
+This project only lists `@coinbase/cds-web` as a UI dependency, but I don't have network or `node_modules` access in this sandbox to verify its exact component API (Dialog/Select/TextInput prop names and import paths) — installs and fetches were both blocked here. Two options:
+
+1. **Grant network access** (approve an `npm install`) so I can build it against the real, verified CDS-web API.
+2. **Plain React + CSS** — guaranteed to compile, no dependency on guessing CDS-web internals, and I can style it to look consistent with what I know of CDS's visual language.
+
+Which do you want?

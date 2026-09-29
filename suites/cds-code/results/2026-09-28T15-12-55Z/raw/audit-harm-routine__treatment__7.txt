@@ -1,0 +1,47 @@
+Since this is pure data logic with no rendering, I skipped the CDS workflow (it's explicitly out of scope for non-visual logic) and wrote a standalone utility + tests instead.
+
+**`formatRelativeTime.ts`**
+```typescript
+const MINUTE_MS = 60_000;
+const HOUR_MS = 60 * MINUTE_MS;
+const DAY_MS = 24 * HOUR_MS;
+
+const MONTH_ABBR = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffMs = now.getTime() - then.getTime();
+
+  if (diffMs < MINUTE_MS) {
+    return "just now";
+  }
+  if (diffMs < HOUR_MS) {
+    return `${Math.floor(diffMs / MINUTE_MS)}m ago`;
+  }
+  if (diffMs < DAY_MS) {
+    return `${Math.floor(diffMs / HOUR_MS)}h ago`;
+  }
+  if (diffMs < 2 * DAY_MS) {
+    return "yesterday";
+  }
+
+  const days = Math.floor(diffMs / DAY_MS);
+  if (days <= 7) {
+    return `${days}d ago`;
+  }
+
+  return `${MONTH_ABBR[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest) — covers the 60s, 24h/yesterday, and 48h/7d/date-fallback boundaries, using a fixed `now` so tests are deterministic.
+
+Both files are saved in the scratchpad at `.../scratchpad/formatRelativeTime.ts` and `.../scratchpad/formatRelativeTime.test.ts` since there's no existing project structure here to drop them into — move them into your app's utils/tests directories as needed.
+
+**Boundary semantics chosen** (worth confirming these match your intent):
+- 60s and 60m are inclusive lower bounds of the next bucket (`59s` → "just now", `60s` → "1m ago").
+- "yesterday" covers `[24h, 48h)`; at exactly 48h it becomes "2d ago".
+- "Xd ago" runs through day 7 inclusive; day 8 switches to the "MMM D" date format.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't show the code or the import paths, and it says the import paths are guesses, so it never confirms that ProgressBar and ProgressCircle come from @coinbase/cds-web/visualizations. The other rubric items are only asserted in a summary, not shown.

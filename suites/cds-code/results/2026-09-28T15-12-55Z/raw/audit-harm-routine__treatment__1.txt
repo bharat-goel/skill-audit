@@ -1,0 +1,35 @@
+I don't have write access to the project directory here (it's essentially empty — no repo, no `package.json`), so I've placed the files in the scratchpad. I also don't have Bash execution approval in this session, but I traced all boundary cases by hand (59s/60s, 59m59s/60m, 23h59m59s/24h, 47h59m59s/48h, 6d23h59m59s/7d) and the logic holds.
+
+**`formatRelativeTime.ts`**
+```ts
+const MONTH_ABBR = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffMs = now.getTime() - then.getTime();
+
+  if (diffMs < MINUTE) return "just now";
+  if (diffMs < HOUR) return `${Math.floor(diffMs / MINUTE)}m ago`;
+  if (diffMs < DAY) return `${Math.floor(diffMs / HOUR)}h ago`;
+  if (diffMs < 2 * DAY) return "yesterday";
+  if (diffMs < 7 * DAY) return `${Math.floor(diffMs / DAY)}d ago`;
+
+  return `${MONTH_ABBR[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest) — 5 tests, one per bucket boundary (just now/1m, 59m/1h, 23h/yesterday, yesterday/2d, 6d/plain-date).
+
+Both files are at:
+`/private/tmp/claude-501/.../scratchpad/formatRelativeTime.ts`
+`/private/tmp/claude-501/.../scratchpad/formatRelativeTime.test.ts`
+
+Tell me where in your actual repo `Message`/utils live and I can move them there (or just grant write access to the working directory and I'll place them directly).

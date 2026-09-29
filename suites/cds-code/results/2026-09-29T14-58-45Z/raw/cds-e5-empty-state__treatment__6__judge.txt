@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code at all, so it can't satisfy any rubric item; it only describes a plan (with 96px/200px values) and asks for approval.

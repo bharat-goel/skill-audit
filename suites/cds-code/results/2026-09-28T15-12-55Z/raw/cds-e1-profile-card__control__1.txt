@@ -1,0 +1,9 @@
+I've built the profile card component and it's ready to publish as a live preview — you may see a permission prompt to approve the upload. Once approved, you'll get a shareable link.
+
+**Design notes:**
+- **Palette**: cool neutral ground (`#eef1f4` light / `#14171d` dark) with a considered slate-indigo accent (`#3c5eaa` / `#8fa6e8`) used only on the avatar gradient and focus states — nothing else competes with it.
+- **Type**: Manrope (600/700) for the name, IBM Plex Sans for the muted email and menu labels — a small but deliberate pairing rather than one flat UI font.
+- **Layout**: single card, 18px rounded corners, subtle border + soft shadow. Avatar (initials, gradient) + name + muted email up top; three full-width menu rows below (Account settings, Notifications, Sign out), each with a left icon, label, and right-side chevron, separated by hairline dividers with hover/focus states.
+- Built for both light and dark themes (system-aware, with a small toggle in the demo so you can preview both), and stays legible down to ~400px width.
+
+I used placeholder profile data ("Maya Chen") since no real user data was specified — swap in your actual avatar/name/email source when wiring it up.

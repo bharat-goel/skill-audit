@@ -1,0 +1,11 @@
+I couldn't create the profile card. Both the `npm install` and the file write were blocked because they need your permission, and I haven't been granted it yet. Nothing has been written to the project.
+
+The project is a bare `package.json` using Coinbase CDS (`@coinbase/cds-web`) and React, with no source files yet. I planned to add `src/ProfileCard.tsx` built from CDS components:
+
+- **Profile card:** a rounded container (`borderRadius={200}`) with an `Avatar`, the display name in `TextHeadline`, and the email in `TextBody` with `color="fgMuted"`.
+- **Menu rows:** a second rounded container with three `ListCell` rows, "Account settings", "Notifications" and "Sign out". Each has `accessory="arrow"` for the right-side arrow and an `onPress` handler prop.
+- **Props:** `displayName`, `email`, `avatarSrc`, `onAccountSettingsPress`, `onNotificationsPress` and `onSignOutPress`.
+
+I would have written it from memory of the CDS API, since I couldn't install the packages to check it. The import paths and the prop names (`accessory`, `borderRadius`, `background`) would still need a compile check.
+
+If you approve the write, and optionally `npm install` so I can type-check it, I'll create the file. You can also tell me where the home page lives and I'll put it there. I can also make it a standalone HTML page or a published artifact if you'd rather not use CDS.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code imports ProgressBar from `@coinbase/cds-web/visualizations/ProgressBar` (not the required `visualizations` subpath), uses `Spinner` instead of `ProgressCircle` with `indeterminate`, and applies `spacingHorizontal` instead of `paddingX`.

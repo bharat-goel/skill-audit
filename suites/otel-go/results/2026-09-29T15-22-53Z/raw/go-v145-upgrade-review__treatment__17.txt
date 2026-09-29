@@ -1,0 +1,74 @@
+# v1.44.0 → v1.45.0 upgrade changes (core v1.45.0, log API/SDK v0.21.0)
+
+I did a static review only. I changed no files and contacted no endpoint. The facts below come from the skill references (`breaking-changes.md`, `performance.md`, `api.md`). I did not check them against upstream changelogs.
+
+## 1. Log record: the `log.Value` API was removed (compile break)
+
+**What changed in v0.21.0:** Log bodies and record attributes now use `attribute.Value` and `attribute.KeyValue`. The old `log.Kind`, `log.Value`, `log.KeyValue`, their constructors and the conversion helpers no longer exist. In v0.20.0 / v1.44.0 your code used `log.StringValue` and `log.String`. Those calls will no longer compile.
+
+**Change:**
+```go
+import "go.opentelemetry.io/otel/attribute"
+
+var rec log.Record
+rec.SetBody(attribute.StringValue("checkout failed"))
+rec.AddAttributes(attribute.String("component", "checkout"))
+logger.Emit(ctx, rec)
+```
+`log.Record` and `logger.Emit` are unchanged. Only the value and attribute constructors move to the `attribute` package.
+
+**Related items to grep for:**
+- `sdk/log.WithExportBufferSize` is deprecated and has no effect in v0.21.0, because the batch processor no longer keeps a separate export buffer. Remove it, and tune `WithMaxQueueSize` or `WithExportMaxBatchSize` instead if you need to.
+- `logtest.RecordFactory` no longer has `AttributeValueLengthLimit` or `AttributeCountLimit`. Test records now keep limits disabled.
+
+## 2. `WithEndpointURL` no longer appends `/v1/traces` (silent behavior change)
+
+**v1.44.0:** `WithEndpointURL("http://otel-gateway:4318")` has no path, so the exporter appended `/v1/traces` and posted to `http://otel-gateway:4318/v1/traces`.
+
+**v1.45.0:** With no path, the exporter uses `/`. It would post to `http://otel-gateway:4318/`. This now matches the signal-specific env vars and the log exporter. Nothing fails to compile. Your Collector, which expects `/v1/traces`, would likely return 404 and traces would be dropped.
+
+**Change:**
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+Do the same for `otlpmetrichttp` with `/v1/metrics`, and check that any env-var configuration follows the same rule. As an alternative, `WithEndpoint("otel-gateway:4318")` plus `WithInsecure()` uses the base-endpoint form, but I haven't confirmed here that it still appends the signal path, so test it locally before relying on it.
+
+## 3. `Retry-After` handling in the HTTP exporters
+
+Yes, the v1.45.0 exporter honors both forms.
+
+| Header | v1.44.0 | v1.45.0 |
+|---|---|---|
+| `Retry-After: 5` | Bug: the integer was treated as **5 nanoseconds**, so the throttling hint was effectively ignored and retries came back almost immediately. | Read as **5 seconds**. |
+| `Retry-After: <HTTP-date>` | Ignored. | Supported. |
+
+No code change is needed. The consequence is that under throttling you will now see real back-off from the exporter, and retries will be spaced further apart. Retry defaults are unchanged: 5s initial interval, 30s max interval, 1 min max elapsed time. A long `Retry-After` still competes with that 1 min budget, so the export can be dropped if the server asks for more time than remains.
+
+## 4. Behaviors that were already in v1.44.0 (not new in v1.45.0)
+
+Don't attribute these to this upgrade. They only matter if you are also coming from v1.43 or earlier:
+- Default metric cardinality limit of 2000 series per instrument, with the overflow series `otel.metric.overflow=true`.
+- OTLP exporters cap requests at 64 MiB by default (`WithMaxRequestSize`).
+- The 8192-byte baggage limit is enforced during extraction.
+- `attribute.Value.Emit` is deprecated in favor of `.String`.
+
+## 5. Only if you also bump contrib (v1.45.0 / otelhttp v0.70.0)
+
+- otelhttp client spans and metrics take `network.protocol.name` and `network.protocol.version` from the negotiated response protocol, not the request's initial `Proto`.
+- Instrumentation moves to semconv v1.43.0. Use one exact semconv package version.
+- Root `otelconf` v0.25.0 includes the SDK's default resource attributes in the resolved resource.
+
+## Module versioning and verification
+
+Keep the two version lines separate: core and the OTLP trace/metric exporters at v1.45.0, and `otel/log`, `otel/sdk/log` and the log exporters at v0.21.0. Don't force `@v1.45.0` on the log modules.
+
+```bash
+go get go.opentelemetry.io/otel@v1.45.0 go.opentelemetry.io/otel/sdk@v1.45.0
+go get go.opentelemetry.io/otel/log@v0.21.0 go.opentelemetry.io/otel/sdk/log@v0.21.0
+go mod tidy -diff   # inspect before tidy writes anything
+go build ./... && go test ./...
+```
+
+To confirm the endpoint fix and the `Retry-After` behavior, point the exporter at a disposable local receiver (an `httptest` server) that logs the request path and returns 429 with `Retry-After: 5`, then with an HTTP-date. Don't test against `otel-gateway`.

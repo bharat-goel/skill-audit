@@ -1,0 +1,84 @@
+I built the component, but I ran into two environment limits in this session worth flagging directly:
+
+1. **No write access to the project directory** — after two attempts, `src/components/ProfileCard.tsx` was refused. The file is saved instead at:
+   `.../scratchpad/ProfileCard.tsx`
+   You'll need to grant file-write permission (or copy it in yourself) to land it in the project.
+
+2. **No `node_modules` and no network/script access** — I couldn't run `discover-cds-packages.sh` or the icon-discovery script, and no `cds-docs` skill or CDS MCP server is configured here. So import paths and the icon name below are my best inference from `guidelines/components.md` (the skill only calls out deep import paths for `alpha`-tagged components — `Select`, `Combobox`, `SelectChip`, etc. — implying everything else ships off the root `@coinbase/cds-web` barrel), not verified against your installed `cds-web@9.28.0` / `cds-icons@5.25.0`. **Please run the discovery script locally once node_modules is present** and adjust imports/icon name if they differ.
+
+Here's the component:
+
+```tsx
+import {
+  ContentCard,
+  ListCell,
+  VStack,
+  HStack,
+  Text,
+  Avatar,
+  Divider,
+} from "@coinbase/cds-web";
+import { Icon } from "@coinbase/cds-icons";
+
+export type ProfileCardProps = {
+  displayName: string;
+  email: string;
+  avatarSrc?: string;
+  onAccountSettings?: () => void;
+  onNotifications?: () => void;
+  onSignOut?: () => void;
+};
+
+export function ProfileCard({
+  displayName,
+  email,
+  avatarSrc,
+  onAccountSettings,
+  onNotifications,
+  onSignOut,
+}: ProfileCardProps) {
+  return (
+    <VStack gap={2}>
+      <ContentCard>
+        <HStack gap={2} alignItems="center">
+          <Avatar src={avatarSrc} alt={displayName} size="l" />
+          <VStack gap={0}>
+            <Text font="title4">{displayName}</Text>
+            <Text font="body" color="fgMuted">
+              {email}
+            </Text>
+          </VStack>
+        </HStack>
+      </ContentCard>
+
+      <ContentCard padding={0}>
+        <ListCell
+          title="Account settings"
+          onClick={onAccountSettings}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+        <Divider />
+        <ListCell
+          title="Notifications"
+          onClick={onNotifications}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+        <Divider />
+        <ListCell
+          title="Sign out"
+          onClick={onSignOut}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+      </ContentCard>
+    </VStack>
+  );
+}
+```
+
+Design notes:
+- **Container / rounded corners**: `ContentCard` provides CDS's standard card radius by default, so no hardcoded `borderRadius` pixel values were needed — satisfies "subtle rounded corners" via the token system rather than a magic number.
+- **Muted email**: `color="fgMuted"` (the semantic token), not a raw gray hex.
+- **Menu rows**: `ListCell` with `accessory` for the trailing arrow, wrapped in a second `ContentCard` (padding stripped so `ListCell`'s own row padding applies) with `Divider`s between rows.
+- No `TextHeadline`/`TextBody` (deprecated v7 components) — using `Text` with `font` tokens throughout, per the skill's guidance.
+
+Once you grant directory access I can move this into `src/components/ProfileCard.tsx` directly — want me to retry, or will you place it?

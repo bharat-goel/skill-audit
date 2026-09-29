@@ -1,0 +1,105 @@
+## `sync.Mutex` vs `sync.RWMutex`
+
+**`sync.Mutex`** is an exclusive lock. Only one goroutine can hold it at a time, whether it reads or writes. Its methods are `Lock` and `Unlock`.
+
+**`sync.RWMutex`** is a reader/writer lock with two modes:
+- **Read lock** (`RLock`/`RUnlock`): any number of goroutines can hold it at once, as long as no writer holds the lock.
+- **Write lock** (`Lock`/`Unlock`): exclusive. It waits for all readers to release, and blocks new readers while it is held or pending.
+
+### When to choose which
+
+**Use `RWMutex` when:**
+- Reads greatly outnumber writes (for example a config or cache read on every request and updated rarely).
+- The read critical section is long enough that letting readers run in parallel pays off.
+
+**Use plain `Mutex` when:**
+- Reads and writes are roughly balanced, or writes are frequent.
+- Critical sections are tiny (a counter increment, a pointer swap). `RWMutex` has more bookkeeping overhead per operation (it maintains reader counts atomically), so it can be *slower* than `Mutex` here.
+- You want the simplest thing that is correct. Default to `Mutex` and switch to `RWMutex` only when profiling shows read contention.
+
+**Gotchas with `RWMutex`:**
+- It is not upgradable. You can't take `RLock` and then `Lock` without releasing first, or you deadlock.
+- Don't acquire `RLock` recursively in the same goroutine. If a writer calls `Lock` between the two `RLock`s, the second blocks behind the pending writer and you deadlock.
+- Never mutate shared data while holding only `RLock`.
+- Never copy a mutex after first use. Embed it in a struct and pass the struct by pointer.
+
+For a simple map with mostly reads, also consider `sync.Map`. It suits keys that are written once and read many times, or goroutines working on disjoint key sets. For a typed map with a general read-heavy pattern, `RWMutex` plus a plain map is usually clearer and type-safe.
+
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// Counters is a map[string]int safe for concurrent use.
+type Counters struct {
+	mu sync.RWMutex
+	m  map[string]int
+}
+
+func NewCounters() *Counters {
+	return &Counters{m: make(map[string]int)}
+}
+
+// Get takes a read lock: many goroutines may run this concurrently.
+func (c *Counters) Get(key string) (int, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	v, ok := c.m[key]
+	return v, ok
+}
+
+// Set takes the exclusive write lock.
+func (c *Counters) Set(key string, val int) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.m[key] = val
+}
+
+func main() {
+	c := NewCounters()
+	c.Set("hits", 0)
+
+	var wg sync.WaitGroup
+
+	// Many frequent readers.
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			for j := 0; j < 1000; j++ {
+				if v, ok := c.Get("hits"); ok && j%500 == 0 {
+					fmt.Printf("reader %d sees hits=%d\n", id, v)
+				}
+			}
+		}(i)
+	}
+
+	// One occasional writer.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for n := 1; n <= 5; n++ {
+			time.Sleep(time.Millisecond)
+			c.Set("hits", n)
+		}
+	}()
+
+	wg.Wait()
+	v, _ := c.Get("hits")
+	fmt.Println("final hits =", v)
+}
+```
+
+Key points in the snippet:
+- The mutex sits next to the data it guards, and access goes only through methods, so callers can't forget to lock.
+- `defer` guarantees unlock even on panic or early return.
+- Readers use `RLock`, and the writer uses `Lock`.
+- Run it with `go run -race .` to confirm there are no data races. Removing the locks makes the race detector flag the map access.
+
+If you need a read-modify-write (for example incrementing a value), do it under a single `Lock`. Doing `Get` then `Set` as two separate calls is a race at the logical level, even though each call is individually safe.

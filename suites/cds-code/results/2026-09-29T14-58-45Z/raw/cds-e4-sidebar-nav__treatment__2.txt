@@ -1,0 +1,44 @@
+I'm building the sidebar, but I can't write the file yet. The write to `src/AppSidebar.tsx` was denied because I haven't been granted permission. The discovery script and `npm install` were blocked for the same reason.
+
+Because of that, two things are still unverified:
+- **Components:** I haven't confirmed that `Sidebar` and `SidebarItem` exist in `@coinbase/cds-web/navigation`.
+- **Icon names:** I haven't confirmed that `home`, `chartLine` and `gear` are valid CDS icon names.
+
+Nothing is installed and I can't read the docs, so I'd be guessing at both.
+
+Here is the component I planned to use. It has three items, with Home selected by default and clicks switching the selection:
+
+```tsx
+import { useState } from 'react';
+import { Sidebar, SidebarItem } from '@coinbase/cds-web/navigation';
+
+const items = [
+  { id: 'home', title: 'Home', icon: 'home' },
+  { id: 'activity', title: 'Activity', icon: 'chartLine' },
+  { id: 'settings', title: 'Settings', icon: 'gear' },
+] as const;
+
+export const AppSidebar = () => {
+  const [activeId, setActiveId] = useState<(typeof items)[number]['id']>('home');
+
+  return (
+    <Sidebar accessibilityLabel="Main navigation">
+      {items.map(({ id, title, icon }) => (
+        <SidebarItem
+          key={id}
+          active={activeId === id}
+          icon={icon}
+          onClick={() => setActiveId(id)}
+          title={title}
+        />
+      ))}
+    </Sidebar>
+  );
+};
+```
+
+To proceed, please either:
+1. Allow me to write `src/AppSidebar.tsx`.
+2. Allow `npm install` and the discovery script, so I can check the component and icon names against the installed CDS 9.28.0 before finalizing.
+
+Option 2 is better, since it lets me correct any wrong names before you use the file.

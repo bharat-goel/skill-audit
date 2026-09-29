@@ -1,0 +1,59 @@
+I couldn't create the profile card. Writing `src/ProfileCard.tsx` was denied twice, and running the discovery script was denied as well. I haven't tried another location or method, since that would sidestep the permission you didn't grant.
+
+There's also no `node_modules` in the project and no CDS docs tool available. The component below uses CDS import paths and props from memory and hasn't been type-checked. Please verify them once CDS is installed.
+
+**Components I planned to use:**
+- `VStack` / `HStack`, for layout and the rounded containers
+- `Avatar`, for the user photo
+- `Text`, with `font="title3"` for the name and `font="body"` with `color="fgMuted"` for the email
+- `ListCell` with `accessory="arrow"`, for the three menu rows
+
+```tsx
+import React from 'react';
+import { ListCell } from '@coinbase/cds-web/cells/ListCell';
+import { Avatar } from '@coinbase/cds-web/media/Avatar';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Text } from '@coinbase/cds-web/typography/Text';
+
+export type ProfileCardProps = {
+  displayName: string;
+  email: string;
+  avatarSrc?: string;
+  onAccountSettingsClick?: () => void;
+  onNotificationsClick?: () => void;
+  onSignOutClick?: () => void;
+};
+
+export const ProfileCard = ({
+  displayName,
+  email,
+  avatarSrc,
+  onAccountSettingsClick,
+  onNotificationsClick,
+  onSignOutClick,
+}: ProfileCardProps) => (
+  <VStack gap={2}>
+    <HStack alignItems="center" background="bgAlternate" borderRadius={200} gap={2} padding={2}>
+      <Avatar alt={displayName} size="xl" src={avatarSrc} />
+      <VStack>
+        <Text font="title3">{displayName}</Text>
+        <Text color="fgMuted" font="body">
+          {email}
+        </Text>
+      </VStack>
+    </HStack>
+    <VStack background="bgAlternate" borderRadius={200} overflow="hidden">
+      <ListCell accessory="arrow" onClick={onAccountSettingsClick} title="Account settings" />
+      <ListCell accessory="arrow" onClick={onNotificationsClick} title="Notifications" />
+      <ListCell accessory="arrow" onClick={onSignOutClick} title="Sign out" />
+    </VStack>
+  </VStack>
+);
+```
+
+It uses only CDS style props and tokens: `borderRadius={200}` for the subtle corners, `background="bgAlternate"`, `gap` and `padding`. There are no raw colors, pixel values or inline styles.
+
+**To finish:**
+1. Grant write access so I can save it to `src/ProfileCard.tsx`, or tell me where you'd like it.
+2. Run `npm install`, and allow me to run the discovery script so I can confirm the import paths and `ListCell`/`Avatar` props against the installed version.
+3. Tell me which home page file should render it, since the project has no source files yet.

@@ -1,0 +1,81 @@
+File writes aren't being approved in this environment, so I can't save this to your project directly. Here's the finished component — save it as `src/components/ProfileCard.tsx`:
+
+```tsx
+import { ContentCard, VStack, HStack, Text, Avatar, ListCell, Divider, Icon } from "@coinbase/cds-web";
+
+export type ProfileCardProps = {
+  avatarSrc?: string;
+  displayName: string;
+  email: string;
+  onAccountSettings?: () => void;
+  onNotifications?: () => void;
+  onSignOut?: () => void;
+};
+
+export function ProfileCard({
+  avatarSrc,
+  displayName,
+  email,
+  onAccountSettings,
+  onNotifications,
+  onSignOut,
+}: ProfileCardProps) {
+  const rows = [
+    { label: "Account settings", onClick: onAccountSettings },
+    { label: "Notifications", onClick: onNotifications },
+    { label: "Sign out", onClick: onSignOut },
+  ];
+
+  return (
+    <ContentCard borderRadius="roundedLarge" padding={0}>
+      <HStack gap={2} alignItems="center" padding={3}>
+        <Avatar src={avatarSrc} alt={displayName} size="l" />
+        <VStack gap={0}>
+          <Text font="title3">{displayName}</Text>
+          <Text font="body" color="fgMuted">
+            {email}
+          </Text>
+        </VStack>
+      </HStack>
+
+      <Divider />
+
+      <VStack gap={0}>
+        {rows.map((row, index) => (
+          <ListCell
+            key={row.label}
+            title={row.label}
+            interactive
+            onClick={row.onClick}
+            end={<Icon name="chevronRight" size="s" color="fgMuted" />}
+            borderBottomWidth={index < rows.length - 1 ? "primary" : undefined}
+          />
+        ))}
+      </VStack>
+    </ContentCard>
+  );
+}
+```
+
+**Usage:**
+```tsx
+<ProfileCard
+  avatarSrc={user.avatarUrl}
+  displayName={user.name}
+  email={user.email}
+  onAccountSettings={() => navigate("/settings/account")}
+  onNotifications={() => navigate("/settings/notifications")}
+  onSignOut={handleSignOut}
+/>
+```
+
+**What's solid:**
+- No hardcoded colors/spacing — `padding`, `gap`, `borderRadius` all use CDS scale tokens; `color="fgMuted"` for the email uses the semantic token
+- `Text` with `font` props instead of raw typography styles
+- `ListCell` for the settings rows per the skill's guidance table
+
+**Two caveats, since I couldn't reach live docs or type definitions** (the discovery script and CDS MCP server weren't available in this sandbox — no `node_modules` installed and script execution wasn't approved):
+1. `Icon` name `"chevronRight"` — verify this against your installed `@coinbase/cds-icons` version; the discovery script (`skill/scripts/discover-cds-icons.mjs chevron`) will confirm the exact name once you can run it.
+2. `ListCell`'s trailing-icon prop (`end`) and `borderBottomWidth` — I used the most likely current API per the skill's notes, but the skill flags this prop set as something to double-check against docs ("see CDS docs for full API"). Worth a quick verification pass once your CDS docs/MCP tooling is reachable.
+
+Once you can install dependencies or reach the docs tooling, I'd re-run Step 3 (component docs) to confirm those two before shipping.

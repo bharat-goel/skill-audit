@@ -19,6 +19,12 @@ sibling directory (`../nullbench`, override with `NULLBENCH_DIR`) — the tools 
 | 0 — nullbench bracket on Sonnet | passed 2026-09-24 |
 | 1 — selection rule frozen | frozen 2026-09-23, 5cf2831 |
 | 2 — screening | 3 eligible (1/100 sources 1-2, 2/23 source 3 — rates not pooled, see SELECTION.md Amendment 1) |
-| 3 — ports registered | not started |
-| 4 — runs | not started |
-| 5 — authors notified, published | not started |
+| 3 — ports registered | uap-release-analyzer `ef9be7b4ff77bd4a`, cds-code `823994c3476651eb`, otel-go `22d04167d4f430c6` |
+| 4 — runs | all three done, all EXPLORATORY (judge canaries) — see [`findings/`](findings/) |
+| 5 — authors notified, published | drafts in [`correspondence/`](correspondence/), not sent |
+
+| Skill | Author's claim | Measured | Pre-registered verdict |
+|---|---|---|---|
+| [uap-release-analyzer](findings/uap-release-analyzer.md) | +37.5pp | +42.5pp [+28.4, +54.3] | claim holds (exploratory) |
+| [cds-code](findings/cds-code.md) | +60pp (derived) | +6.0pp [-2.1, +16.2] | claim not reproduced (exploratory) |
+| [otel-go](findings/otel-go.md) | +100pp (0/3 → 3/3) | +85.0pp [+58.5, +94.8] | claim holds, ceiling rule (exploratory) |

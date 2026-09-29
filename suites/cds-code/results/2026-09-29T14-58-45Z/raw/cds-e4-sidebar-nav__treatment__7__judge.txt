@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code; it only describes intended components and states the icon names are guesses (`chartLine`, `gear`), so it does not use the exact names home, activity, settings or meet the other criteria.

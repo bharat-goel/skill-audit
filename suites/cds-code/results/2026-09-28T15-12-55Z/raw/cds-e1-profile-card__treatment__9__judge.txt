@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The three settings rows use `accessory={<Icon name="chevronRight" .../>}` instead of the required `accessory="arrow"` prop on ListCell.

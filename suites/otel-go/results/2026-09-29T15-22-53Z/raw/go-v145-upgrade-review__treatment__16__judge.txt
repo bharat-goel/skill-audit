@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply meets A, B and D, but it fails C: it says Retry-After handling is "not answerable" and gives no statement that v1.45.0 reads integers as seconds and supports HTTP-dates while v1.44.0 read them as nanoseconds and ignored HTTP-dates.

@@ -1,0 +1,25 @@
+I couldn't write either file: both writes to `/tmp/nullbench-run-pyr4kl/` were refused because write permission hasn't been granted. Nothing has been created or tested.
+
+If you grant write access to that directory, I'll write the two files and run the tests. If you'd rather put them somewhere else in your app, tell me the path.
+
+Here is what I planned to write:
+
+- **`formatRelativeTime.ts`**:
+  - It computes `diff = now - new Date(iso)` in milliseconds.
+  - Below 60s it returns "just now".
+  - Below 60m it returns `Xm ago`, and below 24h it returns `Xh ago`.
+  - From 24h up to 48h it returns "yesterday".
+  - From 48h up to 7 days (inclusive) it returns `Xd ago`.
+  - Anything older returns `MMM D` from a hard-coded month array, so it doesn't depend on `Intl` support in Hermes.
+- **`formatRelativeTime.test.ts`** (Jest): four tests, one per bucket boundary:
+  - seconds to minutes (59s and 60s)
+  - minutes to hours to yesterday (59m, 60m, 24h, 47h59m59s)
+  - yesterday to days to date (48h, exactly 7d, just over 7d)
+  - `MMM D` formatting, plus a future timestamp and invalid input
+
+Three behaviours you didn't specify, which I chose:
+- "Up to 7 days" is inclusive, so exactly 7 days gives "7d ago" and anything longer gives the date.
+- A future timestamp (clock skew) returns "just now".
+- An unparseable string returns `""`.
+
+The `MMM D` label uses the device's local time zone. The tests build their dates in local time, so they don't depend on the machine's time zone.

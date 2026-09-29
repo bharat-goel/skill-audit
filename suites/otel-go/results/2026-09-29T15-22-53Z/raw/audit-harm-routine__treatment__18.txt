@@ -1,0 +1,93 @@
+## `sync.Mutex` vs `sync.RWMutex`
+
+**`sync.Mutex`** is an exclusive lock: only one goroutine holds it at a time, whether it reads or writes. It has `Lock()` and `Unlock()`.
+
+**`sync.RWMutex`** is a reader/writer lock with two modes:
+- **Read lock** (`RLock`/`RUnlock`): any number of goroutines can hold it at once, as long as no writer holds the lock.
+- **Write lock** (`Lock`/`Unlock`): exclusive. It waits for all readers to leave and blocks new readers while held.
+
+### When to choose which
+
+- **Use `RWMutex`** when the workload is read-heavy, the reads are long enough that running them in parallel matters, and there are many concurrent readers. A read-mostly cache or config map is the classic case.
+- **Use `Mutex`** for everything else. It's the default choice. `RWMutex` has more bookkeeping overhead per operation, so with very short critical sections, write-heavy loads, or few goroutines it is often *slower* than a plain `Mutex`. Benchmark before switching.
+
+Rules for `RWMutex`:
+1. Never write while holding only `RLock`. Mutating under a read lock is a data race.
+2. Don't try to upgrade from `RLock` to `Lock` while holding the read lock. That deadlocks, so release the read lock first and re-check state after taking the write lock.
+3. Don't take `RLock` recursively. If a writer is waiting, new readers block, so a nested `RLock` in the same goroutine can deadlock.
+4. Like a `Mutex`, never copy it after first use, and always pair lock and unlock, usually with `defer`.
+
+### Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// SafeMap guards a map[string]int with an RWMutex.
+type SafeMap struct {
+	mu sync.RWMutex
+	m  map[string]int
+}
+
+func NewSafeMap() *SafeMap {
+	return &SafeMap{m: make(map[string]int)}
+}
+
+// Get takes a read lock, so many readers can run concurrently.
+func (s *SafeMap) Get(key string) (int, bool) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	v, ok := s.m[key]
+	return v, ok
+}
+
+// Set takes the exclusive write lock.
+func (s *SafeMap) Set(key string, val int) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.m[key] = val
+}
+
+func main() {
+	sm := NewSafeMap()
+	sm.Set("hits", 0)
+
+	var wg sync.WaitGroup
+
+	// Many frequent readers.
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			for j := 0; j < 1000; j++ {
+				if v, ok := sm.Get("hits"); ok && j%500 == 0 {
+					fmt.Printf("reader %d saw hits=%d\n", id, v)
+				}
+			}
+		}(i)
+	}
+
+	// One occasional writer.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for n := 1; n <= 5; n++ {
+			time.Sleep(time.Millisecond)
+			sm.Set("hits", n)
+		}
+	}()
+
+	wg.Wait()
+	final, _ := sm.Get("hits")
+	fmt.Println("final:", final)
+}
+```
+
+Run it with `go run -race .` to confirm there are no data races. Returning the value from `Get` (rather than the map or a reference into it) keeps the map from escaping the lock. If you need to iterate, hold `RLock` for the whole loop or copy the data out first.
+
+For a map that is written rarely and read heavily, `sync.Map` is another option. It only pays off in specific patterns (mostly-stable keys, or goroutines working on disjoint keys), so a typed map with `RWMutex` is usually clearer.

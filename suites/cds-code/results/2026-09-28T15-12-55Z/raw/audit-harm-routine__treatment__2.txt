@@ -1,0 +1,25 @@
+I wrote a pure TypeScript utility and matching unit tests — no UI code touched. Since this dir isn't a project with a package.json, I put both files in the scratchpad (move them into your app's source tree as needed):
+
+- `formatRelativeTime.ts` — the function
+- `formatRelativeTime.test.ts` — Jest tests
+
+**Logic** (in `formatRelativeTime.ts`):
+```ts
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const diffMs = Math.max(0, now.getTime() - new Date(iso).getTime());
+
+  if (diffMs < MINUTE) return 'just now';
+  if (diffMs < HOUR) return `${Math.floor(diffMs / MINUTE)}m ago`;
+  if (diffMs < DAY) return `${Math.floor(diffMs / HOUR)}h ago`;
+  if (diffMs < 2 * DAY) return 'yesterday';
+  if (diffMs < WEEK) return `${Math.floor(diffMs / DAY)}d ago`;
+
+  const date = new Date(iso);
+  return `${MONTH_LABELS[date.getMonth()]} ${date.getDate()}`;
+}
+```
+Future/negative timestamps are clamped to 0 (`"just now"`) rather than left unhandled, since clock skew is a realistic real-world case for this kind of data.
+
+**Tests** cover the four bucket transitions: 59s→60s ("just now"→"1m ago"), 59m→60m ("59m ago"→"1h ago"), 23h→24h→47h→48h ("23h ago"→"yesterday"→"yesterday"→"2d ago"), and 6d→7d ("6d ago"→"Mar 3").
+
+I couldn't execute `node`/Jest in this sandbox (command execution was blocked), so I hand-verified the boundary math against each assertion instead of just trusting it — all ten cases check out against the logic as written. Worth running `npx jest formatRelativeTime.test.ts` once these land in your actual repo to confirm.

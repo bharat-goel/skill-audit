@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't meet A, B, or C: it declines to identify the log.Value→attribute.Value migration, doesn't state that a pathless endpoint URL uses `/` in v1.45.0, and doesn't state the Retry-After seconds/HTTP-date change from v1.44.0. It does meet D, since it proposes safe local verification and claims no compile or live run.

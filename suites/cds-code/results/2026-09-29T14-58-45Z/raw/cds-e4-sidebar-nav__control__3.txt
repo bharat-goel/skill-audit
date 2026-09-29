@@ -1,0 +1,8 @@
+I couldn't create the sidebar. The write to `/tmp/nullbench-fx-SjHJom/index.html` was denied because permission hasn't been granted, so no file exists yet.
+
+If you grant write access, I'll retry. The plan is a single `index.html` with:
+- a left sidebar containing Home, Activity and Settings, each with an icon
+- Home marked as the current page (`aria-current="page"`) and highlighted
+- hover and focus styles, light and dark theme support, and a collapse to icons only on narrow screens
+
+Or tell me a different location or format, such as React or an artifact page, and I'll use that instead.

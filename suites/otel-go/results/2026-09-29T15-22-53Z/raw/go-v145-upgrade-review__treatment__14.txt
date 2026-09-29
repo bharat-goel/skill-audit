@@ -1,0 +1,35 @@
+I could only partly verify this. The review file is the only thing under `skills/otel-go`. The skill's `references/` directory (`breaking-changes.md` and the others) doesn't exist locally. The upstream CHANGELOG fetch was blocked because WebFetch permission wasn't granted. So I can't confirm the v1.45.0 and v0.21.0 release notes.
+
+**What the file shows**
+- The service is moving from core v1.44.0 to v1.45.0 and from log API/SDK v0.20.0 to v0.21.0.
+- The log record code uses `log.Record`, `SetBody`, `AddAttributes` and `logger.Emit`.
+- The trace exporter uses `WithEndpointURL("http://otel-gateway:4318")`, but the Collector expects `/v1/traces`.
+- The team wants to know whether the v1.45.0 exporter honors both `Retry-After: 5` and an HTTP-date value, and how that differs from v1.44.0.
+
+**Changes I'd make regardless of release notes**
+
+1. **Module bumps.** Core and log are on separate version lines, so resolve each with `@latest` or its own exact tag. Don't force the log modules to v1.45.0.
+   ```bash
+   go get go.opentelemetry.io/otel@v1.45.0 go.opentelemetry.io/otel/sdk@v1.45.0 \
+          go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.45.0
+   go get go.opentelemetry.io/otel/log@v0.21.0 go.opentelemetry.io/otel/sdk/log@v0.21.0
+   go mod tidy -diff; go build ./... && go test ./...
+   ```
+   Before pinning, check that the v0.21.0 tags exist and pair with v1.45.0.
+
+2. **Trace exporter URL.** `WithEndpointURL` takes the URL path literally, unlike the `OTEL_EXPORTER_OTLP_ENDPOINT` env var, which appends `/v1/traces`. With no path in the URL, the exporter may post to `/` instead of `/v1/traces`. Put the full path in the option, which is correct in either release:
+   ```go
+   exporter, err := otlptracehttp.New(ctx,
+       otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+   )
+   ```
+   Alternatively, use `WithEndpoint("otel-gateway:4318")` and `WithInsecure()`, which keeps the default `/v1/traces` path. Confirm which behavior applies to your version against a disposable local receiver, not `otel-gateway`.
+
+3. **Log record.** I can't confirm from the file whether v0.21.0 changes `log.Record`. Your snippet is the zero-value form, which normally works, and the compiler will flag any removed or renamed method. If `go build` fails on it, use `rec.SetBody(...)` and `rec.AddAttributes(...)` as documented in the v0.21.0 API.
+
+**Retry-After (not verified)**
+I can't say whether v1.44.0 or v1.45.0 honors both the integer-seconds form and the HTTP-date form. I won't guess. Check the exporter's retry code and CHANGELOG for "Retry-After". The exporter is `otlptracehttp`, in `internal/retry` or the client's `evaluate` function. HTTP-date is the form most likely to be missing.
+
+If v1.45.0 honors only seconds, configure the Collector or gateway to send `Retry-After: <seconds>`. Also tune `otlptracehttp.WithRetry(...)`, since the exporter falls back to its own backoff when the header can't be parsed.
+
+To settle the open points, grant WebFetch or `gh` access and I'll pull the 1.45.0/0.21.0 and 1.44.0/0.20.0 changelog entries. I'll then give a definitive v1.44.0 vs v1.45.0 comparison.

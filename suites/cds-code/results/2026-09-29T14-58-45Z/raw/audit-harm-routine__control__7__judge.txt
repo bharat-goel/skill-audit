@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function has the requested signature and correct bucket boundaries (`<` for each cutoff, `<=` for the 7-day limit), and the four Jest tests use concrete timestamps that match its logic, with no UI content.

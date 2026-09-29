@@ -1,0 +1,11 @@
+I couldn't write `/tmp/nullbench-fx-zih5xL/banner.html` because the write permission was denied, so nothing has been created. If you approve the write, I'll retry it.
+
+Here is what the file would contain:
+
+- **Banner:** a warning row with an icon, the text "You have unsaved changes", and a "Save now" link pushed to the right. It uses `role="alert"`.
+- **Progress container:** it has 2 units of horizontal padding, which I took as 2 × 8px = 16px via a `--unit` CSS variable. If your unit is a different size, change that one variable.
+- **Progress bar:** it fills 60% of its track and has the matching `aria-valuenow="60"`.
+- **Spinner:** it sits next to the bar, marked as a status element, and spins more slowly when reduced motion is requested.
+- **Theming:** light and dark colors are both defined.
+
+Tell me if you'd rather I write it to a different location, such as the scratchpad directory.

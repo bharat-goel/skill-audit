@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply describes files it claims to have written but includes no actual code (function or tests) in the response itself, so there is nothing to verify against the rubric's requirements for a self-contained function and correct, corresponding unit tests.

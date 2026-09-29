@@ -1,0 +1,25 @@
+I can't give you verified v1.45.0 changes, and I didn't want to guess and present it as fact.
+
+**What the file contains.** `go-v145-upgrade.md` is only a scenario. It describes the current v1.44.0 / log v0.20.0 setup and asks three questions. It has no changelog, and the `skills/otel-go` directory has no other reference files, so nothing local documents the v1.45.0 or log v0.21.0 changes. I also didn't fetch the upstream release notes, because you said not to contact an endpoint. If you want me to fetch the public changelog (not the `otel-gateway` example host), say so.
+
+**What I can say from the file and general knowledge, unverified for v1.45.0:**
+
+1. **Trace endpoint (the most likely real defect).**
+   - `WithEndpointURL("http://otel-gateway:4318")` has no path. The Collector expects `/v1/traces`. My recollection is that `WithEndpointURL` treats the URL path as given, unlike the `OTEL_EXPORTER_OTLP_ENDPOINT` env var, which appends the signal path.
+   - Whatever the exact rule in v1.44.0 versus v1.45.0, the explicit form is safe in both:
+   ```go
+   otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces")
+   ```
+   - Alternatively, use `WithEndpoint("otel-gateway:4318")`, `WithInsecure()` and `WithURLPath("/v1/traces")`.
+   - Check the v1.45.0 release notes for any change in how the path is derived.
+
+2. **Log record.**
+   - The snippet uses `var rec log.Record`, `SetBody`, `AddAttributes` and `logger.Emit(ctx, rec)`. Log API/SDK v0.x releases are allowed to break these signatures.
+   - I can't say what v0.21.0 changed. Compile against v0.21.0 and read its changelog for `Record` and `Emit`. If you construct records this way, expect that to be where any break shows up.
+
+3. **`Retry-After` handling.**
+   - I can't confirm whether v1.45.0 honors both `Retry-After: 5` and HTTP-date values, or how that differs from v1.44.0.
+   - My recollection is that earlier OTLP HTTP exporters parsed only delay-seconds. Treat HTTP-date support as unverified until you read the v1.45.0 `otlptracehttp` changelog or source.
+   - Until then, don't rely on the Collector sending HTTP-date values. Configure the Collector to send integer seconds, or test with a local mock server.
+
+**Recommended next step.** Read the v1.45.0 and log v0.21.0 changelog entries, or let me fetch them. I can then give you exact, sourced changes and a real v1.44.0 versus v1.45.0 comparison.

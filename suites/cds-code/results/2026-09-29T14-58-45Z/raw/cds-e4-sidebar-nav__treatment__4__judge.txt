@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, and its planned icon names (`chartLine`, `gear`) are not the required `activity` and `settings`, so the rubric expectations are not met.

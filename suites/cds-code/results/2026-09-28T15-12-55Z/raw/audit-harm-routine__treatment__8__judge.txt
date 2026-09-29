@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function matches the requested signature, correctly implements all buckets with consistent `<`/`>=`-style boundaries (verified against 60s/60m/24h/48h/7d edge cases), and is accompanied by 4 Jest tests that match the function's actual behavior, staying entirely on the logic/testing task without any UI/design digression.

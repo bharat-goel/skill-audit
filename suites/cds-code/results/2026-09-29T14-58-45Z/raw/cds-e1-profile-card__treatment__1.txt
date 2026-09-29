@@ -1,0 +1,10 @@
+I couldn't write `src/ProfileCard.tsx` because write permission for that path was denied, so nothing has been created yet. I also couldn't run the discovery script or install packages. Approve the write and I'll retry, or tell me a different location.
+
+The component I planned uses these CDS components:
+- **Layout:** `VStack` and `HStack`.
+- **Avatar:** `Avatar` for the user's avatar.
+- **Text:** `Text` with `font="title3"` for the display name and `font="body"` with `color="fgMuted"` for the email.
+- **Card container:** an `HStack` with `background="bgAlternate"` and `borderRadius={200}` for the subtle rounded corners.
+- **Menu rows:** three `ListCell` rows with `accessory="arrow"` for "Account settings", "Notifications" and "Sign out".
+
+The import paths (`@coinbase/cds-web/layout`, `/typography/Text`, `/media/Avatar`, `/cells/ListCell`) are my best guess and not verified against the installed package. Since `node_modules` doesn't exist, I also couldn't confirm the `Avatar` size value, the `borderRadius` token or the `ListCell` arrow accessory. Once you've run `npm install`, I can check them and run typecheck and lint.

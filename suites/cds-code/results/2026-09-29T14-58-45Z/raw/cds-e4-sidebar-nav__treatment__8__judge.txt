@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code uses icon names `chartLine` and `gear` instead of the required `activity` and `settings`, and it uses a raw pixel value `width={280}` (acceptable) but has no explicit token-based color treatment for the selected state, so criteria 1 and 4 are not met.

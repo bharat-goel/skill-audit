@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply covers A (log.StringValue/log.String → attribute equivalents in v0.21.0), B (pathless WithEndpointURL uses `/`, so it adds `/v1/traces`), and C (Retry-After integers as seconds plus HTTP-date support, versus nanoseconds and ignored dates in v1.44.0). For D, it claims no compile or live validation and proposes a local httptest receiver and a local build and test path.

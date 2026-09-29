@@ -1,0 +1,43 @@
+I couldn't write the file: permission to write to `/tmp/nullbench-fx-ERFXyn/UnsavedChangesBanner.tsx` was not granted. The same happened when I tried `npm install`, so nothing has been built or type-checked. Since `package.json` uses Coinbase CDS (`@coinbase/cds-web`), the component below is written for that library.
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banners/Banner';
+import { Box, VStack } from '@coinbase/cds-web/layout';
+import { Spinner } from '@coinbase/cds-web/loaders/Spinner';
+import { ProgressBar } from '@coinbase/cds-web/visualizations/ProgressBar';
+import { Link } from '@coinbase/cds-web/typography/Link';
+
+type UnsavedChangesBannerProps = {
+  onSave: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      variant="warning"
+      startIcon="warning"
+      primaryAction={
+        <Link as="button" onClick={onSave}>
+          Save now
+        </Link>
+      }
+    >
+      You have unsaved changes
+    </Banner>
+
+    <Box alignItems="center" gap={2} paddingX={2}>
+      <Box flexGrow={1}>
+        <ProgressBar progress={0.6} />
+      </Box>
+      <Spinner size={3} accessibilityLabel="Loading" />
+    </Box>
+  </VStack>
+);
+```
+
+- **Banner:** it uses the `warning` variant. "Save now" is the `primaryAction` link and calls `onSave`.
+- **Container:** the `Box` with `paddingX={2}` gives the 2 units of horizontal padding. It holds the progress bar at `progress={0.6}` and the spinner side by side.
+- **Unchecked API details:** I wrote the import paths and prop names (`startIcon`, `Spinner size`, `Link as="button"`) from memory of CDS 9.x. I couldn't check them against the installed package. Run `npm install` and `tsc`, and adjust any paths that differ in 9.28.0.
+
+If you approve write access, I can save the file and run the install and type-check. If you meant a different UI library, or plain HTML/CSS, tell me and I'll rewrite it.

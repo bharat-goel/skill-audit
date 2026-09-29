@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply provides a self-contained, correctly-bucketed TypeScript `formatRelativeTime` function with consistent boundary logic (using `<` checks throughout) and includes 5 Jest-style unit tests that accurately match the function's actual behavior at each bucket boundary, with no UI/design content.

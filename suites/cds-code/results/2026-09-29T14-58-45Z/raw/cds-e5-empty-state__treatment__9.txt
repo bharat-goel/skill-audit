@@ -1,0 +1,20 @@
+I haven't written anything yet. Writing to `/tmp/nullbench-fx-zSskPt/src/SecurityEmptyState.tsx` was blocked, and so was the `mkdir` for `src/`. The CDS discovery script and `npm install` also need approval, so CDS isn't installed and I couldn't check import paths or docs. Please approve the write, or tell me another location to use.
+
+**Components I plan to use:**
+- `VStack` and `Box` for layout.
+- `Text` for the title and supporting text (`title3` and `body` in roomy, `headline` and `caption` in compact).
+- `Pictogram` for the illustration.
+
+**Compact and roomy versions:** Both render the same component with a `density` prop, so the illustration and copy match.
+
+| | Compact | Roomy |
+|---|---|---|
+| Illustration | `Pictogram` 48×48 | `Pictogram` 64×64 |
+| Padding | 3 | 6 |
+| Gap | 1 | 3 |
+| Title | `headline` | `title3` |
+| Supporting text | `caption` | `body` |
+
+The supporting text uses `color="fgMuted"`. The container uses `background="bgAlternate"`. Everything is styled with CDS tokens through style props, with no raw colors or pixel spacing. The only exceptions are the `maxWidth` values on the demo wrappers in `SecurityEmptyStateVariants` (320 and 560), which are layout dimensions.
+
+**Unverified:** I couldn't check the import paths (`@coinbase/cds-web/illustrations`, `/layout`, `/typography`) or that `name="security"` is a real `Pictogram` name. Once CDS is installed I'll confirm both and pick a different pictogram if needed.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code, only a prose description of a planned modal, so the rubric's code requirements (imports, alpha Select subpath, footer button variants, no style props) cannot be verified as met.

@@ -1,0 +1,12 @@
+I built the empty state, but publishing it to claude.ai was declined, so it's only a local file. I haven't rendered it in a browser or checked it in dark mode or at phone width.
+
+The file is at `/tmp/claude-0/-tmp-nullbench-fx-0acKQS/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/security-empty-state.html`.
+
+Both versions use the same illustration, a shield with a check mark inside scan rings, and the same wording:
+
+- **Compact:** a row inside a table or side panel with 16px padding and an 88px illustration. It has a one-line title ("No open findings"), one line of supporting text and a single "Scan now" button. On narrow screens the button drops below the text.
+- **Roomy:** a centered stack for a full page, with 64px padding and a 220px illustration. It has a larger title ("Nothing to fix right now") and a longer explanation. Below that are a monospace line ("Last scan 4 min ago · 0 critical · 0 high · 0 medium") and two buttons, one filled and one outlined.
+
+The colors are a cool slate with a teal accent, in both light and dark themes. The outer scan ring turns slowly unless reduced motion is set.
+
+I can publish it if you approve, or send the file to you.

@@ -1,0 +1,12 @@
+The publish was declined, so nothing is uploaded. I built the page as a local file instead:
+
+`/tmp/claude-0/-tmp-nullbench-fx-iZcjYZ/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/security-empty-state.html`
+
+I haven't rendered it in a browser, so the layout is unchecked.
+
+- **Same illustration in both versions:** a shield with a check mark inside scan rings. A slow sweep animates unless reduced motion is set. It is defined once and reused at 64px and 200px.
+- **Compact:** a horizontal row with the illustration, the title "No open security findings", one line of supporting text and a "Run scan" button. On phone width the button drops below the text.
+- **Roomy:** a centered stack with the larger illustration, a bigger title, two lines of supporting text, primary and secondary buttons, and a "Last scan 09:42 UTC · Next scan 15:42 UTC" line.
+- **Themes:** it follows light and dark themes, and the accent is a teal that works on both.
+
+Do you want me to try publishing it again? It would be uploaded to claude.ai and stay private to you until you share it.

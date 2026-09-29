@@ -1,0 +1,38 @@
+I couldn't save the component. Both attempts to write `UnsavedChangesBanner.tsx` were denied, so no file exists. I also couldn't run `npm install`, so `@coinbase/cds-web` isn't installed. That means none of this has been compiled or rendered, and the import paths and prop names come from memory of the CDS API.
+
+Here is the component so you can paste it in:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner/Banner';
+import { Box, VStack, HStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar } from '@coinbase/cds-web/visualizations/ProgressBar';
+import { Spinner } from '@coinbase/cds-web/loaders/Spinner';
+
+export const UnsavedChangesBanner = () => (
+  <VStack gap={2}>
+    <Banner
+      variant="warning"
+      startIcon="warning"
+      title="You have unsaved changes"
+      primaryAction={<Link to="#save">Save now</Link>}
+    />
+    <Box spacingHorizontal={2}>
+      <HStack alignItems="center" gap={2}>
+        <Box flexGrow={1}>
+          <ProgressBar progress={0.6} />
+        </Box>
+        <Spinner size={3} accessibilityLabel="Loading" />
+      </HStack>
+    </Box>
+  </VStack>
+);
+```
+
+- **Banner:** a warning-variant `Banner` with the title "You have unsaved changes" and a "Save now" `Link` as its primary action.
+- **Container:** the progress bar and spinner sit in a `Box` with `spacingHorizontal={2}`, which is the 2 units of horizontal padding.
+- **Progress bar:** `ProgressBar` at `progress={0.6}` for 60%. The bar fills the row and the spinner sits beside it.
+- **Save action:** `Link to="#save"` is a placeholder. Swap it for a real `href` or an `onClick` handler.
+
+I'd check the import paths and the `Link` prop (`to` vs `href`) once the package is installed. If you grant write access I'll save the file, and if you allow `npm install` I'll type-check it.

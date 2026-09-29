@@ -1,0 +1,11 @@
+I couldn't write `/tmp/nullbench-fx-9rJcF1/banner.html` because the write permission was denied, so nothing has been created yet.
+
+If you grant write access to that directory, I'll create the file. Alternatively I can put it in the scratchpad directory instead.
+
+The file is a single standalone HTML page with these parts:
+- **Banner:** a warning row reading "You have unsaved changes" with a "Save now" link (`href="#save"`, ready to wire to your save handler).
+- **Status container:** below the banner, with 2 units of horizontal padding. I assumed 1 unit is 8px, so that's 16px, set through a `--unit` CSS variable you can change.
+- **Progress bar:** fixed at 60%, with `role="progressbar"` and `aria-valuenow="60"`.
+- **Spinner:** a CSS spinner beside the bar for the secondary loading operation, slowed down when reduced motion is requested.
+
+If you're using a specific framework, such as MUI, Tailwind or React, tell me and I'll write it in that instead. In MUI, for example, the container would be `px={2}`.

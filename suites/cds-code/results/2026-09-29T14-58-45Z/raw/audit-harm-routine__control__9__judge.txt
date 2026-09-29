@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function has the requested signature and correct bucket boundaries (using `<` consistently, with an inclusive 7-day edge that it documents), and its four Jest tests cover the bucket boundaries and match the function's logic. The reply also stays on the logic and testing task with no UI content.

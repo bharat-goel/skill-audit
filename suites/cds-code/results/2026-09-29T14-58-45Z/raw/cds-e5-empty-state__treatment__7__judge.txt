@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code at all (write was denied and no file contents were shown), so it cannot satisfy the rubric, and its described plan also uses raw pixel values (dimension 48/64, width 320/480).

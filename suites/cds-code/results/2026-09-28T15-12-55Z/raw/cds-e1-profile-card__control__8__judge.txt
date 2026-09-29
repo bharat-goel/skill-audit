@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply uses generic `Text` with a `variant` prop instead of the required `font` prop, and uses `Pressable`/`Icon`/`Divider` rows instead of `ListCell` with `accessory="arrow"`, plus `color="foregroundMuted"` instead of `fgMuted`.

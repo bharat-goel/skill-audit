@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code at all, only a request for permissions, so none of the rubric's code-based requirements are satisfied.

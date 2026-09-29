@@ -1,0 +1,80 @@
+File write permission wasn't granted, so I haven't saved anything to disk yet. Here's the component, built against the CDS-web design system already in your `package.json`:
+
+```tsx
+// src/components/ProfileMenuCard.tsx
+import React, { Fragment } from 'react';
+import { Box, VStack, HStack, Text, Avatar, Pressable, Icon, Divider } from '@coinbase/cds-web';
+
+export type ProfileMenuCardProps = {
+  avatarUrl: string;
+  displayName: string;
+  email: string;
+  onAccountSettings?: () => void;
+  onNotifications?: () => void;
+  onSignOut?: () => void;
+};
+
+export function ProfileMenuCard({
+  avatarUrl,
+  displayName,
+  email,
+  onAccountSettings,
+  onNotifications,
+  onSignOut,
+}: ProfileMenuCardProps) {
+  const rows = [
+    { label: 'Account settings', onPress: onAccountSettings },
+    { label: 'Notifications', onPress: onNotifications },
+    { label: 'Sign out', onPress: onSignOut },
+  ];
+
+  return (
+    <VStack gap={2}>
+      <Box background="backgroundAlternate" borderRadius="roundedLarge" padding={4}>
+        <HStack gap={3} alignItems="center">
+          <Avatar src={avatarUrl} alt={displayName} size="l" />
+          <VStack gap={0.5}>
+            <Text variant="label1">{displayName}</Text>
+            <Text variant="caption" color="foregroundMuted">
+              {email}
+            </Text>
+          </VStack>
+        </HStack>
+      </Box>
+
+      <Box background="backgroundAlternate" borderRadius="roundedLarge">
+        {rows.map((row, index) => (
+          <Fragment key={row.label}>
+            <Pressable onPress={row.onPress} padding={4}>
+              <HStack alignItems="center" justifyContent="space-between">
+                <Text variant="label1">{row.label}</Text>
+                <Icon name="chevronRight" color="foregroundMuted" size="s" />
+              </HStack>
+            </Pressable>
+            {index < rows.length - 1 && <Divider />}
+          </Fragment>
+        ))}
+      </Box>
+    </VStack>
+  );
+}
+
+export default ProfileMenuCard;
+```
+
+Usage on the home page:
+
+```tsx
+<ProfileMenuCard
+  avatarUrl={user.avatarUrl}
+  displayName={user.displayName}
+  email={user.email}
+  onAccountSettings={() => navigate('/settings/account')}
+  onNotifications={() => navigate('/settings/notifications')}
+  onSignOut={signOut}
+/>
+```
+
+One caveat worth flagging: `node_modules` isn't installed here, so I couldn't verify `@coinbase/cds-web`'s exact exports/prop names against this version (9.28.0) — I wrote it from the standard `Box`/`VStack`/`HStack`/`Text`/`Avatar`/`Pressable`/`Icon` pattern that library follows, but double check prop names like `borderRadius="roundedLarge"` and the `chevronRight` icon name against what's actually installed in your real repo.
+
+Want me to retry writing this to `src/components/ProfileMenuCard.tsx`, or would you rather paste this into your own codebase?

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: ProgressBar and ProgressCircle are imported from `@coinbase/cds-web-visualization`, the wrong package, instead of `@coinbase/cds-web/visualizations` (rubric item 5).

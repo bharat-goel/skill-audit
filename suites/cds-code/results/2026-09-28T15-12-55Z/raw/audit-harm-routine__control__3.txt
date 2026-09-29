@@ -1,0 +1,38 @@
+The write is waiting on your permission approval in the UI — nothing more I can do on my end until that's granted. Here's the code so you're not blocked either way:
+
+**formatRelativeTime.ts**
+```typescript
+const MONTH_NAMES = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+] as const;
+
+/**
+ * Formats an ISO 8601 timestamp as a short relative label.
+ *
+ * Buckets: "just now" (<60s), "Xm ago" (<60m), "Xh ago" (<24h),
+ * "yesterday" (24-48h), "Xd ago" (up to 7 days), otherwise "MMM D".
+ */
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const date = new Date(iso);
+  const diffSec = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (diffSec < 60) return 'just now';
+
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin}m ago`;
+
+  const diffHour = Math.floor(diffSec / 3600);
+  if (diffHour < 24) return `${diffHour}h ago`;
+
+  const diffDay = Math.floor(diffSec / 86400);
+  if (diffDay === 1) return 'yesterday';
+  if (diffDay < 7) return `${diffDay}d ago`;
+
+  return `${MONTH_NAMES[date.getMonth()]} ${date.getDate()}`;
+}
+```
+
+Boundary logic: everything is computed as whole elapsed seconds, so `diffDay === 1` covers the full 24–48h window ("yesterday"), and `diffDay < 7` covers 2–6 days; at exactly 7×86400s it falls through to the plain date.
+
+Want me to retry the write once you approve, or should I paste the test file too while we're blocked?

@@ -1,0 +1,23 @@
+I wrote the security empty state, but I haven't run or checked it, and it isn't in the project yet. Writing to `src/` was denied, so it's in the scratchpad instead: `/tmp/claude-0/-tmp-nullbench-fx-sLgzFQ/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/SecurityEmptyState.tsx`.
+
+**CDS components used:** `VStack`, `HStack` and `Box` for layout, `Text` for the title and supporting text, `Button` for the action, and `SpotSquare` and `HeroSquare` for the illustration.
+
+**Compact and roomy versions:** `SecurityEmptyState` takes a `density` prop, and both versions share the same title, supporting text, illustration and button.
+
+| | Compact | Roomy |
+|---|---|---|
+| Illustration | `SpotSquare` 96×96 | `HeroSquare` 240×240 |
+| Title | `headline` | `title2` |
+| Supporting text | `caption` | `body` |
+| Padding | 3 | 6 |
+| Gap | 2 | 4 |
+| Button | `compact` | default size |
+
+`SecurityEmptyStateShowcase` renders the two side by side.
+
+**What I couldn't verify:**
+- **Imports:** `node_modules` isn't installed, and the discovery script needed approval that wasn't granted. I used the usual CDS import paths (`@coinbase/cds-web/layout`, `/buttons`, `/illustrations`, `/typography/Text`) without checking them against the installed exports.
+- **Illustration name:** `name="security"` is a guess. Run `node skill/scripts/discover-cds-illustrations.mjs security` after installing to get the real name.
+- **Docs and checks:** I couldn't read the CDS docs or props tables, and the project's lint and typecheck haven't run.
+
+Once you approve writing to `src/` or install dependencies, I'll move the file, fix the illustration name and imports, and run the checks.

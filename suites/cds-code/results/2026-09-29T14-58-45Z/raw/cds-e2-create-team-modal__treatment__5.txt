@@ -1,0 +1,65 @@
+I couldn't save `CreateTeamModal.tsx`. Both write attempts were denied: first `/tmp/nullbench-fx-PZywtX/src/`, then `/tmp/nullbench-fx-PZywtX/skill/`. I'm not going to retry a third path without you saying where it should go. The component is below so you can use it as is.
+
+```tsx
+import { useCallback, useState } from 'react';
+import { Select } from '@coinbase/cds-web/alpha/select';
+import { Button } from '@coinbase/cds-web/buttons';
+import { TextInput } from '@coinbase/cds-web/controls';
+import { VStack } from '@coinbase/cds-web/layout';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from '@coinbase/cds-web/overlays';
+
+export type TeamSize = 'small' | 'medium' | 'large';
+export type CreateTeamValues = { name: string; size: TeamSize };
+export type CreateTeamModalProps = {
+  visible: boolean;
+  onRequestClose: () => void;
+  onSave: (values: CreateTeamValues) => void;
+};
+
+const sizeOptions = [
+  { value: 'small', label: 'Small' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'large', label: 'Large' },
+];
+
+export const CreateTeamModal = ({ visible, onRequestClose, onSave }: CreateTeamModalProps) => {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize>('small');
+
+  const reset = useCallback(() => { setName(''); setSize('small'); }, []);
+  const handleCancel = useCallback(() => { reset(); onRequestClose(); }, [onRequestClose, reset]);
+  const handleSave = useCallback(() => {
+    onSave({ name: name.trim(), size });
+    reset();
+  }, [name, size, onSave, reset]);
+
+  return (
+    <Modal onRequestClose={handleCancel} visible={visible}>
+      <ModalHeader title="Create team" />
+      <ModalBody>
+        <VStack gap={3}>
+          <TextInput label="Team name" onChange={(e) => setName(e.target.value)}
+            placeholder="Enter a team name" value={name} />
+          <Select label="Team size" onChange={(v) => setSize(v as TeamSize)}
+            options={sizeOptions} value={size} />
+        </VStack>
+      </ModalBody>
+      <ModalFooter
+        primaryAction={
+          <Button disabled={name.trim().length === 0} onClick={handleSave} variant="primary">Save</Button>
+        }
+        secondaryAction={<Button onClick={handleCancel} variant="secondary">Cancel</Button>}
+      />
+    </Modal>
+  );
+};
+```
+
+The component uses only CDS style props (`gap={3}`, `variant`) and design-token components. It has no hex colors, pixel values or inline styles. Save is disabled until the name is non-empty. Cancel and closing the modal both reset the form.
+
+I couldn't run the checks the skill asks for, so the imports and props are unverified.
+- **Discovery script:** it needed approval and was blocked. The project also has no `node_modules`, so it would have found nothing.
+- **CDS docs:** no `cds-docs` skill or CDS MCP server is available here, so I couldn't read the component docs. I wrote the code from `guidelines/components.md` and from memory.
+- **Import paths and props:** I haven't confirmed that `@coinbase/cds-web/buttons`, `controls`, `layout`, `overlays` and `alpha/select` are valid exports. I also haven't confirmed the `ModalFooter` `primaryAction`/`secondaryAction` props or the `Select` `onChange` signature. After `npm install`, run the discovery script and your typecheck, and fix any mismatches.
+
+Tell me where you'd like the file written, or grant write access to a directory, and I'll save it and run the checks.

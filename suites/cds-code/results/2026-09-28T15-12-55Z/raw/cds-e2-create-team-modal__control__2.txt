@@ -1,0 +1,71 @@
+I don't have write permission in this session, so I can't save the file directly. Here's the component — save it as `src/components/CreateTeamModal.jsx` (adjust the import paths if your installed `@coinbase/cds-web` version uses different subpaths):
+
+```jsx
+import React, { useState } from 'react';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from '@coinbase/cds-web/overlays';
+import { TextInput, Select } from '@coinbase/cds-web/inputs';
+import { Button } from '@coinbase/cds-web/buttons';
+import { VStack } from '@coinbase/cds-web/layout';
+
+const TEAM_SIZE_OPTIONS = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' },
+];
+
+const INITIAL_SIZE = TEAM_SIZE_OPTIONS[0].value;
+
+export function CreateTeamModal({ visible, onRequestClose, onSave }) {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState(INITIAL_SIZE);
+
+  const reset = () => {
+    setName('');
+    setSize(INITIAL_SIZE);
+  };
+
+  const handleCancel = () => {
+    reset();
+    onRequestClose();
+  };
+
+  const handleSave = () => {
+    onSave({ name: name.trim(), size });
+    reset();
+  };
+
+  return (
+    <Modal visible={visible} onRequestClose={handleCancel}>
+      <ModalHeader title="Create team" onClose={handleCancel} />
+      <ModalBody>
+        <VStack gap={4}>
+          <TextInput
+            label="Team name"
+            placeholder="e.g. Platform Engineering"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Select
+            label="Team size"
+            options={TEAM_SIZE_OPTIONS}
+            value={size}
+            onChange={setSize}
+          />
+        </VStack>
+      </ModalBody>
+      <ModalFooter>
+        <Button variant="secondary" onClick={handleCancel}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={handleSave} disabled={!name.trim()}>
+          Save
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
+}
+```
+
+Usage: render `<CreateTeamModal visible={open} onRequestClose={() => setOpen(false)} onSave={({name, size}) => ...} />`. Save is disabled until a name is entered, and both Save/Cancel reset the form.
+
+Try approving the write permission and I'll save it into `src/components/` for you — or paste it in yourself if you'd rather not grant that.

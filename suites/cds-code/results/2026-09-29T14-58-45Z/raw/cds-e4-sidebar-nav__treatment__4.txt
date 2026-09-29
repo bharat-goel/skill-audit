@@ -1,0 +1,19 @@
+I couldn't create the sidebar. Writing `src/AppSidebar.tsx` was blocked because it needs a permission that hasn't been granted. Two earlier commands were also blocked: the CDS discovery script and an install of the CDS packages. Nothing has been written or tested.
+
+**Why the checks matter.** The project has no `node_modules` and no CDS docs tool is configured. The steps in the CDS skill that I'd normally use to confirm import paths and component props weren't possible. Everything below comes from my memory of CDS, not from the installed 9.28.0 packages.
+
+**Components I planned to use:**
+- `Sidebar` and `SidebarItem`, imported from `@coinbase/cds-web/navigation`.
+- `SidebarItem` props: `title`, `icon`, `active` and `onClick`.
+- The icon names `home`, `chartLine` and `gear`.
+
+**Design.** Home would be selected by default, and clicking an item would move the selection. It uses CDS components and props only, with no raw colors, spacing values or inline styles.
+
+**Unverified:** the `Sidebar` and `SidebarItem` import path and props, the `accessibilityLabel` prop, and whether `chartLine` and `gear` are valid icon names. Any of these could need small fixes once the packages are installed.
+
+**To go ahead, you could:**
+- Grant write access so I can create `src/AppSidebar.tsx`.
+- Allow `npm install` so I can check the exports and icon names against the real packages.
+- Allow the discovery script, `skill/scripts/discover-cds-packages.sh`, to run.
+
+Should I retry with any of those?

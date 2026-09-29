@@ -1,0 +1,44 @@
+I couldn't create the file. Both write attempts were refused for lack of permission, so nothing has been saved to your project. I also couldn't type-check it, because `node_modules` isn't installed. Here is the component as I wrote it, built on the Coinbase design system (`@coinbase/cds-web`) from your `package.json`:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner/Banner';
+import { Box } from '@coinbase/cds-web/layout/Box';
+import { VStack } from '@coinbase/cds-web/layout/VStack';
+import { Spinner } from '@coinbase/cds-web/loaders/Spinner';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar } from '@coinbase/cds-web/visualizations/ProgressBar';
+
+export type UnsavedChangesBannerProps = {
+  onSave?: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      startIcon="warning"
+      variant="warning"
+      primaryAction={
+        <Link as="button" onClick={onSave}>
+          Save now
+        </Link>
+      }
+    >
+      You have unsaved changes
+    </Banner>
+
+    <Box paddingX={2} alignItems="center" gap={2}>
+      <Box flexGrow={1}>
+        <ProgressBar progress={0.6} />
+      </Box>
+      <Spinner size={3} accessibilityLabel="Loading" />
+    </Box>
+  </VStack>
+);
+```
+
+- **Banner:** a warning-variant `Banner` shows "You have unsaved changes". "Save now" is a `Link` passed as `primaryAction` and calls `onSave`.
+- **Progress container:** it sits below the banner in a `Box` with `paddingX={2}`. The `ProgressBar` at `progress={0.6}` (60%) fills the row, and the `Spinner` is beside it.
+- **Import paths and props:** I wrote these from memory of the CDS API. Once you run `npm install`, check them against the 9.28.0 package, especially `Spinner`'s `size` and `Link`'s `as="button"`.
+
+If you grant write access, I'll save it as `UnsavedChangesBanner.tsx` in the project root. I can also put it somewhere else.

@@ -1,0 +1,90 @@
+I couldn't write the files. Both writes to `/tmp/nullbench-run-9pbDaL/` were denied, so nothing has been saved and I haven't run the tests. The code is below. If you grant write access I'll save it and run it, or you can paste it in yourself.
+
+**`formatRelativeTime.ts`**
+```ts
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/**
+ * - < 60s          -> "just now"
+ * - < 60m          -> "Xm ago"
+ * - < 24h          -> "Xh ago"
+ * - 24h to < 48h   -> "yesterday"
+ * - 48h to 7 days  -> "Xd ago" (7 days inclusive)
+ * - older          -> "MMM D" in the device's local time zone (e.g. "Mar 3")
+ *
+ * Future timestamps (clock skew) are treated as "just now".
+ * An unparseable `iso` returns an empty string.
+ */
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  if (Number.isNaN(then.getTime())) return '';
+
+  const diff = now.getTime() - then.getTime();
+
+  if (diff < MINUTE) return 'just now';
+  if (diff < HOUR) return `${Math.floor(diff / MINUTE)}m ago`;
+  if (diff < DAY) return `${Math.floor(diff / HOUR)}h ago`;
+  if (diff < 2 * DAY) return 'yesterday';
+  if (diff <= 7 * DAY) return `${Math.floor(diff / DAY)}d ago`;
+
+  return `${MONTHS[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest, also works under Vitest)
+```ts
+import { formatRelativeTime } from './formatRelativeTime';
+
+const now = new Date('2026-03-10T12:00:00.000Z');
+const ago = (ms: number) => new Date(now.getTime() - ms).toISOString();
+
+const SEC = 1000;
+const MIN = 60 * SEC;
+const HOUR = 60 * MIN;
+const DAY = 24 * HOUR;
+
+describe('formatRelativeTime', () => {
+  it('switches from "just now" to minutes at 60 seconds', () => {
+    expect(formatRelativeTime(ago(0), now)).toBe('just now');
+    expect(formatRelativeTime(ago(59 * SEC + 999), now)).toBe('just now');
+    expect(formatRelativeTime(ago(60 * SEC), now)).toBe('1m ago');
+    expect(formatRelativeTime(ago(59 * MIN + 59 * SEC), now)).toBe('59m ago');
+  });
+
+  it('switches from minutes to hours at 60 minutes, and to "yesterday" at 24 hours', () => {
+    expect(formatRelativeTime(ago(60 * MIN), now)).toBe('1h ago');
+    expect(formatRelativeTime(ago(23 * HOUR + 59 * MIN), now)).toBe('23h ago');
+    expect(formatRelativeTime(ago(24 * HOUR), now)).toBe('yesterday');
+    expect(formatRelativeTime(ago(48 * HOUR - 1), now)).toBe('yesterday');
+  });
+
+  it('uses "Xd ago" from 48 hours through 7 days', () => {
+    expect(formatRelativeTime(ago(48 * HOUR), now)).toBe('2d ago');
+    expect(formatRelativeTime(ago(6 * DAY + 23 * HOUR), now)).toBe('6d ago');
+    expect(formatRelativeTime(ago(7 * DAY), now)).toBe('7d ago');
+  });
+
+  it('falls back to "MMM D" after 7 days', () => {
+    // Built from local components so the test is time-zone independent.
+    const march3 = new Date(2026, 2, 3, 9, 30).toISOString();
+    const localNow = new Date(2026, 2, 12, 9, 30);
+    expect(formatRelativeTime(march3, localNow)).toBe('Mar 3');
+
+    const justOver = new Date(localNow.getTime() - 7 * DAY - 1).toISOString();
+    expect(formatRelativeTime(justOver, localNow)).toMatch(/^[A-Z][a-z]{2} \d{1,2}$/);
+  });
+
+  it('treats future timestamps as "just now"', () => {
+    expect(formatRelativeTime(new Date(now.getTime() + HOUR).toISOString(), now)).toBe('just now');
+  });
+});
+```
+
+Choices I made where your spec left room:
+- **7-day edge:** exactly 7 days gives "7d ago". Anything past that gives the date.
+- **Date format:** "MMM D" uses a hardcoded month array in the device's local time zone. I avoided `Intl` and `toLocaleDateString` because Hermes support for them varies. Timestamps near midnight UTC can therefore show as a different day than their UTC date.
+- **Bad input:** future timestamps return "just now" and unparseable input returns `""`, so the UI never shows "NaNd ago". Say so if you'd rather it throw.

@@ -1,0 +1,981 @@
+{
+  "stamp": "2026-09-29T14:58:45Z",
+  "hash": "823994c3476651ebd8e2c31ed50e48deaafe90a3156e222696e00c5c80b980f7",
+  "klass": "EXPLORATORY",
+  "requested": {
+    "reps": 10,
+    "model": "sonnet",
+    "judgeModel": "sonnet",
+    "taskIds": [
+      "audit-harm-routine",
+      "cds-e1-profile-card",
+      "cds-e2-create-team-modal",
+      "cds-e3-banner-progress",
+      "cds-e4-sidebar-nav",
+      "cds-e5-empty-state"
+    ],
+    "skillOverride": null
+  },
+  "records": [
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function correctly implements all buckets with consistent `<` boundaries, and the Jest tests use concrete "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function implements every requested bucket with consistent `<` boundaries, and the Jest tests match its lo"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function has the requested signature and correct bucket logic with consistent boundaries, and the Jest tes"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply gives a correctly typed function with all six buckets and consistent boundary logic, plus four Jest "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function has the requested signature and correct, consistent `<` boundaries for all buckets. The four Jest"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The function is correct, with sensible boundaries and all the requested buckets, but the unit tests appear onl"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function has the requested signature and correct bucket boundaries (`<` for each cutoff, `<=` for the 7-da"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function has the requested signature and correct, consistent bucket boundaries, and the four Jest tests us"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function has the requested signature and correct bucket boundaries (using `<` consistently, with an inclus"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function correctly implements all buckets with consistent boundaries (60s→1m, 24h→yesterday, 48h→2d, >7d→d"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The inline function has the requested signature and correct bucket and boundary logic, and the tests use concr"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function correctly implements every bucket with consistent boundaries, and the four Jest tests exercise th"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function implements all buckets with consistent boundaries (60s, 60m, 24h, 48h, 7d), and the Jest tests co"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function has the correct signature and bucket logic with consistent `<` boundaries, four Jest tests cover "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function correctly implements all buckets with consistent boundaries (<60s, <60m, <24h, <48h yesterday, ≤7"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function has the requested signature and correct, consistent bucket boundaries, and the Jest tests match i"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual function code and no actual unit tests, only a prose description of a plan, becau"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply gives a correct, self-contained TypeScript function with all buckets and sensible boundaries, plus f"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply gives a correct, self-contained TypeScript function with all buckets and sensible boundaries (<60s, "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, only a prose description of its intent, so the rubric's code requirements cannot b"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function correctly implements all buckets with consistent boundary handling (<60s, <60m, <24h, <48h, ≤7d, "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: No code was produced, and the described plan uses Pressable rows with caretRight icons instead of ListCell wit"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a plan, and its description doesn't satisfy items like using a token f"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, and the described plan also fails the rubric by using TextHeadline and TextBody in"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code; it only describes a plan, so it cannot satisfy the rubric's code requiremen"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The rows use a custom `end` Icon instead of ListCell's `accessory=\"arrow\"`, and the import from `@coinbase/cds"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a prose description, so the rubric's code requirements can't be met, a"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a description of a plan, so it can't satisfy the rubric's code require"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, so most expectations, such as the Text component with the font prop, valid "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a prose description with several rubric points wrong or unmet (uses `c"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: No code was produced; the reply only describes a plan, admits the import paths are unverified guesses, and use"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: No code was written, only a plan; it also uses borderRadius={200} (a plausible token but unverified), assumed "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses a raw numeric `borderRadius={200}` (plausibly a token) but imports from likely invented paths li"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code meets most criteria, but it imports `HStack` and `VStack` from `@coinbase/cds-web/layout`, which the "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code (writes were blocked), so it can't satisfy the rubric, and its described plan uses "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a description, and it admits the import paths were guessed and may be "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: No actual code was produced (the write was denied), and the described plan uses a numeric borderRadius={200}, "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply wrote no code, only a plan with unverified imports and props, so it can't satisfy rubric items such "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses `borderRadius={200}`, which is not clearly a valid CDS token value (CDS tokens are like 100/200/"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code imports `HStack`/`VStack` from `@coinbase/cds-web/layout`, which the reply itself says was written fr"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, so it cannot be shown to use the required components, alpha-subpath Select "
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a prose description. It imports Select from `@coinbase/cds-web/control"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, only a prose description, so it cannot be shown to meet the rubric's requir"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, so it does not demonstrate the required components, the Select alpha subpat"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code (writes were blocked), so it cannot satisfy the rubric requirements such as the com"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, so none of the rubric's code requirements (Modal composition, TextInput, al"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, only a prose description of a planned modal, so the rubric's code requirements (im"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, so it cannot satisfy any of the rubric's requirements (component compositio"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, only a prose description, so it can't be shown to satisfy the rubric's requ"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a description of a planned file, and it admits the Cancel button lacks"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, so it cannot satisfy any rubric item, including the components used, the Se"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: No code was actually written or shown in the reply; it only describes a planned component, so the code-based r"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The code composes Modal/ModalHeader/ModalBody/ModalFooter, uses TextInput and Select from `@coinbase/cds-web/a"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, since the file was never written, so it can't satisfy the rubric's code requiremen"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The code composes Modal/Header/Body/Footer, uses TextInput and Select imported from `@coinbase/cds-web/alpha/s"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code to check against the rubric, and its description doesn't confirm the Select import "
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, and it admits the Cancel button lacks `variant=\"secondary\"` in the drafted "
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The code composes Modal, ModalHeader, ModalBody and ModalFooter, uses TextInput and a Select imported from `@c"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, since the file was never written, so none of the rubric's code requirements"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, only a description of a file saved elsewhere, so the required Modal composition, t"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code using the CDS components (Banner variant=\"warning\", ProgressBar, ProgressCircle fro"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply imports ProgressBar from `@coinbase/cds-web/visualizations/ProgressBar` rather than the `visualizati"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, and its described plain HTML/CSS implementation doesn't use the Banner, ProgressBa"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code at all, and its described plain HTML/CSS design uses none of the required Banner, P"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code and proposed plain HTML/CSS, so it uses none of the required components (Banner var"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code imports ProgressBar from a `visualizations/ProgressBar` path and uses `Spinner` from `loaders/Spinner"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses `Spinner` from `loaders/Spinner` instead of `ProgressCircle` with the `indeterminate` prop, and"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code imports ProgressBar from `@coinbase/cds-web/visualizations/ProgressBar` (not the required `visualizat"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply imports ProgressBar from `@coinbase/cds-web/visualizations/ProgressBar` rather than the `@coinbase/c"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses a `Spinner` from `loaders/Spinner` instead of `ProgressCircle` with the `indeterminate` prop, a"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: ProgressBar and ProgressCircle are imported from `@coinbase/cds-web-visualization` rather than the required `@"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code imports ProgressBar and ProgressCircle from `@coinbase/cds-web-visualization` instead of the required"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply states the banner, Link and layout imports are guesses and never confirms that ProgressBar and Progr"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code imports `ProgressBar` and `ProgressCircle` from `@coinbase/cds-web-visualization`, but the rubric req"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: ProgressBar and ProgressCircle are imported from `@coinbase/cds-web-visualization`, the separate package the r"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: ProgressBar and ProgressCircle are imported from `@coinbase/cds-web-visualization`, the separate package that "
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: ProgressBar and ProgressCircle are imported from `@coinbase/cds-web-visualization`, which is the separate pack"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: ProgressBar and ProgressCircle are imported from `@coinbase/cds-web-visualization` instead of the required `@c"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't show the code or the import paths, and it says the import paths are guesses, so it never con"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: ProgressBar and ProgressCircle are imported from `@coinbase/cds-web-visualization`, the wrong package, instead"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, so it cannot satisfy any of the rubric's requirements (icon names, active state, i"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, so it cannot satisfy any of the rubric's requirements for icon names, active state"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, so it doesn't satisfy any rubric item, and it admits its icon names (`chartLine`, "
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, since the write was denied, so it can't be shown to meet any rubric item (icon nam"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code at all, so it cannot satisfy any of the rubric's requirements (icon names, active s"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, only a description of a file that was never written, so none of the rubric's requi"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, since the write was denied, so it cannot satisfy any of the rubric's requirements "
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, and its description of the page never addresses the rubric's requirements for icon"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses icon names `chartLine` and `gear` instead of the required `activity` and `settings`, and it set"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, so it cannot satisfy any rubric requirement (icon names, active state, sizing, tok"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses icon names chartLine and gear instead of the required activity and settings, and it has no expli"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, and the icon names it says it intended to use (`history` and `gear`) aren't the re"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a description of a plan, and it admits the icon names are guesses (`ch"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, and its planned icon names (`chartLine`, `gear`) are not the required `activity` a"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses icon names chartLine and gear instead of the exact names activity and settings, and it sets no i"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses guessed icon names `chartLine` and `gear` instead of the required exact names `activity` and `s"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code; it only describes intended components and states the icon names are guesses"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses icon names `chartLine` and `gear` instead of the required `activity` and `settings`, and it uses"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code, so it can't meet any rubric item. It also says it guessed the icon names `chartLin"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses `chartLine` and `gear` instead of the required exact icon names `activity` and `settings`, and i"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a single HTML file with a custom shield illustration and rotating scan ring, with no sign "
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a local HTML page with an 88px and a 200px illustration, both in raw pixels, and gives no "
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a hand-built HTML page with a custom shield illustration and explicit pixel sizes (88px, 1"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply shows no code, and it describes a hand-built HTML page with a custom animated shield illustration ra"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a hand-built HTML page with a custom shield illustration at 64px and 200px, which is a raw"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a hand-built HTML file with a custom shield/radar illustration and pixel-sized dimensions "
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a plain HTML file with a custom-drawn shield illustration and px-sized text (16px, 26px), "
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a hand-built HTML page with a custom drawn shield illustration and raw pixel sizes (72px, "
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a hand-built local HTML file with a custom SVG shield, pixel-based sizes (16px, 88px, 64px"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, only a plan, so nothing could satisfy the rubric, and the plan itself uses differe"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes a single hand-written SVG in an HTML file rather than a CDS illustration component (SpotIc"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, only a description of a plan that mentions a guessed illustration name, so it cann"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a plan, so it can't be shown to satisfy the CDS illustration, distinct"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply wrote no code, so nothing can be checked against the rubric; the design table mentions raw pixel siz"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code, so there is nothing to check against the criteria, and its plan doesn't meet the t"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, so it can't satisfy any rubric item; it only describes a plan (with 96px/20"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no code at all (write was denied and no file contents were shown), so it cannot satisfy the"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, and it admits the work was never written. Its plan also mentions raw pixel "
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply summarizes the code without showing it, so it can't be confirmed that no raw pixel values are used, "
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code, only a plan. It also lists raw pixel values (max width 320/480, sizes 48/64"
+    }
+  ]
+}

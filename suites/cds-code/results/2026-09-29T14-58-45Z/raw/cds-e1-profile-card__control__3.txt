@@ -1,0 +1,12 @@
+I couldn't create the profile card: my attempt to write `ProfileCard.tsx` into `/tmp/nullbench-fx-8uaE6s` was blocked because write permission wasn't granted. My `npm install` there was also blocked pending approval. Nothing has been written or run.
+
+The project has only a `package.json`, with no source files and no home page to hook into. It depends on the Coinbase Design System (`@coinbase/cds-web`), so I planned the card around those components:
+
+- **Card container:** a `Box` with `background="bgSecondary"`, `borderRadius={200}` for the subtle rounding, and padding.
+- **Header row:** an `Avatar` (`src`, `name`, `size="xl"`) beside a `VStack`. The display name is `Text font="headline"` and the email is `Text color="fgMuted"`.
+- **Menu rows:** three `ListCell`s below the card, titled "Account settings", "Notifications" and "Sign out". Each has `accessory="arrow"` for the right-side arrow and an `onPress` handler.
+- **Props:** `displayName`, `email`, `avatarUrl?`, `onAccountSettings?`, `onNotifications?` and `onSignOut?`.
+
+I haven't checked the import paths or prop names against the installed package, since it isn't installed.
+
+If you approve the write (and optionally `npm install`), I'll create the file and type-check it. If you'd rather use plain HTML/CSS or a different location, tell me and I'll do that instead.

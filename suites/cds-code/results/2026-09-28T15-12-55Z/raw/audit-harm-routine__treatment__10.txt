@@ -1,0 +1,7 @@
+No test runner is set up in this environment, so I verified the boundary math by hand instead of executing it. Here's the summary:
+
+**`formatRelativeTime.ts`** — computes elapsed seconds/minutes/hours/days from `now - then` and buckets them: `<60s` → "just now", `<60m` → "Xm ago", `<24h` → "Xh ago", `24-48h` → "yesterday", `<7d` → "Xd ago", else "MMM D" using the timestamp's own month/day.
+
+**`formatRelativeTime.test.ts`** (Jest syntax) — covers the just-now/minutes boundary (59s vs 60s), the hours/yesterday boundary (23h vs 24h vs 47h), and the days/date-fallback boundary (48h vs 6d vs exactly 7d → "Sep 21").
+
+Both files are in your scratchpad at `.../scratchpad/formatRelativeTime.ts` and `.test.ts` — move them into your RN project (e.g. `src/utils/`) and adjust the import path in the test to match. Let me know if you'd like me to place them directly in your project instead.

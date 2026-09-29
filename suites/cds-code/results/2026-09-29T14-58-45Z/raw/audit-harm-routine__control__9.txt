@@ -1,0 +1,81 @@
+I couldn't write either file because the write permission was denied, so nothing has been saved or run. Here is the code, which you can drop in as `formatRelativeTime.ts` and `formatRelativeTime.test.ts`. If you grant write access to `/tmp/nullbench-run-BeCLr8`, I'll save them there.
+
+**formatRelativeTime.ts**
+```ts
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/**
+ * - < 60s        -> "just now" (also future timestamps, e.g. clock skew)
+ * - < 60m        -> "Xm ago"
+ * - < 24h        -> "Xh ago"
+ * - 24h - < 48h  -> "yesterday"
+ * - 48h - 7d     -> "Xd ago" (exactly 7 days is still "7d ago")
+ * - otherwise    -> "MMM D" in the device's local time zone, e.g. "Mar 3"
+ *
+ * Returns "" if `iso` can't be parsed.
+ */
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  if (Number.isNaN(then.getTime())) return '';
+
+  const diff = now.getTime() - then.getTime();
+
+  if (diff < MINUTE) return 'just now';
+  if (diff < HOUR) return `${Math.floor(diff / MINUTE)}m ago`;
+  if (diff < DAY) return `${Math.floor(diff / HOUR)}h ago`;
+  if (diff < 2 * DAY) return 'yesterday';
+  if (diff <= 7 * DAY) return `${Math.floor(diff / DAY)}d ago`;
+
+  return `${MONTHS[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**formatRelativeTime.test.ts** (Jest)
+```ts
+import { formatRelativeTime } from './formatRelativeTime';
+
+const SEC = 1000;
+const MIN = 60 * SEC;
+const HOUR = 60 * MIN;
+const DAY = 24 * HOUR;
+
+// Local-time constructor so the "MMM D" assertions are timezone-independent.
+const now = new Date(2026, 5, 15, 12, 0, 0);
+const ago = (ms: number) => new Date(now.getTime() - ms).toISOString();
+
+describe('formatRelativeTime', () => {
+  it('returns "just now" under 60s and switches to minutes at 60s', () => {
+    expect(formatRelativeTime(ago(0), now)).toBe('just now');
+    expect(formatRelativeTime(ago(59 * SEC), now)).toBe('just now');
+    expect(formatRelativeTime(ago(60 * SEC), now)).toBe('1m ago');
+    expect(formatRelativeTime(ago(59 * MIN + 59 * SEC), now)).toBe('59m ago');
+  });
+
+  it('switches from minutes to hours at 60m, and hours to "yesterday" at 24h', () => {
+    expect(formatRelativeTime(ago(60 * MIN), now)).toBe('1h ago');
+    expect(formatRelativeTime(ago(23 * HOUR + 59 * MIN), now)).toBe('23h ago');
+    expect(formatRelativeTime(ago(24 * HOUR), now)).toBe('yesterday');
+    expect(formatRelativeTime(ago(48 * HOUR - SEC), now)).toBe('yesterday');
+  });
+
+  it('switches from "yesterday" to days at 48h and to a date after 7 days', () => {
+    expect(formatRelativeTime(ago(48 * HOUR), now)).toBe('2d ago');
+    expect(formatRelativeTime(ago(7 * DAY), now)).toBe('7d ago');
+    expect(formatRelativeTime(ago(7 * DAY + SEC), now)).toBe('Jun 8');
+  });
+
+  it('handles future timestamps and invalid input gracefully', () => {
+    expect(formatRelativeTime(new Date(now.getTime() + 5 * MIN).toISOString(), now)).toBe('just now');
+    expect(formatRelativeTime('not-a-date', now)).toBe('');
+  });
+});
+```
+
+Choices I made where your spec was open:
+- **7-day edge:** "up to 7 days" is inclusive, so exactly 7d gives "7d ago" and anything past that gives the date. To make it exclusive, change `<=` to `<`.
+- **Date format:** the "MMM D" date uses the device's local time zone and a hardcoded month array, so it doesn't depend on `Intl` support in Hermes.
+- **Edge inputs:** future timestamps return "just now" and unparseable input returns `""`. Both are my additions.

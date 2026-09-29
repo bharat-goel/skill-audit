@@ -1,0 +1,30 @@
+I can't give you exact v1.44.0 vs v1.45.0 behavior changes yet. The review file doesn't contain them, and I don't want to invent them.
+
+**What the file contains**
+- `go-v145-upgrade.md` is only a scenario. It gives the current code and three questions, with no changelog, release notes or expected answers.
+- `skills/otel-go/` holds nothing else. The file is the only one in the skill directory.
+- I haven't fetched the upstream changelog, because you said not to contact an endpoint. If you're fine with me reading the public `opentelemetry-go` CHANGELOG and release notes for v1.44.0, v1.45.0 and log v0.20.0 to v0.21.0, I can do that. I'd treat that as separate from the example `otel-gateway` host, so I'm asking first.
+
+**What I can say from the file alone**
+
+1. **Trace exporter URL (the change I'm confident about).**
+   - The Collector expects `/v1/traces`, but the config passes `http://otel-gateway:4318` with no path.
+   - Whether the exporter appends the default path for an empty URL path has varied between versions, so don't rely on it.
+   - Make the path explicit. It's correct on both v1.44.0 and v1.45.0:
+   ```go
+   exporter, err := otlptracehttp.New(ctx,
+       otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+   )
+   ```
+
+2. **Log record.**
+   - The snippet builds `log.Record` as a zero value and calls `SetBody`, `AddAttributes` and `logger.Emit`. That's the pattern most likely to be hit by a v0.x log API change.
+   - I can't say what changed in v0.21.0 without the changelog. The unverified guesses would be a renamed constructor or attribute method, or a change to how the record is created.
+   - After bumping, `go build ./...` will show whether it compiles. I'd still check the changelog for any behavior changes that compile cleanly.
+
+3. **`Retry-After`.**
+   - Whether v1.45.0 honors both the seconds form (`5`) and the HTTP-date form, and how that differs from v1.44.0, is something I can't answer without the changelog.
+   - I won't guess, because the answer decides whether throttling backs off correctly.
+   - Until it's confirmed, configure the Collector to send the seconds form only. That's the form the older exporter is known to handle.
+
+Do you want me to check the upstream release notes, or can you paste the relevant changelog sections here?

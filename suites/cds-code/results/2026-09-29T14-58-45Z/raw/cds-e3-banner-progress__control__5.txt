@@ -1,0 +1,38 @@
+I couldn't create the file because the write permission was denied twice, so nothing is saved yet. I also couldn't run `npm install`, so none of this has been type-checked or rendered.
+
+The project uses the Coinbase Design System (`@coinbase/cds-web`), so I wrote the component with it. This is what it would contain (`UnsavedChangesBanner.tsx`):
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banners/Banner';
+import { Box, VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar } from '@coinbase/cds-web/visualizations/ProgressBar';
+import { Spinner } from '@coinbase/cds-web/loaders/Spinner';
+
+export const UnsavedChangesBanner = ({ onSave }: { onSave: () => void }) => (
+  <VStack gap={2}>
+    <Banner
+      variant="warning"
+      startIcon="warning"
+      primaryAction={<Link as="button" onClick={onSave}>Save now</Link>}
+    >
+      You have unsaved changes
+    </Banner>
+
+    {/* paddingX={2} = 2 spacing units of horizontal padding */}
+    <Box alignItems="center" gap={2} paddingX={2}>
+      <Box flexGrow={1}>
+        <ProgressBar accessibilityLabel="Progress: 60%" progress={0.6} />
+      </Box>
+      <Spinner accessibilityLabel="Loading" size={3} />
+    </Box>
+  </VStack>
+);
+```
+
+- **Banner:** a warning banner with the message "You have unsaved changes" and a "Save now" link that calls `onSave`.
+- **Container:** a `Box` with `paddingX={2}` sits below the banner. It holds the progress bar at `progress={0.6}` and the spinner for the secondary loading operation.
+- **Unverified props:** I wrote the import paths and prop names (`primaryAction`, `startIcon`, `paddingX`, `progress`) from memory of CDS 9.x. If the types complain, those are the first things to check.
+
+If you grant write access, or run `npm install` for me, I'll create the file and type-check it. Or you can paste the snippet in yourself.

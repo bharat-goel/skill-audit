@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't meet A (no log.String to attribute.String migration), C (no Retry-After seconds/HTTP-date vs. v1.44.0 nanoseconds explanation), or fully B (it says path behavior "has varied" rather than stating v1.45.0 uses the root path), though it does give a safe local `go build` path for D.

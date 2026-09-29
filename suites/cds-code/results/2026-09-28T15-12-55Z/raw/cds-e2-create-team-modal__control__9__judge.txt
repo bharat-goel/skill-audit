@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply uses Dialog/DialogHeader/DialogBody/DialogFooter instead of Modal/ModalHeader/ModalBody/ModalFooter, and imports Select from '@coinbase/cds-web/controls' rather than the required alpha subpath.

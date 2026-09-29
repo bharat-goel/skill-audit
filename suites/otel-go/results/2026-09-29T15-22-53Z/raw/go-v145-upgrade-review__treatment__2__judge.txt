@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply covers A (log.* to attribute.* migration), B (pathless URL uses `/`, fixed by adding `/v1/traces`), C (Retry-After seconds and HTTP-date versus v1.44.0 nanosecond and ignored behavior), and D (static review only, with a local go build/test and httptest verification path).

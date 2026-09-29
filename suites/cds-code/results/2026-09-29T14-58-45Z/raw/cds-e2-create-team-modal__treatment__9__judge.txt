@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code, only a description of a file saved elsewhere, so the required Modal composition, the alpha Select import path and the Save/Cancel Button variants can't be verified. It also says it is unsure whether `ModalFooter` takes `primaryAction`/`secondaryAction` props instead of Button children, and it says the CDS import paths are unverified.

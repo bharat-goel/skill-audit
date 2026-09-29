@@ -1,0 +1,1 @@
+It looks like the write permission wasn't granted (possibly denied or timed out). Let me know if you'd like to approve the file write, or if you'd prefer a different location/filename for the component.

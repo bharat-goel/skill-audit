@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function implements every requested bucket with consistent `<` boundaries, and the Jest tests match its logic. Five `it` blocks slightly exceed the "3-4" tests requested, and the reply stays on logic and tests with no UI content.

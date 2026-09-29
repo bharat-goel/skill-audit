@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, so there is nothing to check against the criteria, and its plan doesn't meet the two-size requirement. Its compact and roomy versions rely on 48px and 64px raw pixel values, which breaks the no-raw-pixel rule.

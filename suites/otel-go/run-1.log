@@ -1,0 +1,43 @@
+nullbench — 2 registered task(s), running 2
+  registration  22d04167d4f430c6
+  model         sonnet (judge sonnet), reps 20
+  subject runs  80
+  judge calls   80
+  canary runs   10
+  TOTAL         170 CLI invocations
+  est. spend    ~$3.40 at an assumed $0.02/call — override with --cost-per-call
+judge canaries: 9/10 correct
+  1/80  PASS  audit-harm-routine__control__3              2/80  PASS  audit-harm-routine__control__1              3/80  PASS  audit-harm-routine__control__2              4/80  PASS  audit-harm-routine__control__4              5/80  PASS  audit-harm-routine__control__5              6/80  PASS  audit-harm-routine__control__8              7/80  PASS  audit-harm-routine__control__6              8/80  PASS  audit-harm-routine__control__7              9/80  PASS  audit-harm-routine__control__9              10/80  PASS  audit-harm-routine__control__10             11/80  PASS  audit-harm-routine__control__11             12/80  PASS  audit-harm-routine__control__12             13/80  PASS  audit-harm-routine__control__13             14/80  PASS  audit-harm-routine__control__15             15/80  PASS  audit-harm-routine__control__14             16/80  PASS  audit-harm-routine__control__16             17/80  PASS  audit-harm-routine__control__17             18/80  PASS  audit-harm-routine__control__18             19/80  PASS  audit-harm-routine__control__19             20/80  PASS  audit-harm-routine__control__20             21/80  PASS  audit-harm-routine__treatment__1            22/80  PASS  audit-harm-routine__treatment__2            23/80  PASS  audit-harm-routine__treatment__3            24/80  PASS  audit-harm-routine__treatment__4            25/80  PASS  audit-harm-routine__treatment__5            26/80  PASS  audit-harm-routine__treatment__6            27/80  PASS  audit-harm-routine__treatment__7            28/80  PASS  audit-harm-routine__treatment__8            29/80  PASS  audit-harm-routine__treatment__9            30/80  PASS  audit-harm-routine__treatment__10           31/80  PASS  audit-harm-routine__treatment__11           32/80  PASS  audit-harm-routine__treatment__12           33/80  PASS  audit-harm-routine__treatment__13           34/80  PASS  audit-harm-routine__treatment__15           35/80  PASS  audit-harm-routine__treatment__16           36/80  PASS  audit-harm-routine__treatment__14           37/80  PASS  audit-harm-routine__treatment__18           38/80  PASS  audit-harm-routine__treatment__17           39/80  PASS  audit-harm-routine__treatment__19           40/80  PASS  audit-harm-routine__treatment__20           41/80  FAIL  go-v145-upgrade-review__control__3          42/80  FAIL  go-v145-upgrade-review__control__1          43/80  FAIL  go-v145-upgrade-review__control__2          44/80  FAIL  go-v145-upgrade-review__control__4          45/80  FAIL  go-v145-upgrade-review__control__5          46/80  FAIL  go-v145-upgrade-review__control__7          47/80  FAIL  go-v145-upgrade-review__control__6          48/80  FAIL  go-v145-upgrade-review__control__8          49/80  FAIL  go-v145-upgrade-review__control__9          50/80  FAIL  go-v145-upgrade-review__control__10         51/80  FAIL  go-v145-upgrade-review__control__11         52/80  FAIL  go-v145-upgrade-review__control__12         53/80  FAIL  go-v145-upgrade-review__control__13         54/80  FAIL  go-v145-upgrade-review__control__14         55/80  FAIL  go-v145-upgrade-review__control__15         56/80  FAIL  go-v145-upgrade-review__control__16         57/80  FAIL  go-v145-upgrade-review__control__17         58/80  FAIL  go-v145-upgrade-review__control__18         59/80  FAIL  go-v145-upgrade-review__control__19         60/80  FAIL  go-v145-upgrade-review__control__20         61/80  PASS  go-v145-upgrade-review__treatment__1        62/80  PASS  go-v145-upgrade-review__treatment__2        63/80  PASS  go-v145-upgrade-review__treatment__3        64/80  FAIL  go-v145-upgrade-review__treatment__4        65/80  PASS  go-v145-upgrade-review__treatment__5        66/80  PASS  go-v145-upgrade-review__treatment__6        67/80  PASS  go-v145-upgrade-review__treatment__7        68/80  PASS  go-v145-upgrade-review__treatment__8        69/80  PASS  go-v145-upgrade-review__treatment__9        70/80  PASS  go-v145-upgrade-review__treatment__10       71/80  PASS  go-v145-upgrade-review__treatment__11       72/80  PASS  go-v145-upgrade-review__treatment__12       73/80  PASS  go-v145-upgrade-review__treatment__13       74/80  PASS  go-v145-upgrade-review__treatment__15       75/80  FAIL  go-v145-upgrade-review__treatment__14       76/80  FAIL  go-v145-upgrade-review__treatment__16       77/80  PASS  go-v145-upgrade-review__treatment__17       78/80  PASS  go-v145-upgrade-review__treatment__18       79/80  PASS  go-v145-upgrade-review__treatment__19       80/80  PASS  go-v145-upgrade-review__treatment__20     
+
+# nullbench report — EXPLORATORY
+
+This run does not match its registration. Per-task figures are shown; the average is suppressed.
+
+Registration `22d04167d4f430c6` · model `sonnet` · judge `sonnet` · reps 20
+
+## Why this run is exploratory
+
+- judge canaries misgraded; judged tasks cannot be confirmed
+
+## Signal tasks — does the skill change the answer?
+
+| Task | Predicted | Control | Treatment | Delta | 95% CI | |
+|---|---|---|---|---|---|---|
+| `go-v145-upgrade-review` | helps | 0% (0/20) | 85% (17/20) | +85.0pp | [+58.5pp, +94.8pp] |  |
+
+## Harm tasks — does the skill stay quiet where it should?
+
+| Task | Predicted | Control | Treatment | Delta | 95% CI | |
+|---|---|---|---|---|---|---|
+| `audit-harm-routine` | no-effect | 100% (20/20) | 100% (20/20) | +0.0pp | [-16.1pp, +16.1pp] | non-discriminating |
+
+**Average across signal tasks: suppressed** — this run is exploratory.
+
+Judge canaries: 9/10 graded correctly.
+
+**Known limitation:** the judge (`sonnet`) shares a model family with the subject (`sonnet`). A blind spot common to both would not be visible here, and the canaries cannot detect it. See FAILURES.md entry 3.
+
+Predictions are recorded in `LEDGER.md` whether or not they were borne out.
+
+Report: /home/user/skill-audit/suites/otel-go/results/2026-09-29T15-22-53Z/report.md
+Ledger: /home/user/skill-audit/suites/otel-go/LEDGER.md

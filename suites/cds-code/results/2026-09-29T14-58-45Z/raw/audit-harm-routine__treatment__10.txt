@@ -1,0 +1,79 @@
+I wrote `formatRelativeTime` and four tests, but I haven't run them. I wasn't given permission to write into the project directory or to run the tests. The files are in my scratchpad, not in your repo, so copy them from below. They use jest-style `describe`/`it`/`expect`, which also works in Vitest.
+
+**`formatRelativeTime.ts`**
+```ts
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  if (Number.isNaN(then.getTime())) return '';
+
+  const diff = now.getTime() - then.getTime();
+
+  if (diff < MINUTE) return 'just now';
+  if (diff < HOUR) return `${Math.floor(diff / MINUTE)}m ago`;
+  if (diff < DAY) return `${Math.floor(diff / HOUR)}h ago`;
+  if (diff < 2 * DAY) return 'yesterday';
+  if (diff <= 7 * DAY) return `${Math.floor(diff / DAY)}d ago`;
+
+  // Manual formatting avoids depending on Intl support in the JS engine.
+  return `${MONTHS[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`**
+```ts
+import { formatRelativeTime } from './formatRelativeTime';
+
+const now = new Date('2024-03-10T12:00:00.000Z');
+const ago = (ms: number) => new Date(now.getTime() - ms).toISOString();
+
+const S = 1000;
+const M = 60 * S;
+const H = 60 * M;
+const D = 24 * H;
+
+describe('formatRelativeTime', () => {
+  it('handles the seconds -> minutes boundary', () => {
+    expect(formatRelativeTime(ago(0), now)).toBe('just now');
+    expect(formatRelativeTime(ago(59 * S + 999), now)).toBe('just now');
+    expect(formatRelativeTime(ago(60 * S), now)).toBe('1m ago');
+    expect(formatRelativeTime(ago(59 * M + 59 * S), now)).toBe('59m ago');
+  });
+
+  it('handles the minutes -> hours -> yesterday boundaries', () => {
+    expect(formatRelativeTime(ago(60 * M), now)).toBe('1h ago');
+    expect(formatRelativeTime(ago(24 * H - 1), now)).toBe('23h ago');
+    expect(formatRelativeTime(ago(24 * H), now)).toBe('yesterday');
+    expect(formatRelativeTime(ago(48 * H - 1), now)).toBe('yesterday');
+  });
+
+  it('handles the yesterday -> days -> date boundaries', () => {
+    expect(formatRelativeTime(ago(48 * H), now)).toBe('2d ago');
+    expect(formatRelativeTime(ago(7 * D), now)).toBe('7d ago');
+    // Just past 7 days falls back to a plain date (time zone may shift the day).
+    expect(formatRelativeTime(ago(7 * D + S), now)).toMatch(/^Mar [23]$/);
+  });
+
+  it('formats older dates as "MMM D" and tolerates bad/future input', () => {
+    const localNow = new Date(2024, 5, 20, 12, 0, 0);
+    expect(formatRelativeTime(new Date(2024, 2, 3, 9, 0, 0).toISOString(), localNow)).toBe('Mar 3');
+    expect(formatRelativeTime(new Date(2023, 11, 25, 9, 0, 0).toISOString(), localNow)).toBe('Dec 25');
+    expect(formatRelativeTime(new Date(now.getTime() + 5 * M).toISOString(), now)).toBe('just now');
+    expect(formatRelativeTime('not a date', now)).toBe('');
+  });
+});
+```
+
+A few choices where your spec was open:
+- **7-day cutoff:** Exactly 7 days gives "7d ago". Anything past that falls to the "MMM D" date. Change `<=` to `<` on the last bucket if you want 7 days to show a date.
+- **Time zone:** The "MMM D" label uses the device's local time zone, so the same timestamp can show a different day for users in different zones.
+- **Future timestamps:** Timestamps in the future, such as from clock skew, return "just now".
+- **Invalid input:** An unparseable string returns `""`. I chose that so a bad `createdAt` doesn't show "NaN"; say if you'd rather it throw.
+
+I didn't touch any UI or rendering code.

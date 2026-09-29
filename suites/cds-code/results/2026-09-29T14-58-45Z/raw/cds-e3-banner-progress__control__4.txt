@@ -1,0 +1,12 @@
+I couldn't write the banner to `/tmp/nullbench-fx-yZAHeb/index.html` because the write permission was denied, so nothing has been created. I haven't tried another location or method.
+
+If you grant write access to that directory, I'll write the file again. If you'd rather have it somewhere else, such as my scratchpad directory, tell me and I'll put it there.
+
+The file is a single self-contained HTML page:
+- **Banner:** a warning icon, the text "You have unsaved changes", and a "Save now" link on the right, in an amber alert style.
+- **Container:** it sits below the banner with 2 units of horizontal padding, where 1 unit is 8px (16px total). The unit is a CSS variable, `--unit`, so you can change it.
+- **Progress bar:** a native `<progress>` element set to 60%.
+- **Spinner:** a CSS-animated spinner beside the bar for the secondary loading operation.
+- **Themes and accessibility:** it has light and dark themes, and the spinner slows down when the user prefers reduced motion.
+
+If you're using a framework such as React with MUI or Tailwind, tell me and I'll build it in that instead. That would also settle what "unit" means, since MUI's default is 8px and Tailwind's `px-2` is 8px.

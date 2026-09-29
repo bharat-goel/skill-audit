@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no CDS component code at all (only a plan/HTML placeholder description and a request for clarification), so none of the required component/prop/token expectations (Avatar, ListCell accessory="arrow", fgMuted, Text font prop, borderRadius token, VStack/HStack, valid import paths) can be verified as satisfied.

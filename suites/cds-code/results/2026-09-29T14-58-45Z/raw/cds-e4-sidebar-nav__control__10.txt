@@ -1,0 +1,9 @@
+I couldn't create the sidebar because permission to write `/tmp/nullbench-fx-urD9aK/index.html` was denied, so no file exists yet.
+
+Once you grant write access, I'll retry. I can also put it somewhere else, such as the scratchpad directory, if you'd prefer.
+
+The file I tried to write is a single static HTML page with these parts:
+- **Layout:** a 220px left sidebar next to a main content area headed "Home".
+- **Items:** Home, Activity and Settings, each with an inline icon.
+- **Selected state:** Home has `aria-current="page"`, a highlighted background and bold text.
+- **Interaction:** the other two items get a hover state, and all three get a keyboard focus ring.

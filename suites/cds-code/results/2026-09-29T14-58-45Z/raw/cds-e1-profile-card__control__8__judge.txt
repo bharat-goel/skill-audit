@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code, only a description of a plan, so it can't satisfy the rubric's code requirements (e.g., the generic Text component with the font prop, valid CDS import paths, VStack/HStack layout).

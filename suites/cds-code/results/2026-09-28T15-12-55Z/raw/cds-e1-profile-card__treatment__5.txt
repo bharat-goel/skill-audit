@@ -1,0 +1,86 @@
+I don't have file-write permission in this sandbox, so I can't create the file directly — here's the full component to save yourself (e.g. `src/components/ProfileCard.tsx`):
+
+```tsx
+import { Avatar } from "@coinbase/cds-web/avatar";
+import { Icon } from "@coinbase/cds-web/icons";
+import { ListCell } from "@coinbase/cds-web/list";
+import { Box, VStack, HStack } from "@coinbase/cds-web/system";
+import { Text } from "@coinbase/cds-web/typography";
+
+type ProfileCardProps = {
+  avatarSrc?: string;
+  displayName: string;
+  email: string;
+  onAccountSettings?: () => void;
+  onNotifications?: () => void;
+  onSignOut?: () => void;
+};
+
+export function ProfileCard({
+  avatarSrc,
+  displayName,
+  email,
+  onAccountSettings,
+  onNotifications,
+  onSignOut,
+}: ProfileCardProps) {
+  return (
+    <VStack background="bgAlternate" borderRadius="roundedLarge" overflow="hidden">
+      <HStack gap={2} alignItems="center" padding={3}>
+        <Avatar src={avatarSrc} name={displayName} size="l" />
+        <VStack gap={0}>
+          <Text font="title4">{displayName}</Text>
+          <Text font="body" color="fgMuted">
+            {email}
+          </Text>
+        </VStack>
+      </HStack>
+
+      <Box borderTopWidth={1} borderColor="line" />
+
+      <VStack>
+        <ListCell
+          title="Account settings"
+          onClick={onAccountSettings}
+          accessory={<Icon name="caretRight" size="s" color="fgMuted" />}
+        />
+        <ListCell
+          title="Notifications"
+          onClick={onNotifications}
+          accessory={<Icon name="caretRight" size="s" color="fgMuted" />}
+        />
+        <ListCell
+          title="Sign out"
+          onClick={onSignOut}
+          accessory={<Icon name="caretRight" size="s" color="fgMuted" />}
+        />
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+Usage:
+
+```tsx
+<ProfileCard
+  avatarSrc={user.avatarUrl}
+  displayName={user.name}
+  email={user.email}
+  onAccountSettings={() => navigate("/settings/account")}
+  onNotifications={() => navigate("/settings/notifications")}
+  onSignOut={signOut}
+/>
+```
+
+What I used and why:
+- **`VStack` with `background="bgAlternate"` + `borderRadius="roundedLarge"`** for the card container with subtle rounded corners, `overflow="hidden"` so child content respects the radius.
+- **`Avatar`** for the photo (falls back to initials from `name` if `avatarSrc` is empty).
+- **`Text font="title4"`** for the display name, **`Text font="body" color="fgMuted"`** for the email — muted per your spec, all through style props rather than inline styles.
+- **`ListCell`** for each settings row (the CDS primitive for settings/menu rows), with a trailing caret `Icon` as the right-side arrow.
+
+Two things I could **not** verify and you should check before merging, since this sandbox has no network access and no installed `node_modules` (so I couldn't run the discovery script or reach CDS docs):
+1. Exact subpath exports (`@coinbase/cds-web/avatar`, `/icons`, `/list`, `/system`, `/typography`) — run `bash skill/scripts/discover-cds-packages.sh` in your real project to confirm these.
+2. `ListCell`'s trailing-content prop name (I used `accessory`; the guidelines note it could also be `accessoryNode` or `end`) and the caret icon's exact name (`caretRight`) — worth a quick check against the component's actual prop types or docs.
+
+Want me to try again once you can grant write/bash permissions, so I can actually run the discovery script and drop the verified file into place?

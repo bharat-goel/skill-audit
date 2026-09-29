@@ -1,0 +1,99 @@
+## Mutex vs RWMutex
+
+**`sync.Mutex`** gives exclusive access: only one goroutine holds the lock at a time, whether it reads or writes.
+
+**`sync.RWMutex`** has two modes:
+- **Write lock** (`Lock`/`Unlock`): exclusive, like a Mutex. It blocks all readers and writers.
+- **Read lock** (`RLock`/`RUnlock`): shared. Any number of goroutines can hold it at once, but no writer can.
+
+### When to choose which
+
+- Use **`RWMutex`** when reads greatly outnumber writes and the critical section does enough work for concurrent readers to matter. Caches, config and lookup tables are typical cases.
+- Use **`Mutex`** when:
+  - Writes are frequent, or the read/write ratio is close to even.
+  - The critical section is very short. `RWMutex` has more bookkeeping (atomic reader counting and writer coordination), so it is slower per operation and can lose to a plain `Mutex` on cheap sections.
+  - You want the simplest thing that is correct. Default to `Mutex` and switch only after measuring contention.
+
+Rules for `RWMutex`:
+- Never write while holding only `RLock`. That is a data race.
+- The lock is not upgradable. Don't call `Lock` while holding `RLock`, because it deadlocks.
+- Don't take `RLock` recursively. If a writer is waiting, new readers block, so a nested `RLock` can deadlock.
+- Don't copy a mutex after first use. Embed it in a struct and use pointer receivers.
+
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// Counters is a map[string]int safe for concurrent use.
+type Counters struct {
+	mu sync.RWMutex
+	m  map[string]int
+}
+
+func NewCounters() *Counters {
+	return &Counters{m: make(map[string]int)}
+}
+
+// Get takes a shared read lock, so many readers run concurrently.
+func (c *Counters) Get(key string) (int, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	v, ok := c.m[key]
+	return v, ok
+}
+
+// Set takes the exclusive write lock.
+func (c *Counters) Set(key string, val int) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.m[key] = val
+}
+
+func main() {
+	c := NewCounters()
+	c.Set("hits", 0)
+
+	var wg sync.WaitGroup
+
+	// One occasional writer.
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 1; i <= 5; i++ {
+			c.Set("hits", i)
+			time.Sleep(10 * time.Millisecond)
+		}
+	}()
+
+	// Many frequent readers.
+	for r := 0; r < 10; r++ {
+		wg.Add(1)
+		go func(id int) {
+			defer wg.Done()
+			for i := 0; i < 20; i++ {
+				if v, ok := c.Get("hits"); ok && id == 0 && i%5 == 0 {
+					fmt.Println("reader 0 saw hits =", v)
+				}
+				time.Sleep(3 * time.Millisecond)
+			}
+		}(r)
+	}
+
+	wg.Wait()
+}
+```
+
+Notes on the code:
+- The mutex sits next to the map it guards, and every access goes through methods, so callers can't forget to lock.
+- `defer Unlock()` and `defer RUnlock()` keep the lock released even on early return or panic.
+- Run it with `go run -race .` to check for races. Removing the locks makes the race detector flag the concurrent map access.
+- If you only need a read-mostly map with rarely changing keys, `sync.Map` is another option. For typed, general-purpose use, `RWMutex` plus a plain map is usually clearer.
+
+I haven't run this snippet in this session.

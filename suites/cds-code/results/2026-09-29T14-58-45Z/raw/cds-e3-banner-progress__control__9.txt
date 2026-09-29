@@ -1,0 +1,41 @@
+I couldn't create `UnsavedChangesBanner.tsx` because the write to `/tmp/nullbench-fx-mifWXv` wasn't approved. I also couldn't run `npm install`, so nothing has been compiled or rendered. Here is the component, written for the Coinbase CDS packages in your `package.json`:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banners/Banner';
+import { Box } from '@coinbase/cds-web/layout/Box';
+import { HStack } from '@coinbase/cds-web/layout/HStack';
+import { VStack } from '@coinbase/cds-web/layout/VStack';
+import { Spinner } from '@coinbase/cds-web/loaders/Spinner';
+import { ProgressBar } from '@coinbase/cds-web/visualizations/ProgressBar';
+import { Link } from '@coinbase/cds-web/typography/Link';
+
+export const UnsavedChangesBanner = ({ onSave }: { onSave: () => void }) => (
+  <VStack gap={2}>
+    <Banner
+      variant="warning"
+      startIcon="warning"
+      title="You have unsaved changes"
+      primaryAction={<Link onPress={onSave}>Save now</Link>}
+    >
+      Save now to avoid losing your work.
+    </Banner>
+
+    {/* paddingX={2} = 2 spacing units of horizontal padding */}
+    <Box paddingX={2}>
+      <HStack alignItems="center" gap={2}>
+        <Box flexGrow={1}>
+          <ProgressBar progress={0.6} accessibilityLabel="60% complete" />
+        </Box>
+        <Spinner size={3} accessibilityLabel="Loading" />
+      </HStack>
+    </Box>
+  </VStack>
+);
+```
+
+- **Banner:** it uses the `warning` variant with the title "You have unsaved changes". "Save now" is a `Link` passed as `primaryAction`, so it calls `onSave`.
+- **Progress and spinner:** they sit in a `Box` with `paddingX={2}`, which is 2 spacing units of horizontal padding. The progress bar is at 0.6 (60%). The spinner is beside it for the secondary loading operation.
+- **Unverified imports:** the import paths and prop names come from memory of the CDS API. Run `npm install` and a type-check before relying on them, since a path or prop name (for example `progress` as a 0–1 value, or `onPress` on `Link`) may differ in v9.28.
+
+If you approve the write, I can save the file and run the install and type-check.

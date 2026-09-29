@@ -1,0 +1,71 @@
+I couldn't write `src/CreateTeamModal.tsx` because the write permission wasn't granted, so nothing has been created yet. If you approve the write, I'll create the file. Here is what I intended to write, in case you'd rather paste it in yourself.
+
+```tsx
+import React, { useCallback, useState } from 'react';
+import { Button } from '@coinbase/cds-web/buttons';
+import { TextInput } from '@coinbase/cds-web/controls';
+import { Select } from '@coinbase/cds-web/alpha/select';
+import { VStack } from '@coinbase/cds-web/layout';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from '@coinbase/cds-web/overlays';
+
+export type TeamSize = 'small' | 'medium' | 'large';
+export type CreateTeamValues = { name: string; size: TeamSize };
+export type CreateTeamModalProps = {
+  visible: boolean;
+  onRequestClose: () => void;
+  onSave: (values: CreateTeamValues) => void;
+};
+
+const teamSizeOptions = [
+  { value: 'small', label: 'Small' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'large', label: 'Large' },
+];
+
+export const CreateTeamModal = ({ visible, onRequestClose, onSave }: CreateTeamModalProps) => {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize>('small');
+
+  const handleClose = useCallback(() => {
+    setName('');
+    setSize('small');
+    onRequestClose();
+  }, [onRequestClose]);
+
+  const handleSave = useCallback(() => {
+    onSave({ name: name.trim(), size });
+    handleClose();
+  }, [name, size, onSave, handleClose]);
+
+  return (
+    <Modal onRequestClose={handleClose} visible={visible}>
+      <ModalHeader title="Create team" />
+      <ModalBody>
+        <VStack gap={3}>
+          <TextInput label="Team name" onChange={(e) => setName(e.target.value)}
+            placeholder="Enter a team name" value={name} />
+          <Select label="Team size" onChange={(v) => setSize(v as TeamSize)}
+            options={teamSizeOptions} value={size} />
+        </VStack>
+      </ModalBody>
+      <ModalFooter
+        primaryAction={<Button disabled={!name.trim()} onClick={handleSave} variant="primary">Save</Button>}
+        secondaryAction={<Button onClick={handleClose} variant="secondary">Cancel</Button>}
+      />
+    </Modal>
+  );
+};
+```
+
+**What I couldn't verify**
+- **Import paths:** the discovery script needed approval, so I didn't run it. `node_modules` isn't installed, so I couldn't read the package `exports` either. Only the `alpha/select` path comes from the component guide. The others (`buttons`, `controls`, `layout`, `overlays`) are my best guess.
+- **CDS docs:** none were available, so I haven't confirmed the props (for example the `Select` `onChange` signature or the `ModalFooter` `primaryAction` and `secondaryAction` props).
+- **Lint and typecheck:** not run, since there's no toolchain installed.
+
+**Design choices**
+- **Styling:** uses only CDS components and the `gap={3}` spacing token, with no inline styles, raw colors or pixel values.
+- **Save button:** disabled until a team name is entered.
+- **Reset on close:** the form resets whenever the modal closes.
+- **Default size:** starts on Small.
+
+Do you want me to run the discovery script, or install the packages so I can check the imports and typecheck?

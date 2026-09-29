@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply correctly explains Mutex (exclusive) vs RWMutex (many readers or one writer), when to choose each, and gives a compilable snippet using RLock/RUnlock for reads and Lock/Unlock for writes with correct pairing via defer.

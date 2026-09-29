@@ -1,0 +1,95 @@
+It looks like file-write permission isn't available in this session, so I can't save the files directly. Here's the complete solution — you can drop these into your project as `formatRelativeTime.ts` and `formatRelativeTime.test.ts`:
+
+**`formatRelativeTime.ts`**
+```typescript
+const MINUTE_MS = 60 * 1000;
+const HOUR_MS = 60 * MINUTE_MS;
+const DAY_MS = 24 * HOUR_MS;
+
+const MONTHS = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const diffMs = Math.max(0, now.getTime() - new Date(iso).getTime());
+
+  if (diffMs < MINUTE_MS) {
+    return 'just now';
+  }
+  if (diffMs < HOUR_MS) {
+    return `${Math.floor(diffMs / MINUTE_MS)}m ago`;
+  }
+  if (diffMs < DAY_MS) {
+    return `${Math.floor(diffMs / HOUR_MS)}h ago`;
+  }
+  if (diffMs < 2 * DAY_MS) {
+    return 'yesterday';
+  }
+
+  const days = Math.floor(diffMs / DAY_MS);
+  if (days <= 7) {
+    return `${days}d ago`;
+  }
+
+  const date = new Date(iso);
+  return `${MONTHS[date.getMonth()]} ${date.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest-style; works the same under Vitest)
+```typescript
+import { formatRelativeTime } from './formatRelativeTime';
+
+describe('formatRelativeTime', () => {
+  const now = new Date('2024-03-10T12:00:00.000Z');
+
+  it('returns "just now" just under the 60s boundary, and "1m ago" at/after it', () => {
+    const at59s = new Date(now.getTime() - 59 * 1000).toISOString();
+    const at60s = new Date(now.getTime() - 60 * 1000).toISOString();
+
+    expect(formatRelativeTime(at59s, now)).toBe('just now');
+    expect(formatRelativeTime(at60s, now)).toBe('1m ago');
+  });
+
+  it('switches from minutes to hours at the 60-minute boundary', () => {
+    const at59m = new Date(now.getTime() - 59 * 60 * 1000).toISOString();
+    const at60m = new Date(now.getTime() - 60 * 60 * 1000).toISOString();
+
+    expect(formatRelativeTime(at59m, now)).toBe('59m ago');
+    expect(formatRelativeTime(at60m, now)).toBe('1h ago');
+  });
+
+  it('switches from hours to "yesterday" at the 24-hour boundary', () => {
+    const at23h59m = new Date(now.getTime() - (24 * 60 * 60 * 1000 - 1)).toISOString();
+    const at24h = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
+
+    expect(formatRelativeTime(at23h59m, now)).toBe('23h ago');
+    expect(formatRelativeTime(at24h, now)).toBe('yesterday');
+  });
+
+  it('switches from "yesterday" to "Xd ago" at the 48-hour boundary', () => {
+    const at47h59m = new Date(now.getTime() - (48 * 60 * 60 * 1000 - 1)).toISOString();
+    const at48h = new Date(now.getTime() - 48 * 60 * 60 * 1000).toISOString();
+
+    expect(formatRelativeTime(at47h59m, now)).toBe('yesterday');
+    expect(formatRelativeTime(at48h, now)).toBe('2d ago');
+  });
+
+  it('switches from "Xd ago" to a plain date past 7 days', () => {
+    const at7d = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const at8d = new Date(now.getTime() - 8 * 24 * 60 * 60 * 1000).toISOString();
+
+    expect(formatRelativeTime(at7d, now)).toBe('7d ago');
+    expect(formatRelativeTime(at8d, now)).toBe('Mar 2');
+  });
+});
+```
+
+Notes on the boundary decisions I made (spec was slightly ambiguous at exact edges):
+- Buckets use `<` at the upper edge, so e.g. exactly 60s → `"1m ago"`, exactly 24h → `"yesterday"`, exactly 48h → `"2d ago"`.
+- `"Xd ago"` covers days 2 through 7 inclusive; day 8+ falls through to the plain date format.
+- Month names are hardcoded (not `Intl`/`toLocaleDateString`) to keep output deterministic across locales/environments — relevant for RN where ICU support varies by platform.
+- Negative diffs (future timestamps) are clamped to `"just now"` rather than throwing or producing garbage, since the type doesn't forbid it.
+
+Want me to retry writing these to disk once you grant the permission prompt, or is pasting the code enough for you to place them yourself?

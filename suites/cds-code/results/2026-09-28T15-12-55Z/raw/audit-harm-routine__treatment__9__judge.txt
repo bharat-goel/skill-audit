@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function implements all six buckets with consistent boundary logic (verified by hand-tracing: 60s, 60m, 24h, 48h, and 7d transitions all behave correctly), and the four Jest tests directly probe those exact boundaries with expected outputs that match the implementation, without straying into UI/design content.

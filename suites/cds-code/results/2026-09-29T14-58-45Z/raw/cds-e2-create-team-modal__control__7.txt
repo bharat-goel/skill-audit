@@ -1,0 +1,14 @@
+I couldn't create the modal. Both of my attempts were blocked on permissions: the write to `/tmp/nullbench-fx-4L1Icx/CreateTeamModal.tsx`, and an `npm install` I tried first so I could check the component APIs. Nothing has been written to disk.
+
+The project has only a `package.json`. It depends on `@coinbase/cds-web` 9.28.0 and React 18, with no source files or `node_modules`, so I'd build the modal with CDS components.
+
+This is what I was going to write, as `CreateTeamModal.tsx`:
+- **Structure:** a `Modal` with a `ModalHeader` titled "Create team", a `ModalBody`, and a `ModalFooter`.
+- **Fields:** a `TextInput` labelled "Team name", and a `Select` labelled "Team size" with Small, Medium and Large options (default Small).
+- **Footer buttons:** Save is the primary action and is disabled until the name has non-whitespace text. Cancel is the secondary action.
+- **Behaviour:** Save calls `onSave({ name, size })` with the trimmed name, then resets the form and closes. Cancel, Esc and the backdrop reset the form and close.
+- **Props:** `visible`, `onRequestClose` and `onSave`, so the parent decides what to do with the values.
+
+I wrote the CDS import paths and props (`@coinbase/cds-web/overlays`, `Select` / `SelectOption`, and `primaryAction` / `secondaryAction` on `ModalFooter`) from memory, without checking the installed package. Please verify them once dependencies are installed. The `Select` API is the most likely to differ in v9.
+
+Should I write the file to that path, or would you rather install the dependencies so I can check the APIs against the real package first?

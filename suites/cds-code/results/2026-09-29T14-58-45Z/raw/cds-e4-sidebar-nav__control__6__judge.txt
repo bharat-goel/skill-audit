@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code, since the write was denied, so it cannot satisfy any of the rubric's requirements on icon names, active state, sizing, tokens or spacing.

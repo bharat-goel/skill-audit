@@ -1,0 +1,40 @@
+I'm writing the banner component to the project directory, but the write was denied, so I need your permission before I can save the file.
+
+Here is the component I planned to write to `/tmp/nullbench-fx-c07vEA/UnsavedChangesBanner.tsx`:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner/Banner';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+type UnsavedChangesBannerProps = {
+  onSave: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      variant="warning"
+      startIcon="warning"
+      title="You have unsaved changes"
+      primaryAction={<Link onPress={onSave}>Save now</Link>}
+    />
+    <VStack paddingX={2} gap={2}>
+      <ProgressBar progress={0.6} />
+      <HStack justifyContent="center">
+        <ProgressCircle indeterminate size={32} accessibilityLabel="Loading" />
+      </HStack>
+    </VStack>
+  </VStack>
+);
+```
+
+The code is unverified, because CDS isn't installed here and I couldn't read the docs:
+
+- **Import paths:** I inferred them from the CDS package layout and the component guide, not from installed exports.
+- **`Link` handler:** I used `onPress`, but on web it may be `onClick` or `href`.
+- **`ProgressCircle`:** I'm not sure about the `size` prop and the `accessibilityLabel` prop.
+
+Once you've run `npm install`, check these against the installed types and run the typecheck. If you approve the write, I can save the file and run the checks myself.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply states the banner, Link and layout imports are guesses and never confirms that ProgressBar and ProgressCircle come from `@coinbase/cds-web/visualizations`, so rubric item 5 isn't met. It also gives `progress={0.6}` while admitting the 0–1 versus 0–100 scale is uncertain.

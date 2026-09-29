@@ -1,0 +1,26 @@
+I couldn't create the security empty state. Write access to `/tmp/nullbench-fx-4bqeGz/src/SecurityEmptyState.tsx` wasn't granted, so no file exists yet. I also couldn't check any CDS names against the real packages.
+
+Each of these was blocked or declined:
+- **Discovery script:** `discover-cds-packages.sh` needed approval and wasn't run.
+- **Illustration lookup:** the illustrations discovery script also wasn't run.
+- **Install:** `npm install` wasn't run, so there is no `node_modules` to read export paths or type definitions from.
+- **Docs:** no `cds-docs` skill or CDS MCP tool is available, so I haven't read the styling or theming docs.
+
+**What I'd build**, based on `package.json` (web runtime, `@coinbase/cds-web` 9.28.0) and the skill's component guide:
+- **Layout:** `VStack` for the layout, `Text` for the title and supporting copy, `Button variant="primary"` for the action, and `Box` to place the two versions side by side.
+- **Compact version:**
+  - `SpotSquare` at 96px.
+  - `title3` title and `body` copy in `fgMuted`.
+  - `padding={3}`, `gap={2}` and a compact button.
+- **Roomy version:**
+  - `HeroSquare` at 240px.
+  - `title1` title and `headline` copy in `fgMuted`.
+  - `padding={6}`, `gap={3}` and a regular button.
+- **Both versions:** the same title and text, on `background="bgAlternate"`. I use only style props and spacing tokens, with no raw colors or pixel spacing.
+
+The illustration name `"security"` is a guess. I couldn't confirm it exists as both a `SpotSquare` and a `HeroSquare`, so it may need swapping for the real name.
+
+To get a verified result, you can do one of these:
+1. Grant write access to the `src/` folder and I'll write the file.
+2. Approve `npm install` and the two discovery scripts so I can confirm the illustration name and import paths before writing.
+3. Tell me another output location, such as the scratchpad directory.

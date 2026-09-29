@@ -1,0 +1,8 @@
+I built the security empty state and sent you the HTML file. It isn't published: the publish to claude.ai needs your approval and it hadn't gone through. I haven't opened it in a browser or checked it at phone width, so the layout is untested.
+
+- **Illustration:** a shield with a check mark inside a scan ring, on a faint grid. It is one SVG shared by both versions, so they show the same visual at different sizes.
+- **Compact:** a 340px side panel with a small illustration, the title "No open findings", one short line of supporting text, and a "Run a scan" button.
+- **Roomy:** a full content pane with a larger illustration and the title "Nothing needs your attention". The supporting text says the last scan finished 4 minutes ago and found nothing. Below it is a row of scan counts (212 packages, 38 secret rules, 0 open) and a "Run a scan now" button.
+- **Theme and width:** it follows light and dark mode, and the panels stack into one column on narrow screens.
+
+The button, the scan counts and the "4 minutes ago" text are placeholder content I added, so swap in your real values. If you approve the publish, I can put it up as a private link.

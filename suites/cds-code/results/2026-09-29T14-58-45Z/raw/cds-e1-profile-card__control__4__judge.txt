@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, and the described plan also fails the rubric by using TextHeadline and TextBody instead of the generic Text component with the font prop.

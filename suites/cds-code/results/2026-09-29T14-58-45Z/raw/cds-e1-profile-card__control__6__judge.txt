@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code, only a prose description, so the rubric's code requirements can't be met, and it admits the import paths and tokens were unverified and it describes headline-weight text and a `borderRadius={200}` token that were never written.

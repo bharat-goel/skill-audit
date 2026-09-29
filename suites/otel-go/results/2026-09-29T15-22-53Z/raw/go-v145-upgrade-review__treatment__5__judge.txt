@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply covers A (attribute.StringValue/String replacing log.*, v0.20→v0.21), B (pathless WithEndpointURL uses `/` in v1.45.0, so it adds `/v1/traces`), and C (Retry-After integers as seconds and HTTP-date support, versus nanoseconds and ignored in v1.44.0). For D, it claims only a static review and proposes a local build/test path with a disposable httptest server.

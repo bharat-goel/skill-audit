@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't identify the log.StringValue/log.String to attribute.* migration (A), doesn't state that pathless WithEndpointURL uses root `/` in v1.45.0 (B), and explicitly declines to say how v1.44.0 versus v1.45.0 handle Retry-After (C), though it does avoid false verification claims (D).

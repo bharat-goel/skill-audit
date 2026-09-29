@@ -1,0 +1,43 @@
+Publishing needs your approval and hasn't gone through yet — the tool calls in this session for writing to the project directory and now for publishing are all sitting unapproved. Rather than keep retrying the same blocked call, here's the component in full so you have it either way; I built it as a standalone HTML/CSS card (no unverified guesses at the internal `@coinbase/cds-web` API, since that package isn't installed in this project and I can't inspect its real prop names).
+
+**Design:** avatar (initials, gradient fill) + name + muted email in the header row, a hairline divider, then three tappable rows — Account settings, Notifications, Sign out (styled with a subtle red tint since it's a distinct action) — each ending in a right-facing chevron that nudges right and brightens on hover. Card gets a 14px radius; rows get their own 9px radius on hover/focus. Full light/dark theming via CSS tokens, `Sora` for the name, `Inter` for everything else.
+
+The file is saved locally at:
+`profile-card.html` in this session's scratchpad — ready to open directly in a browser.
+
+If you approve the pending publish prompt, I can also give you a shareable preview link. Otherwise, here's the markup to drop into your project (adjust class names/tokens to match your CDS setup if you want it wired to the design system instead of plain CSS):
+
+```html
+<div class="card">
+  <div class="card__header">
+    <div class="avatar" aria-hidden="true">JA</div>
+    <div class="identity">
+      <div class="identity__name">Jordan Avery</div>
+      <div class="identity__email">jordan.avery@example.com</div>
+    </div>
+  </div>
+
+  <nav class="menu" aria-label="Account menu">
+    <button type="button" class="row">
+      <span class="row__label">Account settings</span>
+      <svg class="row__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button type="button" class="row">
+      <span class="row__label">Notifications</span>
+      <svg class="row__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button type="button" class="row row--danger">
+      <span class="row__label">Sign out</span>
+      <svg class="row__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </nav>
+</div>
+```
+
+Let me know if you'd like me to retry writing it into a `src/components/` file in your actual project once permissions allow, or wire it up as a React component instead of static markup.

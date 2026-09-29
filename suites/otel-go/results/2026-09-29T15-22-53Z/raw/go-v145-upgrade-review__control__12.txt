@@ -1,0 +1,29 @@
+I can't give you the exact v1.45.0 vs v1.44.0 changes from this file. It is a scenario description with no release notes or changelog, and `skills/otel-go` contains nothing else. I also can't reliably recall v1.45.0 and log v0.21.0 from memory, so I would be guessing. I didn't fetch the upstream changelog either, because you said not to contact an endpoint. Here is what I can say, split by how certain it is.
+
+## Change I'd make now (safe on v1.44.0 and v1.45.0)
+
+**Trace exporter endpoint.** The Collector expects `/v1/traces`, but the code passes a URL with no path:
+
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+
+`WithEndpointURL` takes the path from the URL you give it. Whether an empty path falls back to `/v1/traces` has varied between versions, and I can't confirm what v1.45.0 does. Spelling out the full path removes that dependence, so it is correct on either version.
+
+## Items I can't confirm without the changelog
+
+1. **`Retry-After` handling.** I can't tell you whether v1.45.0 honors both `Retry-After: 5` and an HTTP-date value, or how v1.44.0 differs. The reliable memory I have is that the OTLP HTTP exporters have parsed only the integer-seconds form. Whether HTTP-date support was added in v1.45.0 is what the team has to check. Until then, assume only `Retry-After: 5` is honored. If the Collector or gateway can send HTTP-date, either configure it to send seconds or check the release notes before relying on it.
+
+2. **Log record API (v0.20.0 to v0.21.0).** Your snippet uses `rec.SetBody(...)`, `rec.AddAttributes(...)` and `logger.Emit(ctx, rec)`. I can't say whether v0.21.0 renamed, removed or changed any of these. The log API is still pre-1.0, so breaking changes between minor versions are normal. After bumping, run `go build ./...` and `go vet ./...`. Any compile error on those three calls tells you exactly what changed.
+
+3. **Core v1.44.0 to v1.45.0 in general.** I have no confirmed behavior changes to report, and I'd rather not invent any.
+
+## How to close the gaps
+
+- Read the `CHANGELOG.md` sections for v1.45.0 and log v0.21.0 in `opentelemetry-go`.
+- Search that changelog for `Retry-After`, `WithEndpointURL` and `Record`.
+- Check `exporters/otlp/otlptrace/otlptracehttp` for the retry-header parsing.
+
+If you approve a network fetch of the changelog, or paste those sections here, I'll turn them into an exact per-change diff with the v1.44.0 vs v1.45.0 distinctions.

@@ -1,0 +1,24 @@
+I couldn't write either file, because write permission for `/tmp/nullbench-fx-eVTrP9/src/` wasn't granted. The discovery script was also blocked, so no code has been created yet.
+
+**What's ready:**
+- **Initialization:** the runtime is web, from `package.json` (`@coinbase/cds-web` 9.28.0, `cds-common` 9.28.0, `cds-icons` 5.25.0).
+- **Components I'll use:** `VStack`, `HStack`, `Box`, `Text`, `Pictogram`, and `Button`. `ThemeProvider` wraps the demo.
+- **Design:**
+  - A single `SecurityEmptyState` component takes `density: 'compact' | 'roomy'`, so both versions share the same visual.
+  - Compact uses a 48px `Pictogram`, `headline` and `caption` fonts, and tight spacing.
+  - Roomy uses a 64px `Pictogram`, `title3` and `body` fonts, and generous spacing.
+  - Styling goes through style props and tokens only, with no hex values, raw pixel spacing or inline styles.
+  - An optional secondary `Button` is included.
+  - A demo file renders the two versions side by side.
+
+**What I couldn't verify:**
+- `node_modules` isn't installed, so I couldn't confirm the import subpaths. I planned `/buttons`, `/layout`, `/illustrations`, `/typography`, `/system` and `/themes/defaultTheme`.
+- I also couldn't confirm the illustration name. I planned `name="security"`.
+- No CDS docs tool (`cds-docs` skill or MCP) is available here.
+
+**How would you like to proceed?**
+1. Grant write access to the project directory, and I'll create `src/SecurityEmptyState.tsx` and `src/SecurityEmptyStateDemo.tsx`.
+2. Allow `npm install` and the discovery scripts, so I can check the import paths and pick a real illustration name before writing.
+3. Have me write the files somewhere else, such as the scratchpad.
+
+Option 2 gives the most reliable result.

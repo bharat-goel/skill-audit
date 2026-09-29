@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply covers the log.* to attribute.* migration (A), the pathless WithEndpointURL root-path change with an explicit /v1/traces fix (B), and the Retry-After seconds and HTTP-date change versus v1.44.0 (C). For D, it states it ran nothing and proposes a local build, test and httptest.Server check.

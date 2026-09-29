@@ -1,0 +1,19 @@
+I couldn't write the sidebar file, and I haven't built or checked anything. Three things were denied:
+
+- **Package discovery:** the script needs approval, and `node_modules` isn't installed anyway.
+- **`npm install`:** it needs approval too.
+- **The file write:** creating `src/SideNav.tsx` was denied.
+
+I also had no CDS docs to read, since neither the `cds-docs` skill nor the MCP server is configured here.
+
+**Components I'd use:**
+- `Sidebar` and `SidebarItem` from `@coinbase/cds-web/navigation`.
+- Home would have `active` set, held in `useState` so clicking another item moves the selection.
+
+I chose these from memory of CDS's API. The `Sidebar` and `SidebarItem` names, the `navigation` import path and the props (`title`, `icon`, `active`, `onClick`) are unconfirmed. The icon names (`home`, `chartLine`, `gear`) are guesses too.
+
+The file I tried to write, `src/SideNav.tsx`, is a small component that maps three items (Home, Activity, Settings) to `SidebarItem`s, with `active` true only for the selected id (Home to start).
+
+**To go ahead, pick one:**
+1. Allow the write and `npm install`. I'd install, run the discovery and icon scripts, correct any wrong names or paths, and write the file.
+2. Give me the go-ahead to write it as is, and you'd check the imports yourself.

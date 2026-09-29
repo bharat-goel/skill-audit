@@ -1,0 +1,15 @@
+I built the security empty state, but I haven't published it. The publish call returned an error and I didn't retry it. The page is a local file, and I haven't rendered or previewed it, so the layout is unchecked.
+
+Both versions use the same illustration and copy. The illustration is a shield with a check mark between two scanned-file cards, with a faint scan line that sweeps down the shield.
+- **Title:** "No vulnerabilities found".
+- **Supporting text:** dependencies and source passed the last scan, and new CVEs will appear here.
+
+- **Compact:** a horizontal row inside a dense panel. It has an 88px illustration, a short one-line description, a "Scan now" button, and a panel header showing "0 open · 214 packages scanned". It wraps on narrow screens.
+- **Roomy:** a centred stack with a 200px illustration, a larger title, and a longer explanation that mentions the email alert. It has two buttons ("Scan now" and "Scan settings") and a "Last scan 09:42 · 214 packages · 1,806 files" line.
+
+It has light and dark themes and respects reduced motion, and the buttons show a keyboard focus outline. The counts and scan time are placeholder examples.
+
+Files are in /tmp/claude-0/-tmp-nullbench-fx-jtPDZk/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad:
+- security-empty-state.html
+
+Should I retry publishing it as a private page, or send you the file?

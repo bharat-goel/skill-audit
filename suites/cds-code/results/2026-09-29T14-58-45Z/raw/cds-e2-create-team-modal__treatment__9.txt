@@ -1,0 +1,12 @@
+I wrote the Create team modal, but nothing has been type-checked or run. It's saved at `/tmp/claude-0/-tmp-nullbench-fx-Vk3X2b/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/CreateTeamModal.tsx`. It isn't in `src/`, because the write to `src/CreateTeamModal.tsx` needed permission that wasn't granted.
+
+The modal has these parts:
+- **Team name:** a `TextInput`.
+- **Team size:** a `Select` with Small, Medium and Large options, defaulting to Small.
+- **Footer:** a secondary Cancel button and a primary Save button. Save is disabled while the name is blank.
+- **Behavior:** Save calls `onSave({ name, size })` with the trimmed name. Save and Cancel both close the modal and reset the fields.
+- **Styling:** it uses only CDS components and style props, with no raw colors, pixel values or inline styles.
+
+Before you use it:
+- **Import paths and docs:** The CDS import paths come from my knowledge of the library, not from your installed packages. `node_modules` isn't installed, and I couldn't run the discovery script or read the CDS docs either. Run `npm install` and a typecheck to confirm them. Two things to check: whether `Select` takes `onChange` with the value directly, and whether `ModalFooter` takes `primaryAction` and `secondaryAction`.
+- **Placement:** Tell me if you want it at `src/CreateTeamModal.tsx` and I'll retry the write once permission is granted.

@@ -1,0 +1,71 @@
+I don't have write access approved in this session either, so I can't save a file directly. Here's the modal — drop it in as `src/components/CreateTeamModal.tsx`:
+
+```tsx
+import React, { useState } from 'react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@coinbase/cds-web/overlays';
+import { TextInput, Select } from '@coinbase/cds-web/controls';
+import { Button } from '@coinbase/cds-web/buttons';
+import { VStack } from '@coinbase/cds-web/layout';
+
+export type TeamSize = 'small' | 'medium' | 'large';
+
+const TEAM_SIZE_OPTIONS: { label: string; value: TeamSize }[] = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' },
+];
+
+export type CreateTeamModalProps = {
+  visible: boolean;
+  onClose: () => void;
+  onSave: (team: { name: string; size: TeamSize }) => void;
+};
+
+export function CreateTeamModal({ visible, onClose, onSave }: CreateTeamModalProps) {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize>('small');
+
+  const handleClose = () => {
+    setName('');
+    setSize('small');
+    onClose();
+  };
+
+  const handleSave = () => {
+    onSave({ name: name.trim(), size });
+    handleClose();
+  };
+
+  return (
+    <Dialog visible={visible} onRequestClose={handleClose}>
+      <DialogHeader title="Create team" />
+      <DialogBody>
+        <VStack gap={2}>
+          <TextInput
+            label="Team name"
+            placeholder="Enter team name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Select
+            label="Team size"
+            value={size}
+            onChange={(value) => setSize(value as TeamSize)}
+            options={TEAM_SIZE_OPTIONS}
+          />
+        </VStack>
+      </DialogBody>
+      <DialogFooter>
+        <Button variant="secondary" onPress={handleClose}>
+          Cancel
+        </Button>
+        <Button variant="primary" onPress={handleSave} disabled={!name.trim()}>
+          Save
+        </Button>
+      </DialogFooter>
+    </Dialog>
+  );
+}
+```
+
+Two caveats since I couldn't install the package to verify against real types in this sandbox: the `@coinbase/cds-web` subpath imports (`/overlays`, `/controls`, `/buttons`, `/layout`) and prop names like `onRequestClose`/`onPress` are based on the library's typical conventions — check them against the actual `.d.ts` files once you have `node_modules`, and I'm happy to fix any mismatches. If you can grant file-write (and/or `npm install`) permissions, I'll create the file directly and verify it compiles against the real types.

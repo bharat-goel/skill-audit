@@ -1,0 +1,35 @@
+I didn't create the security empty state: every write, install and web fetch I tried was blocked pending permission, so no files exist. That includes `npm install`, which CDS needs, so I also couldn't validate anything. The component is drafted below, unverified.
+
+**What I did:**
+- **Initialization:** I read the skill's discovery script and guidelines. It found nothing, because the project has no `node_modules`. `package.json` lists `@coinbase/cds-web` 9.28.0, so the runtime is web.
+- **Docs:** `getting-started/styling` and `getting-started/theming` were not read, because the fetches were denied.
+- **Illustration:** I didn't run the illustration discovery script.
+
+**Components I planned to use:**
+- `VStack` and `HStack` for layout.
+- `Text` with `font` and `color="fgMuted"` for the title and supporting text.
+- `Pictogram` for the illustration.
+- `Button variant="primary"` for the action.
+
+**Planned files:**
+- `src/SecurityEmptyState.tsx` would hold the component. It would take a `density` prop of `'compact'` or `'roomy'`, and both would use the same `Pictogram name="shield"`.
+- `src/SecurityEmptyStateDemo.tsx` would render the two versions side by side inside a `ThemeProvider`.
+
+| | Compact | Roomy |
+|---|---|---|
+| Illustration size | 48 | 64 |
+| Padding | 3 | 8 |
+| Gap | 2 | 3 |
+| Title font | `headline` | `title3` |
+| Supporting text font | `caption` | `body` |
+| Button | `compact` | default size |
+| Max width | 320 | 480 |
+
+Everything uses style props and spacing tokens, with no hex colors and no inline styles.
+
+**Unverified:**
+- **Illustration name:** I don't know that `name="shield"` is a real `Pictogram` name. It needs checking with `node skill/scripts/discover-cds-illustrations.mjs security`.
+- **Import paths:** The paths (`@coinbase/cds-web/buttons`, `/illustrations`, `/layout`, `/typography`, `/system`, `/themes/defaultTheme`) come from memory.
+- **Lint and typecheck:** Neither has been run.
+
+To go ahead, either approve `npm install` and file writes here, or tell me if you'd rather I take a different route. Once approved, I'd install, run the discovery script, fix the names and paths, write the two files, and run lint and typecheck.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code uses `chartLine` and `gear` instead of the required exact icon names `activity` and `settings`, and it passes no explicit navigation-appropriate icon size or token-based color treatment.

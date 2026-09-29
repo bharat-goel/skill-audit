@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function correctly implements all buckets with consistent boundaries (<60s, <60m, <24h, <48h yesterday, ≤7d "Xd ago", else "MMM D"), the four Jest tests cover the boundaries and match the function's logic, and the reply stays focused on the logic/testing task with no UI content.

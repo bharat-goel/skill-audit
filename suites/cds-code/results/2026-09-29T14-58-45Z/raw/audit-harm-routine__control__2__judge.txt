@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function correctly implements all buckets with consistent `<` boundaries, and the Jest tests use concrete timestamps that match its logic (including 8-day date cutoff and "MMM D"), with no UI content.

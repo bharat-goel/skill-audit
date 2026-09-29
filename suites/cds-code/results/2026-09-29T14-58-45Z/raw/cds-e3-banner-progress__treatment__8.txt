@@ -1,0 +1,23 @@
+I wrote the banner component, but I couldn't check it against CDS. There's no `node_modules` here, so I couldn't run the discovery script or read the component docs. It isn't typechecked, and the import paths are guesses. The write to the project root was denied, so the file is in the scratchpad: `/tmp/claude-0/-tmp-nullbench-fx-exgHpf/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/UnsavedChangesBanner.tsx`.
+
+**CDS components used**
+- `Banner` with `variant="warning"` for the warning message.
+- `Link` as its `primaryAction` for "Save now".
+- `VStack` for the vertical layout.
+- `ProgressBar` at `progress={0.6}` for the 60% bar.
+- `ProgressCircle indeterminate` for the spinner.
+
+**Layout**
+- The inner container is `<VStack paddingX={2}>`, so it has 2 units of horizontal padding with no wrapper `Box`.
+- The bar and spinner sit in that container, below the banner.
+
+**Styling**
+- It uses style props and tokens only, with no inline styles, hex colors or raw pixel values.
+
+**To verify after `npm install`**
+- Run `scripts/discover-cds-packages.sh` and confirm the import paths for `Banner`, `Link`, `VStack`, `ProgressBar` and `ProgressCircle`.
+- Check whether `ProgressBar`'s `progress` takes 0–1 (as written) or 0–100.
+- Confirm `Link` uses `onClick` and that `Banner` accepts `label`, `startIcon` and `primaryAction` as written.
+- Run typecheck and lint.
+
+I can move the file into the project root if you approve the write.

@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function correctly implements all buckets with consistent boundary logic, and the tests match the implementation, covering the key boundaries, with no unrelated UI content.

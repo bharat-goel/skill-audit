@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply covers A (attribute.* replacing log.* with the v0.21.0 migration), B (pathless URL uses `/`, fixed by adding `/v1/traces`), and C (Retry-After integers as seconds plus HTTP-date support versus v1.44.0's nanoseconds and ignored dates). For D, it says it did not build or test, and it proposes a local compile and test path with a disposable local receiver.

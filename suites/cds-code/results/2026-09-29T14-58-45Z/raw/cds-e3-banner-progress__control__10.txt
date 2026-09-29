@@ -1,0 +1,44 @@
+I couldn't write the banner file or verify it, because both the `npm install` and the file write were blocked on permissions. Here is the component I meant to save as `UnsavedChangesBanner.tsx` in the project. It uses the Coinbase CDS packages already listed in your `package.json`:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner/Banner';
+import { Box } from '@coinbase/cds-web/layout/Box';
+import { VStack } from '@coinbase/cds-web/layout/VStack';
+import { Spinner } from '@coinbase/cds-web/loaders/Spinner';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar } from '@coinbase/cds-web/visualizations/ProgressBar';
+
+export type UnsavedChangesBannerProps = {
+  onSave: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      startIcon="warning"
+      variant="warning"
+      primaryAction={
+        <Link as="button" onClick={onSave}>
+          Save now
+        </Link>
+      }
+    >
+      You have unsaved changes
+    </Banner>
+
+    <Box alignItems="center" gap={2} paddingX={2}>
+      <Box flexGrow={1}>
+        <ProgressBar progress={0.6} weight="normal" accessibilityLabel="60% complete" />
+      </Box>
+      <Spinner size={3} accessibilityLabel="Loading" />
+    </Box>
+  </VStack>
+);
+```
+
+- **Banner:** a `warning` variant with the message "You have unsaved changes". "Save now" is a `Link` passed as the banner's `primaryAction`, and it calls `onSave`.
+- **Container:** a `Box` with `paddingX={2}` (2 spacing units on each side) sits below the banner. It holds the `ProgressBar` at `progress={0.6}` and a `Spinner` for the secondary loading operation, side by side.
+- **Unchecked:** I wrote the import paths and prop names (`startIcon`, `primaryAction`, `progress`, `Spinner` `size`) from memory of the CDS API. Nothing has been type-checked or rendered, so run `tsc` after installing and adjust anything that differs in version 9.28.0.
+
+If you approve the install and the file write, I'll save it, run the type-check, and fix any prop mismatches.

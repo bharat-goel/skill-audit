@@ -1,0 +1,27 @@
+I couldn't write `src/CreateTeamModal.tsx`: the write was blocked pending permission you haven't granted. Nothing has been created, and no code has been run or type-checked.
+
+Two other things were blocked earlier for the same reason:
+- **Discovery script:** I didn't get to run `discover-cds-packages.sh`.
+- **CDS docs:** I couldn't fetch the package to read the docs or types.
+
+Because of that, I never read the CDS docs or types, so I'm unsure of some import paths and props.
+
+**Planned components:**
+- **Dialog:** `Modal`, `ModalHeader`, `ModalBody`, `ModalFooter`
+- **Team name:** `TextInput`
+- **Team size:** `Select`, from `@coinbase/cds-web/alpha/select`
+- **Footer actions:** `Button`, with `variant="primary"` for Save and `variant="secondary"` for Cancel
+- **Layout:** `VStack` with `gap={2}`
+
+**Behavior in the planned file:**
+- **Save:** disabled until the name is non-empty. It calls `onSave({ name, size })` with the trimmed name.
+- **Cancel:** resets the form and closes the modal. Closing with Escape or the backdrop does the same.
+- **Team size:** the dropdown starts on "Small". I picked that default; tell me if you want a different one.
+
+**Unverified guesses I'd check once the packages are installed:**
+- **Import paths:** `@coinbase/cds-web/buttons`, `/controls`, `/layout` and `/overlays`. Only the `alpha/select` path comes from the guidelines.
+- **Modal and footer props:** `Modal`'s `visible` and `onRequestClose`, `ModalHeader`'s `title`, and `ModalFooter`'s `primaryAction` and `secondaryAction`.
+- **Select props:** `Select`'s `value`, `onChange` and `options`. I'd also check whether it needs a `type="single"` prop.
+- **Package install:** `node_modules` isn't installed in this project.
+
+If you approve writing to `/tmp/nullbench-fx-ANXVhg/src/`, I'll create the file. If you also approve `npm install` or `npm pack`, I'll check those props against the real types.

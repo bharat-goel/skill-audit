@@ -96,6 +96,14 @@ average, e7 only). Also: the claim was measured on an earlier, unpublished SKILL
 (ARTICLE.md, bug #3); evals 0, 1 and 2 could not be ported; Sonnet, n=10 per arm per
 expectation against the author's n=1.
 
+**Correction to the frozen `DEVIATIONS.md` (row "SKILL.md references scripts nullbench does
+not inject").** That row says the subject "is additionally run with `--disallowedTools
+Write,Edit,Bash`". That is false. nullbench passes the subject no tool-restriction flag. Headless
+`-p` mode refuses Write, Edit and Bash on its own, because with no project settings present its
+permission system has nothing to approve them against (nullbench PROTOCOL.md §7). The effect
+is the same: the subject cannot run `run_all.py`. The row is left as frozen, and the mechanism
+is corrected here.
+
 **Mapped to FAILURES.md:** entry 1 (answer-key vocabulary, at the rubric level); entry 7
 (the published +38 is a single run per arm with no interval); entry 3 (Sonnet judging
 Sonnet — the e6 misgrade is the kind of error a same-family judge shares with its subject).

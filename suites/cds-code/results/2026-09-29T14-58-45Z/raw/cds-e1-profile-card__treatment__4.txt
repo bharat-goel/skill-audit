@@ -1,0 +1,49 @@
+I couldn't create `ProfileCard.tsx`. Writing to `/tmp/nullbench-fx-4sfELy/src/` needs your approval, and the write and the `mkdir` were both blocked. Nothing has been written to disk, and I haven't run any lint or typecheck.
+
+Here is the component I intended to write:
+
+```tsx
+import React from 'react';
+import { ListCell } from '@coinbase/cds-web/cells/ListCell';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Avatar } from '@coinbase/cds-web/media/Avatar';
+import { Text } from '@coinbase/cds-web/typography/Text';
+
+export type ProfileCardProps = {
+  displayName: string;
+  email: string;
+  avatarSrc?: string;
+  onAccountSettingsPress?: () => void;
+  onNotificationsPress?: () => void;
+  onSignOutPress?: () => void;
+};
+
+export const ProfileCard = ({
+  displayName, email, avatarSrc,
+  onAccountSettingsPress, onNotificationsPress, onSignOutPress,
+}: ProfileCardProps) => (
+  <VStack gap={2}>
+    <HStack alignItems="center" background="bgAlternate" borderRadius={200} gap={2} padding={3}>
+      <Avatar alt={displayName} size="xl" src={avatarSrc} />
+      <VStack>
+        <Text as="h2" font="title3">{displayName}</Text>
+        <Text as="p" color="fgMuted" font="body">{email}</Text>
+      </VStack>
+    </HStack>
+
+    <VStack background="bgAlternate" borderRadius={200} overflow="hidden">
+      <ListCell accessory="arrow" onClick={onAccountSettingsPress} title="Account settings" />
+      <ListCell accessory="arrow" onClick={onNotificationsPress} title="Notifications" />
+      <ListCell accessory="arrow" onClick={onSignOutPress} title="Sign out" />
+    </VStack>
+  </VStack>
+);
+```
+
+- **Card:** the container uses `borderRadius={200}` for subtle rounded corners. The email uses `color="fgMuted"`.
+- **Rows:** the three settings rows are `ListCell` with `accessory="arrow"` for the right-side arrow.
+- **Styling:** everything is set through CDS style props and tokens, with no raw colors, pixel spacing or inline styles.
+
+- **Unverified:** `@coinbase/cds-web` isn't installed in this project, so I couldn't run the package discovery script or read the docs. The import paths, `size="xl"` on `Avatar`, `overflow="hidden"` and the `ListCell` props are from my knowledge of CDS v9 and unchecked. Run `npm install` and a typecheck to confirm them.
+
+If you approve writes to `src/`, I'll create the file. Or tell me a different location, such as an existing home-page directory.

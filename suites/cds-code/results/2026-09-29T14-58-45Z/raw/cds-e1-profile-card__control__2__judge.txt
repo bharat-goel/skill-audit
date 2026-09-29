@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: No code was produced, and the described plan uses Pressable rows with caretRight icons instead of ListCell with accessory="arrow", so the rubric's requirements are not met.

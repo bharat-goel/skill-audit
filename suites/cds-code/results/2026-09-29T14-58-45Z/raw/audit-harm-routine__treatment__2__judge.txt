@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function correctly implements every bucket with consistent boundaries, and the four Jest tests exercise the boundaries and match the function's logic, with no UI content.

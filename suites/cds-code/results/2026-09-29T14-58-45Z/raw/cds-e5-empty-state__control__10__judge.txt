@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply describes a single hand-written SVG in an HTML file rather than a CDS illustration component (SpotIcon, SpotSquare, Pictogram), and it says nothing about CDS layout or Text primitives, so it fails expectations 1 and 3. Its sizes are likely raw pixel values (for example a 340px panel), which would also fail expectation 5.

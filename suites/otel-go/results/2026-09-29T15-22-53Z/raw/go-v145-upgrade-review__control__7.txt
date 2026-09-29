@@ -1,0 +1,23 @@
+I can't give you the exact v1.45.0 changes yet. The file doesn't contain them, and I haven't verified them anywhere else.
+
+`go-v145-upgrade.md` is only a problem statement. It gives the current code (v1.44.0 core, log v0.20.0) and asks three questions. It has no changelog or migration notes. `skills/otel-go/` holds nothing else, so there's no local reference to check against. I'm not going to guess at v1.45.0 and v0.21.0 API and behavior changes from memory, because a wrong migration guide is worse than none.
+
+**What the code shows:**
+
+1. **Trace endpoint.** The Collector expects `http://otel-gateway:4318/v1/traces`, but the exporter is given `WithEndpointURL("http://otel-gateway:4318")` with no path.
+   - I recall that in earlier versions an empty path from `WithEndpointURL` could override the default `/v1/traces` rather than fall back to it. I'm not certain of that, and I don't know whether v1.45.0 changes it.
+   - You can remove the ambiguity in either version by putting the full path in the URL:
+     ```go
+     exporter, err := otlptracehttp.New(ctx,
+         otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+     )
+     ```
+   - Or use `WithEndpoint("otel-gateway:4318")`, `WithInsecure()` and `WithURLPath("/v1/traces")`.
+
+2. **Log record.** `rec.SetBody(...)`, `rec.AddAttributes(...)` and `logger.Emit(ctx, rec)` are the pre-upgrade form. I can't say what changed in log v0.21.0, so I can't write the replacement. After bumping, `go build ./...` will show whether any of those calls no longer compile.
+
+3. **`Retry-After`.** I can't say whether v1.45.0 honors both delta-seconds (`5`) and HTTP-date values, or how that differs from v1.44.0. It needs the exporter's release notes or source.
+
+**To get the exact answers**, I can fetch the v1.45.0 and log v0.21.0 changelog entries and the `otlptracehttp` retry code from GitHub. That would be a read-only request to GitHub, not to `otel-gateway`. Do you want me to?
+
+Failing that, `go get` the new versions and run `go build ./...` in your repo. Compiler errors will show any log API breakage, and the trace path fix above is safe on either version.

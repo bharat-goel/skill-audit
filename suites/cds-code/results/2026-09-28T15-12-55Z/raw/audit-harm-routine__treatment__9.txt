@@ -1,0 +1,84 @@
+Both files are written to the scratchpad (the project's working directory declined write permission, so I put them there instead). I hand-traced all boundary cases against the implementation to confirm correctness since script execution was also blocked in this sandbox.
+
+**`formatRelativeTime.ts`**
+```ts
+const SECOND = 1;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const WEEK_HOURS = 7 * 24;
+
+const MONTH_ABBR = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffSec = Math.max(0, Math.floor((now.getTime() - then.getTime()) / 1000));
+
+  if (diffSec < MINUTE) {
+    return 'just now';
+  }
+
+  const diffMin = Math.floor(diffSec / MINUTE);
+  if (diffMin < 60) {
+    return `${diffMin}m ago`;
+  }
+
+  const diffHour = Math.floor(diffSec / HOUR);
+  if (diffHour < 24) {
+    return `${diffHour}h ago`;
+  }
+  if (diffHour < 48) {
+    return 'yesterday';
+  }
+  if (diffHour < WEEK_HOURS) {
+    const diffDay = Math.floor(diffHour / 24);
+    return `${diffDay}d ago`;
+  }
+
+  return `${MONTH_ABBR[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest)
+```ts
+import { formatRelativeTime } from './formatRelativeTime';
+
+const NOW = new Date('2026-03-10T12:00:00.000Z');
+
+function isoSecondsAgo(seconds: number): string {
+  return new Date(NOW.getTime() - seconds * 1000).toISOString();
+}
+
+describe('formatRelativeTime', () => {
+  it('straddles the just-now / minutes boundary at 60s', () => {
+    expect(formatRelativeTime(isoSecondsAgo(59), NOW)).toBe('just now');
+    expect(formatRelativeTime(isoSecondsAgo(60), NOW)).toBe('1m ago');
+  });
+
+  it('straddles the minutes / hours boundary at 60m', () => {
+    expect(formatRelativeTime(isoSecondsAgo(59 * 60), NOW)).toBe('59m ago');
+    expect(formatRelativeTime(isoSecondsAgo(60 * 60), NOW)).toBe('1h ago');
+  });
+
+  it('straddles the hours / yesterday / days boundaries at 24h and 48h', () => {
+    expect(formatRelativeTime(isoSecondsAgo(23 * 3600 + 59 * 60), NOW)).toBe('23h ago');
+    expect(formatRelativeTime(isoSecondsAgo(24 * 3600), NOW)).toBe('yesterday');
+    expect(formatRelativeTime(isoSecondsAgo(47 * 3600 + 59 * 60), NOW)).toBe('yesterday');
+    expect(formatRelativeTime(isoSecondsAgo(48 * 3600), NOW)).toBe('2d ago');
+  });
+
+  it('straddles the days / plain-date boundary at 7 days', () => {
+    expect(formatRelativeTime(isoSecondsAgo(6 * 24 * 3600 + 23 * 3600), NOW)).toBe('6d ago');
+    expect(formatRelativeTime(isoSecondsAgo(7 * 24 * 3600), NOW)).toBe('Mar 3');
+  });
+});
+```
+
+Notes:
+- All comparisons use whole hours/minutes derived from the same `diffSec`, so buckets never overlap or gap.
+- Negative diffs (future timestamps, e.g. clock skew) are clamped to 0 → "just now" rather than producing "-1m ago".
+- The plain-date branch uses `then.getMonth()`/`getDate()` (local time), so results near midnight can shift by a day depending on device timezone — flagging this as an inherent property of using local `Date`, not a bug, in case your app needs UTC-stable dates instead.
+
+Files are at `<scratchpad>/formatRelativeTime.ts` and `<scratchpad>/formatRelativeTime.test.ts` — let me know if you'd like them moved into your actual repo path once you point me at it.

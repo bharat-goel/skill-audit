@@ -1,0 +1,77 @@
+# v1.44.0 → v1.45.0 upgrade: required changes
+
+This comes from a static read of the eval file and the skill's reference docs. I changed no files and contacted no endpoint. I did not check the claims against upstream changelogs or the module source, so they are only as accurate as those reference docs.
+
+## 1. Log record: `log.*` value types replaced by `attribute.*` (log v0.20.0 → v0.21.0)
+
+**Behavior change:** The log API and SDK, on their own v0.x line, drop `log.Kind`, `log.Value`, `log.KeyValue`, their constructors and the conversion helpers. Log bodies and record attributes now use `attribute.Value` and `attribute.KeyValue`. This is a compile break, not a silent change. The old code will not build against v0.21.0.
+
+**Change:**
+```go
+import "go.opentelemetry.io/otel/attribute"
+
+var rec log.Record
+rec.SetBody(attribute.StringValue("checkout failed"))
+rec.AddAttributes(attribute.String("component", "checkout"))
+logger.Emit(ctx, rec)
+```
+`log.Record` and `logger.Emit` stay as they are. If any code uses `log.Int`, `log.Bool` or similar, switch it to the matching `attribute.*` constructor.
+
+**Versus v1.44.0:** v1.44.0 paired with log v0.20.0 used `log.StringValue` and `log.String`. Only the value and key-value types change. The record and logger API is untouched.
+
+## 2. OTLP HTTP `WithEndpointURL` no longer appends `/v1/traces` (core v1.45.0)
+
+**Behavior change:** When the URL has no path, `otlptracehttp.WithEndpointURL` (and `otlpmetrichttp`) now uses `/`. Before, it appended `/v1/traces`. The current config would therefore post traces to `http://otel-gateway:4318/`, and the Collector would not accept them at that path. This fails at runtime with no compile error. The exporter would probably return 404s while traces silently drop.
+
+**Change:** put the signal path in the URL.
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+Alternatively, use `WithEndpoint("otel-gateway:4318")` and `WithInsecure()`. Don't rely on that without checking, because the docs I read don't cover how those options treat the path in v1.45.0. The explicit full URL is the safe choice.
+
+**Versus v1.44.0:** v1.44.0 appended `/v1/traces` automatically, so the bare URL worked. v1.45.0 now matches the signal-specific endpoint environment variables and the log exporter, which use the URL exactly as given.
+
+## 3. `Retry-After` handling in the HTTP exporters (core v1.45.0)
+
+**No code change is needed.** This is a bug fix.
+
+| Header | v1.44.0 | v1.45.0 |
+|---|---|---|
+| `Retry-After: 5` | Read as 5 nanoseconds, so the retry fired almost immediately and did not wait 5s. | Read as 5 seconds. |
+| `Retry-After: <HTTP-date>` | Ignored, so the exporter fell back to its normal backoff. | Honored. |
+
+So v1.45.0 honors both forms, and v1.44.0 honored neither correctly. With the default retry settings (5s initial interval, 30s max interval, 1min max elapsed), a throttling Collector will now get real backoff from this exporter. That can mean longer delays before data is exported or dropped.
+
+## Other v1.45.0 items to check
+
+- **`sdk/log.WithExportBufferSize`:** it is deprecated and has no effect in v0.21.0. If the service sets it, remove it. The batch processor no longer keeps a separate export buffer.
+- **`logtest.RecordFactory`:** it no longer has `AttributeValueLengthLimit` or `AttributeCountLimit`, so remove those fields from tests. Test records now keep attribute limits disabled.
+- **If you use `otelhttp` v0.70.0 or `otelconf` v0.25.0 (contrib v1.45.0):** these don't touch the code shown, but they change telemetry.
+  - `network.protocol.*` now comes from the negotiated response protocol.
+  - Semconv moves to v1.43.0.
+  - `otelconf` resolved resources now include the SDK's default resource attributes.
+  - Expect dashboards or queries on those attributes to shift.
+
+## Already in v1.44.0, not new in v1.45.0
+
+These may still catch you if you are jumping several versions:
+
+- The metric SDK has a default cardinality limit of 2000 series per instrument.
+- OTLP exporters cap requests at 64 MiB.
+- The baggage limit of 8192 bytes is enforced during extraction.
+
+## Module versions
+
+Log v0.x, contrib v0.x and core v1.x are separate version lines. Run `go get <module>@latest` for each module instead of forcing everything to `v1.45.0`.
+
+## Local verification
+
+Run these, and don't point the exporter at the real gateway:
+```
+go mod tidy -diff
+go build ./...
+go test ./...
+```
+To check the URL path and `Retry-After` behavior, point the exporter at an `httptest.Server`. Have it log the request path and return `429` with each `Retry-After` form.

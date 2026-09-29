@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply describes a local HTML page with an 88px and a 200px illustration, both in raw pixels, and gives no sign of CDS components (SpotIcon, SpotSquare, Pictogram, CDS layout or Text primitives). The illustration is a custom shield-and-cards drawing with a sweeping scan line, not a CDS illustration component.

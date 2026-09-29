@@ -1,0 +1,45 @@
+I couldn't write `UnsavedChangesBanner.tsx`. The write to `/tmp/nullbench-fx-BVxNRT/` was denied, so nothing has been created yet. I also couldn't run the discovery script, which needed approval, and no CDS docs tool is available here.
+
+Here is the component I was going to write:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner/Banner';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+export const UnsavedChangesBanner = ({ onSave }: { onSave: () => void }) => (
+  <VStack gap={2}>
+    <Banner
+      variant="warning"
+      title="You have unsaved changes"
+      startIcon="warning"
+      primaryAction={<Link onPress={onSave}>Save now</Link>}
+    >
+      Save your work before leaving this page.
+    </Banner>
+    <VStack paddingX={2} gap={2}>
+      <ProgressBar progress={0.6} />
+      <HStack alignItems="center" gap={1}>
+        <ProgressCircle indeterminate size={24} />
+      </HStack>
+    </VStack>
+  </VStack>
+);
+```
+
+**Components chosen:**
+- **`Banner`** with `variant="warning"` holds the message, and `Link` is its "Save now" action.
+- **`VStack paddingX={2}`** is the container. The padding goes directly on the stack rather than on a wrapping `Box`.
+- **`ProgressBar progress={0.6}`** is the 60% bar.
+- **`ProgressCircle indeterminate`** is the spinner for the secondary loading operation.
+
+**Unverified, because `node_modules` isn't installed and I couldn't read the docs:**
+- The deep import paths (`banner/Banner`, `typography/Link`, `layout`).
+- The `Banner` props `title`, `startIcon` and `primaryAction`.
+- Whether `Link` takes `onPress` or `onClick`. The guidelines say web `Button` uses `onClick`, so it's probably `onClick`.
+- Whether `progress` is 0–1 or 0–100.
+- Whether `ProgressCircle` accepts `size`.
+
+Run `npm install` and typecheck to confirm these. I can also write the file if you grant write access.

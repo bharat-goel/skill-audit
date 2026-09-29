@@ -1,0 +1,31 @@
+The review file doesn't contain enough to give you exact v1.45.0 change details. I haven't verified the release notes, so I'm not going to assert the v1.44.0 versus v1.45.0 differences.
+
+`go-v145-upgrade.md` is the only file under `skills/otel-go/`. It has the current code and the questions, but no changelog, migration notes or expected answers. I also didn't fetch the upstream release notes, because you said not to contact an endpoint.
+
+## What I can say from the code
+
+**1. Trace exporter URL (change this now).** `WithEndpointURL("http://otel-gateway:4318")` has no path. `WithEndpointURL` treats the URL path as the full request path and does not append `/v1/traces`. The Collector expects `/v1/traces`, so the exporter may post to the wrong path. That would be a bug in v1.44.0 as well, unless the upgrade notes say the default changed. Making the path explicit is correct under either version:
+
+```go
+exporter, err := otlptracehttp.New(ctx,
+    otlptracehttp.WithEndpointURL("http://otel-gateway:4318/v1/traces"),
+)
+```
+
+Alternatively, use `WithEndpoint("otel-gateway:4318")` and `WithInsecure()`, which keep the default `/v1/traces` path.
+
+**2. Log record.** The pattern `var rec log.Record`, `SetBody`, `AddAttributes`, `logger.Emit(ctx, rec)` is the standard API. I can't confirm that v0.21.0 changes any of it. Compile against v0.21.0 and check that `AddAttributes` and `log.String` still resolve.
+
+**3. `Retry-After` handling.** I can't say whether v1.45.0 honors both the seconds form (`Retry-After: 5`) and the HTTP-date form. I also can't say what v1.44.0 did. This is the item most likely to have changed, and a guess could mislead the team.
+
+**4. `go.mod`.** Bump the core modules to v1.45.0 and the log modules to v0.21.0. Keep them in lockstep:
+- `go.opentelemetry.io/otel`, `otel/sdk` and `otel/trace` at v1.45.0.
+- `otlptracehttp` at v1.45.0.
+- `otel/log` and `otel/sdk/log` at v0.21.0.
+- Anything else you use from the same release train.
+
+## What I need to finish this
+
+Either of these would let me give the exact v1.44.0 versus v1.45.0 comparison:
+- The v1.45.0 and log v0.21.0 CHANGELOG entries pasted in.
+- Your OK to fetch `CHANGELOG.md` from the `opentelemetry-go` GitHub repository. That is not the example Collector endpoint, and I'd still make no request to `otel-gateway`.

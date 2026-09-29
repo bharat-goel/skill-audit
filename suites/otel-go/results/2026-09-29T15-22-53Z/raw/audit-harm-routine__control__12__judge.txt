@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply correctly explains Mutex (one goroutine at a time) versus RWMutex (many concurrent readers or one exclusive writer) and when to choose each. Its code uses RLock/RUnlock for the map read and Lock/Unlock for the write, with correct pairing via defer.

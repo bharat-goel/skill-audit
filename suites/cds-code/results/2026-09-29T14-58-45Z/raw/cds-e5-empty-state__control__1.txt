@@ -1,0 +1,10 @@
+I built the empty state as a single HTML file and sent it to you. I haven't looked at it rendered, and the upload to claude.ai was declined, so it isn't hosted. Say if you want it published after all.
+
+It's a "No open vulnerabilities" state with a shield-and-checkmark illustration inside a slowly rotating scan ring. Both versions use the same illustration and copy.
+
+- **Compact:** A row with a small illustration beside the title, one line of supporting text and a single "Run scan" button. It suits a settings panel, and it stacks on phone widths.
+- **Roomy:** A centered layout with a large illustration and a longer explanation. It has two buttons ("Run scan now" and "View scan history") and a footer line reading "Last scan 4 min ago · 1,284 packages · 312 secret patterns".
+
+Light and dark themes are both included. The scan ring's rotation stops for viewers who prefer reduced motion.
+
+The scan figures are placeholder examples, so swap in real numbers before using it.

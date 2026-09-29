@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply gives a correct, self-contained TypeScript function with all buckets and sensible boundaries, plus four consistent Jest/Vitest tests covering the boundaries, and stays focused on the logic (the failed file writes don't change the code delivered).

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, and its described plain HTML/CSS implementation doesn't use the Banner, ProgressBar or ProgressCircle components from @coinbase/cds-web.

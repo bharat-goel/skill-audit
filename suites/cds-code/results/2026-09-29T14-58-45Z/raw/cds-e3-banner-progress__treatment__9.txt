@@ -1,0 +1,39 @@
+I couldn't save the component: both attempts to write `/tmp/nullbench-fx-ZjnpTN/UnsavedChangesBanner.tsx` were blocked on permissions. Here is the code so you can drop it in yourself, or grant write access and I'll save it.
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banners/Banner';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+export type UnsavedChangesBannerProps = {
+  onSave: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      startIcon="warning"
+      title="You have unsaved changes"
+      variant="warning"
+      primaryAction={<Link onClick={onSave}>Save now</Link>}
+    >
+      Save your work before leaving this page.
+    </Banner>
+    <VStack paddingX={2} gap={2}>
+      <ProgressBar progress={0.6} />
+      <HStack justifyContent="center">
+        <ProgressCircle indeterminate size={32} />
+      </HStack>
+    </VStack>
+  </VStack>
+);
+```
+
+- **Banner:** `Banner variant="warning"` carries the "You have unsaved changes" title. The "Save now" `Link` is passed as `primaryAction`.
+- **Container:** `VStack paddingX={2}` gives the 2 units of horizontal padding as a style prop. The `ProgressBar` at `progress={0.6}` and the indeterminate `ProgressCircle` spinner sit inside it.
+- **Styling:** it uses no hex colors, no pixel spacing and no inline styles. The spinner's `size={32}` is a literal dimension, which the skill allows.
+- **Extra text:** I added the line "Save your work before leaving this page." as banner body text. Delete it if you only want the title.
+
+**Not verified:** the import paths (`banners/Banner`, `typography/Link`), the Banner props (`startIcon`, `primaryAction`) and whether `progress` takes 0–1 or 0–100 are from memory, not from installed packages or docs. If `progress` takes 0–100, use `progress={60}`. I couldn't run lint or typecheck either, since there's no `node_modules` and the discovery script wasn't approved. Run `npm install` and a typecheck to confirm the imports resolve.

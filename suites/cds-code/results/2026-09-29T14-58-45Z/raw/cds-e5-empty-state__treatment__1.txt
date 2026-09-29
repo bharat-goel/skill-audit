@@ -1,0 +1,21 @@
+I couldn't create the security empty state. The write to `/tmp/nullbench-fx-fWcgIr/src/SecurityEmptyState.tsx` was denied, so no file exists.
+
+The discovery script and the CDS docs fetch were also denied. `node_modules` isn't installed either, so I couldn't check any CDS docs, import paths or illustration names.
+
+Here is what I planned to build, using CDS components from the bundled guidelines:
+- **Layout:** `VStack` for the layout.
+- **Text:** `Text` for the title and supporting copy. The supporting copy is `color="fgMuted"` and both are centered.
+- **Illustration:** compact uses `Pictogram` at `64x64`. Roomy uses `HeroSquare` at `240x240`.
+- **Spacing and background:** only spacing tokens (`gap`, `padding`) and `background="bgAlternate"`, with no raw colors or pixel spacing.
+- **Comparison:** one component with a `density: 'compact' | 'roomy'` prop that renders the same visual at both sizes side by side.
+
+The compact version would use a `headline` title, `caption` text and tighter spacing. The roomy version would use a `title2` title, `body` text and generous spacing.
+
+Two things I'd need to verify once the packages are available:
+- **Illustration name:** I'd guessed `name="security"` and haven't confirmed it exists in `@coinbase/cds-icons` or the illustrations package.
+- **Import paths:** the `@coinbase/cds-web/illustrations` and `/layout` paths are unchecked.
+
+To proceed, I need one of these:
+- **Write access:** approve writes to that folder so I can create the file.
+- **Install and discovery:** allow `npm install` and the discovery script so I can confirm the illustration name and imports.
+- **Inline code:** I can paste the component here instead.

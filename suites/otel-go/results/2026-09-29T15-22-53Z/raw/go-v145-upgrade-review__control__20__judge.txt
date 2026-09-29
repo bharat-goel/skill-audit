@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply doesn't state the log.String to attribute.String migration (A), says pathless WithEndpointURL is uncertain rather than stating it uses root path `/` in v1.45.0 (B), and declines to give the Retry-After seconds/HTTP-date behavior change (C).

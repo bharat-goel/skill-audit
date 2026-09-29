@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: No code was produced; the reply only describes a plan, admits the import paths are unverified guesses, and uses an unverified `borderRadius={200}` and a plain `HStack` container rather than a demonstrated, verified implementation.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code, only a prose description. It imports Select from `@coinbase/cds-web/controls` instead of the alpha subpath, and it doesn't show a `Button` with a secondary variant in the footer.

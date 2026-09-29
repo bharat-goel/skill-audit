@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code; it only describes a plan, so it cannot satisfy the rubric's code requirements (and it admits its import paths were unverified).

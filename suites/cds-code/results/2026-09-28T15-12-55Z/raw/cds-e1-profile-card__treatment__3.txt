@@ -1,0 +1,7 @@
+I don't have write permission for this project directory in the current session, and retrying doesn't grant it. I need you to approve the file write (or tell me to use a different location).
+
+To confirm before you approve: I'm about to create `src/components/ProfileCard.tsx` with a `ProfileCard` component built from CDS web components — `ContentCard` for the container (rounded corners come from its default styling), `Avatar` + `Text` (`font="title3"` for the name, `font="body" color="fgMuted"` for the muted email), and a second `ContentCard` holding three `ListCell` rows ("Account settings", "Notifications", "Sign out") separated by `Divider`s, each with a trailing `Icon name="caretRight"` arrow.
+
+One caveat: I couldn't reach live CDS docs or run the icon-discovery script in this sandbox (no `node_modules` installed, no CDS MCP/docs skill configured, and shell approvals are being denied), so `caretRight` and the `ListCell`'s `end` prop are my best inference from the guideline file's wording rather than confirmed against the actual type definitions — worth a quick doc check once you have CDS docs access.
+
+Want me to proceed with the write once you grant permission, or would you prefer a different file path?

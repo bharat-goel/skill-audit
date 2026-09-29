@@ -1,0 +1,6 @@
+I hit permission blocks on both `npm install` and writing the new file, so nothing has been created yet. Before I retry, a couple of notes:
+
+1. This directory only has a bare `package.json` (declaring `@coinbase/cds-web`, `@coinbase/cds-icons`, etc.) — no `node_modules`, no `src/`, no existing app shell. I can't install packages or read the CDS component source to confirm exact prop names here.
+2. I was about to write `src/components/ProfileCard.jsx` using CDS primitives (`Box`, `HStack`/`VStack`, `Text`, `Avatar`, `Icon`, `Pressable`) with muted-color email text, rounded container, and three rows (Account settings / Notifications / Sign out) each with a trailing chevron icon — but the write needs your approval.
+
+Want me to go ahead and retry the write (you'll get a permission prompt), or would you prefer plain HTML/CSS instead of guessing at the CDS API without being able to verify it against the installed package?

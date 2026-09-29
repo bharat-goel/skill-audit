@@ -1,0 +1,13 @@
+I couldn't create the modal. The write to `/tmp/nullbench-fx-sXDWMk/src/CreateTeamModal.tsx` was blocked because it needs permission you haven't granted. `npm install` was blocked for the same reason, so I haven't installed the dependencies or checked the CDS imports.
+
+The project has only a `package.json`, and it uses `@coinbase/cds-web` 9.28.0 with React 18. Here is what I was going to write. `CreateTeamModal` is a component with `visible`, `onRequestClose` and `onSave({ name, size })` props:
+
+- **Header:** "Create team".
+- **Body:** a `TextInput` labelled "Team name", and a `Select` labelled "Team size" with Small, Medium and Large. It defaults to Small.
+- **Footer:** `ModalFooter` with a primary Save button and a secondary Cancel button.
+- **Save:** it stays disabled until the name is non-empty. It trims the name, calls `onSave`, resets the form and closes.
+- **Cancel:** Cancel, and closing the modal any other way, resets the form and closes it.
+
+The imports are `Button` from `@coinbase/cds-web/buttons`, `Select` and `TextInput` from `@coinbase/cds-web/controls`, and `Modal`, `ModalBody`, `ModalFooter` and `ModalHeader` from `@coinbase/cds-web/overlays`. These come from my memory of the CDS API, so the `Select` props and the `primaryAction`/`secondaryAction` props on `ModalFooter` may need adjusting to 9.28.
+
+Do you want to grant write access so I can create the file? If so, I can also run `npm install` and type-check it against the real CDS types. Or tell me a different location or framework and I'll adapt it.
