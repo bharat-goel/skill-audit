@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply hand-rolls raw HTML/CSS with hex colors and pixel values instead of using CDS components like Avatar, ListCell, Text, VStack/HStack, fgMuted, or design tokens.

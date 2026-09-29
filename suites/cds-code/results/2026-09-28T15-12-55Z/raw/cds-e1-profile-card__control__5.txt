@@ -1,0 +1,196 @@
+File writes aren't being approved in this session (every attempt — even a single flat file at the project root — comes back "not granted yet"), so I can't persist anything to disk right now. Rather than keep retrying the same blocked call, here's the full component inline; paste it in once you can grant file-write permission, or let me know if you'd like me to retry.
+
+**`src/components/ProfileCard/ProfileCard.jsx`**
+```jsx
+import styles from './ProfileCard.module.css';
+
+function ChevronRightIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+      className={styles.chevron}
+    >
+      <path
+        d="M6 3.5L10.5 8L6 12.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MenuRow({ label, onClick }) {
+  return (
+    <button type="button" className={styles.menuRow} onClick={onClick}>
+      <span>{label}</span>
+      <ChevronRightIcon />
+    </button>
+  );
+}
+
+export function ProfileCard({
+  avatarUrl,
+  displayName,
+  email,
+  onAccountSettingsClick,
+  onNotificationsClick,
+  onSignOutClick,
+}) {
+  return (
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <img
+          src={avatarUrl}
+          alt={displayName ? `${displayName}'s avatar` : 'User avatar'}
+          className={styles.avatar}
+        />
+        <div className={styles.info}>
+          <span className={styles.displayName}>{displayName}</span>
+          <span className={styles.email}>{email}</span>
+        </div>
+      </div>
+
+      <div className={styles.menu}>
+        <MenuRow label="Account settings" onClick={onAccountSettingsClick} />
+        <MenuRow label="Notifications" onClick={onNotificationsClick} />
+        <MenuRow label="Sign out" onClick={onSignOutClick} />
+      </div>
+    </div>
+  );
+}
+```
+
+**`src/components/ProfileCard/ProfileCard.module.css`**
+```css
+.card {
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --card-divider: #eef0f2;
+  --text-primary: #111827;
+  --text-muted: #6b7280;
+  --row-hover: #f9fafb;
+  --chevron: #9ca3af;
+
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: var(--card-bg);
+  overflow: hidden;
+  max-width: 360px;
+  font-family: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    --card-bg: #1c1e21;
+    --card-border: #2e3136;
+    --card-divider: #2a2c30;
+    --text-primary: #f3f4f6;
+    --text-muted: #9aa0a6;
+    --row-hover: #26282c;
+    --chevron: #6b7075;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--card-divider);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.displayName {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.email {
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu {
+  border-top: 1px solid var(--card-divider);
+}
+
+.menuRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--card-divider);
+  font: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.menuRow:last-child {
+  border-bottom: none;
+}
+
+.menuRow:hover,
+.menuRow:focus-visible {
+  background: var(--row-hover);
+}
+
+.menuRow:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}
+
+.chevron {
+  color: var(--chevron);
+  flex-shrink: 0;
+}
+```
+
+Usage:
+```jsx
+<ProfileCard
+  avatarUrl={user.avatarUrl}
+  displayName={user.displayName}
+  email={user.email}
+  onAccountSettingsClick={() => navigate('/settings/account')}
+  onNotificationsClick={() => navigate('/settings/notifications')}
+  onSignOutClick={handleSignOut}
+/>
+```
+
+Two notes:
+1. Your `package.json` pulls in `@coinbase/cds-web` / `@coinbase/cds-icons`, but with no `node_modules` installed and no network access in this sandbox, I couldn't verify that library's current component/prop names, so I hand-rolled the markup and CSS (guaranteed to work) instead of guessing at CDS APIs. If you confirm the exports (or install the deps so I can inspect them), I can port this onto CDS primitives (`Avatar`, `Text`, chevron icon, etc.) to match the rest of the app.
+2. File writes are being blocked in this session ("not granted yet") even for a single root-level file — so nothing is saved to disk yet. Grant write permission (or point me to how to do so here) and I'll persist these two files for you.

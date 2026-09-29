@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The Select component is imported from '@coinbase/cds-web/inputs' rather than the required alpha subpath (e.g. '@coinbase/cds-web/alpha/select'), violating rubric items 3 and 6.

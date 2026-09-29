@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply provides a self-contained, correctly-typed `formatRelativeTime` function that implements all stated buckets with consistent boundary handling, plus 4 Jest tests that accurately exercise the just-now/minute/hour/yesterday/day/date boundaries and match the function's actual behavior, without any off-topic UI content.

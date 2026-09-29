@@ -1,0 +1,57 @@
+The sandbox blocked me from executing `node`/`npx` in this session (permission prompts weren't approved), so I couldn't run the suite live. I traced every boundary by hand instead and confirmed the logic is correct at each threshold.
+
+**Files** (in the scratchpad since the working directory rejected writes):
+- `formatRelativeTime.ts` — the utility
+- `formatRelativeTime.test.ts` — Vitest tests (swap the `vitest` import for `jest`'s globals if this repo uses Jest instead; the assertions are identical)
+
+```ts
+const MONTH_NAMES = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffSeconds = Math.floor((now.getTime() - then.getTime()) / 1000);
+
+  if (diffSeconds < 60) {
+    return 'just now';
+  }
+
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  if (diffMinutes < 60) {
+    return `${diffMinutes}m ago`;
+  }
+
+  const diffHours = Math.floor(diffMinutes / 60);
+  if (diffHours < 24) {
+    return `${diffHours}h ago`;
+  }
+
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays < 2) {
+    return 'yesterday';
+  }
+
+  if (diffDays < 7) {
+    return `${diffDays}d ago`;
+  }
+
+  return `${MONTH_NAMES[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+Bucket boundaries (each threshold rolls up to the next bucket, not stays in the current one — e.g. exactly 60s → "1m ago", not "just now"):
+
+| Elapsed | Output |
+|---|---|
+| < 60s | `just now` |
+| 60s – <60m | `Xm ago` |
+| 60m – <24h | `Xh ago` |
+| 24h – <48h | `yesterday` |
+| 48h – <7d | `Xd ago` |
+| ≥7d | `MMM D` (e.g. `Mar 3`) |
+
+Tests cover: the 60s/1m edge, the 60m/1h edge, the 24h/yesterday edge (both ends: 24h and 47h), the 48h/2d edge, and the 7-day cutoff into date format (including a month rollover, Mar 10 → Feb 8).
+
+One caveat worth knowing: the `MMM D` branch reads `then.getMonth()`/`getDate()` in the **device's local timezone**, while the ISO timestamps are UTC instants — so a message right at a local midnight boundary could display a date one day off from what a UTC-only view would show. That matches how RN apps usually want relative time displayed (in the user's local time), but flag it if your team wants UTC-normalized dates instead.

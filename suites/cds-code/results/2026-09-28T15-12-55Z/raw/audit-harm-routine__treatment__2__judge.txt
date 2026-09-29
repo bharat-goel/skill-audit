@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply only shows the `formatRelativeTime.ts` code and merely describes what the test file covers in prose, without ever displaying the actual Jest test code, so it doesn't satisfy the rubric's requirement to include 3-4 unit tests with real test-framework syntax in the reply.

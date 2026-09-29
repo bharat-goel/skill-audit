@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply never shows the actual function or test code in the response — it only describes files supposedly placed in a scratchpad — so there's no verifiable self-contained TypeScript function or concrete unit tests to check against the rubric's bucket/boundary requirements.

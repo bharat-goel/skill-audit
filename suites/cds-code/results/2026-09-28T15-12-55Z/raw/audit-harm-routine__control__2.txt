@@ -1,0 +1,70 @@
+I couldn't run/verify with node in this sandboxed environment (commands need manual approval), but I verified the date math by hand. Here's the utility and its tests.
+
+**`formatRelativeTime.ts`**
+```typescript
+const MONTH_NAMES = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffMs = now.getTime() - then.getTime();
+  const diffSec = Math.floor(diffMs / 1000);
+  const diffMin = Math.floor(diffSec / 60);
+  const diffHour = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHour / 24);
+
+  if (diffSec < 60) return 'just now';
+  if (diffMin < 60) return `${diffMin}m ago`;
+  if (diffHour < 24) return `${diffHour}h ago`;
+  if (diffHour < 48) return 'yesterday';
+  if (diffDay < 7) return `${diffDay}d ago`;
+
+  return `${MONTH_NAMES[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest)
+```typescript
+import { formatRelativeTime } from './formatRelativeTime';
+
+describe('formatRelativeTime', () => {
+  const now = new Date('2026-03-05T12:00:00.000Z');
+
+  it('returns "just now" for timestamps under 60 seconds old', () => {
+    const iso = new Date(now.getTime() - 59 * 1000).toISOString();
+    expect(formatRelativeTime(iso, now)).toBe('just now');
+  });
+
+  it('returns minutes-ago label just under the 60-minute boundary', () => {
+    const iso = new Date(now.getTime() - 59 * 60 * 1000).toISOString();
+    expect(formatRelativeTime(iso, now)).toBe('59m ago');
+  });
+
+  it('returns hours-ago label just under the 24-hour boundary', () => {
+    const iso = new Date(now.getTime() - 23 * 60 * 60 * 1000).toISOString();
+    expect(formatRelativeTime(iso, now)).toBe('23h ago');
+  });
+
+  it('returns "yesterday" for timestamps between 24 and 48 hours old', () => {
+    const iso = new Date(now.getTime() - 30 * 60 * 60 * 1000).toISOString();
+    expect(formatRelativeTime(iso, now)).toBe('yesterday');
+  });
+
+  it('returns days-ago label between 2 and 7 days old', () => {
+    const iso = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000).toISOString();
+    expect(formatRelativeTime(iso, now)).toBe('3d ago');
+  });
+
+  it('falls back to "MMM D" for timestamps 7 or more days old', () => {
+    const iso = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000).toISOString();
+    expect(formatRelativeTime(iso, now)).toBe('Feb 23'); // 2026 is not a leap year
+  });
+});
+```
+
+Notes:
+- Buckets are checked in order using whole-unit floors (`diffMin`, `diffHour`, `diffDay`), so e.g. 59m59s still reports as `59m ago`, and exactly 24h rolls into `yesterday` rather than `24h ago`.
+- The `Xd ago` bucket covers 2–6 days (yesterday already claims day 1); day 7+ falls through to the `MMM D` format.
+- Files were written to the scratchpad (`formatRelativeTime.ts` / `.test.ts`) since this session isn't inside a project — move them into your RN project's utils folder alongside your test setup.

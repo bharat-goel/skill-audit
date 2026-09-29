@@ -1,0 +1,67 @@
+I don't have write permission in this sandbox, so I can't create the file directly. Here's the component — save it as `src/components/ProfileCard.tsx`:
+
+```tsx
+import { Avatar, Icon } from "@coinbase/cds-web/media";
+import { Divider, HStack, VStack } from "@coinbase/cds-web/layout";
+import { Text } from "@coinbase/cds-web/typography";
+import { ListCell } from "@coinbase/cds-web/cells";
+
+export type ProfileCardProps = {
+  avatarUrl?: string;
+  displayName: string;
+  email: string;
+  onAccountSettingsClick?: () => void;
+  onNotificationsClick?: () => void;
+  onSignOutClick?: () => void;
+};
+
+const menuRowEnd = <Icon name="chevronRight" size="s" color="fgMuted" />;
+
+export function ProfileCard({
+  avatarUrl,
+  displayName,
+  email,
+  onAccountSettingsClick,
+  onNotificationsClick,
+  onSignOutClick,
+}: ProfileCardProps) {
+  return (
+    <VStack background="bgAlternate" borderRadius={2} overflow="hidden">
+      <HStack gap={1.5} alignItems="center" padding={2}>
+        <Avatar src={avatarUrl} name={displayName} size="l" />
+        <VStack gap={0.25}>
+          <Text font="headline">{displayName}</Text>
+          <Text font="body" color="fgMuted">
+            {email}
+          </Text>
+        </VStack>
+      </HStack>
+
+      <Divider />
+
+      <VStack>
+        <ListCell
+          title="Account settings"
+          onClick={onAccountSettingsClick}
+          end={menuRowEnd}
+        />
+        <Divider />
+        <ListCell
+          title="Notifications"
+          onClick={onNotificationsClick}
+          end={menuRowEnd}
+        />
+        <Divider />
+        <ListCell title="Sign out" onClick={onSignOutClick} end={menuRowEnd} />
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+Usage on your home page: `<ProfileCard avatarUrl={user.avatarUrl} displayName={user.name} email={user.email} onSignOutClick={handleSignOut} />`
+
+Notes/caveats:
+- **CDS adherence**: no raw colors or pixel spacing — `background="bgAlternate"`, `borderRadius={2}` (subtle rounding on the numeric 8px scale), `color="fgMuted"` for the email, and `font="headline"`/`font="body"` for typography, all per the guidelines.
+- **Unverified imports**: `node_modules` isn't installed in this sandbox and I couldn't run the discovery script or reach CDS docs, so the deep-import paths (`@coinbase/cds-web/media`, `/layout`, `/typography`, `/cells`) and the `ListCell` prop names (`title`, `end`) are my best-informed guess based on this skill's guidelines, not verified against your actual installed version (9.28.0). Please run `bash skill/scripts/discover-cds-packages.sh` yourself and adjust the import paths/props if they differ, and check `ListCell`'s docs for its exact prop API before merging.
+- I also couldn't run lint/typecheck since dependencies aren't installed here — verify that once you drop it into your app.

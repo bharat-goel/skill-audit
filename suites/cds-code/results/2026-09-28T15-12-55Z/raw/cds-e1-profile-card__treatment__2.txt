@@ -1,0 +1,9 @@
+I'm blocked from writing outside the current setup without your explicit approval. Before I retry, here's exactly what I'm about to create so you can approve with full context:
+
+**File:** `src/components/ProfileCard.tsx` (new file, new `src/components/` dir — nothing else touched)
+
+A `ProfileCard` component using CDS web components: `Avatar` + `Text` (name/email, muted via `color="fgMuted"`) in a header row, a `Divider`, then three `ListCell` rows ("Account settings", "Notifications", "Sign out") each with a trailing `Icon` chevron, wrapped in a `VStack` with `borderRadius="roundedSmall"` for the subtle rounded container.
+
+Two caveats since this sandbox blocked `npm install` and the CDS discovery scripts (no `node_modules`, no docs MCP/skill wired up here): the exact deep-import subpaths (`@coinbase/cds-web/media`, `/layout`, `/icons`, `/list-cell`, `/typography`) and the icon name `"chevronRight"` are my best-known convention for CDS web v9, not verified against your installed package. Once you approve the write, I'd recommend running `scripts/discover-cds-packages.sh` and the icon discovery script yourself to confirm those paths/name before merging.
+
+Want me to go ahead and write the file?

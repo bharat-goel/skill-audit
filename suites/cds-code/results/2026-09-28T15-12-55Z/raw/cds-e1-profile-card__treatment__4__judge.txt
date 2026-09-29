@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The ListCell rows use a custom `end={<Icon name="caretRight" />}` prop instead of the required `accessory="arrow"`, violating rubric item 2.

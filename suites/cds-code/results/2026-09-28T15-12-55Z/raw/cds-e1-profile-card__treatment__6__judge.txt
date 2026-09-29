@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The three settings rows use ListCell with a manually built `end` icon (chevronRight) rather than the required `accessory="arrow"` prop, so rubric item 2 is not satisfied.

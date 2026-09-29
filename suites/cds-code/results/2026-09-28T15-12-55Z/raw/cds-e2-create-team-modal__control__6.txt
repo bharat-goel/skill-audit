@@ -1,0 +1,78 @@
+File writes aren't permitted in this environment, so here's the component directly. It assumes the `@coinbase/cds-web` component API you have installed (Modal/TextInput/Select/Button) — adjust prop names if your installed version differs slightly, since I couldn't inspect `node_modules` (not installed here) or reach npm to verify.
+
+```tsx
+import { useState } from 'react';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from '@coinbase/cds-web/overlays';
+import { TextInput } from '@coinbase/cds-web/inputs/TextInput';
+import { Select } from '@coinbase/cds-web/inputs/Select';
+import { Button } from '@coinbase/cds-web/buttons/Button';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+
+type TeamSize = 'small' | 'medium' | 'large';
+
+const TEAM_SIZE_OPTIONS: { label: string; value: TeamSize }[] = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' },
+];
+
+type CreateTeamModalProps = {
+  visible: boolean;
+  onCancel: () => void;
+  onSave: (team: { name: string; size: TeamSize }) => void;
+};
+
+export function CreateTeamModal({ visible, onCancel, onSave }: CreateTeamModalProps) {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize>('small');
+
+  const canSave = name.trim().length > 0;
+
+  const handleSave = () => {
+    if (!canSave) return;
+    onSave({ name: name.trim(), size });
+  };
+
+  const handleClose = () => {
+    setName('');
+    setSize('small');
+    onCancel();
+  };
+
+  return (
+    <Modal visible={visible} onDismiss={handleClose}>
+      <ModalHeader title="Create team" onClose={handleClose} />
+      <ModalBody>
+        <VStack gap={4}>
+          <TextInput
+            label="Team name"
+            placeholder="Enter team name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Select
+            label="Team size"
+            options={TEAM_SIZE_OPTIONS}
+            value={size}
+            onChange={(value) => setSize(value as TeamSize)}
+          />
+        </VStack>
+      </ModalBody>
+      <ModalFooter>
+        <HStack gap={2} justifyContent="flex-end">
+          <Button variant="secondary" onPress={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onPress={handleSave} disabled={!canSave}>
+            Save
+          </Button>
+        </HStack>
+      </ModalFooter>
+    </Modal>
+  );
+}
+```
+
+Usage: render `<CreateTeamModal visible={isOpen} onCancel={...} onSave={({ name, size }) => ...} />`. Save is disabled until a name is entered; Cancel resets the fields.
+
+If you'd like, grant file-write permission and I'll save this into `src/components/` for you — just let me know.

@@ -1,0 +1,17 @@
+I ran into sandbox restrictions here: this session has no network access, so I can't publish it as a live Artifact link, and direct writes into the project directory were also blocked. Here's what I could do:
+
+**What I built:** A self-contained profile card component (`profile-card.html`) saved locally at:
+`/private/tmp/claude-501/.../scratchpad/profile-card.html`
+
+It includes:
+- **Avatar** — a monogram circle (SVG), name, and email in muted gray, with subtle 16px rounded corners on the card and a light border/shadow
+- **Three settings rows** — "Account settings," "Notifications," "Sign out" — each with a right-aligned chevron arrow, hover state, and keyboard focus ring
+- **Sign out** gets a subtle red-tinted hover as a destructive-action cue, matching common product conventions
+- Full light/dark theme support and responsive down to phone width
+
+Since I can't reach the network to publish it as a viewable link, or write it into your `src/` tree in this sandbox, I have two options depending on what you need:
+
+1. **Paste the code directly into chat** so you can drop it into your project by hand
+2. If you can grant approval for file writes / network access, I'll retry writing it into `src/components/` and publishing a preview link
+
+Which would you prefer? Also — should this be built as a plain component (as I did) or wired to your actual `@coinbase/cds-web` design-system components (`Card`, `Avatar`, `Text`, etc.)? I couldn't verify that library's real API without `npm install` succeeding, so I avoided guessing at it.

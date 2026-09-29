@@ -1,0 +1,37 @@
+I couldn't run the sandbox's node/bash due to permission restrictions in this environment, but I traced the boundary logic by hand and it checks out. Here's what I created:
+
+**`formatRelativeTime.ts`** (scratchpad):
+```typescript
+const MONTH_ABBR = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffMs = now.getTime() - then.getTime();
+  const diffSec = Math.floor(diffMs / 1000);
+
+  if (diffSec < 60) return "just now";
+
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin}m ago`;
+
+  const diffHr = Math.floor(diffMin / 60);
+  if (diffHr < 24) return `${diffHr}h ago`;
+
+  const diffDay = Math.floor(diffHr / 24);
+  if (diffDay < 2) return "yesterday";
+  if (diffDay < 7) return `${diffDay}d ago`;
+
+  return `${MONTH_ABBR[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest) covers the boundaries: 59s vs 60s (just now → 1m), 59m vs 60m (m → h), 23h/24h/47h (h → yesterday), and 48h/6d/7d (yesterday → Nd ago → plain date).
+
+Both files live in your scratchpad directory (writes to the actual working directory were denied by the permission system, and shell execution was blocked too, so I verified the boundary logic by manual trace instead of an actual test run):
+- `/private/tmp/claude-501/.../scratchpad/formatRelativeTime.ts`
+- `/private/tmp/claude-501/.../scratchpad/formatRelativeTime.test.ts`
+
+Move these into your project's source tree (e.g. `src/utils/formatRelativeTime.ts`) when ready. Note: at exactly the 7-day mark it falls into the plain-date branch (not "7d ago") — that matches "up to 7 days" meaning the 7d bucket tops out just under 7 full days.

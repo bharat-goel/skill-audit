@@ -1,0 +1,16 @@
+Checking against each rubric item:
+
+1. Avatar used — pass
+2. ListCell used but with `end={<MenuArrow />}` prop, not `accessory="arrow"` — fail
+3. `color="fgMuted"` used for email — pass
+4. Generic `Text` with `font` prop used, no derivative Text components — pass
+5. `borderRadius={3}` uses a token-like integer, not px/%— pass
+6. No hardcoded hex/rgb colors — pass
+7. No raw pixel values — pass
+8. VStack/HStack used for layout — pass
+9. Import paths: single barrel import from `@coinbase/cds-web` — plausible, no invented deep paths — pass
+
+Item 2 fails: the rubric explicitly requires `ListCell` with `accessory="arrow"`, but the reply uses a custom `end` prop with a manually rendered chevron `Icon`, not the `accessory="arrow"` API.
+
+VERDICT: FAIL
+REASON: The reply implements the settings rows with `ListCell`'s `end` prop and a manual chevron Icon instead of the required `accessory="arrow"` prop.

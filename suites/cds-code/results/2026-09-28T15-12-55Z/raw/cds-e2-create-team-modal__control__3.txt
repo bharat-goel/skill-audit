@@ -1,0 +1,98 @@
+I don't have file-write or network permissions in this session, so here's the modal as code in my response instead.
+
+```tsx
+// src/components/CreateTeamModal.tsx
+import { useState } from 'react';
+import { Modal } from '@coinbase/cds-web/overlays';
+import { TextInput, Select } from '@coinbase/cds-web/inputs';
+import { Button } from '@coinbase/cds-web/buttons';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+
+export type TeamSize = 'small' | 'medium' | 'large';
+
+const TEAM_SIZE_OPTIONS: { label: string; value: TeamSize }[] = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' },
+];
+
+export type CreateTeamModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: (team: { name: string; size: TeamSize }) => void;
+};
+
+export function CreateTeamModal({ isOpen, onClose, onSave }: CreateTeamModalProps) {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize>('small');
+
+  const reset = () => {
+    setName('');
+    setSize('small');
+  };
+
+  const handleSave = () => {
+    onSave({ name: name.trim(), size });
+    reset();
+  };
+
+  const handleCancel = () => {
+    reset();
+    onClose();
+  };
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      title="Create team"
+      footer={
+        <HStack gap={2} justifyContent="flex-end">
+          <Button variant="secondary" onPress={handleCancel}>
+            Cancel
+          </Button>
+          <Button variant="primary" onPress={handleSave} disabled={!name.trim()}>
+            Save
+          </Button>
+        </HStack>
+      }
+    >
+      <VStack gap={4}>
+        <TextInput
+          label="Team name"
+          placeholder="Enter team name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
+        <Select
+          label="Team size"
+          value={size}
+          onChange={(value) => setSize(value as TeamSize)}
+          options={TEAM_SIZE_OPTIONS}
+        />
+      </VStack>
+    </Modal>
+  );
+}
+```
+
+Usage:
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<CreateTeamModal
+  isOpen={open}
+  onClose={() => setOpen(false)}
+  onSave={({ name, size }) => {
+    // persist the team
+    setOpen(false);
+  }}
+/>
+```
+
+Two caveats since I couldn't verify against the actual installed `@coinbase/cds-web@9.28.0` types (no network/`node_modules` access this session):
+- `Modal`'s open/close props (`isOpen`/`onRequestClose`) and the `footer` prop — some CDS versions expose a `ModalFooter` subcomponent instead.
+- `Select`'s `onChange` signature — some versions pass the event rather than the raw value.
+
+If either doesn't typecheck, check the type defs in `node_modules/@coinbase/cds-web/dist/**/*.d.ts` once installed and I can adjust the two spots accordingly.

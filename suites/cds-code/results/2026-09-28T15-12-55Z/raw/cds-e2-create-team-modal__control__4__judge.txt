@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply uses Dialog/DialogHeader/DialogContent/DialogFooter instead of Modal/ModalHeader/ModalBody/ModalFooter, and imports Select from '@coinbase/cds-web/inputs' rather than the required alpha subpath, violating rubric items 1, 3, and 6.

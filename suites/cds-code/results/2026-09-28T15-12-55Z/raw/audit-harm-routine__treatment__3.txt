@@ -1,0 +1,10 @@
+I verified the logic by hand against each boundary (already matches the test expectations); no need to execute given the sandbox is restricting bash here.
+
+Two files, written to the scratchpad since writes to the project root weren't approved:
+
+- `formatRelativeTime.ts` — the utility function
+- `formatRelativeTime.test.ts` — Jest tests covering the `just now`/`m`/`h`/`yesterday`/`d`/date-fallback boundaries (59s, 60s, 59m, 60m, 23h, 24h, 48h, 6d, 7d)
+
+Move them into your app's source tree wherever `Message`-related utilities live (e.g. `src/utils/formatRelativeTime.ts`) — I didn't have write access to the actual project directory in this session, only the scratchpad.
+
+One implementation note: at exactly 7 days it falls through to the "MMM D" date branch rather than "7d ago", matching "otherwise... up to 7 days" as an exclusive upper bound — flag if you intended 7d inclusive instead, that's a one-line change (`< 7 * DAY` → `<= 7 * DAY`).

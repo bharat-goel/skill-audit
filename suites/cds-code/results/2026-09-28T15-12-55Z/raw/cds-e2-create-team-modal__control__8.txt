@@ -1,0 +1,83 @@
+I couldn't verify the exact `@coinbase/cds-web` API since neither `node_modules` nor network access is available in this sandbox (writes/network calls are being blocked here too), so I can't confirm current prop names against your installed version (9.28.0). Here's the modal built on the conventions I'm most confident are close to correct — check the import path and prop names against your existing CDS usage elsewhere in your codebase before relying on it:
+
+```tsx
+import React, { useState } from 'react';
+import {
+  Modal,
+  ModalHeader,
+  ModalContent,
+  ModalFooter,
+  TextInput,
+  Select,
+  Button,
+  VStack,
+} from '@coinbase/cds-web';
+
+type TeamSize = 'small' | 'medium' | 'large';
+
+const TEAM_SIZE_OPTIONS: { label: string; value: TeamSize }[] = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' },
+];
+
+type CreateTeamModalProps = {
+  visible: boolean;
+  onClose: () => void;
+  onSave: (team: { name: string; size: TeamSize }) => void;
+};
+
+export function CreateTeamModal({ visible, onClose, onSave }: CreateTeamModalProps) {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize>('small');
+
+  const handleCancel = () => {
+    setName('');
+    setSize('small');
+    onClose();
+  };
+
+  const handleSave = () => {
+    onSave({ name: name.trim(), size });
+    handleCancel();
+  };
+
+  return (
+    <Modal visible={visible} onRequestClose={onClose}>
+      <ModalHeader title="Create team" onClose={onClose} />
+      <ModalContent>
+        <VStack gap={4}>
+          <TextInput
+            label="Team name"
+            placeholder="e.g. Platform Engineering"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Select
+            label="Team size"
+            value={size}
+            onChange={(value) => setSize(value as TeamSize)}
+            options={TEAM_SIZE_OPTIONS}
+          />
+        </VStack>
+      </ModalContent>
+      <ModalFooter>
+        <Button variant="secondary" onClick={handleCancel}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={handleSave} disabled={!name.trim()}>
+          Save
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
+}
+```
+
+Assumptions to double-check:
+- Import path is the package root (`@coinbase/cds-web`) rather than a subpath like `@coinbase/cds-web/overlays`.
+- `Modal`/`ModalHeader`/`ModalContent`/`ModalFooter` as separate named exports with `visible`/`onRequestClose` props.
+- `Select` takes `options: {label, value}[]` and an `onChange(value)` signature rather than an event object.
+- `Button` uses `onClick` (some CDS variants use `onPress`).
+
+If you can point me at an existing component in your app that already uses CDS's `Modal` or `Select`, I can match the real API exactly instead of guessing.

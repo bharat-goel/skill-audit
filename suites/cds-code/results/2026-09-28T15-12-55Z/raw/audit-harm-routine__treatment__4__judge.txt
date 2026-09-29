@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply provides no actual code content (neither the function nor the tests are shown or verifiable in the response itself), so the rubric's requirements for a self-contained correct function and concrete unit tests cannot be confirmed as met.

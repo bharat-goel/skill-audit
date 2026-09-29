@@ -1,0 +1,92 @@
+I can't get write/network permissions approved in this session, so I can't save the file or verify the CDS-web API against your installed version. Here's the component — paste it into `src/components/CreateTeamModal.tsx` (or wherever your modals live) and adjust the `@coinbase/cds-web/*` import paths/prop names if they differ from your installed `9.28.0`:
+
+```tsx
+import React, { useState } from 'react';
+import { Dialog, DialogHeader, DialogContent, DialogFooter } from '@coinbase/cds-web/overlays';
+import { TextInput, Select } from '@coinbase/cds-web/inputs';
+import { Button } from '@coinbase/cds-web/buttons';
+import { VStack } from '@coinbase/cds-web/layout';
+
+export type TeamSize = 'small' | 'medium' | 'large';
+
+const TEAM_SIZE_OPTIONS: Array<{ label: string; value: TeamSize }> = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' },
+];
+
+export type CreateTeamModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: (team: { name: string; size: TeamSize }) => void;
+};
+
+export function CreateTeamModal({ isOpen, onClose, onSave }: CreateTeamModalProps) {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize>('small');
+
+  const canSave = name.trim().length > 0;
+
+  const handleClose = () => {
+    setName('');
+    setSize('small');
+    onClose();
+  };
+
+  const handleSave = () => {
+    if (!canSave) return;
+    onSave({ name: name.trim(), size });
+    handleClose();
+  };
+
+  return (
+    <Dialog visible={isOpen} onRequestClose={handleClose}>
+      <DialogHeader title="Create team" />
+      <DialogContent>
+        <VStack gap={4}>
+          <TextInput
+            label="Team name"
+            placeholder="e.g. Platform Engineering"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            autoFocus
+          />
+          <Select
+            label="Team size"
+            value={size}
+            onChange={(value) => setSize(value as TeamSize)}
+            options={TEAM_SIZE_OPTIONS}
+          />
+        </VStack>
+      </DialogContent>
+      <DialogFooter>
+        <Button variant="secondary" onPress={handleClose}>
+          Cancel
+        </Button>
+        <Button variant="primary" onPress={handleSave} disabled={!canSave}>
+          Save
+        </Button>
+      </DialogFooter>
+    </Dialog>
+  );
+}
+```
+
+Usage:
+
+```tsx
+const [modalOpen, setModalOpen] = useState(false);
+
+<CreateTeamModal
+  isOpen={modalOpen}
+  onClose={() => setModalOpen(false)}
+  onSave={({ name, size }) => {/* create the team */}}
+/>
+```
+
+Notes / assumptions to verify against your actual CDS-web docs or `node_modules/@coinbase/cds-web`:
+- Sub-package paths (`/overlays`, `/inputs`, `/buttons`, `/layout`) and the `Dialog`/`DialogHeader`/`DialogContent`/`DialogFooter` split.
+- `Select`'s `options`/`value`/`onChange` shape (some versions use `items` or expect an event object instead of a raw value).
+- `Button`/`Dialog` using `onPress`/`visible`/`onRequestClose` (CDS shares an API across web and native, which is where these names come from) rather than `onClick`/`open`/`onClose`.
+
+Want me to also retry once you grant filesystem/network permissions, so I can install the package and confirm these against the real types?

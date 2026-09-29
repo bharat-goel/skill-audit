@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced plain HTML/CSS (no Avatar, ListCell, fgMuted, Text with font prop, borderRadius token, or VStack/HStack usage) and explicitly declined to write any CDS component code.

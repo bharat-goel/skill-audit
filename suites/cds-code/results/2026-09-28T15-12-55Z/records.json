@@ -1,0 +1,981 @@
+{
+  "stamp": "2026-09-28T15:12:55Z",
+  "hash": "823994c3476651ebd8e2c31ed50e48deaafe90a3156e222696e00c5c80b980f7",
+  "klass": "VOID",
+  "requested": {
+    "reps": 10,
+    "model": "sonnet",
+    "judgeModel": "sonnet",
+    "taskIds": [
+      "audit-harm-routine",
+      "cds-e1-profile-card",
+      "cds-e2-create-team-modal",
+      "cds-e3-banner-progress",
+      "cds-e4-sidebar-nav",
+      "cds-e5-empty-state"
+    ],
+    "skillOverride": null
+  },
+  "records": [
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply omits the required 3-4 unit tests entirely, instead asking whether to paste them later, which fails "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 2,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function correctly implements all buckets with consistent boundary logic, and the tests match the implemen"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply provides no TypeScript function or unit tests at all, merely asking for write permission, so it fail"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply shows the implementation code but never actually includes the unit test code in the response—it only"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply provides no TypeScript function and no unit tests at all, instead only asking for write permission, "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply shows only the implementation code and merely describes what the tests cover in prose, never actuall"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 7,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply provides a self-contained, correctly-typed `formatRelativeTime` function that implements all stated "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply provides a self-contained, correctly-bucketed TypeScript `formatRelativeTime` function with consiste"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply provides no TypeScript function and no unit tests at all, merely asking for file-write permission, s"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "control",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The reply provides a self-contained `formatRelativeTime` function matching the requested signature with correc"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply describes files it claims to have written but includes no actual code (function or tests) in the res"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply only shows the `formatRelativeTime.ts` code and merely describes what the test file covers in prose,"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply provides no actual code content (neither the function nor the tests are shown or verifiable in the r"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply shows the function code but never actually includes the unit test code (only a one-line description "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply only describes files it claims to have written to the scratchpad without including the actual functi"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply shows the function code but never actually includes the unit test code (only claims a test file exis"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never actually shows the unit test code (only claims it exists in a saved file and describes what it"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never shows the actual function or test code in the response — it only describes files supposedly pl"
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function matches the requested signature, correctly implements all buckets with consistent `<`/`>=`-style "
+    },
+    {
+      "task": "audit-harm-routine",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": true,
+      "failed": false,
+      "why": "judge: The function implements all six buckets with consistent boundary logic (verified by hand-tracing: 60s, 60m, 24"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no actual code (only prose design notes with hardcoded hex colors and pixel values), so it "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all (it only asks for write permission), so it cannot satisfy any of the rubric'"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produces no code at all (blocked on permissions and asks the user how to proceed), so none of the ru"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply provides no CDS component code at all (plain HTML/CSS/JS instead), so it fails every rubric item req"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all and merely asks for publish confirmation, so it fails to satisfy any of the "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all—just a note about a blocked publish—so none of the rubric's code requirement"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply hand-rolls raw HTML/CSS with hex colors and pixel values instead of using CDS components like Avatar"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses generic `Text` with a `variant` prop instead of the required `font` prop, and uses `Pressable`/"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced plain HTML/CSS (no Avatar, ListCell, fgMuted, Text with font prop, borderRadius token, or V"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply's ListCell rows use a manual `end={<Icon name=\"chevronRight\".../>}` prop instead of the required `ac"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply produced no CDS component code at all (only a plan/HTML placeholder description and a request for cl"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never wrote any code (blocked awaiting approval), and even its description doesn't satisfy the rubri"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply never actually produces or delivers the code (only asks for permission and describes an unwritten, u"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The ListCell rows use a custom `end={<Icon name=\"caretRight\" />}` prop instead of the required `accessory=\"arr"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: ListCell uses accessory={<Icon name=\"caretRight\" .../>} instead of the required accessory=\"arrow\" prop."
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The three settings rows use ListCell with a manually built `end` icon (chevronRight) rather than the required "
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses `ListCell` with a custom `accessory={<Icon name=\"chevronRight\".../>}` instead of `accessory=\"arr"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The three settings rows use `accessory={<Icon name=\"chevronRight\" .../>}` instead of the required `accessory=\""
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply implements the settings rows with `ListCell`'s `end` prop and a manual chevron Icon instead of the r"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all—it only asks the user to choose between two options—so none of the rubric's "
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The Select component is imported from '@coinbase/cds-web/inputs' rather than the required alpha subpath (e.g. "
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply doesn't use ModalHeader/ModalBody/ModalFooter subcomponents (uses a single Modal with title/footer p"
+    },
+    {
+      "task": "cds-e1-profile-card",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The code uses `accessory={<Icon name=\"chevronRight\".../>}` instead of `accessory=\"arrow\"` on ListCell, and nev"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses Dialog/DialogHeader/DialogContent/DialogFooter instead of Modal/ModalHeader/ModalBody/ModalFoot"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": false,
+      "why": "judge: Select is imported from `@coinbase/cds-web/inputs/Select` rather than the required alpha subpath, violating ru"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all, only a request for permissions, so none of the rubric's code-based requirem"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply contains no code at all (just a note about a failed file write), so it cannot satisfy any of the rub"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses Dialog/DialogHeader/DialogBody/DialogFooter instead of Modal/ModalHeader/ModalBody/ModalFooter,"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": false,
+      "why": "judge: The reply uses ModalContent instead of ModalBody and imports Select from the package root rather than the requ"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e2-create-team-modal",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e3-banner-progress",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e4-sidebar-nav",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "control",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 1,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 2,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 3,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 4,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 5,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 6,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 7,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 8,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 9,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    },
+    {
+      "task": "cds-e5-empty-state",
+      "cond": "treatment",
+      "rep": 10,
+      "pass": false,
+      "failed": true,
+      "why": "run failed (exit 1): You've hit your session limit · resets 2:10pm (America/Denver)"
+    }
+  ]
+}

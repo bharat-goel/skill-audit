@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code at all—it only asks the user to choose between two options—so none of the rubric's code-based requirements (Modal composition, TextInput, Select, Button footer, style prop avoidance) can be satisfied.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produces no code at all (blocked on permissions and asks the user how to proceed), so none of the rubric's code-level requirements (Avatar, ListCell with accessory="arrow", fgMuted, generic Text with font prop, borderRadius token, no raw colors/pixels, VStack/HStack, valid CDS import paths) are met.

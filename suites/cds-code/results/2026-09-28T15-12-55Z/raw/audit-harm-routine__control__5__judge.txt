@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply provides no TypeScript function or unit tests at all, merely asking for write permission, so it fails to meet any rubric requirement.

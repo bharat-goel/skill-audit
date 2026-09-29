@@ -1,0 +1,8 @@
+I've verified the boundary logic by hand (matches the test cases). Both files are in the scratchpad:
+
+- `formatRelativeTime.ts` — the utility function
+- `formatRelativeTime.test.ts` — 4 vitest tests covering the just-now/minutes, minutes/hours, hours/yesterday, and days/date-fallback boundaries
+
+The function computes elapsed seconds/minutes/hours/days from `now - then` and checks thresholds in order: `<60s` → "just now", `<60m` → "Xm ago", `<24h` → "Xh ago", `<48h` → "yesterday", `<7d` → "Xd ago", else `MMM D` (e.g. "Sep 21") using the timestamp's own month/day. No UI code was touched — this is pure data logic as requested.
+
+If you tell me where this should live in your actual project (e.g. `src/utils/formatRelativeTime.ts`), I can move it there instead of the scratchpad.

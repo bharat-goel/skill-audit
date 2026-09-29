@@ -1,0 +1,85 @@
+I built the component, but I wasn't able to get write access to the project directory in this session — the file is saved in the scratchpad instead:
+
+`/private/tmp/claude-501/.../scratchpad/ProfileCard.tsx`
+
+```tsx
+import {
+  Avatar,
+  ContentCard,
+  ContentCardBody,
+  Divider,
+  HStack,
+  Icon,
+  ListCell,
+  Text,
+  VStack,
+} from "@coinbase/cds-web";
+
+export type ProfileCardProps = {
+  avatarSrc?: string;
+  displayName: string;
+  email: string;
+  onAccountSettingsClick?: () => void;
+  onNotificationsClick?: () => void;
+  onSignOutClick?: () => void;
+};
+
+export function ProfileCard({
+  avatarSrc,
+  displayName,
+  email,
+  onAccountSettingsClick,
+  onNotificationsClick,
+  onSignOutClick,
+}: ProfileCardProps) {
+  return (
+    <VStack gap={2}>
+      <ContentCard>
+        <ContentCardBody>
+          <HStack gap={2} alignItems="center">
+            <Avatar src={avatarSrc} alt={displayName} size="l" />
+            <VStack gap={0}>
+              <Text font="title4">{displayName}</Text>
+              <Text font="body" color="fgMuted">
+                {email}
+              </Text>
+            </VStack>
+          </HStack>
+        </ContentCardBody>
+      </ContentCard>
+
+      <ContentCard>
+        <ListCell
+          title="Account settings"
+          onClick={onAccountSettingsClick}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+        <Divider />
+        <ListCell
+          title="Notifications"
+          onClick={onNotificationsClick}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+        <Divider />
+        <ListCell
+          title="Sign out"
+          onClick={onSignOutClick}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+      </ContentCard>
+    </VStack>
+  );
+}
+```
+
+**What it uses and why (per CDS guidelines):**
+- `ContentCard` for both the profile block and the menu group — gives subtle rounded corners for free, no hardcoded border-radius.
+- `Avatar` + `Text font="title4"` for the name, `Text font="body" color="fgMuted"` for the muted email.
+- `ListCell` for each settings row with a trailing chevron `Icon`, separated by `Divider`.
+- All spacing (`gap`, layout) uses CDS tokens, not raw pixels.
+
+**Caveats — please verify before merging:** this sandbox had no `node_modules` installed and I couldn't get approval to run the discovery script, install packages, or fetch live docs, so I couldn't confirm against real type definitions:
+- `ListCell`'s trailing-content prop — I used `accessory`; the guidelines mention `accessory`/`accessoryNode`/`end` as possible names depending on version.
+- `Icon name="chevronRight"` and `Avatar size="l"` are my best-guess token/name values, not verified against the installed icon set.
+
+Want me to try again to write it into `src/components/ProfileCard.tsx` in the project (that write was blocked pending your approval), or would you rather copy it in yourself?

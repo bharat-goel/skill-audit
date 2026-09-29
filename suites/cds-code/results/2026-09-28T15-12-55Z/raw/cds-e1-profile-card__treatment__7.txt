@@ -1,0 +1,61 @@
+I hit a hard wall: this sandbox is denying every write, script-execution, and network permission request (npm install, the discovery scripts, WebSearch, and even `Write`/`mkdir` to your project directory all came back unapproved). I can't save the file for you, so here's the component in full — copy it into `src/components/ProfileCard.tsx`.
+
+**Components used** (from `guidelines/components.md`): `VStack`/`HStack` for layout, `Text` with `font`/`color` tokens for the name and muted email, `Avatar` for the photo, `Divider` to separate sections, and `ListCell` for each settings row with a trailing `Icon`.
+
+```tsx
+import { Avatar, Divider, HStack, Icon, ListCell, Text, VStack } from '@coinbase/cds-web';
+
+export type ProfileCardProps = {
+  avatarSrc?: string;
+  displayName: string;
+  email: string;
+  onAccountSettingsClick?: () => void;
+  onNotificationsClick?: () => void;
+  onSignOutClick?: () => void;
+};
+
+function MenuArrow() {
+  return <Icon name="chevronRight" size="s" color="fgMuted" />;
+}
+
+export function ProfileCard({
+  avatarSrc,
+  displayName,
+  email,
+  onAccountSettingsClick,
+  onNotificationsClick,
+  onSignOutClick,
+}: ProfileCardProps) {
+  return (
+    <VStack background="bgAlternate" borderRadius={3} overflow="hidden">
+      <HStack gap={2} padding={3} alignItems="center">
+        <Avatar src={avatarSrc} name={displayName} size="l" />
+        <VStack>
+          <Text font="title4">{displayName}</Text>
+          <Text font="body" color="fgMuted">
+            {email}
+          </Text>
+        </VStack>
+      </HStack>
+
+      <Divider />
+
+      <VStack>
+        <ListCell title="Account settings" onClick={onAccountSettingsClick} end={<MenuArrow />} />
+        <Divider />
+        <ListCell title="Notifications" onClick={onNotificationsClick} end={<MenuArrow />} />
+        <Divider />
+        <ListCell title="Sign out" onClick={onSignOutClick} end={<MenuArrow />} />
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+**Style props only** — no hex/rgb, no raw pixel spacing, no inline `style`. `borderRadius={3}` gives the subtle rounded corners; `background="bgAlternate"` and `color="fgMuted"` are semantic tokens.
+
+**Two things I couldn't verify** because `node_modules` isn't installed and I had no doc/MCP/web access this session:
+1. `Icon name="chevronRight"` — the right-arrow icon's exact name in `@coinbase/cds-icons`. Once you can install deps, run `node skill/scripts/discover-cds-icons.mjs chevron` to confirm (or try `arrow`/`caret` if that comes up empty).
+2. Top-level imports from `@coinbase/cds-web` — I inferred stable components are barrel-exported at the package root (only alpha components like `Select` need deep imports per the guidelines), but couldn't confirm the actual export map. Run `bash skill/scripts/discover-cds-packages.sh` once installed to double check `ListCell`'s `end` prop name too (older versions may use `accessory`/`accessoryNode` instead).
+
+Once you can run `npm install` locally, a quick `tsc`/lint pass will immediately flag either of these if wrong.

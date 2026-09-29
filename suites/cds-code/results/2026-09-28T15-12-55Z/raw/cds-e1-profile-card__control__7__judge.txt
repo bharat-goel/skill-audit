@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code at all—just a note about a blocked publish—so none of the rubric's code requirements (Avatar, ListCell, fgMuted, Text with font prop, borderRadius tokens, no hardcoded colors/pixels, VStack/HStack, valid CDS imports) can be verified as satisfied.

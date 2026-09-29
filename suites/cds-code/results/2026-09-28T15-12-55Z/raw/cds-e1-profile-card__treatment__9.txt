@@ -1,0 +1,76 @@
+File write permissions aren't being granted in this session, so I can't save the component to disk. Here's the finished `ProfileCard.tsx` for you to add — paste it wherever your app's home page components live (e.g. `src/components/ProfileCard.tsx`):
+
+```tsx
+import { Avatar } from "@coinbase/cds-web/avatar";
+import { Icon } from "@coinbase/cds-web/icon";
+import { HStack, VStack } from "@coinbase/cds-web/layout";
+import { ListCell } from "@coinbase/cds-web/list-cell";
+import { Text } from "@coinbase/cds-web/text";
+
+type ProfileCardProps = {
+  avatarSrc?: string;
+  displayName: string;
+  email: string;
+  onAccountSettings?: () => void;
+  onNotifications?: () => void;
+  onSignOut?: () => void;
+};
+
+export function ProfileCard({
+  avatarSrc,
+  displayName,
+  email,
+  onAccountSettings,
+  onNotifications,
+  onSignOut,
+}: ProfileCardProps) {
+  return (
+    <VStack gap={2}>
+      <HStack
+        gap={2}
+        padding={3}
+        alignItems="center"
+        background="bgAlternate"
+        borderRadius={2}
+      >
+        <Avatar src={avatarSrc} alt={displayName} size="l" />
+        <VStack gap={0}>
+          <Text font="headline">{displayName}</Text>
+          <Text font="body" color="fgMuted">
+            {email}
+          </Text>
+        </VStack>
+      </HStack>
+
+      <VStack>
+        <ListCell
+          title="Account settings"
+          onClick={onAccountSettings}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+        <ListCell
+          title="Notifications"
+          onClick={onNotifications}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+        <ListCell
+          title="Sign out"
+          onClick={onSignOut}
+          accessory={<Icon name="chevronRight" size="s" color="fgMuted" />}
+        />
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+What it does:
+- **Profile card**: `HStack` with `background="bgAlternate"` and `borderRadius={2}` for subtle rounded corners, containing an `Avatar`, a `Text font="headline"` display name, and a muted `Text font="body" color="fgMuted"` email.
+- **Settings rows**: three `ListCell`s below the card, each with a title and a trailing `chevronRight` `Icon` accessory for the right-side arrow.
+- No raw hex/px values — all colors and spacing use CDS tokens/style props.
+
+Caveats I couldn't verify in this environment (no `node_modules`, and installs/file-writes weren't approved):
+- Exact deep-import subpaths (`@coinbase/cds-web/avatar`, `/icon`, `/layout`, `/list-cell`, `/text`) — confirm against your installed `@coinbase/cds-web@9.28.0` exports; swap to root-barrel imports if those subpaths don't resolve.
+- The `Icon` glyph name `"chevronRight"` and `ListCell`'s trailing prop name `accessory` — please check these against CDS docs/type defs, as I couldn't run the icon-discovery script or fetch docs here.
+
+If you grant filesystem write permission, I can save this directly and also run lint/typecheck to confirm everything resolves.

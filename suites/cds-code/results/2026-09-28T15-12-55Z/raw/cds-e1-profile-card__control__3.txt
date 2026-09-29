@@ -1,0 +1,3 @@
+A quick note: I couldn't get write access to your project (`src/...`) or the Artifact publish approved in this session, so I've pasted the full component above instead — save it as `account-panel.html` and open it directly to see the working light/dark, hover, and focus states.
+
+Your `package.json` declares `@coinbase/cds-web`/`cds-icons`, but since the project has no source tree yet and I don't have verified access to that library's exact component API, I built this in plain HTML/CSS/JS rather than guess at CDS prop names. If you'd like it as a React component wired to your actual CDS primitives (`Avatar`, `Box`, chevron icon, etc.), point me at an example file using those components or grant write access and I'll adapt it in place.

@@ -1,0 +1,10 @@
+`formatRelativeTime` is pure data logic with no rendering, so this falls outside the CDS skill's scope by its own definition — I implemented it directly.
+
+I wasn't able to write into the working directory (permission denied) or execute `node` to run the suite (sandboxed), so both files live in your scratchpad instead, and I hand-verified every boundary case by walking the arithmetic (all 11 cases check out):
+
+- `formatRelativeTime.ts`
+- `formatRelativeTime.test.ts` (Jest-style; covers the 60s/60m/24h/48h/7d edges)
+
+One note baked into the implementation: the `"MMM D"` fallback reads `then.getMonth()`/`getDate()`, i.e. the *local* calendar date — appropriate for a chat UI showing a user their own local time. Because of that, the test file pins `process.env.TZ = "UTC"` so the date-boundary assertions aren't flaky depending on the machine running them.
+
+Move both files into your actual project (e.g. `src/utils/formatRelativeTime.ts` + a matching `__tests__` file) and run them with your existing Jest/RNTL setup — let me know the real path and I can place them there directly once file writes are approved.
