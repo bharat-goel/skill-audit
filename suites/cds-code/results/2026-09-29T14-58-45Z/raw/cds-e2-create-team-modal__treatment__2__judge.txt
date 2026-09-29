@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: No code was actually written or shown in the reply; it only describes a planned component, so the code-based rubric items (imports, alpha Select path, no style props) can't be satisfied.

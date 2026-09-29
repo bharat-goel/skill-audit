@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The inline function has the requested signature and correct bucket and boundary logic, and the tests use concrete timestamps that match its behaviour. The reply stays on the logic and tests, with no UI content.

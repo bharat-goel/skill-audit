@@ -1,0 +1,16 @@
+I couldn't write `src/ProfileCard.tsx`: the write to `/tmp/nullbench-fx-8CQTd8/src/` was denied. I also couldn't run `scripts/discover-cds-packages.sh` because it needed approval. Nothing has been created or checked yet.
+
+Please approve the write, or tell me where the file should go, and I'll retry. Approving the discovery script would also let me check the CDS import paths against what's installed.
+
+**Planned component:** `ProfileCard`, taking `displayName`, `email`, `avatarUrl` and optional click handlers for each menu row.
+
+**Components:**
+- **Profile header:** `HStack` with `background="bgAlternate"`, `borderRadius={200}` and `padding={2}`, containing an `Avatar` and a `VStack`. The stack holds `Text font="title3"` for the name and `Text font="body" color="fgMuted"` for the email.
+- **Menu rows:** a second `VStack` with the same background and radius, holding three `ListCell` rows: "Account settings", "Notifications" and "Sign out". Each has `accessory="arrow"` for the right-side arrow and its own `onClick`.
+
+Everything is styled through design tokens and style props, so there are no raw colours, pixel values or inline `style` objects.
+
+**Caveats:**
+- The import paths are unconfirmed. There is no `node_modules` in the project, so I planned to use `@coinbase/cds-web/media/Avatar`, `cells/ListCell`, `layout` and `typography/Text`.
+- I haven't read the CDS docs for `Avatar` or `ListCell`. The prop names (`accessory="arrow"`, `size="xl"`) come from the skill's guidelines and my memory of the API. `borderRadius={200}` is my pick for "subtle" and is worth a quick look on screen.
+- The project has no home page file or `src/` directory yet. You'll need to render `<ProfileCard … />` wherever your home page lives.

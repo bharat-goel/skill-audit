@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, only a description of a plan that mentions a guessed illustration name, so it cannot satisfy any of the code-based rubric requirements.

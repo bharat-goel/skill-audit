@@ -1,0 +1,15 @@
+I couldn't create the modal: the write to `/tmp/nullbench-fx-GqkPZa/CreateTeamModal.tsx` was blocked because permission wasn't granted. The `npm install` I tried first was blocked too. Nothing has been written to the project, and I haven't run or type-checked any code.
+
+Here is what I was going to write. The project uses `@coinbase/cds-web`, so the modal is built from its components.
+
+- **Component:** `CreateTeamModal` takes `visible`, `onRequestClose` and `onSave({ name, size })`.
+- **Header:** "Create team".
+- **Body:** a `TextInput` labelled "Team name", and a `Select` labelled "Team size" with Small, Medium and Large. Small is the default.
+- **Footer:** Save is the primary action and Cancel is secondary.
+- **Behaviour:**
+  - Save stays disabled until the name is non-empty. It trims the name, calls `onSave`, resets the form and closes the modal.
+  - Cancel and dismissing the modal both reset the form and close it.
+
+I wrote the CDS import paths and props (`Modal`, `ModalFooter` with `primaryAction`/`secondaryAction`, `Select` `onChange`) from memory of v9, without the package installed to check them. If you let me install dependencies, I can check them against the real types and adjust.
+
+How would you like to proceed? I can retry writing the file once you grant write access. I can also install `node_modules` so I can type-check it, or you can tell me if you'd rather have it in a different framework or location.

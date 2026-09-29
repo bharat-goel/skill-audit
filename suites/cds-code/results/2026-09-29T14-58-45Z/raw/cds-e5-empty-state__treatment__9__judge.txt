@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code, and it admits the work was never written. Its plan also mentions raw pixel values (Pictogram 48×48 and 64×64, maxWidth 320 and 560), which breaks the no-raw-pixel rule.

@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply gives a correctly typed function with all six buckets and consistent boundary logic, plus four Jest tests whose expected values match that logic, and it stays on the logic and testing task.

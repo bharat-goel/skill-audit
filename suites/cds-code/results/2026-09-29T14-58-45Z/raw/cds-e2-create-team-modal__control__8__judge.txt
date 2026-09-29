@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code at all, so it cannot satisfy any of the rubric's requirements (component composition, Select import path, footer buttons, style-prop constraints).

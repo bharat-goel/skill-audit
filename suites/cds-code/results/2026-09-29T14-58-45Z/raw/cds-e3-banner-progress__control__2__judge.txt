@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code using the CDS components (Banner variant="warning", ProgressBar, ProgressCircle from @coinbase/cds-web/visualizations); it only described a plain HTML/CSS page that was never written.

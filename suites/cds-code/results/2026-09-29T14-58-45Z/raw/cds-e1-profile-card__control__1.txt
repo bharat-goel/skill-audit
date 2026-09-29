@@ -1,0 +1,12 @@
+I couldn't create the profile card. The write to `/tmp/nullbench-fx-aqyZuD/src/ProfileCard.tsx` was blocked because it needs your permission, and I haven't received it. I also couldn't run `npm install`, so nothing has been installed or checked.
+
+The project currently holds only a `package.json`, and it uses Coinbase CDS (`@coinbase/cds-web`). No home page or entry file exists yet. The `src/` folder was created before the write was blocked.
+
+This is what I intended to write, as a `ProfileCard` component built from CDS parts:
+- **Profile block:** a rounded container (`borderRadius={200}`, `bgAlternate` background) holding an `Avatar`, the display name in `headline` font, and the email in `Text color="fgMuted"`.
+- **Menu:** a second rounded container with three `ListCell` rows, "Account settings", "Notifications" and "Sign out". Each has `accessory="arrow"` for the right-side arrow and its own click handler.
+- **Props:** `displayName`, `email`, `avatarSrc`, `onAccountSettings`, `onNotifications` and `onSignOut`.
+
+I wrote the CDS import paths and prop names from memory, without checking them against the installed package, so they may need small fixes once the dependencies are installed.
+
+If you allow file writes to that folder, and `npm install` if you want it, I'll create the file and check it compiles. If you'd rather I use plain HTML/CSS, or you tell me where your home page lives, I'll do that instead.

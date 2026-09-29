@@ -1,0 +1,10 @@
+I built the security empty state and sent it to you as an HTML file. I haven't previewed it in a browser, and it isn't published. Publishing to claude.ai needed your approval and hasn't gone through. Approve it and I'll publish it.
+
+The empty state reads "No open security alerts". Both versions use the same illustration: a shield with a check mark inside a slowly rotating scan radar. It follows light and dark themes, and the scan sweep is skipped if the viewer prefers reduced motion.
+
+- **Compact:** a 64px illustration, one line of supporting text and a single "Run scan" button. It fits inside a list, sidebar or card.
+- **Roomy:** a 168px illustration, a larger title, two lines of supporting text, and last and next scan times. It has "Run scan now" and "Review scan settings" buttons and is meant to fill a page.
+
+The two versions sit side by side on wide screens and stack on phones. The run buttons show a brief "Scanning…" state when clicked.
+
+The first attempt to write the file into the project folder also needed your approval and wasn't granted. The file is in the session scratchpad instead.

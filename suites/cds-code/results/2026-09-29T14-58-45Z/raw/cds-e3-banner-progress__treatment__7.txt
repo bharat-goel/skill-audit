@@ -1,0 +1,46 @@
+I'm still trying to save the component file, but the write was denied, so I need your permission before I can continue.
+
+Here is the component I was going to write to `/tmp/nullbench-fx-0bxq7k/UnsavedChangesBanner.tsx`:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banners/Banner';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+export type UnsavedChangesBannerProps = {
+  onSave: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      startIcon="warning"
+      variant="warning"
+      primaryAction={<Link onClick={onSave}>Save now</Link>}
+    >
+      You have unsaved changes
+    </Banner>
+    <VStack paddingX={2} gap={2}>
+      <ProgressBar progress={0.6} />
+      <HStack justifyContent="center">
+        <ProgressCircle indeterminate size={24} />
+      </HStack>
+    </VStack>
+  </VStack>
+);
+```
+
+- **Banner:** `Banner variant="warning"` shows the message, and the "Save now" `Link` is passed as its `primaryAction`.
+- **Container:** the container is a `VStack` with `paddingX={2}`, so it needs no extra `Box` wrapper. It uses `gap` tokens for spacing.
+- **Progress bar:** `ProgressBar` has `progress={0.6}`. I assumed the scale is 0–1.
+- **Spinner:** `ProgressCircle indeterminate` covers the secondary loading operation.
+- **Styling:** there are no hex colors, pixel spacing values or inline styles.
+
+**Not verified:**
+- **Import paths:** the project has no `node_modules`, so I couldn't run the discovery script or confirm them. The `Banner` and `Link` paths are the most likely to need adjusting.
+- **Docs and checks:** no CDS docs tool was available, and I haven't run lint or typecheck.
+- **Prop names:** `startIcon`, `primaryAction`, the `ProgressBar` 0–1 scale and the `size` prop on `ProgressCircle` are from memory of the CDS API. Please check them against the docs.
+
+If you approve the write, I can save the file. I can also put it somewhere else if you prefer.

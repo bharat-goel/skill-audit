@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code at all, only a prose description, so it can't be shown to satisfy the rubric's requirements on components, the alpha Select import, footer button variants, or the absence of style props and raw values.

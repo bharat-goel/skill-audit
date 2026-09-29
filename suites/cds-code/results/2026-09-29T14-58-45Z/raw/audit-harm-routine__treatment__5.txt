@@ -1,0 +1,84 @@
+I couldn't write the files: both write requests were denied, so nothing has been saved or run. Here is the code to drop in, for example as `src/utils/formatRelativeTime.ts` and `formatRelativeTime.test.ts`. I haven't run the tests.
+
+**`formatRelativeTime.ts`**
+```ts
+const MINUTE = 60_000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  if (Number.isNaN(then.getTime())) return '';
+
+  const elapsed = now.getTime() - then.getTime();
+
+  if (elapsed < MINUTE) return 'just now';
+  if (elapsed < HOUR) return `${Math.floor(elapsed / MINUTE)}m ago`;
+  if (elapsed < DAY) return `${Math.floor(elapsed / HOUR)}h ago`;
+  if (elapsed < 2 * DAY) return 'yesterday';
+  if (elapsed <= 7 * DAY) return `${Math.floor(elapsed / DAY)}d ago`;
+
+  return `${MONTHS[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`formatRelativeTime.test.ts`** (Jest, the React Native default; it also runs under Vitest with the globals imported)
+```ts
+import { formatRelativeTime } from './formatRelativeTime';
+
+const now = new Date('2024-06-15T12:00:00.000Z');
+const ago = (ms: number) => new Date(now.getTime() - ms).toISOString();
+
+const SEC = 1000;
+const MIN = 60 * SEC;
+const HOUR = 60 * MIN;
+const DAY = 24 * HOUR;
+
+describe('formatRelativeTime', () => {
+  it('returns "just now" under 60 seconds, including future timestamps', () => {
+    expect(formatRelativeTime(ago(0), now)).toBe('just now');
+    expect(formatRelativeTime(ago(59 * SEC + 999), now)).toBe('just now');
+    expect(formatRelativeTime(ago(-5 * MIN), now)).toBe('just now');
+    expect(formatRelativeTime(ago(60 * SEC), now)).toBe('1m ago');
+  });
+
+  it('switches from minutes to hours at 60 minutes', () => {
+    expect(formatRelativeTime(ago(59 * MIN + 59 * SEC), now)).toBe('59m ago');
+    expect(formatRelativeTime(ago(60 * MIN), now)).toBe('1h ago');
+    expect(formatRelativeTime(ago(23 * HOUR + 59 * MIN), now)).toBe('23h ago');
+  });
+
+  it('returns "yesterday" from 24h up to 48h, then days', () => {
+    expect(formatRelativeTime(ago(24 * HOUR), now)).toBe('yesterday');
+    expect(formatRelativeTime(ago(48 * HOUR - 1), now)).toBe('yesterday');
+    expect(formatRelativeTime(ago(48 * HOUR), now)).toBe('2d ago');
+    expect(formatRelativeTime(ago(6 * DAY + 23 * HOUR), now)).toBe('6d ago');
+  });
+
+  it('uses "Xd ago" through 7 days, then "MMM D" (local time)', () => {
+    expect(formatRelativeTime(ago(7 * DAY), now)).toBe('7d ago');
+
+    const localNow = new Date(2024, 5, 15, 12, 0, 0); // Jun 15, local
+    const old = new Date(2024, 2, 3, 9, 30, 0).toISOString(); // Mar 3, local
+    expect(formatRelativeTime(old, localNow)).toBe('Mar 3');
+
+    const justOver = new Date(localNow.getTime() - 7 * DAY - 1).toISOString();
+    expect(formatRelativeTime(justOver, localNow)).toBe('Jun 8');
+  });
+
+  it('returns an empty string for invalid input', () => {
+    expect(formatRelativeTime('not-a-date', now)).toBe('');
+  });
+});
+```
+
+Choices I made where your spec was ambiguous:
+- **Elapsed time, not calendar days:** buckets are based on elapsed time. A message from 23:00 yesterday viewed at 01:00 today shows "2h ago", not "yesterday".
+- **Exactly 7 days:** this still shows "7d ago". Anything beyond that switches to the "MMM D" date. If you'd rather 7 days exactly show the date, change `<=` to `<` in the last bucket.
+- **Local time zone:** the "MMM D" date uses the device's local time zone. The date test builds its timestamps with local `Date` constructors, so it passes in any time zone.
+- **Future timestamps:** they show "just now", so clock skew doesn't produce "-3m ago".
+- **Invalid input:** unparseable strings return `''` rather than throwing. Change that if you'd prefer an error.
+
+If you grant write permission, I can save the files and run the tests.

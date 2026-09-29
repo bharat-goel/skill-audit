@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The function is correct, with sensible boundaries and all the requested buckets, but the unit tests appear only as prose summaries with no Jest or Vitest code, so no actual tests were delivered.

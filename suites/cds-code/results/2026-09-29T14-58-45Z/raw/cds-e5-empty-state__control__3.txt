@@ -1,0 +1,10 @@
+The publish was declined, so nothing has been uploaded. The page is saved locally at `/tmp/claude-0/-tmp-nullbench-fx-krM2jG/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/security-empty-state.html`. I haven't opened it in a browser.
+
+It shows "No open security findings" in two sizes, using one shared shield-and-check illustration so the visual is identical:
+
+- **Compact:** an 88px illustration with tight spacing, for sidebars, cards or table footers.
+- **Roomy:** a 176px illustration with a larger title, longer supporting text and more padding, for a full empty tab.
+
+Both have a scan summary ("Scanned 4 min ago, 0 of 212 packages"), a "Scan now" button and a history button. The colors follow light and dark themes, and the panels stack on narrow screens. The package counts and scan times are placeholder copy.
+
+If you want it hosted, I can retry the publish once you approve it. I can also send you the file directly.

@@ -1,0 +1,73 @@
+I couldn't write the files: both Write calls were denied for permissions. I haven't retried, and nothing has been run or tested. Here is the code so you can drop it in yourself.
+
+**`src/utils/formatRelativeTime.ts`**
+```ts
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  if (Number.isNaN(then.getTime())) return '';
+
+  const diff = now.getTime() - then.getTime();
+
+  if (diff < MINUTE) return 'just now';
+  if (diff < HOUR) return `${Math.floor(diff / MINUTE)}m ago`;
+  if (diff < DAY) return `${Math.floor(diff / HOUR)}h ago`;
+  if (diff < 2 * DAY) return 'yesterday';
+  if (diff <= 7 * DAY) return `${Math.floor(diff / DAY)}d ago`;
+
+  return `${MONTHS[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`src/utils/formatRelativeTime.test.ts`** (Jest)
+```ts
+import { formatRelativeTime } from './formatRelativeTime';
+
+const now = new Date('2024-03-10T12:00:00.000Z');
+const ago = (ms: number) => new Date(now.getTime() - ms).toISOString();
+const SEC = 1000, MIN = 60 * SEC, HOUR = 60 * MIN, DAY = 24 * HOUR;
+
+describe('formatRelativeTime', () => {
+  it('switches from "just now" to minutes at 60s', () => {
+    expect(formatRelativeTime(ago(0), now)).toBe('just now');
+    expect(formatRelativeTime(ago(59 * SEC + 999), now)).toBe('just now');
+    expect(formatRelativeTime(ago(60 * SEC), now)).toBe('1m ago');
+    expect(formatRelativeTime(ago(60 * MIN - 1), now)).toBe('59m ago');
+  });
+
+  it('switches minutes -> hours at 60m, hours -> "yesterday" at 24h', () => {
+    expect(formatRelativeTime(ago(60 * MIN), now)).toBe('1h ago');
+    expect(formatRelativeTime(ago(24 * HOUR - 1), now)).toBe('23h ago');
+    expect(formatRelativeTime(ago(24 * HOUR), now)).toBe('yesterday');
+    expect(formatRelativeTime(ago(48 * HOUR - 1), now)).toBe('yesterday');
+  });
+
+  it('switches "yesterday" -> days at 48h, days -> date after 7 days', () => {
+    expect(formatRelativeTime(ago(48 * HOUR), now)).toBe('2d ago');
+    expect(formatRelativeTime(ago(7 * DAY), now)).toBe('7d ago');
+    const older = new Date(now.getTime() - 7 * DAY - 1);
+    const expected = `${older.toLocaleString('en-US', { month: 'short' })} ${older.getDate()}`;
+    expect(formatRelativeTime(older.toISOString(), now)).toBe(expected);
+  });
+
+  it('formats older dates as "MMM D" without zero padding', () => {
+    const localNow = new Date(2024, 2, 20, 12, 0, 0);
+    const iso = new Date(2024, 2, 3, 9, 30, 0).toISOString();
+    expect(formatRelativeTime(iso, localNow)).toBe('Mar 3');
+  });
+});
+```
+
+Choices I made where your spec was ambiguous:
+- **7-day boundary:** exactly 7 days is still "7d ago". Anything older switches to "MMM D".
+- **Future timestamps:** these return "just now", so clock skew doesn't produce negative labels.
+- **Invalid input:** an unparseable string returns `""`.
+- **Date label:** "MMM D" uses the device's local time zone. It's built from a month array rather than `Intl`, to avoid Hermes locale differences. The date tests use local-time inputs so they pass in any time zone.
+
+If you approve write access I can create the files and run the tests.

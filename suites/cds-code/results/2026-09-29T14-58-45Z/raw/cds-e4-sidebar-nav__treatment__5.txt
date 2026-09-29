@@ -1,0 +1,38 @@
+I couldn't write the sidebar file. The write to `/tmp/nullbench-fx-1M8CSJ/src/SidebarNav.tsx` was denied, so nothing has been created. I also couldn't install the CDS packages or run the discovery script. Both needed approval, so I haven't checked the component or icon names against the installed version.
+
+This is the component I planned to write. Home is selected by default, and clicking an item selects it.
+
+```tsx
+import React, { useState } from 'react';
+import { Sidebar, SidebarItem } from '@coinbase/cds-web/navigation';
+
+const items = [
+  { id: 'home', title: 'Home', icon: 'home' },
+  { id: 'activity', title: 'Activity', icon: 'chartLine' },
+  { id: 'settings', title: 'Settings', icon: 'gear' },
+] as const;
+
+export const SidebarNav = () => {
+  const [activeId, setActiveId] = useState<(typeof items)[number]['id']>('home');
+
+  return (
+    <Sidebar autoFit>
+      {items.map(({ id, title, icon }) => (
+        <SidebarItem
+          key={id}
+          active={activeId === id}
+          icon={icon}
+          onClick={() => setActiveId(id)}
+          title={title}
+        />
+      ))}
+    </Sidebar>
+  );
+};
+```
+
+- **Styling:** it uses no raw colors, pixel values or inline styles, so it follows the theme.
+- **Unverified names:** `Sidebar` and `SidebarItem` are imported from `@coinbase/cds-web/navigation`, and the icon names are `home`, `chartLine` and `gear`. All of these come from memory. If `chartLine` or the import path is wrong, the icon script or the CDS docs will give the right name.
+- **Not run:** I haven't run the linter or typecheck, and the CDS docs weren't available to read.
+
+To go ahead, either grant write access and I'll create `src/SidebarNav.tsx`, or allow `npm install` so I can check the names and run the typecheck.

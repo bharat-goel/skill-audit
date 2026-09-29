@@ -1,0 +1,21 @@
+I couldn't create the security empty state. Writing `SecurityEmptyState.tsx` was blocked because write permission wasn't granted, so no file exists yet. I also couldn't run the CDS discovery script or `npm install` because both needed approval. The project has no `node_modules`, so I couldn't check any imports.
+
+Here is what I planned to write. It follows the skill's rules: style props and tokens only, and no raw colors or pixel spacing.
+
+**CDS components**
+- `VStack`, `Box`: layout and spacing.
+- `Text` with `font`, `color` and `textAlign`: title and supporting copy.
+- `Pictogram` at 64x64 for the compact version.
+- `HeroSquare` at 200x200 for the roomy version.
+- Both are illustration sizes listed in `guidelines/illustrations.md`.
+
+**Compact and roomy versions**
+- **Compact:** a 64px pictogram, a `headline` title, `label2` muted body text, and gap and padding of 2 and 4.
+- **Roomy:** a 200px hero illustration, a `title2` title, `body` muted text, and gap 3 with padding 4 and 8.
+- A single `<SecurityEmptyState variant="compact" | "roomy" />` component with a showcase that renders both side by side on `bgAlternate`.
+
+**Not verified**
+- The illustration name (I used `'security'`) is a guess. `Pictogram` and `HeroSquare` may also use different names for the same artwork, so check the name against the installed illustration set.
+- The import paths (`@coinbase/cds-web/illustrations`, `/layout`, `/typography/Text`) haven't been checked against the package exports.
+
+Approve the write, or the discovery script and `npm install`, and I'll create the file, check the names and paths, and run the project's lint and typecheck.

@@ -1,0 +1,14 @@
+I built the empty state, but I couldn't publish it. The publish request wasn't approved, so there's no link. I also couldn't write into the project folder, so the file is in the session scratchpad:
+
+`/tmp/claude-0/-tmp-nullbench-fx-7UfXDW/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/security-empty-state.html`
+
+I haven't rendered it, so I haven't seen it in a browser.
+
+**What's in it**
+- **Illustration:** a shield with a check mark inside two dashed scan rings. A slow sweep line circles it, and the sweep stops if the viewer has reduced motion turned on. Both versions use the same drawing, so they show the same visual at different scales.
+- **Copy:** the title is "No open findings". The supporting text says the last scan found no vulnerable dependencies or committed secrets. A monospace line under it shows the scan details: 0 CVEs, 212 packages, last scan time.
+- **Compact:** a 360px side-panel card, left-aligned, with a 72px illustration, a short paragraph and one "Run scan" button.
+- **Roomy:** a full-width panel, centered, with a 240px illustration, a larger title, longer text, extra scan details and two buttons ("Run scan again" and "View scan history").
+- **Extras:** the buttons work on the page: "Run scan" shows "Scanning…" for a moment, then the time updates to "just now". Both light and dark themes are designed, and the page works at phone width.
+
+Should I publish it as a private artifact, or write the file somewhere else in the project instead?

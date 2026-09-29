@@ -1,0 +1,49 @@
+I couldn't write the banner component: the write to `/tmp/nullbench-fx-32Yq6f/UnsavedChangesBanner.tsx` was denied because permission wasn't granted. I also couldn't finish the skill's setup steps, so the component below is untested.
+
+- **Discovery script:** it needed approval and didn't run. `node_modules` isn't installed, so I couldn't read the package export maps either.
+- **CDS docs:** I never loaded the `cds-docs` skill or the CDS MCP server, so I haven't read the docs for `Banner`, `ProgressBar` or `ProgressCircle`.
+
+**Components I planned to use** (from `guidelines/components.md`):
+- `Banner` with `variant="warning"` for the message, with a `Link` as its action.
+- `VStack` for layout. Its `paddingX={2}` gives the 2 units of horizontal padding, so no extra `Box` wrapper is needed.
+- `ProgressBar` with `progress={0.6}` for the 60% bar.
+- `ProgressCircle indeterminate` for the spinner.
+
+Here is the component I intended to write:
+
+```tsx
+import { Banner } from '@coinbase/cds-web/banner/Banner';
+import { VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+export type UnsavedChangesBannerProps = {
+  onSave: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      primaryAction={
+        <Link as="button" onClick={onSave}>
+          Save now
+        </Link>
+      }
+      startIcon="warning"
+      variant="warning"
+    >
+      You have unsaved changes
+    </Banner>
+    <VStack alignItems="flex-start" gap={2} paddingX={2}>
+      <ProgressBar progress={0.6} />
+      <ProgressCircle indeterminate />
+    </VStack>
+  </VStack>
+);
+```
+
+The import paths are from memory and unchecked: `@coinbase/cds-web/banner/Banner`, `@coinbase/cds-web/typography/Link`, and importing `ProgressBar` and `ProgressCircle` from the `@coinbase/cds-web-visualization` root.
+
+The `Banner` props (`primaryAction`, `startIcon`) and the `progress` scale (0.6 versus 60) are also unconfirmed.
+
+If you grant write permission and let me run the discovery script, I'll write the file and check the imports and props against the installed packages.

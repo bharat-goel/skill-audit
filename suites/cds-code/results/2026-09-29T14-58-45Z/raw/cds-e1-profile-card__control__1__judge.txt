@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, only a prose description of its intent, so the rubric's code requirements cannot be verified. It also admits that import paths and prop names were written from memory and unchecked, and it describes `borderRadius={200}` and `headline` font only in passing.

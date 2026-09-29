@@ -1,0 +1,9 @@
+I couldn't create the profile card. The write to `/tmp/nullbench-fx-q7tsFL/src/ProfileCard.tsx` needs permission that hasn't been granted. The earlier `npm install` was also blocked, so nothing has been written and nothing has been tested.
+
+Once you grant write access, I'll create `src/ProfileCard.tsx` and can retry the install to check it. It's built on the Coinbase CDS components already in your `package.json` (`Avatar`, `ListCell`, `Icon`, `Text`, `VStack`/`HStack`):
+
+- **Header card:** it shows the avatar next to the display name in headline weight, with the email below it in muted text (`color="fgMuted"`). The container is `bgAlternate` with `borderRadius={200}`, which is a small radius.
+- **Menu rows:** a second rounded container holds three `ListCell` rows: "Account settings", "Notifications" and "Sign out". Each has a muted `caretRight` icon on the right.
+- **Props:** the component takes `displayName`, `email`, `avatarSrc` and one press handler per row, so you can wire it to your router and auth.
+
+I wrote the CDS import paths and prop names (for example `media/Avatar`, `cells/ListCell`, the `caretRight` icon name and the `borderRadius={200}` token) from memory, not checked against the installed 9.28.0 package. If you'd rather I write it a different way, or put it somewhere other than `src/`, tell me.

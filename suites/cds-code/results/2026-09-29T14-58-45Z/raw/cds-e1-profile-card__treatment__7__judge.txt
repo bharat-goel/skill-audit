@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: No actual code was produced (the write was denied), and the described plan uses a numeric borderRadius={200}, unconfirmed import paths, and no verifiable code satisfying the rubric.

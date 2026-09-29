@@ -1,0 +1,18 @@
+I couldn't create `src/CreateTeamModal.tsx`. The write was denied because permission to write to that path hasn't been granted, so nothing has been written yet. The discovery script was blocked for the same reason.
+
+If you approve writes to `/tmp/nullbench-fx-WHsGyr/src/`, I'll create the file. If you'd rather it go somewhere else, tell me the path.
+
+This is what the component will contain:
+
+- **Modal structure:** `Modal` with `ModalHeader` (title "Create team"), `ModalBody` and `ModalFooter`.
+- **Fields:** a `TextInput` labelled "Team name", and a `Select` labelled "Team size" with options Small, Medium and Large (default Small). They sit in a `VStack` with `gap={2}`.
+- **Footer buttons:** `Button variant="primary"` for Save, disabled until the name is non-empty. `Button variant="secondary"` for Cancel.
+- **Behavior:** Cancel and closing the modal reset the fields and call `onRequestClose`. Save calls `onSave({ name, size })` with the trimmed name, then closes.
+- **Props:** `visible`, `onRequestClose` and `onSave`.
+- **Styling:** only style props and design tokens, with no inline styles or raw values.
+
+I couldn't verify a few things:
+
+- **Import paths:** `node_modules` isn't installed and the discovery script was blocked. I wrote `@coinbase/cds-web/buttons`, `/controls`, `/overlays` and `/layout` from memory. The `Select` path comes from the guidelines. Run `npm install` and I'll check them against the package `exports`.
+- **Prop names:** I couldn't read the component docs. The `Select` `onChange` signature, the `ModalFooter` `primaryAction`/`secondaryAction` props and `TextInput`'s `onChange` are unconfirmed.
+- **Lint and typecheck:** not run, because there are no dependencies and no config in the project.

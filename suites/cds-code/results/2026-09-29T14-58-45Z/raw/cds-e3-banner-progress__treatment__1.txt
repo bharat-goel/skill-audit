@@ -1,0 +1,37 @@
+I'm trying to save the banner component to your project, but the write permission was denied. I'll show the code here instead.
+
+**CDS components I planned to use:** `Banner` (warning variant), `Link` (the "Save now" action), `VStack` (layout, with `paddingX={2}`), `ProgressBar` (60%) and `ProgressCircle` (indeterminate spinner).
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner';
+import { VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+export const UnsavedChangesBanner = ({ onSave }: { onSave?: () => void }) => (
+  <VStack gap={2}>
+    <Banner
+      startIcon="warning"
+      primaryAction={<Link as="button" onClick={onSave}>Save now</Link>}
+      title="You have unsaved changes"
+      variant="warning"
+    >
+      Your latest edits have not been saved yet.
+    </Banner>
+    <VStack alignItems="center" gap={2} paddingX={2}>
+      <ProgressBar accessibilityLabel="Progress, 60% complete" progress={0.6} />
+      <ProgressCircle accessibilityLabel="Loading" indeterminate size={24} />
+    </VStack>
+  </VStack>
+);
+```
+
+**Not done or checked:**
+- **File not written:** I couldn't write `UnsavedChangesBanner.tsx` into `/tmp/nullbench-fx-QumO8P`. Approve the write if you want it saved there.
+- **No discovery or docs:** The discovery script needed approval and didn't run. CDS isn't installed (`node_modules` is missing), and I didn't read the CDS docs. `package.json` shows the web runtime.
+- **Unverified imports and props:** The import paths and the `Banner`, `Link`, `ProgressBar` and `ProgressCircle` props come from the CDS component guide, not the installed packages. Check them after `npm install`.
+- **Progress scale:** I assumed `progress` runs from 0 to 1, so 60% is `0.6`.
+- **Not run:** I haven't run the linter or typechecker.
+
+Styling uses only style props and tokens, with no hex colors, raw pixel spacing or inline styles.

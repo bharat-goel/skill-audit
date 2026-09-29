@@ -1,0 +1,18 @@
+I couldn't create the sidebar: writing `/tmp/nullbench-fx-GGKBy0/src/SideNav.tsx` was blocked because I don't have permission to write there. Nothing has been created or run, so there's no code to review yet.
+
+The same permission issue blocked the discovery script and `npm install`. That means the steps below weren't done:
+- I haven't verified any CDS import paths or icon names.
+- I haven't read the CDS docs. The `cds-docs` skill and the CDS MCP server aren't available in this session.
+- Lint and typecheck haven't run.
+
+Here's what I intended to write:
+- **CDS components:** `Sidebar` and `SidebarItem` from `@coinbase/cds-web/navigation/...`, with `active` marking the selected item.
+- **Items:** Home, Activity and Settings, with Home selected by default. Selection is held in `useState` so clicking another item moves the highlight.
+- **Icons:** `home`, `history` and `gear`.
+- **Styling:** No custom styles or hex/px values. All styling would come from CDS components and tokens.
+
+The `Sidebar` and `SidebarItem` import paths, their props, and the icon names are from memory and unchecked.
+
+Two ways to go on:
+1. Grant write access to `/tmp/nullbench-fx-GGKBy0/src/`, plus permission to run the discovery script and `npm install`, and I'll create the file and verify the imports and icons.
+2. Tell me a different location I can write to.

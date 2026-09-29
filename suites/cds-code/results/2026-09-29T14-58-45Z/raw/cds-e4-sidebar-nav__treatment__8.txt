@@ -1,0 +1,53 @@
+I couldn't create the sidebar file. The write to `/tmp/nullbench-fx-rmJp02/src/SidebarNav.tsx` was denied, so no code has been added to the project yet.
+
+Earlier attempts to run the CDS discovery script and `npm install` were also blocked. Nothing was installed, and I couldn't read the CDS docs.
+
+Here is what I planned to write, so you can drop it in yourself or grant write access and I'll create it:
+
+```tsx
+import { useState } from 'react';
+import { Icon } from '@coinbase/cds-web/icons';
+import { ListCell } from '@coinbase/cds-web/cells';
+import { VStack } from '@coinbase/cds-web/layout';
+
+const navItems = [
+  { id: 'home', title: 'Home', icon: 'home' },
+  { id: 'activity', title: 'Activity', icon: 'chartLine' },
+  { id: 'settings', title: 'Settings', icon: 'gear' },
+] as const;
+
+type NavItemId = (typeof navItems)[number]['id'];
+
+export const SidebarNav = () => {
+  const [selectedId, setSelectedId] = useState<NavItemId>('home');
+
+  return (
+    <VStack as="nav" accessibilityLabel="Main navigation" background="bg" borderedEnd gap={0.5} padding={1} width={280}>
+      {navItems.map(({ id, title, icon }) => {
+        const selected = id === selectedId;
+        return (
+          <ListCell
+            key={id}
+            accessibilityLabel={title}
+            aria-current={selected ? 'page' : undefined}
+            media={<Icon active={selected} name={icon} size="m" />}
+            onClick={() => setSelectedId(id)}
+            selected={selected}
+            title={title}
+          />
+        );
+      })}
+    </VStack>
+  );
+};
+```
+
+I couldn't check any of these against the installed CDS package, so please treat them as unverified:
+- **Import paths:** `@coinbase/cds-web/icons`, `/cells` and `/layout` are my best guess at the valid exports.
+- **Icon names:** `home`, `chartLine` and `gear` may not exist. Run `node skill/scripts/discover-cds-icons.mjs <query>` after installing to check.
+- **Props:** I haven't confirmed `ListCell` supports `selected`, `media` and `onClick`, or that `VStack` supports `borderedEnd` and `as="nav"`.
+- **Checks:** I haven't run lint or typecheck.
+
+Home is selected by default, and clicking an item changes the selection.
+
+To continue, either approve the file write and the `npm install` (so I can verify the imports, icons and props and run typecheck), or paste the code above yourself.

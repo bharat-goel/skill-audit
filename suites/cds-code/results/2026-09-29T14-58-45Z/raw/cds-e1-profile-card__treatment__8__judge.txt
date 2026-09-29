@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply wrote no code, only a plan with unverified imports and props, so it can't satisfy rubric items such as borderRadius as a token, valid import paths, or ListCell with accessory="arrow".

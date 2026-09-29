@@ -1,0 +1,9 @@
+I couldn't build the profile card. The write to `/tmp/nullbench-fx-mm18KZ/src/ProfileCard.tsx` was blocked because I don't have permission to write there yet. The `npm install` and the search for the CDS packages were also blocked. Nothing has been created, installed or run.
+
+The project is a bare `package.json` that depends on `@coinbase/cds-web`, so I planned a React component built from CDS parts. I couldn't check the CDS import paths or prop names because the package isn't installed, so the code is from memory of the library and unverified.
+
+Here is what I was going to write:
+- **Profile card:** a `ProfileCard` component taking `displayName`, `email` and `avatarUrl`. It has a `bgSecondary` container with `borderRadius={200}` for the subtle rounded corners. Inside are an `Avatar` (size `xl`), the display name in `headline` font, and the email in `body` font with `color="fgMuted"`.
+- **Menu rows:** below the card, a second rounded container holds three full-width `Pressable` rows: "Account settings", "Notifications" and "Sign out". Each has the label on the left and a muted `caretRight` icon on the right. Each row has an optional press handler (`onAccountSettingsPress`, `onNotificationsPress`, `onSignOutPress`).
+
+To go ahead, either grant write access to `/tmp/nullbench-fx-mm18KZ` so I can create the file, or tell me where you want it. If you also let me run `npm install`, I can check the CDS imports and props against the real package and fix anything that's wrong. I can also adjust the layout, for example putting the three rows inside the same card as the profile.

@@ -1,0 +1,42 @@
+I couldn't save the component to a file: both write attempts were denied. Here is the code inline instead. I haven't type-checked or run it.
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+export type UnsavedChangesBannerProps = {
+  onSave: () => void;
+};
+
+export const UnsavedChangesBanner = ({ onSave }: UnsavedChangesBannerProps) => (
+  <VStack gap={2}>
+    <Banner
+      variant="warning"
+      startIcon="warning"
+      primaryAction={<Link onClick={onSave}>Save now</Link>}
+    >
+      You have unsaved changes
+    </Banner>
+    <HStack paddingX={2} gap={2} alignItems="center">
+      <ProgressBar progress={0.6} />
+      <ProgressCircle indeterminate size={24} />
+    </HStack>
+  </VStack>
+);
+```
+
+- **Banner:** a `warning` variant with the "You have unsaved changes" message and a `Save now` `Link` as its action.
+- **Container:** the `HStack` has `paddingX={2}`, which is the 2 units of horizontal padding you asked for. It holds the 60% `ProgressBar` (`progress={0.6}`) and an indeterminate `ProgressCircle` as the spinner.
+- **Styling:** everything uses style props and design tokens, with no hex colors, raw pixel spacing or inline styles. The one exception is the spinner's `size={24}`, an explicit dimension.
+
+**Unverified:**
+- **Imports:** the discovery script couldn't run because `node_modules` isn't installed, and no CDS docs tool was available. The import paths come from the skill guidelines and `package.json`.
+- **`ProgressBar`:** it may be a 0–1 value or a percentage in your installed version.
+- **`Link`:** its `onClick` prop is my assumption for the web build.
+- **`startIcon="warning"`:** this is a guess at the icon name.
+- **Lint and typecheck:** neither was run.
+
+If you grant write access, I can save it to a file, or I can adjust the props once dependencies are installed.

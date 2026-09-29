@@ -1,0 +1,37 @@
+I couldn't create the sidebar. Both the write to `/tmp/nullbench-fx-YQXns3/src/SidebarNav.tsx` and an earlier `npm install` were blocked because I haven't been granted permission for them.
+
+This is what I intended to write. The project uses Coinbase CDS (`@coinbase/cds-web`), so I built it on CDS's `Sidebar` and `SidebarItem`:
+
+```tsx
+import React, { useState } from 'react';
+import { Sidebar, SidebarItem } from '@coinbase/cds-web/navigation';
+
+const items = [
+  { id: 'home', title: 'Home', icon: 'home' },
+  { id: 'activity', title: 'Activity', icon: 'chartLine' },
+  { id: 'settings', title: 'Settings', icon: 'gear' },
+] as const;
+
+export const SidebarNav = () => {
+  const [selected, setSelected] = useState<(typeof items)[number]['id']>('home');
+
+  return (
+    <Sidebar logo={null}>
+      {items.map(({ id, title, icon }) => (
+        <SidebarItem
+          key={id}
+          active={selected === id}
+          icon={icon}
+          onClick={() => setSelected(id)}
+          title={title}
+        />
+      ))}
+    </Sidebar>
+  );
+};
+```
+
+- **Selected item:** Home is selected by default, and clicking another item moves the highlight.
+- **Unverified:** `node_modules` isn't installed, so I wrote the CDS prop names and icon names (`home`, `chartLine`, `gear`) from memory. The `Sidebar` props and the `chartLine` icon are the parts I'm least sure of.
+
+If you allow writes to `src/` (and optionally `npm install`), I'll create the file and check those names against the installed package. I can also make it a plain HTML/CSS sidebar with no CDS dependency.

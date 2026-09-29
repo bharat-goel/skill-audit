@@ -1,0 +1,60 @@
+I couldn't write the profile card to disk. The write to `/tmp/nullbench-fx-Mfh3Wh/src/ProfileCard.tsx` was blocked because it needs permission you haven't granted. `npm install` was blocked the same way. Nothing has been created or verified.
+
+Here is the component I was going to add. It uses the CDS packages already in your `package.json`:
+
+```tsx
+import React from 'react';
+import { ListCell } from '@coinbase/cds-web/cells/ListCell';
+import { Icon } from '@coinbase/cds-web/icons/Icon';
+import { Avatar } from '@coinbase/cds-web/media/Avatar';
+import { Box, HStack, VStack } from '@coinbase/cds-web/layout';
+import { Text } from '@coinbase/cds-web/typography/Text';
+
+export type ProfileCardProps = {
+  name: string;
+  email: string;
+  avatarSrc?: string;
+  onAccountSettings?: () => void;
+  onNotifications?: () => void;
+  onSignOut?: () => void;
+};
+
+export const ProfileCard = ({ name, email, avatarSrc, onAccountSettings, onNotifications, onSignOut }: ProfileCardProps) => {
+  const rows = [
+    { title: 'Account settings', onPress: onAccountSettings },
+    { title: 'Notifications', onPress: onNotifications },
+    { title: 'Sign out', onPress: onSignOut },
+  ];
+
+  return (
+    <VStack gap={2} maxWidth={400} width="100%">
+      <Box background="bgSecondary" borderRadius={200} padding={3}>
+        <HStack alignItems="center" gap={2}>
+          <Avatar alt={name} size="xxl" src={avatarSrc} />
+          <VStack>
+            <Text as="p" font="headline">{name}</Text>
+            <Text as="p" color="fgMuted" font="body">{email}</Text>
+          </VStack>
+        </HStack>
+      </Box>
+
+      <Box background="bgSecondary" borderRadius={200} overflow="hidden">
+        {rows.map(({ title, onPress }) => (
+          <ListCell
+            key={title}
+            end={<Icon color="fgMuted" name="caretRight" size="s" />}
+            onPress={onPress}
+            title={title}
+          />
+        ))}
+      </Box>
+    </VStack>
+  );
+};
+```
+
+- **Card:** the avatar, display name and email sit in a container with subtle rounded corners (`borderRadius={200}`). The email uses the muted foreground colour (`fgMuted`).
+- **Menu rows:** 'Account settings', 'Notifications' and 'Sign out' are `ListCell` rows in a second rounded container below the card. Each has a right-side caret arrow.
+- **Unverified:** I wrote the CDS import paths and prop values (`caretRight`, `borderRadius={200}`, `Avatar size="xxl"`) from memory. I couldn't install the packages to check them against the 9.28 types.
+
+If you approve file writes and `npm install`, I'll create the file and run a type-check. Or tell me where your home page lives and I'll wire it in there.

@@ -1,0 +1,82 @@
+I couldn't create the modal file. Both the write to `src/CreateTeamModal.tsx` and the `mkdir` for `src/` were denied, and nothing exists on disk yet.
+
+I also couldn't run the CDS discovery script, because it needs approval and there's no `node_modules` here. No CDS docs were reachable either. The import paths and props below come from the component guide and my knowledge of CDS web, so they haven't been checked against the installed packages (`@coinbase/cds-web` 9.28.0).
+
+Here is the component, ready to save as `src/CreateTeamModal.tsx`:
+
+```tsx
+import { useCallback, useState } from 'react';
+import { Select } from '@coinbase/cds-web/alpha/select';
+import { Button } from '@coinbase/cds-web/buttons/Button';
+import { TextInput } from '@coinbase/cds-web/controls/TextInput';
+import { VStack } from '@coinbase/cds-web/layout/VStack';
+import { Modal } from '@coinbase/cds-web/overlays/modal/Modal';
+import { ModalBody } from '@coinbase/cds-web/overlays/modal/ModalBody';
+import { ModalFooter } from '@coinbase/cds-web/overlays/modal/ModalFooter';
+import { ModalHeader } from '@coinbase/cds-web/overlays/modal/ModalHeader';
+
+export type TeamSize = 'small' | 'medium' | 'large';
+export type CreateTeamValues = { name: string; size: TeamSize };
+
+const teamSizeOptions = [
+  { value: 'small', label: 'Small' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'large', label: 'Large' },
+];
+
+export type CreateTeamModalProps = {
+  visible: boolean;
+  onRequestClose: () => void;
+  onSave: (values: CreateTeamValues) => void;
+};
+
+export const CreateTeamModal = ({ visible, onRequestClose, onSave }: CreateTeamModalProps) => {
+  const [name, setName] = useState('');
+  const [size, setSize] = useState<TeamSize | null>(null);
+
+  const reset = useCallback(() => { setName(''); setSize(null); }, []);
+  const handleClose = useCallback(() => { reset(); onRequestClose(); }, [onRequestClose, reset]);
+  const handleSave = useCallback(() => {
+    if (!size) return;
+    onSave({ name: name.trim(), size });
+    reset();
+  }, [name, onSave, reset, size]);
+
+  const canSave = name.trim().length > 0 && size !== null;
+
+  return (
+    <Modal onRequestClose={handleClose} visible={visible}>
+      <ModalHeader title="Create team" />
+      <ModalBody>
+        <VStack gap={2}>
+          <TextInput
+            label="Team name"
+            onChange={(event) => setName(event.target.value)}
+            placeholder="Enter a team name"
+            value={name}
+          />
+          <Select
+            label="Team size"
+            onChange={(value) => setSize(value as TeamSize | null)}
+            options={teamSizeOptions}
+            placeholder="Select a team size"
+            value={size}
+          />
+        </VStack>
+      </ModalBody>
+      <ModalFooter
+        primaryAction={<Button disabled={!canSave} onClick={handleSave} variant="primary">Save</Button>}
+        secondaryAction={<Button onClick={handleClose} variant="secondary">Cancel</Button>}
+      />
+    </Modal>
+  );
+};
+```
+
+- **Styling:** it uses only CDS style props and tokens (`gap={2}`, `variant`), with no inline styles, raw colors or pixel values.
+- **Save button:** it stays disabled until the name is non-empty and a size is chosen.
+- **Closing:** Cancel and the modal's close request both clear the form and call `onRequestClose`.
+- **Saving:** Save calls `onSave({ name, size })`.
+- **Not checked:** typecheck and lint haven't run, since nothing is installed.
+
+If you approve creating the directory and file, I can write it myself. If you'd rather run `npm install` first, I can re-run discovery and verify the imports and the `Select`, `ModalFooter` and `TextInput` props before saving.

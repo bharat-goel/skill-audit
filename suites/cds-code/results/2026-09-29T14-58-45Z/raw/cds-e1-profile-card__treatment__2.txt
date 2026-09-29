@@ -1,0 +1,14 @@
+I couldn't write the profile card because the write to `/tmp/nullbench-fx-T6B04U/src/ProfileCard.tsx` was denied, so nothing has been created. I also couldn't run the discovery script, so the imports below are unchecked. The CDS packages aren't installed (there's no `node_modules`) and I couldn't reach the CDS docs.
+
+Where should I put the file? The project lives in `/tmp/nullbench-fx-T6B04U`, but the session's working directory is the `skill` subfolder, which is the only place I can write to without approval. I can write it under `skill/` instead. I can also retry the `src/ProfileCard.tsx` write if you grant access.
+
+The planned design uses these CDS components:
+- **`Avatar`, `Text` and stacks:** `Avatar` shows the photo. `Text` shows the display name at `font="title3"` and the email at `font="body"` with `color="fgMuted"`. `VStack` and `HStack` handle layout.
+- **Rounded container:** the card is an `HStack` with `borderRadius={200}`, `background="bgAlternate"`, `padding={3}` and `gap={2}`.
+- **Menu rows:** three `ListCell` rows below the card ("Account settings", "Notifications", "Sign out"). Each has `accessory="arrow"` for the right-side arrow and an `onClick` prop. They sit in a second `VStack` with the same `borderRadius={200}` and `background="bgAlternate"`.
+- **Tokens only:** the styling uses only CDS style props, with no raw colors, pixel values or inline styles.
+
+Once the packages are installed, these are the things to check:
+- The import paths (I assumed `@coinbase/cds-web/cells/ListCell`, `/layout`, `/media/Avatar` and `/typography/Text`).
+- That `accessory="arrow"` and `size="xxl"` are valid props.
+- That the project's lint and typecheck pass.

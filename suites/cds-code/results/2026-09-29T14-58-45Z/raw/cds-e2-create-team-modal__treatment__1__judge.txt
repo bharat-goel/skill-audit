@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code, only a description of a planned file, and it admits the Cancel button lacks the required `variant="secondary"` in its draft, so the rubric expectations aren't met by any code.

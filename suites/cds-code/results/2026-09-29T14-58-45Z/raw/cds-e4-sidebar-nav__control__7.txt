@@ -1,0 +1,6 @@
+I couldn't write `/tmp/nullbench-fx-FP30NA/index.html` because the write permission was denied, so nothing has been created yet. If you grant write access to that directory, I'll retry as written.
+
+The file would be a single-page HTML sidebar with:
+- **Items:** Home, Activity and Settings, each with an inline icon.
+- **Selected state:** Home is highlighted and marked `aria-current="page"`.
+- **Styling:** it follows light and dark mode, and has hover and keyboard-focus states.

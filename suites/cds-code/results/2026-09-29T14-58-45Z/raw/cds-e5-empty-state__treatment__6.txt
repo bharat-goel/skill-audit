@@ -1,0 +1,13 @@
+I'm blocked on two things, so I haven't written the component yet.
+
+- **Discovery script:** the CDS discovery script needs approval, and it hasn't been granted. CDS also isn't installed in the project (there's no `node_modules`), so I can't confirm the valid import paths or illustration names.
+- **File write:** my write of `SecurityEmptyState.tsx` was also declined.
+
+My plan, once I can write the file:
+- **Components:** `VStack`, `Text`, `SpotSquare` (compact) and `HeroSquare` (roomy).
+- **Compact:** a 96px illustration with tighter spacing, `headline` for the title and `caption` for the supporting text.
+- **Roomy:** a 200px illustration with more spacing, `title2` for the title and `body` for the supporting text.
+- **Tokens:** only CDS tokens, no raw colors or pixel spacing.
+- **Both versions:** stacked in one example so you can compare them.
+
+Do you want to approve the write, or should I put the file somewhere else, such as the scratchpad? I'd also like your approval to run the discovery script so I can confirm the illustration name. I used `"shield"` as a placeholder and it's unverified.

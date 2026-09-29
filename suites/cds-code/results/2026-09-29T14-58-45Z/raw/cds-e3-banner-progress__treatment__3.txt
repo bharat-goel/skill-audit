@@ -1,0 +1,14 @@
+I wrote the banner component, but nothing has been type-checked, linted or rendered. The CDS packages aren't installed here (no `node_modules`), the docs tools weren't available, and the discovery script needed approval that I didn't get. Writing into the project folder was also denied, so I saved it to the scratchpad:
+
+`/tmp/claude-0/-tmp-nullbench-fx-fuZPCF/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/UnsavedChangesBanner.tsx`
+
+**What it does**
+- **Banner:** `Banner variant="warning"` with the title "You have unsaved changes". A `Link` labelled "Save now" is passed as `primaryAction` and calls an `onSave` prop.
+- **Progress row:** an `HStack paddingX={2}` sits below the banner, so the container has 2 units of horizontal padding. Inside it, `ProgressBar progress={0.6}` fills the row and an indeterminate `ProgressCircle` is the spinner for the secondary loading operation.
+- **Styling:** layout uses only style props (`gap`, `paddingX`, `flexGrow`, `alignItems`). There are no hex colors, raw pixel spacing, inline styles or classNames. The one literal size is the spinner's `size={24}`.
+
+**Things to check once CDS is installed**
+- **Import subpaths:** `@coinbase/cds-web/banner`, `@coinbase/cds-web/typography/Link` and `@coinbase/cds-web/layout` are guesses. Check them against each package's `exports`.
+- **Props:** I'm not sure of `startIcon="warning"` on `Banner`, `size` and `accessibilityLabel` on `ProgressCircle`, or whether `progress` takes 0–1 or 0–100. If it takes 0–100, use `progress={60}`.
+
+Approve the discovery script, or install the dependencies, and I'll verify the imports and props and copy the file into the project.

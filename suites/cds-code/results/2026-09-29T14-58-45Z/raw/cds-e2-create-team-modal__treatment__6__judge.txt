@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code to check against the rubric, and its description doesn't confirm the Select import path (it says import paths are unverified) or the ModalFooter composition. The footer is described as `primaryAction`/`secondaryAction` props rather than Button children with a secondary variant.

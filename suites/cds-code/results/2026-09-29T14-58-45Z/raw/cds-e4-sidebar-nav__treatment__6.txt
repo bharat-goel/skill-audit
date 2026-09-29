@@ -1,0 +1,13 @@
+I wrote the sidebar, but I couldn't verify any of it, and it isn't in your project yet.
+
+**What it does:** `AppSidebar` uses the CDS `Sidebar` with three `SidebarItem`s: Home, Activity and Settings. Home is selected by default, and clicking an item moves the selection. It uses no raw colors, spacing or inline styles.
+
+**Where it is:** `/tmp/claude-0/-tmp-nullbench-fx-Xnz1Ya/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/AppSidebar.tsx`. Writing to `/tmp/nullbench-fx-Xnz1Ya/src/` was blocked, so I used the scratchpad. Copy it into your `src/` folder, or approve the write and I'll do it.
+
+**What I couldn't check:**
+- **CDS install:** The CDS packages aren't installed (there's no `node_modules`) and the discovery scripts were blocked pending approval. I never confirmed the import paths (`@coinbase/cds-web/navigation/Sidebar` and `.../SidebarItem`) or the `Sidebar` and `SidebarItem` props (`accessibilityLabel`, `active`, `icon`, `onClick`, `title`).
+- **Docs:** I couldn't read the CDS docs because neither the `cds-docs` skill nor the MCP server is available here.
+- **Icons:** The icon names `home`, `chartLine` and `gear` are guesses. Activity is the least certain.
+- **Lint and typecheck:** Not run.
+
+After `npm install`, run `scripts/discover-cds-icons.mjs` (or the `discover-cds-packages.sh` script) to confirm the icon names and import paths. If you approve the scripts, I'll run them and fix anything that doesn't match.

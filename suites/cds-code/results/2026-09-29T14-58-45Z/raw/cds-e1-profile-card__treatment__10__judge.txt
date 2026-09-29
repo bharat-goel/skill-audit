@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code imports `HStack`/`VStack` from `@coinbase/cds-web/layout`, which the reply itself says was written from memory and unverified. The other rubric points (Avatar, ListCell `accessory="arrow"`, generic Text, `fgMuted`, token `borderRadius`, no hardcoded colors or pixel values) are met. Unverified import paths mean criterion 9 can't be confirmed.

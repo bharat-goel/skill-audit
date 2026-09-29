@@ -1,0 +1,18 @@
+I couldn't create the modal. Writing `/tmp/nullbench-fx-SpKXWJ/CreateTeamModal.tsx` was blocked because write permission hasn't been granted. The `npm install` I tried earlier, to check the CDS API, also needed approval. So no file exists yet, and nothing has been type-checked or run.
+
+**Blocked:** if you grant write access, I'll create the file. If you'd rather I put it somewhere else, tell me the path.
+
+**What the component would be:** `CreateTeamModal`, built on the `@coinbase/cds-web` 9.28.0 already in your `package.json`.
+- **Header:** the title "Create team".
+- **Body:** a `TextInput` for the team name and a `Select` for team size with Small, Medium and Large options. Small is the default.
+- **Footer:** Save as the primary button and Cancel as the secondary one.
+- **Save:** disabled until the name has non-whitespace text. It calls `onSave({ name, size })`, resets the form, and closes the modal.
+- **Cancel and dismiss:** Cancel, or dismissing the modal, resets the form and calls `onRequestClose`.
+- **Props:** `visible`, `onRequestClose` and `onSave`.
+
+**Unverified:** `node_modules` isn't installed here, so the CDS import paths and prop names are from memory. Please check these:
+- `Modal`, `ModalHeader`, `ModalBody` and `ModalFooter` from `@coinbase/cds-web/overlays`, with `primaryAction` and `secondaryAction` on the footer.
+- `TextInput` and `Select` from `@coinbase/cds-web/controls`.
+- Whether `Select`'s `onChange` gives you the value directly or an event.
+
+Also tell me if your app uses a different select component. Running `npm install` and a type-check will settle these quickly, and I can do that if you approve it.

@@ -1,0 +1,47 @@
+I couldn't create the sidebar. The file write was denied, and so were the discovery script and `npm install`. Nothing has been written to the project.
+
+**What's blocked**
+- The discovery script (`skill/scripts/discover-cds-packages.sh`) needed approval, so I read `package.json` instead. It lists `@coinbase/cds-web` 9.28.0 and `@coinbase/cds-icons` 5.25.0, which means the web runtime.
+- `npm install` also needed approval, so `node_modules` is missing. I couldn't check the CDS exports, prop tables or icon names.
+- I didn't find CDS docs (no `cds-docs` skill or CDS MCP server), so I skipped that step.
+- Writing `src/SidebarNav.tsx` needed permission I don't have.
+
+**CDS components I planned to use**
+- `Sidebar` and `SidebarItem` from `@coinbase/cds-web/navigation`. This is the CDS navigation sidebar. `Sidebar` is the container and `SidebarItem` is a row with `title`, `icon`, `active` and `onClick`.
+- Home is selected by holding `activeId` in state, starting at `'home'`, and passing `active={activeId === id}` to each item.
+- Icons: `home`, `chartLine` (for Activity) and `gear`, at the default size `m`. I picked these from memory, and `chartLine` is the one I'm least sure exists.
+- No inline styles, hex colors or pixel values, so theming stays connected.
+
+**The file I meant to write (`src/SidebarNav.tsx`)**
+```tsx
+import { useState } from 'react';
+import { Sidebar, SidebarItem } from '@coinbase/cds-web/navigation';
+
+const items = [
+  { id: 'home', title: 'Home', icon: 'home' },
+  { id: 'activity', title: 'Activity', icon: 'chartLine' },
+  { id: 'settings', title: 'Settings', icon: 'gear' },
+] as const;
+
+export const SidebarNav = () => {
+  const [activeId, setActiveId] = useState<(typeof items)[number]['id']>('home');
+
+  return (
+    <Sidebar accessibilityLabel="Main navigation">
+      {items.map(({ id, title, icon }) => (
+        <SidebarItem
+          key={id}
+          active={activeId === id}
+          icon={icon}
+          onClick={() => setActiveId(id)}
+          title={title}
+        />
+      ))}
+    </Sidebar>
+  );
+};
+```
+
+**Untested assumptions:** the import path, the `accessibilityLabel` prop on `Sidebar`, and the three icon names come from memory. I haven't run typechecking or linting.
+
+If you approve the write and the install, I'll create the file, install the packages, and check the exports, props and icon names against them. Or tell me another location to write to.

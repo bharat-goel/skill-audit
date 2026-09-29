@@ -1,0 +1,36 @@
+I'm trying to write the banner component file, but the write needs your permission and hasn't been granted yet. Please approve it and I'll continue.
+
+Here is the component I'm trying to create, `UnsavedChangesBanner.tsx`:
+
+```tsx
+import React from 'react';
+import { Banner } from '@coinbase/cds-web/banner';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Link } from '@coinbase/cds-web/typography/Link';
+import { ProgressBar, ProgressCircle } from '@coinbase/cds-web-visualization';
+
+export const UnsavedChangesBanner = ({ onSave }: { onSave: () => void }) => (
+  <VStack gap={2}>
+    <Banner
+      primaryAction={<Link onPress={onSave}>Save now</Link>}
+      title="You have unsaved changes"
+      variant="warning"
+    />
+    <HStack alignItems="center" gap={2} paddingX={2}>
+      <VStack flexGrow={1}>
+        <ProgressBar accessibilityLabel="Progress: 60%" progress={0.6} />
+      </VStack>
+      <ProgressCircle accessibilityLabel="Loading" indeterminate size={24} />
+    </HStack>
+  </VStack>
+);
+```
+
+**CDS components:** `Banner` (warning variant), `Link` for the action, `VStack` and `HStack` for layout, `ProgressBar` at `progress={0.6}`, and an indeterminate `ProgressCircle` as the spinner. The container uses the style prop `paddingX={2}`, so there are no raw pixel or colour values.
+
+**What I couldn't verify:**
+- The discovery script was blocked pending approval, so I read the runtime (web) and package versions from `package.json` instead.
+- The CDS packages aren't installed and no docs tool is available. The import subpaths and prop names, such as `onPress` on `Link`, are from memory and unchecked.
+- I haven't run linting or typechecking.
+
+After `npm install`, run a typecheck to confirm the imports and props.

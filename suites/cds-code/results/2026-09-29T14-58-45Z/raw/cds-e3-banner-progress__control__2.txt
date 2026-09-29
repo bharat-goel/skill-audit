@@ -1,0 +1,10 @@
+I couldn't write `/tmp/nullbench-fx-Fykg9s/banner.html` because the write permission was denied, so nothing has been created yet. I also haven't run or previewed the page.
+
+The file I tried to write is a single static HTML page with these parts:
+
+- **Banner:** a warning row with an icon, the text "You have unsaved changes", and a "Save now" link pushed to the right. It has `role="alert"` and amber styling, with a dark-mode variant.
+- **Status container:** it has 2 units of horizontal padding, using a spacing unit of 8px, so 16px on each side. This is a guess, since you didn't name a framework. If you use MUI or Tailwind, I can switch to `px: 2` or `px-4` instead.
+- **Progress bar:** set to 60% and marked with `role="progressbar"` and `aria-valuenow="60"`.
+- **Spinner:** a CSS-only spinner sitting next to the progress bar, which slows down when the browser is set to reduce motion.
+
+To get the file, you can allow writes to that directory and I'll retry. If you'd rather have it in React, Vue or another framework, tell me and I'll build it that way.

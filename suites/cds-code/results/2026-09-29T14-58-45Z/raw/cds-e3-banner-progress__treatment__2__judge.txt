@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code imports ProgressBar and ProgressCircle from `@coinbase/cds-web-visualization` instead of the required `@coinbase/cds-web/visualizations` subpath, so rubric item 5 fails.

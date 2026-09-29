@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The code composes Modal/ModalHeader/ModalBody/ModalFooter, uses TextInput and Select from `@coinbase/cds-web/alpha/select` with Small/Medium/Large options, puts a primary Save and a secondary Cancel Button in ModalFooter, and uses no style prop, raw pixel values or colors (only `gap={3}` on VStack).

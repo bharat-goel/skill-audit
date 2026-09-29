@@ -1,0 +1,10 @@
+I couldn't create the sidebar because the write to `/tmp/nullbench-fx-F41C12/index.html` was denied. Nothing has been written.
+
+If you grant write access to that directory, I'll retry as is. I can also write it to the scratchpad directory instead.
+
+The file is a single `index.html`:
+- A 220px left sidebar with three links: Home, Activity and Settings, each with an icon.
+- Home is the selected item. It's marked with `aria-current="page"` and shown with a highlighted background and accent colour.
+- Hover and keyboard-focus styles, plus light and dark themes that follow the system setting.
+
+Which would you prefer?

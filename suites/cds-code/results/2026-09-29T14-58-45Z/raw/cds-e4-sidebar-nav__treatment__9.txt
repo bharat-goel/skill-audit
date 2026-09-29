@@ -1,0 +1,18 @@
+I couldn't create the sidebar: the write to `/tmp/nullbench-fx-Iq5LB6/src/SidebarNav.tsx` needs permission you haven't granted. Nothing has been written to the project.
+
+I couldn't run `discover-cds-packages.sh` or `npm install` either, because both need approval. `node_modules` isn't installed, so I also couldn't check the CDS docs, import paths or icon names. I took the web runtime from `package.json`, which lists `@coinbase/cds-web`.
+
+I planned to use these CDS components:
+- **`VStack`:** renders as a `<nav>` and holds the three items.
+- **`ListCell`:** one row per item, with a selected state on Home.
+- **`Icon`:** the row icons.
+
+I planned to style everything with CDS style props and tokens only, with no raw colours, no inline styles and no pixel spacing. The exception is a fixed 280 sidebar width.
+
+Details I couldn't verify:
+- **Import paths:** I guessed `@coinbase/cds-web/icons`, `/cells` and `/layout`.
+- **Icon names:** I guessed `home`, `chartLine` and `gear`.
+- **`ListCell` selected state:** I assumed a `selected` prop.
+- **`VStack` prop:** I assumed `borderedEnd`.
+
+Do you want to allow the write, or run `npm install` so I can verify these and finish? If you'd rather I skip the check, I can write the file as planned with those guesses.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply uses icon names `chartLine` and `gear` instead of the required `activity` and `settings`, and it sets no explicit icon sizing or token-based selected-state color treatment.

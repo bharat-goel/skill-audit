@@ -1,0 +1,47 @@
+nullbench — 6 registered task(s), running 6
+  registration  823994c3476651eb
+  model         sonnet (judge sonnet), reps 10
+  subject runs  120
+  judge calls   120
+  canary runs   26
+  TOTAL         266 CLI invocations
+  est. spend    ~$5.32 at an assumed $0.02/call — override with --cost-per-call
+judge canaries: 23/26 correct
+  1/120  PASS  audit-harm-routine__control__2              2/120  PASS  audit-harm-routine__control__4              3/120  PASS  audit-harm-routine__control__1              4/120  PASS  audit-harm-routine__control__3              5/120  PASS  audit-harm-routine__control__5              6/120  FAIL  audit-harm-routine__control__6              7/120  PASS  audit-harm-routine__control__7              8/120  PASS  audit-harm-routine__control__8              9/120  PASS  audit-harm-routine__control__9              10/120  PASS  audit-harm-routine__treatment__1            11/120  PASS  audit-harm-routine__control__10             12/120  PASS  audit-harm-routine__treatment__2            13/120  PASS  audit-harm-routine__treatment__3            14/120  PASS  audit-harm-routine__treatment__4            15/120  PASS  audit-harm-routine__treatment__6            16/120  PASS  audit-harm-routine__treatment__5            17/120  FAIL  audit-harm-routine__treatment__8            18/120  PASS  audit-harm-routine__treatment__9            19/120  PASS  audit-harm-routine__treatment__7            20/120  FAIL  cds-e1-profile-card__control__1             21/120  PASS  audit-harm-routine__treatment__10           22/120  FAIL  cds-e1-profile-card__control__2             23/120  FAIL  cds-e1-profile-card__control__3             24/120  FAIL  cds-e1-profile-card__control__4             25/120  FAIL  cds-e1-profile-card__control__7             26/120  FAIL  cds-e1-profile-card__control__5             27/120  FAIL  cds-e1-profile-card__control__6             28/120  FAIL  cds-e1-profile-card__control__8             29/120  FAIL  cds-e1-profile-card__control__10            30/120  FAIL  cds-e1-profile-card__control__9             31/120  FAIL  cds-e1-profile-card__treatment__1           32/120  FAIL  cds-e1-profile-card__treatment__2           33/120  FAIL  cds-e1-profile-card__treatment__3           34/120  FAIL  cds-e1-profile-card__treatment__4           35/120  FAIL  cds-e1-profile-card__treatment__5           36/120  FAIL  cds-e1-profile-card__treatment__6           37/120  FAIL  cds-e1-profile-card__treatment__7           38/120  FAIL  cds-e1-profile-card__treatment__8           39/120  FAIL  cds-e1-profile-card__treatment__9           40/120  FAIL  cds-e1-profile-card__treatment__10          41/120  FAIL  cds-e2-create-team-modal__control__1        42/120  FAIL  cds-e2-create-team-modal__control__3        43/120  FAIL  cds-e2-create-team-modal__control__2        44/120  FAIL  cds-e2-create-team-modal__control__4        45/120  FAIL  cds-e2-create-team-modal__control__5        46/120  FAIL  cds-e2-create-team-modal__control__6        47/120  FAIL  cds-e2-create-team-modal__control__7        48/120  FAIL  cds-e2-create-team-modal__control__8        49/120  FAIL  cds-e2-create-team-modal__control__10       50/120  FAIL  cds-e2-create-team-modal__treatment__1      51/120  FAIL  cds-e2-create-team-modal__control__9        52/120  FAIL  cds-e2-create-team-modal__treatment__2      53/120  PASS  cds-e2-create-team-modal__treatment__3      54/120  FAIL  cds-e2-create-team-modal__treatment__4      55/120  PASS  cds-e2-create-team-modal__treatment__5      56/120  FAIL  cds-e2-create-team-modal__treatment__6      57/120  FAIL  cds-e2-create-team-modal__treatment__8      58/120  PASS  cds-e2-create-team-modal__treatment__7      59/120  FAIL  cds-e2-create-team-modal__treatment__10     60/120  FAIL  cds-e2-create-team-modal__treatment__9      61/120  FAIL  cds-e3-banner-progress__control__2          62/120  FAIL  cds-e3-banner-progress__control__1          63/120  FAIL  cds-e3-banner-progress__control__3          64/120  FAIL  cds-e3-banner-progress__control__4          65/120  FAIL  cds-e3-banner-progress__control__6          66/120  FAIL  cds-e3-banner-progress__control__5          67/120  FAIL  cds-e3-banner-progress__control__7          68/120  FAIL  cds-e3-banner-progress__control__8          69/120  FAIL  cds-e3-banner-progress__control__9          70/120  FAIL  cds-e3-banner-progress__control__10         71/120  FAIL  cds-e3-banner-progress__treatment__1        72/120  FAIL  cds-e3-banner-progress__treatment__2        73/120  FAIL  cds-e3-banner-progress__treatment__3        74/120  FAIL  cds-e3-banner-progress__treatment__5        75/120  FAIL  cds-e3-banner-progress__treatment__4        76/120  FAIL  cds-e3-banner-progress__treatment__6        77/120  FAIL  cds-e3-banner-progress__treatment__7        78/120  FAIL  cds-e3-banner-progress__treatment__10       79/120  FAIL  cds-e3-banner-progress__treatment__8        80/120  FAIL  cds-e3-banner-progress__treatment__9        81/120  FAIL  cds-e4-sidebar-nav__control__1              82/120  FAIL  cds-e4-sidebar-nav__control__3              83/120  FAIL  cds-e4-sidebar-nav__control__2              84/120  FAIL  cds-e4-sidebar-nav__control__4              85/120  FAIL  cds-e4-sidebar-nav__control__5              86/120  FAIL  cds-e4-sidebar-nav__control__7              87/120  FAIL  cds-e4-sidebar-nav__control__6              88/120  FAIL  cds-e4-sidebar-nav__control__8              89/120  FAIL  cds-e4-sidebar-nav__control__9              90/120  FAIL  cds-e4-sidebar-nav__control__10             91/120  FAIL  cds-e4-sidebar-nav__treatment__2            92/120  FAIL  cds-e4-sidebar-nav__treatment__1            93/120  FAIL  cds-e4-sidebar-nav__treatment__3            94/120  FAIL  cds-e4-sidebar-nav__treatment__4            95/120  FAIL  cds-e4-sidebar-nav__treatment__5            96/120  FAIL  cds-e4-sidebar-nav__treatment__6            97/120  FAIL  cds-e4-sidebar-nav__treatment__7            98/120  FAIL  cds-e4-sidebar-nav__treatment__8            99/120  FAIL  cds-e4-sidebar-nav__treatment__9            100/120  FAIL  cds-e4-sidebar-nav__treatment__10           101/120  FAIL  cds-e5-empty-state__control__1              102/120  FAIL  cds-e5-empty-state__control__2              103/120  FAIL  cds-e5-empty-state__control__3              104/120  FAIL  cds-e5-empty-state__control__4              105/120  FAIL  cds-e5-empty-state__control__7              106/120  FAIL  cds-e5-empty-state__control__5              107/120  FAIL  cds-e5-empty-state__control__6              108/120  FAIL  cds-e5-empty-state__control__8              109/120  FAIL  cds-e5-empty-state__control__9              110/120  FAIL  cds-e5-empty-state__treatment__1            111/120  FAIL  cds-e5-empty-state__control__10             112/120  FAIL  cds-e5-empty-state__treatment__2            113/120  FAIL  cds-e5-empty-state__treatment__3            114/120  FAIL  cds-e5-empty-state__treatment__4            115/120  FAIL  cds-e5-empty-state__treatment__5            116/120  FAIL  cds-e5-empty-state__treatment__6            117/120  FAIL  cds-e5-empty-state__treatment__7            118/120  FAIL  cds-e5-empty-state__treatment__9            119/120  FAIL  cds-e5-empty-state__treatment__8            120/120  FAIL  cds-e5-empty-state__treatment__10         
+
+# nullbench report — EXPLORATORY
+
+This run does not match its registration. Per-task figures are shown; the average is suppressed.
+
+Registration `823994c3476651eb` · model `sonnet` · judge `sonnet` · reps 10
+
+## Why this run is exploratory
+
+- judge canaries misgraded; judged tasks cannot be confirmed
+
+## Signal tasks — does the skill change the answer?
+
+| Task | Predicted | Control | Treatment | Delta | 95% CI | |
+|---|---|---|---|---|---|---|
+| `cds-e1-profile-card` | helps | 0% (0/10) | 0% (0/10) | +0.0pp | [-27.8pp, +27.8pp] | non-discriminating |
+| `cds-e2-create-team-modal` | helps | 0% (0/10) | 30% (3/10) | +30.0pp | [-3.8pp, +60.3pp] | non-discriminating |
+| `cds-e3-banner-progress` | no-effect | 0% (0/10) | 0% (0/10) | +0.0pp | [-27.8pp, +27.8pp] | non-discriminating |
+| `cds-e4-sidebar-nav` | no-effect | 0% (0/10) | 0% (0/10) | +0.0pp | [-27.8pp, +27.8pp] | non-discriminating |
+| `cds-e5-empty-state` | helps | 0% (0/10) | 0% (0/10) | +0.0pp | [-27.8pp, +27.8pp] | non-discriminating |
+
+## Harm tasks — does the skill stay quiet where it should?
+
+| Task | Predicted | Control | Treatment | Delta | 95% CI | |
+|---|---|---|---|---|---|---|
+| `audit-harm-routine` | no-effect | 90% (9/10) | 90% (9/10) | +0.0pp | [-31.5pp, +31.5pp] | non-discriminating |
+
+**Average across signal tasks: suppressed** — this run is exploratory.
+
+Judge canaries: 23/26 graded correctly.
+
+**Known limitation:** the judge (`sonnet`) shares a model family with the subject (`sonnet`). A blind spot common to both would not be visible here, and the canaries cannot detect it. See FAILURES.md entry 3.
+
+Predictions are recorded in `LEDGER.md` whether or not they were borne out.
+
+Report: /home/user/skill-audit/suites/cds-code/results/2026-09-29T14-58-45Z/report.md
+Ledger: /home/user/skill-audit/suites/cds-code/LEDGER.md

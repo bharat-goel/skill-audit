@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code at all, since the file was never written, so none of the rubric's code requirements (components, Select alpha import, buttons, style props) can be verified.

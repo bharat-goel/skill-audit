@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code imports `ProgressBar` and `ProgressCircle` from `@coinbase/cds-web-visualization`, but the rubric requires `@coinbase/cds-web/visualizations` and explicitly rules out the separate package.

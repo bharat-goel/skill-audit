@@ -1,0 +1,39 @@
+I couldn't create either file: both writes were denied because write permission wasn't granted. Nothing has been written to `/tmp/nullbench-run-ACRQkq`. If you approve writes there, I'll redo it. I can also put them somewhere else if you prefer. I haven't run any of the code or tests.
+
+Here is what I was going to write.
+
+**`src/formatRelativeTime.ts`**
+```ts
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  if (Number.isNaN(then.getTime())) return '';
+
+  const diff = now.getTime() - then.getTime();
+
+  if (diff < MINUTE) return 'just now';
+  if (diff < HOUR) return `${Math.floor(diff / MINUTE)}m ago`;
+  if (diff < DAY) return `${Math.floor(diff / HOUR)}h ago`;
+  if (diff < 2 * DAY) return 'yesterday';
+  if (diff <= 7 * DAY) return `${Math.floor(diff / DAY)}d ago`;
+
+  return `${MONTHS[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+**`src/formatRelativeTime.test.ts`** (Jest) has four tests:
+1. seconds to minutes: 0s and 59s give "just now", 60s gives "1m ago", 59m59s gives "59m ago".
+2. minutes to hours to yesterday: 60m gives "1h ago", 23h59m59s gives "23h ago", 24h and 47h59m59s give "yesterday".
+3. yesterday to days to date: 48h gives "2d ago", exactly 7d gives "7d ago", and 7d plus 1s gives "Jun 8".
+4. edge cases: a timestamp in the future gives "just now", and an unparseable string gives "".
+
+Decisions I made where your spec was open:
+- **Exactly 7 days:** it shows "7d ago". The date format starts only after that.
+- **Future timestamps:** they show "just now", which covers clock skew between the device and server.
+- **Invalid input:** it returns `""` rather than throwing.
+- **Dates:** the "MMM D" label uses the device's local time zone. It uses a month-name array rather than `Intl`, to avoid depending on Hermes `Intl` support. If you'd rather use UTC, swap in `getUTCMonth()` and `getUTCDate()`.

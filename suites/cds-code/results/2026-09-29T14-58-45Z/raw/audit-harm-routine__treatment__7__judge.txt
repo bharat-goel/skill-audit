@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The reply gives a correct, self-contained TypeScript function with all buckets and sensible boundaries (<60s, <60m, <24h, <48h yesterday, ≤7d "Xd ago", then "MMM D"). It describes Jest-style boundary tests that match that logic, and it stays on the logic/testing task with no UI content. The test code isn't shown inline and the tests weren't run, but the described cases are consistent with the function.

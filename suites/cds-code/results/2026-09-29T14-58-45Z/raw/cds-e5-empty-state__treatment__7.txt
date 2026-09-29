@@ -1,0 +1,20 @@
+I couldn't create `src/SecurityEmptyState.tsx`: write permission for that path was denied. Nothing has been written, and nothing was verified. `npm install` and the discovery script were blocked too, so CDS isn't installed and nothing has been type-checked or rendered.
+
+What I planned to build is a single `SecurityEmptyState` component with a `density` prop (`compact` or `roomy`). It also has a `SecurityEmptyStateComparison` that shows both side by side. Both versions use the same pictogram, title, supporting text and action:
+
+| | Compact | Roomy |
+|---|---|---|
+| Pictogram | `dimension={48}` | `dimension={64}` |
+| Title | `font="headline"` | `font="title3"` |
+| Supporting text | `font="label2"`, `color="fgMuted"` | `font="body"`, `color="fgMuted"` |
+| Spacing | `padding={2}`, `gap={1}` | `padding={6}`, `gap={3}` |
+| Button | `compact`, `variant="secondary"` | regular, `variant="secondary"` |
+
+The components are `VStack`, `HStack`, `Text` and `Button` (with `Pictogram` for the illustration). There are no raw colors, no raw pixel spacing and no inline styles. The comparison's two `width` values (320 and 480) are the only raw pixel values.
+
+Things I couldn't check:
+- **Import paths:** I assumed `@coinbase/cds-web/buttons`, `/illustrations`, `/layout` and `/typography`.
+- **Illustration name:** I assumed a pictogram named `security`. I couldn't check the list, so I'd leave a TODO on it.
+- **Docs:** I didn't read the styling or theming docs, because no CDS docs tool is available in this session.
+
+To continue, you can grant write access to `src/`, or approve `npm install` and the discovery script so I can verify the imports and illustration name first. I can also paste the file contents here if you'd rather create it yourself.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply summarizes the code without showing it, so it can't be confirmed that no raw pixel values are used, and the table lists "96×96" and "240×240" dimensions, which look like raw pixel values.

@@ -1,0 +1,27 @@
+I couldn't create the sidebar. The write to `/tmp/nullbench-fx-CYMvNp/src/SidebarNav.tsx` needs your permission and wasn't granted. Three earlier commands were blocked for the same reason:
+- the CDS discovery script
+- `npm install`
+- the compound `ls` and `cd` commands
+
+**Skipped from the CDS workflow:**
+- **Docs:** I couldn't read the CDS docs because neither the `cds-docs` skill nor the MCP server is available here.
+- **Discovery script:** it never ran. The project has no `node_modules`, so `package.json` was the only source for versions. It shows `@coinbase/cds-web` 9.28.0 and `@coinbase/cds-icons` 5.25.0, and I took the platform as web.
+- **Typecheck and lint:** they haven't run, because the packages aren't installed.
+
+**Planned components:**
+- `VStack` with `as="nav"` for the container.
+- `ListCell` for each row (Home, Activity, Settings), which the guidelines list for navigation lists.
+- `Icon` in each row's `media`, with `active` set on the selected item.
+- `useState` starting at `home`, so Home is selected and clicking another row moves the selection.
+
+Everything is styled with CDS props and tokens, with no hex colors, inline styles or classNames. The one exception is `width={240}`, a fixed layout dimension.
+
+Some of this is a guess because the packages were unavailable:
+- **Import paths:** `@coinbase/cds-web/icons`, `/layout` and `/cells`.
+- **Icon names:** `home`, `chartLine` and `gear` may not match the installed set.
+- **`ListCell` props:** `selected` and `aria-current`.
+- **`VStack` prop:** `borderedEnd`.
+
+**To continue,** either:
+- approve the file write, or
+- approve `npm install` and the discovery script so I can check those names first.

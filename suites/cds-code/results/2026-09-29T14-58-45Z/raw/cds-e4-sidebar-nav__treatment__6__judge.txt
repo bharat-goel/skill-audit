@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply uses guessed icon names `chartLine` and `gear` instead of the required exact names `activity` and `settings`, and it shows no code or icon sizing that could be checked against the other criteria.

@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply imports ProgressBar from `@coinbase/cds-web/visualizations/ProgressBar` rather than the `@coinbase/cds-web/visualizations` subpath, and it uses `Spinner` instead of `ProgressCircle` with the `indeterminate` prop.

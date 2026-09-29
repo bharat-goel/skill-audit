@@ -1,0 +1,13 @@
+I built the security empty state, but I couldn't publish it. Publishing needs your approval, and it hasn't been granted. I also couldn't write to `/tmp/nullbench-fx-fPk1jm`, so the file is only in my scratch folder:
+
+`/tmp/claude-0/-tmp-nullbench-fx-fPk1jm/f3256c19-562c-53c4-81ca-6235c3bce5d3/scratchpad/security-empty-state.html`
+
+I haven't rendered it in a browser, so the layout and both color themes are unchecked.
+
+Both versions use the same illustration: a shield with a check mark inside a scan ring. They carry the same copy and actions, and sit in two panels that stack on phones.
+- **Compact:** for a dashboard card. It has a small illustration, a 16px title "No open vulnerabilities", one line of supporting text, a "Scan now" button and a "View history" link.
+- **Roomy:** for a full page. It has a larger illustration, a 26px title, a longer explanation, and a metadata line: "Scanned 4 min ago", "212 dependencies", "38 secret rules". Those figures are sample content.
+
+It follows the viewer's light or dark theme.
+
+To publish it, approve the publish request and I'll run it again. If you'd rather have the file in the project folder, grant write access there and I'll save it.

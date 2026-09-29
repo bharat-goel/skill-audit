@@ -1,0 +1,14 @@
+I couldn't create the modal: the write to `/tmp/nullbench-fx-dDxlJz/CreateTeamModal.tsx` was denied, so no file exists yet. Before that, `npm pack` for the CDS package also needed approval, and `node_modules` isn't installed. That means I couldn't check the CDS component APIs against the real types.
+
+The `CreateTeamModal` component I drafted uses Coinbase CDS, since that's what your `package.json` has:
+
+- **Structure:** `Modal` with a `ModalHeader` titled "Create team", a `ModalBody` and a `ModalFooter`.
+- **Fields:** a `TextInput` for the team name (autofocused) and a `Select` with Small / Medium / Large options.
+- **Footer:** Save is the primary action and is disabled while the name is blank. Cancel is the secondary action.
+- **Props:** `visible`, `onRequestClose` and `onSave({ name, size })`.
+- **Behavior:** Cancel, and closing the modal any other way, resets the fields and closes it. Save trims the name, calls `onSave`, then resets and closes.
+
+The imports and prop names (`ModalFooter` `primaryAction`/`secondaryAction`, `Select`/`SelectOption`, `TextInput`) are from memory of CDS 9.x, so check them once the package is installed. Two decisions for you:
+
+1. Should I write the file to that path, or somewhere else?
+2. Can I run `npm install` so I can type-check it against the real CDS types?

@@ -1,0 +1,14 @@
+I couldn't create the modal. Both `npm install` and writing `CreateTeamModal.tsx` into `/tmp/nullbench-fx-Pbq6ix` were blocked because I don't have permission yet.
+
+The project is empty apart from a `package.json` that depends on `@coinbase/cds-web` 9.28.0, so I wrote the modal with the CDS components. Nothing has been installed or type-checked. I couldn't check the `Select` and `ModalFooter` props against the package, so those may need small adjustments.
+
+**What the component does**
+- **Modal:** `CreateTeamModal` takes `visible`, `onRequestClose` and `onSave({ name, size })`. The header title is "Create team".
+- **Body:** a `TextInput` labelled "Team name", and a `Select` labelled "Team size" with Small, Medium and Large. It defaults to Small.
+- **Footer:** Save is the primary action and is disabled until the name is non-empty. Cancel is the secondary action. Cancel and closing the modal both reset the form and call `onRequestClose`. Save resets it too.
+
+**What I need from you**
+- Grant write access to that directory (or tell me a different location) and I'll create `CreateTeamModal.tsx`.
+- Approve `npm install` so I can type-check it against the real CDS types.
+
+If you're not using CDS, tell me the framework and I'll rewrite it.

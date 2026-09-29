@@ -1,0 +1,18 @@
+I wrote the `CreateTeamModal` component, but it hasn't been type-checked or run. The project has no `node_modules`, and I couldn't read the CDS docs or the installed types. Treat the import paths and prop names as unverified.
+
+I saved it in the scratchpad, `scratchpad/CreateTeamModal.tsx`. A write to `/tmp/nullbench-fx-Js6syB/src/` was refused, so move it into your app's source folder.
+
+- **Modal:** it has a "Create team" header, a body and a footer, and it's controlled through `visible` and `onRequestClose`.
+- **Team name:** a text input with the label "Team name".
+- **Team size:** a dropdown with Small, Medium and Large, defaulting to Small.
+- **Footer:** Cancel and Save buttons. Save is disabled while the name is blank. Both buttons reset the fields and close the modal, and Save calls `onSave({ name, size })` first.
+- **Styling:** it only uses CDS style props, with no inline styles, hex colors or pixel values.
+
+**What I couldn't check:**
+- **Project setup:** the discovery script and MCP docs weren't usable, so I took the web runtime from your `package.json` (`@coinbase/cds-web` 9.28.0).
+- **Import paths:** they follow the component guide and my memory of the CDS package layout, not the installed exports.
+- **Footer props:** I assumed `ModalFooter` takes `primaryAction` and `secondaryAction`.
+- **Handlers:** I assumed `Select`'s `onChange` gives you the value directly and `TextInput`'s `onChange` gives you an event.
+- **Lint and types:** I couldn't run lint or the type-check.
+
+Once dependencies are installed, run a type-check. It will catch any wrong path or prop quickly.

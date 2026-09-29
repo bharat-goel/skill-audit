@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no actual code, only a plan, so it can't be shown to satisfy the CDS illustration, distinct size variants, layout/Text primitives, or no-raw-values criteria (and it cites raw 64px/200px sizes).

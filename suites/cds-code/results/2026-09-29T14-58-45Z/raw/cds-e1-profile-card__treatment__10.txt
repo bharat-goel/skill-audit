@@ -1,0 +1,54 @@
+I couldn't create `src/ProfileCard.tsx` because the write permission was denied, so nothing has been written to the project.
+
+I also couldn't run the CDS discovery script, which needed approval, and `node_modules` isn't installed. The CDS docs weren't reachable either. The project uses `@coinbase/cds-web` 9.28.0 (web runtime). The import subpaths and the `ListCell` `accessory="arrow"` prop below come from memory, so I haven't verified them against the installed package or run typechecking.
+
+**CDS components I planned to use**
+- `VStack` and `HStack` for layout.
+- `Avatar` for the user photo, with an initials fallback.
+- `Text` with `font="title3"` for the display name, and `font="body"` with `color="fgMuted"` for the email.
+- `ListCell` with `accessory="arrow"` for each menu row.
+
+**Styling**
+- **Card container:** `background="bgAlternate"`, `borderRadius={200}` for the subtle rounded corners, and `padding` and `gap` tokens.
+- **Menu rows:** the three rows sit in a `VStack` below the card, each with an `onClick` handler.
+- **Tokens:** there are no hex colours, pixel values or inline styles.
+
+Here is the component I tried to write to `src/ProfileCard.tsx`:
+
+```tsx
+import { ListCell } from '@coinbase/cds-web/cells/ListCell';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Avatar } from '@coinbase/cds-web/media/Avatar';
+import { Text } from '@coinbase/cds-web/typography/Text';
+
+export type ProfileCardProps = {
+  displayName: string;
+  email: string;
+  avatarSrc?: string;
+  onAccountSettingsClick?: () => void;
+  onNotificationsClick?: () => void;
+  onSignOutClick?: () => void;
+};
+
+export const ProfileCard = ({
+  displayName, email, avatarSrc,
+  onAccountSettingsClick, onNotificationsClick, onSignOutClick,
+}: ProfileCardProps) => (
+  <VStack gap={2}>
+    <HStack alignItems="center" background="bgAlternate" borderRadius={200} gap={2} padding={2}>
+      <Avatar alt={displayName} size="xl" src={avatarSrc} />
+      <VStack>
+        <Text font="title3">{displayName}</Text>
+        <Text color="fgMuted" font="body">{email}</Text>
+      </VStack>
+    </HStack>
+    <VStack>
+      <ListCell accessory="arrow" onClick={onAccountSettingsClick} title="Account settings" />
+      <ListCell accessory="arrow" onClick={onNotificationsClick} title="Notifications" />
+      <ListCell accessory="arrow" onClick={onSignOutClick} title="Sign out" />
+    </VStack>
+  </VStack>
+);
+```
+
+If you approve the write, and the discovery script if you want the import paths checked, I can create the file and run the checks. Otherwise you can paste the code in yourself.

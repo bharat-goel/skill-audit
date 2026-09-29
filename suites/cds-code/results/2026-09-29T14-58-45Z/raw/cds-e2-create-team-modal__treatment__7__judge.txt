@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The code composes Modal, ModalHeader, ModalBody and ModalFooter, uses TextInput and a Select imported from `@coinbase/cds-web/alpha/select` with Small/Medium/Large options, and passes a primary Save and a secondary Cancel Button to ModalFooter. It uses only the `gap={2}` style prop and no inline `style`, pixel values or colors.

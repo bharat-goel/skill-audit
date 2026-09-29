@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, only a plan, so nothing could satisfy the rubric, and the plan itself uses different-sized `Pictogram` and `HeroSquare` components and never confirms the CDS illustration names or import paths.

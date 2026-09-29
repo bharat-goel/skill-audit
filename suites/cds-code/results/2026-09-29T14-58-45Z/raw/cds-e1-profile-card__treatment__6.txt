@@ -1,0 +1,14 @@
+I couldn't write `src/components/ProfileCard.tsx`: the write permission was denied, so no file exists yet. I also couldn't run the CDS discovery script, which needed approval. Nothing has been typechecked or rendered.
+
+The component I would have written:
+- **Card:** `HStack` with `background="bgAlternate"`, `borderRadius={200}`, `padding={2}` and `gap={2}`.
+- **Header:** `Avatar` at size `xl`, then `Text font="title3"` for the display name and `Text font="body" color="fgMuted"` for the email.
+- **Menu:** a second rounded `VStack` holding three `ListCell` rows (Account settings, Notifications, Sign out). Each row has `accessory="arrow"` and its own `onClick` handler.
+- **Props:** `displayName`, `email`, optional `avatarUrl`, and the three click handlers.
+- **Styling:** everything uses CDS tokens and style props, with no hex colors, raw pixel values or inline styles.
+
+Two things to confirm when you do run it:
+- **Import paths:** `@coinbase/cds-web` isn't installed here (no `node_modules`). I guessed the paths from CDS conventions: `cells/ListCell`, `media/Avatar`, `layout` and `typography/Text`. Check them against the package's `exports` after `npm install`.
+- **`ListCell` props:** I couldn't read the `ListCell` docs, so `accessory="arrow"` and `onClick` are from memory. Confirm them against the props table.
+
+Do you want me to write the file to `src/components/ProfileCard.tsx` once you grant write access, or put it somewhere else?

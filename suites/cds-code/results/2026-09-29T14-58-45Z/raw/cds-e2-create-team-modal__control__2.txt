@@ -1,0 +1,11 @@
+I've drafted `CreateTeamModal.tsx`, but the write to the project directory needs your approval and hasn't gone through yet. `npm install` also needs approval, so I haven't been able to check the CDS component APIs against the installed package.
+
+The modal is built from CDS components:
+- **Modal:** `Modal` with `ModalHeader` (title "Create team"), `ModalBody` and `ModalFooter`.
+- **Form fields:** a `TextInput` for the team name and a `Select` for Small / Medium / Large, defaulting to Small.
+- **Footer:** Save is the primary action and stays disabled until the name is non-empty. Cancel is the secondary action.
+- **Behavior:** Save calls `onSave({ name, size })` and then closes. Cancel and the close button both close the modal and reset the form.
+
+The import paths and props (`ModalFooter`'s `primaryAction` and `secondaryAction`, and the `Select` / `SelectOption` usage) are written from memory of CDS 9.x. Without the package installed, I haven't type-checked them.
+
+If you approve the file write, I'll create the file. If you also approve `npm install`, I'll check the imports and props against the real package and fix anything that's off. Otherwise, tell me where you'd like the file written instead.

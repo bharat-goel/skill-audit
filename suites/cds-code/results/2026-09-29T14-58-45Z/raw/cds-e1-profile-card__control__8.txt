@@ -1,0 +1,11 @@
+I couldn't build the profile card. Both the `npm install` and the file write were blocked on permissions, so nothing has been created. I haven't retried either one.
+
+The project is empty apart from `package.json`, and its only UI dependency is Coinbase CDS. I planned to write `src/ProfileCard.tsx` with these pieces:
+
+- **Profile card:** a `Box` with `background="bgAlternate"` and `borderRadius={200}` for the subtle rounded corners. Inside it, an `Avatar`, the display name, and the email in `Text color="fgMuted"`.
+- **Menu rows:** a second rounded container holding three `ListCell`s with `accessory="arrow"`, titled "Account settings", "Notifications" and "Sign out". Each takes an `onPress` handler.
+- **Props:** `displayName`, `email`, `avatarUrl` and the three `on…Press` handlers.
+
+I planned to write it from memory of the CDS API rather than check it against the installed package, because the install was blocked. So the import paths and prop names (`Avatar` size, `borderRadius` token, `font` values) are unverified.
+
+To go ahead, you can approve write access to `/tmp/nullbench-fx-MXGPlk/src/`. Approving `npm install` as well would let me check the component APIs and render the card. Or tell me if you'd rather have it as plain React and CSS instead of CDS.

@@ -1,0 +1,10 @@
+I couldn't create the modal. The write to `/tmp/nullbench-fx-64DrOX/CreateTeamModal.tsx` was blocked because the file-write permission hasn't been granted. The `npm install` was blocked for the same reason.
+
+What I know so far:
+- **Stack:** the project has only a `package.json`, with `@coinbase/cds-web` 9.28.0 and React 18, and no `node_modules`.
+- **Component design:** I wrote a `CreateTeamModal` for that stack. It takes `visible`, `onRequestClose` and `onSave({ name, size })`.
+- **Layout:** the body has a "Team name" `TextInput` and a "Team size" `Select` with Small, Medium and Large. The footer has Cancel and Save.
+- **Behaviour:** Save is disabled until the name is non-empty after trimming. Save and Cancel both reset the form and close the modal.
+- **Unverified imports:** I wrote the CDS import paths and props from memory. `Select`/`SelectOption` and `ModalFooter`'s `primaryAction`/`secondaryAction` are the parts most likely to differ in 9.28.0.
+
+If you allow file writes, I'll create the file. If you also allow `npm install`, I can check the CDS imports against the installed package and type-check the result. Or tell me if you'd rather use a different UI library.

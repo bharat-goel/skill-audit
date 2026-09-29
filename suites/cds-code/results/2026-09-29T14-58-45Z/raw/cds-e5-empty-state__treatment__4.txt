@@ -1,0 +1,20 @@
+I couldn't create the security empty state. Every step that needed approval was denied: the discovery script, `npm install`, fetching the CDS docs, and writing files to `src/`. Nothing was written and nothing was checked.
+
+I did work out that this is a web project, because `package.json` depends on `@coinbase/cds-web` 9.28.0. The packages aren't installed, though, so I couldn't confirm import paths or illustration names.
+
+I also skipped reading the CDS docs (styling and theming, plus the component pages), which the skill requires before writing code. No `cds-docs` skill or MCP server was available, and the web fetches were denied.
+
+The design I'd write is one `SecurityEmptyState` component with a `density` prop set to `compact` or `roomy`. The illustration stays the same in both. Only the scale changes, and everything uses CDS style props and tokens with no raw colors or pixel spacing.
+
+| | Compact | Roomy |
+| --- | --- | --- |
+| Illustration | `Pictogram` at 48x48 | `Pictogram` at 64x64 |
+| Title | `Text font="headline"` | `Text font="title2"` |
+| Supporting text | `Text font="body" color="fgMuted"` | `Text font="body" color="fgMuted"` |
+| `gap` / `padding` | 1 / 2 | 3 / 6 |
+
+Both versions center the layout with `VStack`. A second file would render them side by side in a `HStack`, each on a `bgAlternate` panel with a label.
+
+Two things are unverified. The pictogram name `"shield"` is a guess, and I can't confirm the `@coinbase/cds-web/illustrations` import path without the packages installed.
+
+To go ahead, either grant write access to `src/` and I'll create both files, or allow `npm install` and I'll check the illustration name and run typecheck first. Once you tell me which, I'll continue.

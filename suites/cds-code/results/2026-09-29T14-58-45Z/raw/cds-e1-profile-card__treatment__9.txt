@@ -1,0 +1,36 @@
+I couldn't write `src/ProfileCard.tsx`, so no file exists yet. The write needs permission that hasn't been granted. The discovery script and the CDS docs were also unavailable, so nothing has been verified against the installed CDS packages.
+
+If you approve the write, I'll create the file with the component below.
+
+```tsx
+import React from 'react';
+import { ListCell } from '@coinbase/cds-web/cells/ListCell';
+import { HStack, VStack } from '@coinbase/cds-web/layout';
+import { Avatar } from '@coinbase/cds-web/media/Avatar';
+import { Text } from '@coinbase/cds-web/typography/Text';
+
+export const ProfileCard = ({ displayName, email, avatarSrc, onAccountSettingsClick, onNotificationsClick, onSignOutClick }) => (
+  <VStack gap={2}>
+    <HStack alignItems="center" background="bgAlternate" borderRadius={200} gap={2} padding={2}>
+      <Avatar alt={displayName} name={displayName} size="xl" src={avatarSrc} />
+      <VStack>
+        <Text font="headline">{displayName}</Text>
+        <Text color="fgMuted" font="body">{email}</Text>
+      </VStack>
+    </HStack>
+
+    <VStack background="bgAlternate" borderRadius={200} overflow="hidden">
+      <ListCell accessory="arrow" onClick={onAccountSettingsClick} title="Account settings" />
+      <ListCell accessory="arrow" onClick={onNotificationsClick} title="Notifications" />
+      <ListCell accessory="arrow" onClick={onSignOutClick} title="Sign out" />
+    </VStack>
+  </VStack>
+);
+```
+
+- **Styling:** it uses only style props and theme tokens. There are no hex colors, pixel values or inline styles. The email is `color="fgMuted"`, and `borderRadius={200}` gives the subtle rounded corners.
+- **Layout:** the profile and the three menu rows are in two separate rounded containers, with the rows below the profile.
+- **Not yet verified:** I haven't confirmed the import subpaths, or the `ListCell` `accessory="arrow"`, `Avatar` `size="xl"` and `borderRadius={200}` props, against `@coinbase/cds-web` 9.28.0. `node_modules` isn't installed and I couldn't run the discovery script.
+- **Not yet run:** I haven't run typecheck or lint.
+
+To finish, either grant write access, or run `npm install` and approve the discovery script. I'll then write the file, check the imports and props, and run typecheck and lint.

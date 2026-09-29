@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The code uses `borderRadius={200}`, which is not clearly a valid CDS token value (CDS tokens are like 100/200/300 but the reply admits it is unverified). Its import paths (`@coinbase/cds-web/layout`, `/cells/ListCell`, `/typography/Text`) are also unverified, so criterion 9 can't be confirmed as met.

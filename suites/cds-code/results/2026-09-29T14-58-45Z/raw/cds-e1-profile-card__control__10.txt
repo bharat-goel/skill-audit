@@ -1,0 +1,11 @@
+I couldn't build the profile card. Both the `npm install` and the file write to `src/ProfileCard.tsx` were blocked because they need permission you haven't granted yet.
+
+The project is a bare `package.json` with no source files and no `node_modules`. It depends on Coinbase's design system (`@coinbase/cds-web`). I planned a `ProfileCard` React component built from that library:
+
+- **Profile card:** a rounded container (`borderRadius={200}`) with an `Avatar`, the display name, and the email in `fgMuted`.
+- **Menu rows:** a second rounded container below it with three `ListCell` rows, each with `accessory="arrow"`. The rows are "Account settings", "Notifications" and "Sign out", each with an optional `onClick`.
+- **Props:** `displayName`, `email`, `avatarSrc` and the three click handlers.
+
+I hadn't been able to install the packages, so the CDS import paths and prop names were from memory and unchecked. If you approve the write, I'd still need to install the packages and run a type-check before I could call the card working.
+
+Do you want me to go ahead with the write and the install, or would you rather I build it in plain React and CSS without CDS?

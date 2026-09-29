@@ -1,0 +1,22 @@
+I couldn't create `src/CreateTeamModal.tsx` because the write permission was denied, so no file exists yet. The discovery script and web fetch were denied the same way.
+
+I haven't typechecked or run any of this. There's no `node_modules` in the project and no source files. I also couldn't read the CDS docs, so the import paths and props below come from my memory of the CDS web API.
+
+**Components:**
+- **Dialog:** `Modal` with `ModalHeader` (title "Create team"), `ModalBody` and `ModalFooter`.
+- **Team name:** `TextInput` with a "Team name" label.
+- **Team size:** the alpha `Select` with Small / Medium / Large options, defaulting to Small.
+- **Footer:** Save is the `primaryAction` and is disabled until the name is non-empty. Cancel is the `secondaryAction`, and it should be `variant="secondary"` (see below).
+- **Spacing:** `VStack gap={3}`, with no inline styles or raw values.
+
+**Props and behaviour:**
+- `visible`, `onRequestClose`, and `onSave({ name, size })`.
+- The name is trimmed before saving.
+- `TeamSize` is `'small' | 'medium' | 'large'`.
+
+**Things to check when you typecheck:**
+- **Imports:** `@coinbase/cds-web/buttons`, `/controls`, `/layout`, `/overlays` and `/alpha/select`.
+- **Cancel variant:** I left `variant="secondary"` off the Cancel button in the drafted file. Add it so Cancel is styled as secondary.
+- **Select typing:** `onChange` may already be typed to `TeamSize`, in which case the cast isn't needed.
+
+Do you want me to retry writing the file to `src/CreateTeamModal.tsx`, or put it somewhere else? If you approve the discovery script, I can also check the import paths against the installed packages.

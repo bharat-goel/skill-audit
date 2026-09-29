@@ -1,0 +1,13 @@
+I'm building the modal with the CDS components your `package.json` lists, but both file writes were blocked because write permission hasn't been granted. So nothing has been created yet. `node_modules` isn't installed either, and the install command also needed approval, so I haven't checked any of this against the real CDS API.
+
+Here is what I was going to write:
+
+- **`CreateTeamModal.tsx`**:
+  - It takes `visible`, `onRequestClose` and `onSave` props.
+  - The body has a "Team name" `TextInput` and a "Team size" `Select` with Small / Medium / Large options. Size defaults to Small.
+  - The footer has a secondary Cancel button and a primary Save button.
+  - Save is disabled until the name is non-empty, and it passes the trimmed name to `onSave`.
+  - Save and Cancel both reset the form and close the modal.
+- **`CreateTeamModalExample.tsx`**: a small button that opens the modal, for trying it out.
+
+Can you grant write access to `/tmp/nullbench-fx-igLg8U`, or tell me a different location? I'll write the files as soon as I can. If you'd rather I install the dependencies, I can also check the import paths and prop names before you use it.

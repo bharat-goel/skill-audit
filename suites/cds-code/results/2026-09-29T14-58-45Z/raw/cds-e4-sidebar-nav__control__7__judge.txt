@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply produced no code, only a description of a file that was never written, so none of the rubric's requirements (icon names, sizing, token colors, spacing) can be verified as met.

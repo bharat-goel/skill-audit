@@ -1,0 +1,13 @@
+I couldn't write the profile card. The write to `/tmp/nullbench-fx-wsycTi/src/ProfileCard.tsx` needs a permission you haven't granted, and I didn't try another route. Nothing has been created yet.
+
+The project is empty apart from `package.json`, which lists `@coinbase/cds-web` and related packages. There's no existing home page and no `node_modules`. `npm install` also needed approval, so I haven't type-checked or rendered anything.
+
+I planned a single `ProfileCard` component built on the CDS components:
+
+- **Profile header:** the `Avatar`, the display name, and the email in `color="fgMuted"`. It sits in a container with `borderRadius={200}`, a small radius, on the `bgAlternate` background.
+- **Menu rows:** three `ListCell` rows for "Account settings", "Notifications" and "Sign out". Each uses `accessory="arrow"` for the right-side arrow, and they share a rounded container to match the header.
+- **Props:** `displayName`, `email`, an optional `avatarUrl`, and `onAccountSettingsPress`, `onNotificationsPress` and `onSignOutPress` handlers.
+
+I wrote the CDS import paths and prop names (`Avatar`, `ListCell`, the `borderRadius` value) from memory, so they may need adjusting once the packages are installed.
+
+If you allow the write, I'll create the file. If you'd also like `npm install` run, I can then type-check it. Or tell me where the home page lives and I'll put the card there.

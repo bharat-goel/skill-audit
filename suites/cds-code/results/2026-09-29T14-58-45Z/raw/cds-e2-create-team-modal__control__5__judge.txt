@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code (writes were blocked), so it cannot satisfy the rubric requirements such as the component composition, the alpha Select import, and the button variants.

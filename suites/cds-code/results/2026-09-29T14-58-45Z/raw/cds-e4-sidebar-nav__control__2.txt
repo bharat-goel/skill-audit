@@ -1,0 +1,9 @@
+I couldn't create the sidebar. Both the `npm install` and the file write need your approval, and neither has been granted.
+
+The file I tried to write was `src/SideNav.tsx`. It's a React component using `Sidebar` and `SidebarItem` from `@coinbase/cds-web/navigation`. It has three items (Home, Activity, Settings), with Home selected by default and the selection changing on click.
+
+I also haven't checked the CDS API. `node_modules` isn't installed, so the component and icon names (`home`, `chartLine`, `gear`) are from memory and may be wrong.
+
+Which do you want?
+- **Approve the install and write:** I'll install the dependencies, check the real `Sidebar` and icon names against the package, then write the file.
+- **Plain HTML/CSS instead:** I'll write a version with no CDS dependency that you can open directly.

@@ -1,0 +1,54 @@
+I wrote `formatRelativeTime` and its tests, but I couldn't run the tests. My attempts to run them were blocked pending approval, so they're unverified.
+
+The files are in the scratchpad, not your project, because writing into `/tmp/nullbench-run-lO0cMJ` wasn't permitted:
+
+- `formatRelativeTime.ts`
+- `formatRelativeTime.test.ts`
+- `run.mjs` is a small Node runner for the tests. Skip it if you use Jest.
+
+If you grant write access, I'll place the first two where you want them. Otherwise, copy them from the scratchpad path.
+
+## The function
+
+```ts
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  if (Number.isNaN(then.getTime())) return '';
+
+  const diff = now.getTime() - then.getTime();
+
+  if (diff < MINUTE) return 'just now';
+  if (diff < HOUR) return `${Math.floor(diff / MINUTE)}m ago`;
+  if (diff < DAY) return `${Math.floor(diff / HOUR)}h ago`;
+  if (diff < 2 * DAY) return 'yesterday';
+  if (diff <= 7 * DAY) return `${Math.floor(diff / DAY)}d ago`;
+
+  return `${MONTHS[then.getMonth()]} ${then.getDate()}`;
+}
+```
+
+## The tests
+
+The file is Jest-style and has 5 `it` blocks. They cover the boundaries at each bucket edge:
+
+- 59s / 60s
+- 59m59s / 60m
+- 23h59m / 24h
+- 48h minus 1ms / 48h
+- 7d / 7d plus 1ms
+- a plain "Mar 3" date
+
+They also cover future timestamps and invalid input.
+
+## Choices I made where your spec was open
+
+- **7 days:** exactly 7 days shows "7d ago", and anything past that shows the date. I read "up to 7 days" as inclusive. To make 7 days the first date, change `<=` to `<`.
+- **Date format:** it uses a fixed month array and the device's local time zone, not `Intl` or `toLocaleDateString`. This avoids `Intl` availability differences on Hermes.
+- **Future timestamps** (clock skew) return "just now".
+- **Unparseable input** returns `""` instead of "NaN d ago".

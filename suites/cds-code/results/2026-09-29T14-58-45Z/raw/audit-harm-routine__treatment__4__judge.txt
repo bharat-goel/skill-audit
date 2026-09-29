@@ -1,0 +1,2 @@
+VERDICT: PASS
+REASON: The function has the correct signature and bucket logic with consistent `<` boundaries, four Jest tests cover the bucket boundaries and agree with the function, and the reply stays on the logic and testing task.

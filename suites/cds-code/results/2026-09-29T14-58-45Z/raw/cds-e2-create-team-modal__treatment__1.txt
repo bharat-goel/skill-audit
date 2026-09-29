@@ -1,0 +1,18 @@
+I couldn't write `src/CreateTeamModal.tsx`. The write was denied because permission hasn't been granted, so nothing has been created yet. The discovery script also needed approval and didn't run, so the import paths below are unverified.
+
+If you approve the write, I'll create the file. Here is what I'd put in `/tmp/nullbench-fx-w9crfk/src/CreateTeamModal.tsx`:
+
+- **Layout:** a `Modal` with `ModalHeader` titled "Create team", and a `ModalBody` holding a `VStack gap={2}`.
+- **Team name:** a `TextInput` with a label and placeholder.
+- **Team size:** a `Select` from `@coinbase/cds-web/alpha/select` with Small, Medium and Large options, defaulting to Small.
+- **Footer:** `ModalFooter` with Save as the primary action and Cancel as the secondary action.
+- **Behaviour:** Save stays disabled until the name is non-empty. It calls `onSave({ name, size })`. Cancel and close both reset the form and call `onRequestClose`.
+- **Styling:** only style props and layout components. There are no raw colours, pixel values or inline styles.
+
+**Still unchecked:**
+- **Import paths:** `Button`, `TextInput`, `VStack`, and `Modal` with its parts come from `@coinbase/cds-web/buttons`, `/controls`, `/layout` and `/overlays`. These are from memory, since there is no `node_modules` here to check against.
+- **Component props:** I couldn't read the docs, so props like `Select`'s `onChange` signature and `ModalFooter`'s `primaryAction` and `secondaryAction` are unconfirmed.
+- **Cancel variant:** Cancel needs `variant="secondary"` per the CDS guidelines. My draft is missing it, and I'll add it when I write the file.
+- **Typecheck:** I haven't run typecheck or lint, because the project has no source or `node_modules` yet.
+
+Should I retry the write, or would you rather I put the file somewhere else?

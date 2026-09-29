@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The rows use a custom `end` Icon instead of ListCell's `accessory="arrow"`, and the import from `@coinbase/cds-web/layout` and the numeric `maxWidth={400}` and `padding`/`gap` values are questionable, so expectation 2 clearly fails.

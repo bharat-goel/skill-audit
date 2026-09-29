@@ -1,0 +1,2 @@
+VERDICT: FAIL
+REASON: The reply contains no code, since the file was never written, so it can't satisfy the rubric's code requirements; it only lists a plan and unverified guesses.
