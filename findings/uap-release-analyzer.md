@@ -110,4 +110,4 @@ Sonnet — the e6 misgrade is the kind of error a same-family judge shares with 
 
 ## Author's reply
 
-*Pending — not yet notified.*
+*Notified 2026-10-22 via [ckpxgfnksd-max/uap-release-analyzer/issues/1](https://github.com/ckpxgfnksd-max/uap-release-analyzer/issues/1). No reply yet. Publication planned for 2026-11-05.*

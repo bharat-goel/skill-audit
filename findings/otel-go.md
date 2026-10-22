@@ -89,4 +89,4 @@ entry 7 (+100 from n=3 per arm); entry 3 (Sonnet judging Sonnet).
 
 ## Author's reply
 
-*Pending — not yet notified.*
+*Notified 2026-10-22 via [ollygarden/opentelemetry-agent-skills/issues/281](https://github.com/ollygarden/opentelemetry-agent-skills/issues/281). No reply yet. Publication planned for 2026-11-05.*
