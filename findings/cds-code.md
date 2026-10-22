@@ -128,4 +128,4 @@ arm with no interval); entry 3 (Sonnet judging Sonnet).
 
 ## Author's reply
 
-*Pending — not yet notified.*
+*Notified 2026-10-22 via [coinbase/cds/issues/913](https://github.com/coinbase/cds/issues/913). No reply yet. Publication planned for 2026-11-05.*

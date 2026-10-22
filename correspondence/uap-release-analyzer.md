@@ -1,6 +1,10 @@
 # uap-release-analyzer — correspondence
 
-## Draft — not sent
+## Sent 2026-10-22 — https://github.com/ckpxgfnksd-max/uap-release-analyzer/issues/1
+
+Posted by Bharat as a GitHub issue; body as in `issues/uap-release-analyzer.md` (publish date 2026-11-05). The text below is the earlier draft.
+
+### Draft
 
 Route: a GitHub issue on
 [ckpxgfnksd-max/uap-release-analyzer](https://github.com/ckpxgfnksd-max/uap-release-analyzer)

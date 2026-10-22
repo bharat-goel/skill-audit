@@ -1,6 +1,10 @@
 # cds-code — correspondence
 
-## Draft — not sent
+## Sent 2026-10-22 — https://github.com/coinbase/cds/issues/913
+
+Posted by Bharat as a GitHub issue; body as in `issues/cds-code.md` (publish date 2026-11-05). The text below is the earlier draft.
+
+### Draft
 
 Route: a GitHub issue on [coinbase/cds](https://github.com/coinbase/cds) (confirm issues are
 enabled before sending). To be sent by Bharat, under Bharat's own name.
