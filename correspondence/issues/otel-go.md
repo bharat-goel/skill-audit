@@ -9,7 +9,7 @@ What I did: your prompt and fixture were used verbatim, with your four expectati
 
 One thing you may want to know: in your run, expectations A–C passed in every rep of both arms and only D varied. In ours it was the other way round. Without the skill, Sonnet never stated the v1.45.0 changes (A–C) and usually declined because it couldn't verify them. With the skill, it read them from `references/` (`breaking-changes.md`, `performance.md`, which state them nearly as the expectations do). D separated the arms only a little: the without-skill replies missed it in 5 of 20. So on Sonnet the skill's value here is the reference content, more than the verification instruction #218 added. Part of that is our baseline: it had only the fixture, while yours had the repo's other skills and `AGENTS.md`.
 
-The full write-up is below. I plan to publish it, with the complete method, deviations and raw data, on 2026-10-19. Any reply you send will be published verbatim beside the finding unless you ask otherwise, and I'll correct anything I got wrong about your method.
+The full write-up is below. I plan to publish it, with the complete method, deviations and raw data, on 2026-11-05. Any reply you send will be published verbatim beside the finding unless you ask otherwise, and I'll correct anything I got wrong about your method.
 
 — Bharat
 

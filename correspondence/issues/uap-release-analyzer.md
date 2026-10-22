@@ -12,7 +12,7 @@ Two things you may want to know:
 1. Most of the gain comes from the with-skill replies naming the skill's own files (`run_all.py`, `REPORT.md`, `agency_vocab.md`). The without-skill replies named none of them in 80 tries, partly because our baseline ran without release_01 present, unlike yours. The expectations about the substance of the advice (e1, e5, e8) moved from 0 to 1 of 10.
 2. SKILL.md L93 says to add new prefixes to `PREFIX_RULES` in the scripts; expectation 6 says "rather than hard-coded into the scripts". 9 of 10 with-skill replies followed SKILL.md. One of the two probably needs updating.
 
-The full write-up is below. I plan to publish it, with the complete method, deviations and raw data, on 2026-10-19. Any reply you send will be published verbatim beside the finding unless you ask otherwise, and I'll correct anything I got wrong about your method.
+The full write-up is below. I plan to publish it, with the complete method, deviations and raw data, on 2026-11-05. Any reply you send will be published verbatim beside the finding unless you ask otherwise, and I'll correct anything I got wrong about your method.
 
 — Bharat
 
