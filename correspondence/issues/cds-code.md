@@ -9,7 +9,7 @@ What I did: evals 1–5. Your prompts were used verbatim. Each eval was graded a
 
 One thing you may want to fix regardless: eval 3's expectation 5 requires `ProgressBar` / `ProgressCircle` from `@coinbase/cds-web/visualizations` and not from `@coinbase/cds-web-visualization`. `guidelines/components.md` (L315, L322, L391) says to import them from `@coinbase/cds-web-visualization`. All 8 with-skill replies that contained code followed the guideline and failed that expectation. One of the two probably needs updating.
 
-The full write-up is below. I plan to publish it, with the complete method, deviations and raw data, on 2026-10-19. Any reply you send will be published verbatim beside the finding unless you ask otherwise, and I'll correct anything I got wrong about your method.
+The full write-up is below. I plan to publish it, with the complete method, deviations and raw data, on 2026-11-05. Any reply you send will be published verbatim beside the finding unless you ask otherwise, and I'll correct anything I got wrong about your method.
 
 — Bharat
 
