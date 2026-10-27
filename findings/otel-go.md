@@ -66,8 +66,9 @@ A–C right without this skill (see below). Sonnet's control arm did not.
 
 ## Judge reliability
 
-Canaries: 9/10. nullbench computes which canary was misgraded but does not write it to the
-report or to `records.json`, so it cannot be identified from this run. Canaries were not edited
+Canaries: 9/10. The nullbench version this run used (`9bcd56e`) computed which canary was
+misgraded but did not write it to the report or to `records.json`, so it cannot be identified
+from this run. nullbench has recorded misgrades since [nullbench#8](https://github.com/bharat-goel/nullbench/pull/8). Canaries were not edited
 after the result.
 
 ## What was different from the author's method

@@ -51,8 +51,11 @@ only when the reply names a file the control arm has never seen. That is
 [nullbench `FAILURES.md` entry 1](https://github.com/bharat-goel/nullbench/blob/main/FAILURES.md),
 answer-key vocabulary, one level up: here the answer key is not a substring pattern but the
 artifact names that SKILL.md teaches, built into the rubrics. nullbench's
-`PATTERN_IN_SKILL` preflight cannot see it, because every task is judge-graded. This was
-predicted in writing before the run
+`PATTERN_IN_SKILL` preflight cannot see it, because every task is judge-graded, and the
+nullbench version this run used had no other check for it. Since [nullbench#12](https://github.com/bharat-goel/nullbench/pull/12), preflight warns
+about it (`RUBRIC_TERM_IN_SKILL`): on this suite it flags 7 of the 8 expectations, e2, e3 and
+e6 among them, naming `scripts/run_all.py`, `REPORT.md` and `references/agency_vocab.md`. The
+warning does not change a run's class. This was predicted in writing before the run
 ([`DEVIATIONS.md`](../suites/uap-release-analyzer/DEVIATIONS.md)).
 
 The expectations that test the *substance* of the advice, not its vocabulary, barely
