@@ -25,8 +25,8 @@ is checked. A dry-run immediately before the run reproduced the same H. Both fac
 
 The interval lies entirely below the author's +60pp, and it includes zero. The run is
 EXPLORATORY because the judge misgraded 3 of 26 canaries. Under the rule fixed before the run,
-this result is reported, labelled exploratory, and not used as a headline. nullbench does not
-record which canaries were misgraded (see "Judge reliability").
+this result is reported, labelled exploratory, and not used as a headline. The nullbench version
+this run used did not record which canaries were misgraded (see "Judge reliability").
 
 Before the run, the reading rule (N-1) predicted that this port's thinner control environment
 would *inflate* the measured delta. The measured delta is far below the claim anyway.
@@ -99,9 +99,10 @@ pattern as uap-release-analyzer's e6: the skill instructs what its own eval forb
 
 ## Judge reliability
 
-Canaries: 25/26 (run 1, VOID) and 23/26 (run 2). nullbench computes which canaries were
-misgraded but does not write them to the report or to `records.json`, so the 3 misgrades
-here cannot be identified without paying for another canary pass. Canaries were not edited after
+Canaries: 25/26 (run 1, VOID) and 23/26 (run 2). The nullbench version this run used
+(`9bcd56e`) computed which canaries were misgraded but did not write them to the report or to
+`records.json`, so the 3 misgrades here cannot be identified without paying for another canary
+pass. nullbench has recorded them since [nullbench#8](https://github.com/bharat-goel/nullbench/pull/8). Canaries were not edited after
 any result. `canaries.json` was last changed in `90dc00b` (2026-09-26), before either run.
 
 Many judge reasons also penalise replies that *admit* their import paths are unverified. That

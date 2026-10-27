@@ -1,4 +1,4 @@
-# Handoff — skill-audit (as of 2026-10-23)
+# Handoff — skill-audit (as of 2026-10-27)
 
 Paste this into a new chat (or point a local Claude Code session at this repo) to continue.
 The full record of every ruling is in `notes/sdd-ledger.md`.
@@ -31,19 +31,16 @@ The full record of every ruling is in `notes/sdd-ledger.md`.
 4. Post a short follow-up comment on each issue linking to its published finding.
 5. Update the README's phase 5 row to "published".
 
-## nullbench (github.com/bharat-goel/nullbench, public) — open, waiting on review/merge
+## nullbench (github.com/bharat-goel/nullbench, public) — merged 2026-10-27
 
-- **PR #7** `feat/skill-dir` → main.
-  - Conflicts with #6: keep both bracket ledger entries, in time order.
-  - Conflicts with #5 in five files: rebase #5 after.
-  - Suggested merge order: #6, #7, then #8, then rebase #5.
-- **PR #8** `fix/audit-gaps`, stacked on #7. Reviewed, 220/222 tests pass. It adds:
-  - canary misgrade identities in reports and the ledger;
-  - the answering backend in reports and the ledger;
-  - opt-in `"h_version": 2` covering fixture contents and `canaries.json`;
-  - canary validation.
-- **Issues:** #9 (snapshot the skill at preflight), #10 (leakage false warnings), #11 (headless
-  write refusal).
+- **#5–#8 merged** (in the order #6, #5, #7, #8), then **#12** (`RUBRIC_TERM_IN_SKILL`, a
+  preflight warning for rubrics that grade the skill's own vocabulary) and **#13** (#11 option 1:
+  a preflight warning for judge-graded fixture tasks under headless write refusal, and
+  `FAILURES.md` entry 14). All published H values reproduce on main.
+- The findings now say which nullbench version each run used and that misgrade identities (#8)
+  and the rubric-vocabulary warning (#12) were added afterwards.
+- **Still open:** #9 (snapshot the skill at preflight), #10 (leakage false warnings), #11
+  option 2.
 
 ## Rules carried over
 
