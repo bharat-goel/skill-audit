@@ -90,4 +90,6 @@ entry 7 (+100 from n=3 per arm); entry 3 (Sonnet judging Sonnet).
 
 ## Author's reply
 
-*Notified 2026-10-22 via [ollygarden/opentelemetry-agent-skills/issues/281](https://github.com/ollygarden/opentelemetry-agent-skills/issues/281). No reply yet. Publication planned for 2026-11-05.*
+*Notified 2026-10-22 via [ollygarden/opentelemetry-agent-skills/issues/281](https://github.com/ollygarden/opentelemetry-agent-skills/issues/281). No reply as of publication on 2026-11-23 (32 days; later than the planned 2026-11-05). Any reply will be added here verbatim.*
+
+**Upstream changes since the audited commit (`73a557b`).** The skill changed in `be344f2` (2026-10-26) and `40fee70` (2026-11-22). Both were read in full before publication: they rename `WithBlockOnQueueFull` to `sdktrace.WithBlocking()`, reword several reference lines without changing their facts, and drop the run date from `evals/results.md`. The `Retry-After` passage quoted above and the v1.45.0 facts in `breaking-changes.md` that expectations A–C test are still present. Nothing in this finding depends on the changed lines.

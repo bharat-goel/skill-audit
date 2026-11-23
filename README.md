@@ -21,7 +21,7 @@ sibling directory (`../nullbench`, override with `NULLBENCH_DIR`) — the tools 
 | 2 — screening | 3 eligible (1/100 sources 1-2, 2/23 source 3 — rates not pooled, see SELECTION.md Amendment 1) |
 | 3 — ports registered | uap-release-analyzer `ef9be7b4ff77bd4a`, cds-code `823994c3476651eb`, otel-go `22d04167d4f430c6` |
 | 4 — runs | all three done, all EXPLORATORY (judge canaries) — see [`findings/`](findings/) |
-| 5 — authors notified, published | notified 2026-10-22 (issues linked in [`correspondence/`](correspondence/)); publication 2026-11-05 |
+| 5 — authors notified, published | notified 2026-10-22 (issues linked in [`correspondence/`](correspondence/)); no replies; **published 2026-11-23** with the write-up ["I re-measured three published Claude skill claims"](https://bharatgoel.com/writing/three-skill-claims-re-measured) |
 
 | Skill | Author's claim | Measured | Pre-registered verdict |
 |---|---|---|---|
