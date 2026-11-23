@@ -129,4 +129,4 @@ arm with no interval); entry 3 (Sonnet judging Sonnet).
 
 ## Author's reply
 
-*Notified 2026-10-22 via [coinbase/cds/issues/913](https://github.com/coinbase/cds/issues/913). No reply yet. Publication planned for 2026-11-05.*
+*Notified 2026-10-22 via [coinbase/cds/issues/913](https://github.com/coinbase/cds/issues/913). No reply as of publication on 2026-11-23 (32 days; later than the planned 2026-11-05). `skills/cds-code` has had no commits since notification, and `guidelines/components.md` still places `ProgressBar` and `ProgressCircle` in `@coinbase/cds-web-visualization`. Any reply will be added here verbatim.*
